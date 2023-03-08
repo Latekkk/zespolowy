@@ -1,9 +1,9 @@
 <p style="color: crimson">Witam moje misie kolorowe w projekcie zespołowym.</p>
 <p>Odpalanie aplikacji:</p>
-<p>vagrant up</p>
+<p><code>vagrant up</code></p>
 <p>później</p>
-<p>npm run dev</p>
-
+<p><code>npm run dev</code></p>
+<p>Terminal mamy w <code>vagrant ssh</code></p>
 <p>Stack technologiczny:</p>
 
 <p>#REACT</P>
