@@ -4,7 +4,8 @@
 <p>później</p>
 <p><code>npm run dev</code></p>
 <p>Terminal mamy w <code>vagrant ssh</code></p>
-<p style="color: red;font-size: 24px;">PO SKOŃCZENIU PROGRAMOWANIA TRZEBWA WPISAĆ <code>vagrant halt</code></p>
+<p style="color: red;font-size: 24px;">PO SKOŃCZENIU PROGRAMOWANIA TRZEBA WPISAĆ <code>vagrant halt</code></p>
+<p style="color: red;">Inaczej ciągle będzie chodził w tle</p>
 
 <p>DOCS:</p>
 <a href="https://laravel.com/docs/10.x"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/256/laravel-48.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/256/laravel-1024.png 2x" alt="Coding, development, js, laravel, logo icon - Free download" class="d-block mx-auto">laravel</a></br>
