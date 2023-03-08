@@ -26,4 +26,9 @@ W Homestead.yaml zmienic nazwe folderu na ten co zainstalujemy
 - 10 linijka z latek np. na kuba
 
 
+w C:\Windows\System32\drivers\etc pierw kopiujemy sobie plik hosts następnie edytujemy kopie pliku hosts
+i dopisujemy na samym dole 192.168.56.56  zespolowy.test
+i bedzie to w dokumentach bo nie mozemy zapisac tam i kasujemy oryginalny  plik nastepnie wklejamy ten nasz  (musi byc bez rozszerzenia)
+
+
 Jak mamy już zainstalowane wszystko to puszczamy magiczną komende "vagrant up"
