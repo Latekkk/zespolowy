@@ -9,6 +9,14 @@ Stack technologiczny:
 #VAGRANT
 #MYSQL
 
+
+DOCS:
+https://laravel.com/docs/10.x/homestead#hostname-resolution
+https://pl.reactjs.org/
+https://www.typescriptlang.org/
+https://legacy.inertiajs.com/
+https://vitejs.dev/guide/
+https://dev.mysql.com/doc/
 php min 8.1
 Do zainstalowania
 
@@ -16,7 +24,9 @@ https://www.virtualbox.org/wiki/Downloads
 https://developer.hashicorp.com/vagrant/downloads
 
 
-docsy https://laravel.com/docs/10.x/homestead#hostname-resolution
+
+
+
 później
 
 windows jęzeli nie masz klucza wygenerowanego to:
