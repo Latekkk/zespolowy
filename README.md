@@ -1,4 +1,8 @@
 Witam moje misie kolorowe.
+Odpalanie aplikacji:
+vagrant up
+później
+npm run dev
 
 Stack technologiczny:
 
@@ -38,6 +42,8 @@ git clone https://github.com/laravel/homestead.git ~/Homestead
 windows
 windows git clone https://github.com/laravel/homestead.git C:\Users\latek\Homestead
 
+kopiujemy plik .env.example do .env
+kopiujemy plik Homestead.yaml.example do Homestead.yaml
 W Homestead.yaml zmienic nazwe folderu na ten co zainstalujemy
 - 10 linijka z latek np. na kuba
 
@@ -47,4 +53,7 @@ i dopisujemy na samym dole 192.168.56.56  zespolowy.test
 i bedzie to w dokumentach bo nie mozemy zapisac tam i kasujemy oryginalny  plik nastepnie wklejamy ten nasz  (musi byc bez rozszerzenia)
 
 composer install
+
+
+
 Jak mamy już zainstalowane wszystko to puszczamy magiczną komende "vagrant up"
