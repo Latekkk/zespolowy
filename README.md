@@ -9,7 +9,7 @@ Stack technologiczny:
 #VAGRANT
 #MYSQL
 
-Najnowszy php min 8.1
+php min 8.1
 Do zainstalowania
 
 https://www.virtualbox.org/wiki/Downloads
@@ -18,6 +18,11 @@ https://developer.hashicorp.com/vagrant/downloads
 
 docsy https://laravel.com/docs/10.x/homestead#hostname-resolution
 później
+
+windows jęzeli nie masz klucza wygenerowanego to:
+ssh-keygen
+
+
 linux/macOs nie jestem pewny maca
 git clone https://github.com/laravel/homestead.git ~/Homestead
 windows
