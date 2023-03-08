@@ -4,8 +4,22 @@
 <p>później</p>
 <p><code>npm run dev</code></p>
 <p>Terminal mamy w <code>vagrant ssh</code></p>
+<p style="color: red;font-size: 24px;">PO SKOŃCZENIU PROGRAMOWANIA TRZEBWA WPISAĆ <code>vagrant halt</code></p>
+
+<p>DOCS:</p>
+<a href="https://laravel.com/docs/10.x"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/256/laravel-48.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/256/laravel-1024.png 2x" alt="Coding, development, js, laravel, logo icon - Free download" class="d-block mx-auto">laravel</a></br>
+<a href="https://www.php.net/releases/8.2/en.php"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/568/php-logo-48.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/568/php-logo-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/568/php-logo-512.png 2x" alt="Code, development, logo, php" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-3/568/php-logo-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/568/php-logo-512.png 2x">php</a></br>
+<a href="https://pl.reactjs.org/"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-48.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-1024.png 2x" alt="Js, react js, logo, react, react native icon - Free download" class="d-block mx-auto" width="48px">react</a></br>
+<a href="https://www.typescriptlang.org"><img src="https://cdn3.iconfinder.com/data/icons/teenyicons-outline-vol-3/15/typescript-48.png" srcset="https://cdn3.iconfinder.com/data/icons/teenyicons-outline-vol-3/15/typescript-256.png 1x, https://cdn3.iconfinder.com/data/icons/teenyicons-outline-vol-3/15/typescript-512.png 2x" alt="Typescript" width="48" class=" lazyloaded" data-srcset="https://cdn3.iconfinder.com/data/icons/teenyicons-outline-vol-3/15/typescript-256.png 1x, https://cdn3.iconfinder.com/data/icons/teenyicons-outline-vol-3/15/typescript-512.png 2x"> typescript</a></br>
+<a href="https://legacy.inertiajs.com"><img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1647520363571/DDXRfNDdI.png" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb pT0Scc KAlRDb" alt="Installing Laravel with Vue3, Inertia.js, Vite, Tailwind CSS" data-noaft="1" style="width: 48px; margin: 0px;">inertiajs</a></br>
+<a href="https://vitejs.dev/guide"><img src="https://ih1.redbubble.net/image.2346251112.5083/mp,840x830,matte,f8f8f8,t-pad,1000x1000,f8f8f8.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb pT0Scc KAlRDb" alt="Vite - Vite Logo&quot; Canvas Print for Sale by brokenkneestees | Redbubble" data-noaft="1" style="width: 48px; margin: 0px;"> vite</a></br>
+<a href="https://dev.mysql.com/doc"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x" alt="Code, development, logo, mysql" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x">mysql</a></br>
+<a href="https://laravel.com/docs/10.x/homestead#hostname-resolution"> <img src="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-48.png 2x" alt="Vagrant" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-512.png 2x">LARAVEL HOMESTEAD</a></br>
+
 <p>Stack technologiczny:</p>
 
+<p>#PHP</p>
+<p>#laravel</p>
 <p>#REACT</P>
 <p>#TYPESCRIPT</p>
 <p>#INERTIA</p>
@@ -14,13 +28,6 @@
 <p>#MYSQL</p>
 
 
-<p>DOCS:</P>
-<p>https://laravel.com/docs/10.x/homestead#hostname-resolution</p>
-<p>https://pl.reactjs.org/</p>
-<p>https://www.typescriptlang.org/</p>
-<p>https://legacy.inertiajs.com/</p>
-<p>https://vitejs.dev/guide/</p>
-<p>https://dev.mysql.com/doc/</p>
 <p>php min 8.1</p>
 <p>Do zainstalowania</p>
 
@@ -33,8 +40,8 @@
 
 <p>później</P>
 
-<p>windows jęzeli nie masz klucza wygenerowanego to:</p>p>
-<p></p>ssh-keygen</p>
+<p>windows jęzeli nie masz klucza wygenerowanego to:</p>
+<p>ssh-keygen</p>
 
 
 <p>linux/macOs nie jestem pewny maca</p>
@@ -52,8 +59,8 @@
 <p>i dopisujemy na samym dole 192.168.56.56  zespolowy.test</p>
 <p>i bedzie to w dokumentach bo nie mozemy zapisac tam i kasujemy oryginalny  plik nastepnie wklejamy ten nasz  (musi byc bez rozszerzenia)</p>
 
-<p>composer install</p>
+<p><code>composer install</code></p>
 
 
 
-<p>Jak mamy już zainstalowane wszystko to puszczamy magiczną komende "vagrant up"</p>
+<p>Jak mamy już zainstalowane wszystko to puszczamy magiczną komende <code>vagrant up</code></p>
