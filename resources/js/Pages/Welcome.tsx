@@ -1,4 +1,5 @@
 import { Link, Head } from '@inertiajs/react';
+import { ReactChild, ReactFragment, ReactPortal } from 'react';
 
 export default function Welcome(props) {
     return (

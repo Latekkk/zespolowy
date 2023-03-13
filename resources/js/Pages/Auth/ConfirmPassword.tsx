@@ -17,7 +17,7 @@ export default function ConfirmPassword() {
         };
     }, []);
 
-    const handleOnChange = (event) => {
+    const handleOnChange = (event: { target: { name: any; value: any; }; }) => {
         setData(event.target.name, event.target.value);
     };
 
