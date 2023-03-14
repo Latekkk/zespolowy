@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr';
 import EnvironmentPlugin from 'vite-plugin-environment';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import i18n from 'laravel-react-i18n/vite';
+
 
 export default defineConfig({
     server: {
@@ -18,7 +18,6 @@ export default defineConfig({
             refresh: true,
         }),
         react(),
-        i18n(),
         tsconfigPaths(),
         svgr(),
         EnvironmentPlugin('all')
