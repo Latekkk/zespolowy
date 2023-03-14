@@ -66,3 +66,7 @@
 
 
 <p>Jak mamy już zainstalowane wszystko to puszczamy magiczną komende <code>vagrant up</code></p>
+
+
+<p style="color: cyan">Inne info</p>
+<p>Tłumacznia wźięte z https://dev.to/adrai/how-to-properly-internationalize-a-react-application-using-i18next-3hdb</p>

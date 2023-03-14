@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Dashboard(props: { auth: any; errors: any; }) {
 
-    const { t, ready } = useTranslation(['common'])
+    const { t } = useTranslation(['common'])
 
     return (
         <GuestLayout
