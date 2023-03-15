@@ -2,6 +2,7 @@ import Layout from '@/Layouts/Layout';
 import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import Advertisement from './Partials/Advertisement';
+import Pagination from "@/Components/Pagination";
 export default function Index(  props: any) {
 
     const { t } = useTranslation(['advertisement'])
@@ -16,15 +17,18 @@ export default function Index(  props: any) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
+                        <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                             {props.advertisements.data.map((advertisement, index) => {
                                return <Advertisement
                                     key={'advertisement' + index}
                                     description={advertisement.description}
                                     title={advertisement.title}
+                                    slug={advertisement.slug}
+                                    auth={props.auth.user !== null}
                                 />
                             })}
                         </div>
+                        <Pagination props={props.advertisements}/>
                     </div>
                 </div>
             </div>

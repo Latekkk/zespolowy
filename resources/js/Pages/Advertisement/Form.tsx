@@ -1,15 +1,19 @@
-import GuestLayout from '@/Layouts/GuestLayout';
+import Layout from '@/Layouts/Layout';
 import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-export default function Create() {
+export default function Form(props) {
 
+    const advertisement = props.advertisement ?? null;
+
+    console.log(advertisement === null)
     const {t} = useTranslation(['common'])
-    const {data, setData, post, processing, errors} = useForm({
-        title: "",
-        description: "",
+
+    const {data, setData, post, put, processing, errors} = useForm({
+        title: advertisement?.title || "",
+        description: advertisement?.description ?? "",
         remember: true,
     })
 
@@ -39,11 +43,12 @@ export default function Create() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post('/advertisement')
+        advertisement === null? post(route('advertisement.store')): put(route('advertisement.update', advertisement.slug))
     }
 
     return (
-        <GuestLayout
+        <Layout
+            props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
         >
             <Head title="Aktualności"/>
@@ -64,6 +69,6 @@ export default function Create() {
                     </div>
                 </div>
             </div>
-        </GuestLayout>
+        </Layout>
     );
 }
