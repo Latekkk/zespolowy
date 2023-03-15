@@ -18,9 +18,9 @@
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://dev.mysql.com/doc"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x" alt="Code, development, logo, mysql" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x">mysql</a>
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://laravel.com/docs/10.x/homestead#hostname-resolution"> <img src="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-48.png 2x" alt="Vagrant" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-512.png 2x">LARAVEL HOMESTEAD</a>
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://headlessui.com/"> <img src="https://repository-images.githubusercontent.com/295992065/4bd52200-0043-11eb-9711-359a3854d4dc"  alt="Headles ui" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-512.png 2x">Gotowe komponenty</a>
+<a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://react-icons.github.io/react-icons/"> <img src="https://camo.githubusercontent.com/48d099290b4cb2d7937bcd96e8497cf1845b54a810a6432c70cf944b60b40c77/68747470733a2f2f7261776769742e636f6d2f676f72616e67616a69632f72656163742d69636f6e732f6d61737465722f72656163742d69636f6e732e737667"  alt="Ikonki" width="48" class=" lazyloaded" >Ikonki</a>
 </div>
 <p>Stack technologiczny:</p>
-
 <p>#PHP</p>
 <p>#laravel</p>
 <p>#REACT</P>
