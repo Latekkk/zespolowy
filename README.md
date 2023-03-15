@@ -17,6 +17,7 @@
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://vitejs.dev/guide"><img src="https://ih1.redbubble.net/image.2346251112.5083/mp,840x830,matte,f8f8f8,t-pad,1000x1000,f8f8f8.jpg" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb pT0Scc KAlRDb" alt="Vite - Vite Logo&quot; Canvas Print for Sale by brokenkneestees | Redbubble" data-noaft="1" style="width: 48px; margin: 0;"> vite</a>
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://dev.mysql.com/doc"><img src="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x" alt="Code, development, logo, mysql" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-3/181/MySQL-512.png 2x">mysql</a>
 <a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://laravel.com/docs/10.x/homestead#hostname-resolution"> <img src="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-64.png" srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-48.png 2x" alt="Vagrant" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-512.png 2x">LARAVEL HOMESTEAD</a>
+<a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://headlessui.com/"> <img src="https://repository-images.githubusercontent.com/295992065/4bd52200-0043-11eb-9711-359a3854d4dc"  alt="Headles ui" width="48" class=" lazyloaded" data-srcset="https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-256.png 1x, https://cdn4.iconfinder.com/data/icons/logos-brands-5/24/vagrant-512.png 2x">Gotowe komponenty</a>
 </div>
 <p>Stack technologiczny:</p>
 
@@ -66,3 +67,7 @@
 
 
 <p>Jak mamy już zainstalowane wszystko to puszczamy magiczną komende <code>vagrant up</code></p>
+
+
+<p style="color: cyan">Inne info</p>
+<p>Tłumacznia wźięte z https://dev.to/adrai/how-to-properly-internationalize-a-react-application-using-i18next-3hdb</p>
