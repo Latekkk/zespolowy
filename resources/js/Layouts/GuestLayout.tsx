@@ -3,10 +3,10 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
-export default function Authenticated({ auth, header, children, }) {
+export default function GuestLayout({ props, header, children, }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const { t } = useTranslation(['navbar'])
 
@@ -111,5 +111,6 @@ export default function Authenticated({ auth, header, children, }) {
 
             <main>{children}</main>
         </div>
+
     );
 }

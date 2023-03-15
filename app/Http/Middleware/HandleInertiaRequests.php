@@ -39,6 +39,10 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'toast' => [
+                // in your case, you named your flash message "success"
+                'value' => fn () => $request->session()->get('toast')
+            ],
         ]);
     }
 }
