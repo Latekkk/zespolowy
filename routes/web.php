@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -31,5 +32,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('advertisement', AdvertisementController::class)->middleware(['auth', 'verified'])->except('index');
+Route::resource('point', PointController::class)->middleware(['auth', 'verified'])->only(['index']);
 
 require __DIR__.'/auth.php';

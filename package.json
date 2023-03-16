@@ -30,6 +30,7 @@
     },
     "dependencies": {
         "@inertiajs/progress": "^0.2.7",
+        "@react-google-maps/api": "^2.18.1",
         "draft-js": "^0.11.7",
         "i18next": "^22.4.11",
         "i18next-browser-languagedetector": "^7.0.1",

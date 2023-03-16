@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method create(array|string[] $array_merge)
+ */
 class Path extends Model
 {
     use HasFactory;
