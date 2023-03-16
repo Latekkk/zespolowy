@@ -5,8 +5,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Head, useForm } from '@inertiajs/react';
+import {useTranslation} from "react-i18next";
 
 export default function ConfirmPassword() {
+    const {t} = useTranslation(['auth']);
     const { data, setData, post, processing, errors, reset } = useForm({
         password: '',
     });

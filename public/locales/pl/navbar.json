@@ -3,6 +3,7 @@
     "advertisements.create": "Utwórz ogłoszenie",
     "login": "Logowanie",
     "register": "Rejestracja",
-    "settings": "ustawienia"
-
+    "settings": "Ustawienia",
+    "logout": "Wyloguj się",
+    "profile": "Profil"
 }

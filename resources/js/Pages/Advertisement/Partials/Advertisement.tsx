@@ -1,9 +1,9 @@
 import Dropdown from "@/Components/Dropdown";
-import {useTranslation} from "react-i18next";
+
 import { FiSettings } from "react-icons/fi";
+import {useTranslation} from "react-i18next";
 
 export default function Advertisement({description, title, auth, slug}: any) {
-
     const { t } = useTranslation(['global'])
     return (
         <>

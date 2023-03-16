@@ -9,7 +9,7 @@ export default function Form(props) {
     const advertisement = props.advertisement ?? null;
 
     console.log(advertisement === null)
-    const {t} = useTranslation(['common'])
+    const { t } = useTranslation(['advertisement'])
 
     const {data, setData, post, put, processing, errors} = useForm({
         title: advertisement?.title || "",
@@ -49,7 +49,7 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('new.announcement')}</h2>}
         >
             <Head title="Aktualności"/>
 
@@ -58,12 +58,12 @@ export default function Form(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <form onSubmit={handleSubmit}>
-                                <label htmlFor="title">Tytuł:</label>
+                                <label htmlFor="title">{t('title')}</label>
                                 <input id="title" value={data.title} onChange={handleChange}/>
                                 {errors.title && <div>{errors.title}</div>}
                                 <ReactQuill theme="snow" modules={modules} value={data.description} onChange={((e) => handleChange(e, 'description'))}/>
                                 {errors.description && <div>{errors.description}</div>}
-                                <button type="submit" disabled={processing}>Submit</button>
+                                <button type="submit" disabled={processing}>{t('submit')}</button>
                             </form>
                         </div>
                     </div>

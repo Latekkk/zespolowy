@@ -5,8 +5,10 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
+import {useTranslation} from "react-i18next";
 
 export default function Register() {
+    const {t} = useTranslation(['auth']);
     const {data, setData, post, processing, errors, reset} = useForm({
         name: '',
         email: '',
@@ -38,7 +40,7 @@ export default function Register() {
                 <div className={"flex w-max"}>
                     <form onSubmit={submit}>
                         <div>
-                            <InputLabel htmlFor="name" value="Name"/>
+                            <InputLabel htmlFor="name" value={t('name')}/>
 
                             <TextInput
                                 id="name"
@@ -55,7 +57,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="email" value="Email"/>
+                            <InputLabel htmlFor="email" value={t('email')}/>
 
                             <TextInput
                                 id="email"
@@ -72,7 +74,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password" value="Password"/>
+                            <InputLabel htmlFor="password" value={t('password')}/>
 
                             <TextInput
                                 id="password"
@@ -89,7 +91,7 @@ export default function Register() {
                         </div>
 
                         <div className="mt-4">
-                            <InputLabel htmlFor="password_confirmation" value="Confirm Password"/>
+                            <InputLabel htmlFor="password_confirmation" value={t('confirm.password')}/>
 
                             <TextInput
                                 id="password_confirmation"
@@ -110,11 +112,11 @@ export default function Register() {
                                 href={route('login')}
                                 className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
-                                Already registered?
+                                {t('already.registered')}
                             </Link>
 
                             <PrimaryButton className="ml-4" disabled={processing}>
-                                Register
+                                {t('register')}
                             </PrimaryButton>
                         </div>
                     </form>
