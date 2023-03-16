@@ -1,3 +1,6 @@
 {
-    "name": "Ogłoszenia"
+    "name": "Announcements",
+    "submit": "Submit",
+    "title": "Title:",
+    "new.announcement": "New announcement"
 }

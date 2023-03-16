@@ -1,3 +1,6 @@
 {
-    "name": "Ogłoszenia"
+    "name": "Ogłoszenia",
+    "submit": "Wyślij",
+    "title": "Tytuł:",
+    "new.announcement": "Nowe ogłoszenie"
 }

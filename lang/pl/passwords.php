@@ -19,4 +19,5 @@ return [
     'token' => 'Token resetowania hasła jest nieprawidłowy',
     'user' => "Nie możemy znaleźć użytkownika powiązanego z tym adresem e-mail.",
 
+
 ];

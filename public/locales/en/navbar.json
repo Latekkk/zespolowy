@@ -1,6 +1,9 @@
 {
     "advertisements": "Advertisements",
+    "advertisements.create": "Create advertisements",
     "login": "Login",
     "register": "Register",
-    "settings": "Settings"
+    "settings": "Settings",
+    "logout": "Log out",
+    "profile": "Profile"
 }
