@@ -96,7 +96,9 @@ export default function Authenticated({ props, header, children }) {
                                                 {t('points')}
                                             </Dropdown.Link>
 
-
+                                            <Dropdown.Link href={route('point.create')}>
+                                                {t('points.create')}
+                                            </Dropdown.Link>
                                         </Dropdown.Content>
                                     </Dropdown>
                                 </div>

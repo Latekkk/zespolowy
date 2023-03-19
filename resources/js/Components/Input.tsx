@@ -1,10 +1,21 @@
-export default function input({labelText, name, value, onChange, error}) {
+
+import { useTranslation } from 'react-i18next';
+
+export default function input({labelText, name, value, onChange, error, readOnly = false}) {
+
+    const { t } = useTranslation(['input'])
+
     return (
         <>
-            <label htmlFor={props.name}>{props.labelText}</label>
-            <input id={props.name} value={props.value} onChange={props.onChange}/>
+            <label htmlFor={name}>{labelText}</label>
+            <input
+                className={`rounded border px-1 '+ ${error? 'border-red-500' : 'border-black'}`}
+                   id={name}
+                   value={typeof value == "object"? '': value}
+                   placeholder={!readOnly && (t('entryValue') + ' ' + name)}
+                readOnly={readOnly} onChange={((e) => onChange(e))}/>
             {
-                errors && <div>{errors}</div>
+                error && <div className="text-red-500">{error}</div>
             }
         </>
     )

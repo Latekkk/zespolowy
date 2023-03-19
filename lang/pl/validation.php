@@ -147,12 +147,6 @@ return [
 
     'attributes' => [
         'name' => 'nazwa',
-        'phone_Number' => 'numer telefonu',
-        'address' => 'adres',
-        'site' => 'strony',
-        'title' => 'tytuł',
-        'description' => 'opis',
-        'category' => 'kategoria',
-        'parent_category_id' => 'podkategoria',
+        'markers' => 'Pozycja geograficzna'
     ],
 ];

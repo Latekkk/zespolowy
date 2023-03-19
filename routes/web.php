@@ -32,6 +32,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('advertisement', AdvertisementController::class)->middleware(['auth', 'verified'])->except('index');
-Route::resource('point', PointController::class)->middleware(['auth', 'verified'])->only(['index']);
+Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

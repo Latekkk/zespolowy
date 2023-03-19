@@ -8,7 +8,6 @@ export default function Form(props) {
 
     const advertisement = props.advertisement ?? null;
 
-    console.log(advertisement === null)
     const { t } = useTranslation(['advertisement'])
 
     const {data, setData, post, put, processing, errors} = useForm({

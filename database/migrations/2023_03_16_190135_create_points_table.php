@@ -13,10 +13,8 @@ return new class extends Migration {
         Schema::create('points', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('lan');
-            $table->string('len');
-            $table->string('position');
-            $table->foreignIdFor(\App\Models\Path::class);
+            $table->string('lat');
+            $table->string('lng');
             $table->timestamps();
         });
     }
