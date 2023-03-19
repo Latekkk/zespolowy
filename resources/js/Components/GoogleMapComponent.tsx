@@ -17,6 +17,7 @@ const options = {
 }
 
 function createKey(location) {
+    console.log(location)
     return location.lat + location.lng
 }
 
@@ -31,11 +32,16 @@ export default function GoogleMapComponent(props) {
         props.setMarkers(event, 'markers', [newMarker]);
     };
 
+    const zoom = props?.markers[0] === undefined? 6 : 10;
+    console.log(zoom)
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLEMAPSAPIKEY}
         >
-            <GoogleMap id='marker-example' mapContainerStyle={mapContainerStyle} zoom={6} center={props?.markers[0] === undefined? center : createKey(props?.markers[0]) }
+            <GoogleMap id='marker-example'
+                       mapContainerStyle={mapContainerStyle}
+                       zoom={zoom}
+                       center={props?.markers[0] === undefined? center : props?.markers[0] }
                        onClick={handleMapClick}>
                 <MarkerClusterer options={options}>
                     {(clusterer) =>

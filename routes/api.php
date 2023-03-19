@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PointController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
+Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');

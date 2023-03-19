@@ -9,12 +9,12 @@ import Button from "@/Components/Button";
 export default function Form(props) {
 
     const {t} = useTranslation(['points'])
-
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
-        markers: [],
-        name: '',
+        markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
+        name: props?.point?.name || '',
         remember: true,
     })
+
 
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @method create(Point $point)
  * @method static paginate(int $int)
+ * @method static orderBy(mixed $param, string $param1)
  */
 class Point extends Model
 {
@@ -17,7 +18,6 @@ class Point extends Model
         'name',
         'lat',
         'lng',
-        'position',
     ];
 
 }

@@ -32,7 +32,7 @@ class PointRepository
         $point->delete();
     }
 
-    private function getPointFromRequest($request)
+    private function getPointFromRequest($request): Point
     {
         return new Point(['name' => $request->name, 'lat' => $request->markers[0]['lat'], 'lng' => $request->markers[0]['lng'], 'slug' => SlugHelper::getSlug($request->name)]);
     }
