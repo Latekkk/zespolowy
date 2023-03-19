@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Inertia} from '@inertiajs/inertia'
 
 import Layout from '@/Layouts/Layout';
-import {Head} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 
 import {Column} from 'primereact/column';
@@ -14,7 +14,6 @@ import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
-
 interface Point {
     name: string;
     lat: string;
@@ -88,8 +87,11 @@ export default function Index(props: any) {
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button type="button" className="bg-blue-700" icon="pi pi-file-edit" onClick={() => visit(rowData.id)}
-                        rounded></Button>
+                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('point.edit', {id: rowData.id})} method="get" as="button" type="button">
+                    <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
+                    </i>
+                </Link>
+
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
