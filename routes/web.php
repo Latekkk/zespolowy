@@ -6,7 +6,6 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PathController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -38,7 +37,6 @@ Route::resource('badge', BadgeController::class)->middleware(['auth', 'verified'
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 
 Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
-Route::resource('path', PathController::class)->middleware(['auth', 'verified']);
 
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
