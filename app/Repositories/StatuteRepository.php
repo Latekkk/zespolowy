@@ -17,16 +17,22 @@ class StatuteRepository
 
     public function create(StatuteRequest $request): void
     {
-        $this->model->create(array_merge($request->all()));
+        $this->model->create(array_merge($request->all(), ['slug' => $this->saveSlug($request->title)]));
     }
 
-    public function update(StatuteRequest $request, Statute $statute): void
+    public function update(StatuteRequest $request, Statute $advertisement): void
     {
-        $statute->update(array_merge($request->all()));
+        $advertisement->update(array_merge($request->all(), ['slug' => $this->saveSlug($request->title)]));
     }
 
-    public function remove(Statute $statute): void
+    public function remove(Statute $advertisement): void
     {
-        $statute->delete();
+        $advertisement->delete();
+    }
+
+
+    private function saveSlug($title): string
+    {
+        return Str::slug(str_replace(' ','_', $title));
     }
 }

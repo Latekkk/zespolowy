@@ -16,5 +16,11 @@ class Statute extends Model
 
     protected $fillable = [
         'content',
+        'slug',
     ];
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }

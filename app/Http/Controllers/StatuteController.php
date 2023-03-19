@@ -25,7 +25,7 @@ class StatuteController extends Controller
     public function index(): Response
     {
         return Inertia::render('Statute/Index', [
-            'statute' => Statute::first()
+            'statute' => Statute::paginate(5)
         ]);
     }
 
@@ -52,13 +52,13 @@ class StatuteController extends Controller
     {
         $this->repository->update($statuteRequest, $statute);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(['toast' => ['message' => __('astatute.create.toast'), 'type' => 'success']]);
     }
 
     public function store(StatuteRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(['toast' => ['message' => __('astatute.create.toast'), 'type' => 'success']]);
     }
 }
