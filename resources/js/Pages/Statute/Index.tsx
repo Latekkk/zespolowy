@@ -18,14 +18,11 @@ export default function Index(  props: any) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                            {props.statutes.data.map((statute, index) => {
-                               return <Statute
-                                    key={'statute' + index}
-                                    content={statute.content}
-                                    slug={statute.slug}
-                                    auth={props.auth.user !== null}
-                                />
-                            })}
+                           <Statute
+                                key={'statute'}
+                                statute={props.statute}
+                                auth={props.auth.user !== null}
+                            />
                         </div>
                         <Pagination props={props.statutes}/>
                     </div>
