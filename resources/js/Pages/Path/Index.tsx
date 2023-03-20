@@ -50,6 +50,7 @@ export default function Index(  props: any) {
         {field: 'distance', header: 'distance'}
     ];
     useEffect(() => {
+
         getPaths()
     }, []);
 
@@ -73,7 +74,7 @@ export default function Index(  props: any) {
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('paths=.edit', {id: rowData.id})} method="get" as="button" type="button">
+                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('path.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
                 </Link>
