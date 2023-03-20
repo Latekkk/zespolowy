@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('statute', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->string('slug', 200);
             $table->timestamps();
         });
     }

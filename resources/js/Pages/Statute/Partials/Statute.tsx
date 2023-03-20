@@ -3,7 +3,7 @@ import Dropdown from "@/Components/Dropdown";
 import { FiSettings } from "react-icons/fi";
 import {useTranslation} from "react-i18next";
 
-export default function Statute({description, title, auth, slug}: any) {
+export default function Statute({statute, auth}: any) {
     const { t } = useTranslation(['global'])
     return (
         <>
@@ -39,14 +39,9 @@ export default function Statute({description, title, auth, slug}: any) {
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
-                                                <Dropdown.Link href={route('statute.edit', slug)}>
+                                                <Dropdown.Link href={route('statute.edit',statute.id)}>
                                                     {t('edit')}
                                                 </Dropdown.Link>
-
-                                                <Dropdown.Link href={route('statute.destroy', slug)}>
-                                                    {t('remove')}
-                                                </Dropdown.Link>
-
                                             </Dropdown.Content>
                                         </Dropdown>
                                     </div>
@@ -54,8 +49,7 @@ export default function Statute({description, title, auth, slug}: any) {
                             </div>
                         }
 
-                        <div className="font-bold text-xl mb-2 my-2 p-4 shadow-lg">{title}</div>
-                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: description }}>
+                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: content }}>
                         </p>
                     </div>
 
