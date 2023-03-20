@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PathRequest;
 use App\Models\Path;
 use App\Repositories\PathRepository;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -58,6 +59,18 @@ class PathController extends Controller
         $this->repository->create($request);
 
         return redirect()->route('home')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
+    }
+    public function getAll(): JsonResponse
+    {
+        $params = request()->query();
+        $paths = Path::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        return response()->json($paths);
+    }
+
+    public function removeAPI(Path $path): JsonResponse
+    {
+        $this->repository->remove($path);
+        return response()->json(['status' => 'ok']);
     }
 
 }
