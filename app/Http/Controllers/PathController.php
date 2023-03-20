@@ -59,5 +59,17 @@ class PathController extends Controller
 
         return redirect()->route('home')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
     }
+    public function getAll(): JsonResponse
+    {
+        $params = request()->query();
+        $paths = Path::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        return response()->json($paths);
+    }
+
+    public function removeAPI(Path $path): JsonResponse
+    {
+        $this->repository->remove($path);
+        return response()->json(['status' => 'ok']);
+    }
 
 }

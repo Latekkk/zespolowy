@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method create(array|string[] $array_merge)
+ * @method static orderBy(mixed $param, string $param1)
  */
 class Path extends Model
 {
