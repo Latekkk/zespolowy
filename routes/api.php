@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PointController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,11 @@ use App\Http\Controllers\PathController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/contact', [ContactController::class, 'getAll'])->name('api.points.index');
+Route::delete('/contact/{contact}', [ContactController::class, 'removeAPI'])->name('api.points.destroy');
+
 
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
 Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');
