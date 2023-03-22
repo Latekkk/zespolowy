@@ -10,6 +10,8 @@ import {Toast} from "primereact/toast";
 import {DataTable} from "primereact/datatable";
 import {Paginator} from "primereact/paginator";
 import {Button} from "primereact/button";
+import {Dialog} from "primereact/dialog";
+import PointService from "@/Pages/Point/service/PointService";
 interface Path {
     name: string;
     entry_points: string;
@@ -71,24 +73,40 @@ export default function Index(  props: any) {
         setPage(event.page + 1);
         setPaginate(event.rows);
     };
+    function pathMap(e: any){
+        //wyświetlenie mapy
+    }
+    const showModal = (data) => {
+        setVisible(true)
+        setModalData(data)
+    }
+    const removeElement = (data) => {
+        PathService.removePath(data.id).then((e) => {
+                getPaths()
+                setVisible(false)
+                toastShow('Usunięto', 'error', data.name)
+            }
+        );
+    }
+    const toastShow = (summary, severity, content) => {
+        toast.current?.show({severity: severity, summary: summary, detail: content});
+    };
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
+                <Button type="button" className="bg-white-700 hover:bg-red-500 focus:bg-pink-500" icon="pi pi-delete-left"
+                        onClick={() => pathMap(rowData)} ></Button>
                 <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('path.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
                 </Link>
-
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
         );
 
     };
-    const showModal = (data) => {
-        setVisible(true)
-        setModalData(data)
-    }
+
 
     return (
         <Layout
@@ -101,21 +119,7 @@ export default function Index(  props: any) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        {/*<input placeholder="Enter name search" onChange={event =>  window.location.href='/path'} id="name"/>*/}
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                            {/*{console.log(props.path)}*/}
-                            {/*{props?.data?.map((path, index) => {*/}
-
-                            {/*    return <Path*/}
-                            {/*        key={'path' + index}*/}
-                            {/*        name={path.name}*/}
-                            {/*        entry_points={path.entry_points}*/}
-                            {/*        points_for_descent={path.points_for_descent}*/}
-                            {/*        distance = {path.distance}*/}
-                            {/*        slug={path.slug}*/}
-                            {/*        auth={props.auth.user !== null}*/}
-                            {/*    />*/}
-                            {/*})}*/}
                             <DataTable
                                 value={paths}
                                 sortField={sort}
@@ -139,7 +143,25 @@ export default function Index(  props: any) {
                                    onPageChange={onPageChange}/>
                     </div>
                 </div>
-            </div>
+            </div>{
+            modalData &&
+
+                <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
+                        style={{width: '50vw'}} onHide={() => setVisible(false)}>
+                    <p className="m-0">
+                        {t('entry_points')}: {modalData.entry_points}
+                        {t('points_for_descent')}: {modalData.points_for_descent}
+                        {t('distance')}: {modalData.distance}
+                    </p>
+                    <div className="flex flex-row gap-x-2 justify-end">
+                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
+                                onClick={() => removeElement(modalData)}/>
+                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                                onClick={() => setVisible(false)}/>
+                    </div>
+                </Dialog>
+            }
+                <Toast ref={toast}/>
         </Layout>
     );
 }
