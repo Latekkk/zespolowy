@@ -57,6 +57,7 @@ class AdvertisementController extends Controller
 
     public function store(AdvertisementRequest $request): RedirectResponse
     {
+
         $this->repository->create($request);
 
         return redirect()->route('home')->with(['toast' => ['message' => __('advertisement.create.toast'), 'type' => 'success']]);

@@ -6,7 +6,7 @@ import Pagination from "@/Components/Pagination";
 export default function Index(  props: any) {
 
     const { t } = useTranslation(['advertisement'])
-
+    console.log(props)
     return (
         <Layout
             props={props}
@@ -21,10 +21,8 @@ export default function Index(  props: any) {
                             {props.advertisements.data.map((advertisement, index) => {
                                return <Advertisement
                                     key={'advertisement' + index}
-                                    description={advertisement.description}
-                                    title={advertisement.title}
-                                    slug={advertisement.slug}
                                     auth={props.auth.user !== null}
+                                    advertisement={advertisement}
                                 />
                             })}
                         </div>

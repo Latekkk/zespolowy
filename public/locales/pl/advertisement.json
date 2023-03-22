@@ -2,5 +2,7 @@
     "name": "Ogłoszenia",
     "submit": "Wyślij",
     "title": "Tytuł:",
-    "new.announcement": "Nowe ogłoszenie"
+    "new.announcement": "Nowe ogłoszenie",
+    "time_from": "Od kiedy obowiązuje",
+    "time_to": "Do kiedy"
 }

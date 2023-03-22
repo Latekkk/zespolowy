@@ -1,6 +1,19 @@
 {
-    "advertisements": "Ogłoszenia",
-    "advertisements.create": "Utwórz ogłoszenie",
+    "home": "Ogłoszenia",
+
+    "advertisement": "Ogłoszenia",
+    "advertisement.index": "Lista ogłoszeń",
+    "advertisement.create": "Utwórz ogłoszenie",
+
+    "point": "Punkty",
+    "point.index": "Lista punktów",
+    "point.create": "Dodaj punkt",
+
+    "path": "Ścieżki",
+    "path.index": "Lista ścieżek",
+    "path.create": "Dodaj ścieżke",
+
+
     "login": "Logowanie",
     "register": "Rejestracja",
     "settings": "Ustawienia",

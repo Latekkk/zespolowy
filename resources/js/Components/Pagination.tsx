@@ -43,13 +43,11 @@ export default function Pagination(props) {
 
     useEffect(() => {
         const data = props.props;
-        console.log(data)
         setLinks(paginate(data.current_page, data.links.length, 2))
     }, [props]);
 
     return (
         <>
-            {console.log(links)}
             {links?.length > 3 &&
                 <div className="flex justify-center mt-4 btn-group flex-row">
                     {links.map((link, index) =>

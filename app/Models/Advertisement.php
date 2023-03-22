@@ -17,6 +17,8 @@ class Advertisement extends Model
         'title',
         'description',
         'slug',
+        'time_from',
+        'time_to'
     ];
 
     public function getRouteKeyName(): string

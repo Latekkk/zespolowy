@@ -1,7 +1,20 @@
 {
-    "advertisements": "Advertisements",
-    "advertisements.create": "Create advertisements",
-    "login": "Login",
+    "home": "Advertisement",
+
+    "advertisement": "Advertisement",
+    "advertisement.index": "Advertisement list",
+    "advertisement.create": "Create advertisements",
+
+    "point": "Points",
+    "point.index": "Points list",
+    "point.create": "Add point",
+
+
+    "path": "Path",
+    "path.index": "Path list",
+    "path.create": "Create path",
+
+    "login": "Log in",
     "register": "Register",
     "settings": "Settings",
     "logout": "Log out",
