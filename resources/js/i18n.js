@@ -20,13 +20,7 @@ i18n
         debug: false,
         fallbackLng: 'en',
         interpolation: {
-            escapeValue: false, // not needed for react as it escapes by default
-            // format: (value, format, lng) => { // legacy usage
-            //   if (value instanceof Date) {
-            //     return DateTime.fromJSDate(value).setLocale(lng).toLocaleString(DateTime[format])
-            //   }
-            //   return value;
-            // }
+            escapeValue: false
         }
     });
 

@@ -5,6 +5,7 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link} from '@inertiajs/react';
 import {useTranslation} from "react-i18next";
 import NavBar from "@/Components/NavBar";
+import LangueSwitcher from "@/Components/LangueSwitcher";
 
 export default function Authenticated({props, header, children}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -79,7 +80,9 @@ export default function Authenticated({props, header, children}) {
 
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
+                                <LangueSwitcher/>
                             <div className="ml-3 relative">
+
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
