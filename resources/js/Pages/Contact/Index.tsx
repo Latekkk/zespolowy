@@ -7,13 +7,14 @@ import {useTranslation} from 'react-i18next';
 
 import {Column} from 'primereact/column';
 
-import PointService from "@/Pages/Point/service/PointService";
 import {DataTable} from 'primereact/datatable';
 import {Paginator} from 'primereact/paginator';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import {Toast} from 'primereact/toast';
 import ContactService from "@/Pages/Contact/service/ContactService";
+import {InputSwitch} from "primereact/inputswitch";
+import { BiShow } from "react-icons/bi";
 
  interface Contact {
     id: number;
@@ -47,6 +48,7 @@ export default function Index(props: any) {
 
     const [visibleContact, setVisibleContact] = useState<boolean>(false);
     const [modalContactData, setContactModalData] = useState<Contact>();
+    const [responseSwitch, setResponseSwitch] = useState()
     const toast = useRef<Toast>(null);
 
     const columns: ColumnMeta[] = [
@@ -73,10 +75,10 @@ export default function Index(props: any) {
 
     useEffect(() => {
         getPoints()
-    }, [page, paginate, sort, sortOrder]);
+    }, [page, paginate, sort, sortOrder,responseSwitch]);
 
     const getPoints = () => {
-        ContactService.getContacts(paginate, page, sort, sortOrder).then((data: Contact[]) => {
+        ContactService.getContacts(paginate, page, sort, sortOrder, responseSwitch).then((data: Contact[]) => {
             setContacts(data.data);
             setLoading(false);
             setTotalRecords(data.total)
@@ -96,8 +98,8 @@ export default function Index(props: any) {
         return (
             <div className="flex flex-wrap gap-2">
 
-                <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500" icon="pi pi-edit text-white"
-                        onClick={() => showContactModal(rowData)} rounded></Button>
+                <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500 w-[42px] justify-center"
+                        onClick={() => showContactModal(rowData)} rounded><BiShow/></Button>
 
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
@@ -116,7 +118,6 @@ export default function Index(props: any) {
     }
 
     const setResponse = (data) => {
-        console.log(data)
         ContactService.setResponse(data.id).then((e) => {
                 getPoints()
                 setVisible(false)
@@ -135,6 +136,10 @@ export default function Index(props: any) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="flex flex-row gap-2 p-2 w-full justify-end">
+                            <p>Skontaktowano?</p>
+                            <InputSwitch checked={responseSwitch} onChange={(e) => setResponseSwitch(e.value)} />
+                        </div>
                         <div className="card w-full p-fluid">
                             <DataTable
                                 value={contacts}
@@ -184,7 +189,7 @@ export default function Index(props: any) {
                     <div className="flex flex-row gap-x-2 justify-end">
                         <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>
-                        <Button label="Usuń" severity="danger" raised className={"bg-red-600 hover:bg-red-500 focus:bg-red-500 border-red-600"}
+                        <Button label="Usuń"   className={"bg-red-600 hover:bg-red-500 focus:bg-red-500 border-red-600"}
                                 onClick={() => removeElement(modalData)}/>
                     </div>
                 </Dialog>
@@ -194,7 +199,7 @@ export default function Index(props: any) {
                 modalContactData &&
 
                 <Dialog header={`Dane kontaktowe : "${modalContactData.name}"`} visible={visibleContact} maximizable
-                        style={{width: '50vw'}} onHide={() => setVisible(false)}>
+                        style={{width: '50vw'}} onHide={() => setVisibleContact(false)}>
                     <div className="flex flex-col gap-y-2 m-0 ">
                         <p>tytuł : {modalContactData.title}</p>
                         {
@@ -210,10 +215,18 @@ export default function Index(props: any) {
                         <p>opis : {modalContactData.description}</p>
                     </div>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
-                                onClick={() => setVisibleContact(false)}/>
-                        <Button label="Skontaktowano"  className={"bg-green-600 hover:bg-green-500 focus:bg-green-500 border-green-600"}
-                                onClick={() => setResponse(modalContactData)}/>
+
+                        {
+                            modalContactData.response == 1 && (
+                                <>
+                                    <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                                            onClick={() => setVisibleContact(false)}/>
+                                    <Button label="Skontaktowano"  className={"bg-green-600 hover:bg-green-500 focus:bg-green-500 border-green-600"}
+                                            onClick={() => setResponse(modalContactData)}/>
+                                </>
+                            )
+                        }
+
                     </div>
                 </Dialog>
             }

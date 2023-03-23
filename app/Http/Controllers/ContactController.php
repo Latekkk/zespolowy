@@ -66,7 +66,7 @@ class ContactController extends Controller
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $paths = Contact::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $paths = Contact::where('response', $params['responseSwitch'] !== 'true' ? 1 : 0)->orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )->paginate((int)$params['paginate'] ?? 15);
         return response()->json($paths);
     }
 

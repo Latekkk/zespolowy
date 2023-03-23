@@ -32,7 +32,6 @@ class ContactRepository
 
     public function setResponse(Contact $contact): void
     {
-
-        $contact->update(!$contact->response);
+        $contact->update(['response' => !$contact->response ]);
     }
 }
