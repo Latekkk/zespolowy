@@ -3,7 +3,6 @@ import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import Input from "@/Components/Input"
-import SecondaryButton from "@/Components/SecondaryButton";
 import Button from "@/Components/Button";
 
 export default function Form(props) {

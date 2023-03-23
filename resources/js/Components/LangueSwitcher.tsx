@@ -35,7 +35,6 @@ function LanguageSwitcher() {
                         {
                             label: 'Polski',
                             short: 'pl',
-                            icon: 'pi pi-fw pi-trash',
                             command: (data) => {
                                 i18n.changeLanguage(data.item.short)
                                 toast.current.show({
@@ -49,7 +48,6 @@ function LanguageSwitcher() {
                         {
                             label: 'English',
                             short: 'en',
-                            icon: 'pi pi-fw pi-external-link',
                             command: (data) => {
                                 i18n.changeLanguage(data.item.short)
                                 toast.current.show({
@@ -68,18 +66,16 @@ function LanguageSwitcher() {
 
     useEffect(() => {
         setLanguage();
-        console.log(items)
     }, []);
 
 
     useEffect(() => {
         setLanguage();
-        console.log(items)
     }, [i18n]);
 
     const getFlag = () => {
         return (
-            <Flag code={i18n.language === 'en'? 'gb' : i18n.language} height="16"  />
+            <Flag code={i18n.language === 'en'? 'gb' : i18n.language ?? 'gb'} height="16"  />
         )
     }
 

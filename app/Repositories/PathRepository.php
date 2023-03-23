@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\SlugHelper;
 use App\Http\Requests\PathRequest;
 use App\Models\Path;
 use Illuminate\Support\Str;
@@ -17,12 +18,12 @@ class PathRepository
 
     public function create(PathRequest $request): void
     {
-        $this->model->create(array_merge($request->all(), ['slug' => $this->saveSlug($request->name)]));
+        $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
     public function update(PathRequest $request, Path $path): void
     {
-        $path->update(array_merge($request->all(), ['slug' => $this->saveSlug($request->name)]));
+        $path->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
     public function remove(Path $path): void
@@ -30,15 +31,11 @@ class PathRepository
         $path->delete();
     }
 
-
-    private function saveSlug($text): string
-    {
-        return Str::slug(str_replace(' ','_', $text));
-    }
     private function getPointFromRequest($request): Path
     {
         return new Path(['name' => $request->name, 'entry_points' => $request->markers[0]['entry_points'], 'points_for_descent' => $request->markers[0]['points_for_descent'],
             'distance' => $request->markers[0]['distance'], 'first_point' => $request->markers[0]['first_point'], 'second_point' => $request->markers[0]['second_point'],
             'slug' => SlugHelper::getSlug($request->name)]);
     }
+
 }

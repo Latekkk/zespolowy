@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Helpers\SlugHelper;
 use App\Http\Requests\PointRequest;
 use App\Models\Point;
-use Illuminate\Support\Str;
 
 class PointRepository
 {
