@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PointRequest;
 use App\Models\Point;
+use App\Models\Path;
 use App\Repositories\PointRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
