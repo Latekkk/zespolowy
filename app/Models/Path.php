@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @method create(array|string[] $array_merge)
@@ -22,4 +23,9 @@ class Path extends Model
         'first_point',
         'second_point'
     ];
+
+    public function points(): BelongsToMany
+    {
+        return $this->belongsToMany(Point::class, 'paths_points');
+    }
 }
