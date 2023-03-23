@@ -94,7 +94,7 @@ export default function Index(  props: any) {
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button type="button" className="bg-white-700 hover:bg-red-500 focus:bg-pink-500" icon="pi pi-delete-left"
+                <Button type="button" className="bg-green-600 hover:bg-green-700" icon="pi pi-map"
                         onClick={() => pathMap(rowData)} ></Button>
                 <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('path.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
