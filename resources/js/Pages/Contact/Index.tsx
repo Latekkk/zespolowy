@@ -12,12 +12,17 @@ import {DataTable} from 'primereact/datatable';
 import {Paginator} from 'primereact/paginator';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
-import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
-interface Point {
+import ContactService from "@/Pages/Contact/service/ContactService";
+
+ interface Contact {
+    id: number;
     name: string;
-    lat: string;
-    lng: string;
+    title: string;
+    email: string;
+    phone_number: string;
+    description: string;
+    response: boolean;
 }
 
 interface ColumnMeta {
@@ -26,8 +31,8 @@ interface ColumnMeta {
 }
 
 export default function Index(props: any) {
-    const {t} = useTranslation(['points'])
-    const [points, setPoints] = useState<Point[]>([]);
+    const {t} = useTranslation(['contact'])
+    const [contacts, setContacts] = useState<Contact[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [page, setPage] = useState(1);
     const [paginate, setPaginate] = useState(15);
@@ -37,14 +42,18 @@ export default function Index(props: any) {
     const [sortOrder, setSortOrder] = useState<string>('1')
 
     const [visible, setVisible] = useState<boolean>(false);
-    const [modalData, setModalData] = useState<Point>();
+    const [modalData, setModalData] = useState<Contact>();
+
+
+    const [visibleContact, setVisibleContact] = useState<boolean>(false);
+    const [modalContactData, setContactModalData] = useState<Contact>();
     const toast = useRef<Toast>(null);
 
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: 'Name'},
-        {field: 'lat', header: 'Lat'},
-        {field: 'lng', header: 'Len'}
+        {field: 'title', header: 'Title'},
+        {field: 'description', header: 'descripton'},
     ];
 
     const toastShow = (summary, severity, content) => {
@@ -67,30 +76,28 @@ export default function Index(props: any) {
     }, [page, paginate, sort, sortOrder]);
 
     const getPoints = () => {
-        PointService.getPoints(paginate, page, sort, sortOrder).then((data: Point[]) => {
-            setPoints(data.data);
+        ContactService.getContacts(paginate, page, sort, sortOrder).then((data: Contact[]) => {
+            setContacts(data.data);
             setLoading(false);
             setTotalRecords(data.total)
         });
-    }
-
-    const visit = (id) => {
-        Inertia.visit(route('point.edit', {id: id}))
     }
 
     const showModal = (data) => {
         setVisible(true)
         setModalData(data)
     }
-
+    const showContactModal = (data) => {
+        setVisibleContact(true)
+        setContactModalData(data)
+    }
 
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('point.edit', {id: rowData.id})} method="get" as="button" type="button">
-                    <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
-                    </i>
-                </Link>
+
+                <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500" icon="pi pi-edit text-white"
+                        onClick={() => showContactModal(rowData)} rounded></Button>
 
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
@@ -100,10 +107,20 @@ export default function Index(props: any) {
     };
 
     const removeElement = (data) => {
-        PointService.removePoint(data.id).then((e) => {
+        ContactService.removeContact(data.id).then((e) => {
                 getPoints()
                 setVisible(false)
                 toastShow('Usunięto', 'error', data.name)
+            }
+        );
+    }
+
+    const setResponse = (data) => {
+        console.log(data)
+        ContactService.setResponse(data.id).then((e) => {
+                getPoints()
+                setVisible(false)
+                toastShow('Skontaktowano', 'error', data.name)
             }
         );
     }
@@ -120,7 +137,7 @@ export default function Index(props: any) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="card w-full p-fluid">
                             <DataTable
-                                value={points}
+                                value={contacts}
                                 sortField={sort}
                                 sortOrder={sortOrder}
                                 onSort={event => {
@@ -150,15 +167,53 @@ export default function Index(props: any) {
 
                 <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
-                    <p className="m-0">
-                        Szerokość : {modalData.lat}
-                        Długość {modalData.lng}
-                    </p>
+                    <div className="flex flex-col gap-y-2 m-0 ">
+                        <p>tytuł : {modalData.title}</p>
+                        {
+                            modalData.phone_number &&  (
+                            <p>phone number : {modalData.phone_number}</p>
+                            )
+                        }
+                        {
+                            modalData.email &&  (
+                            <p>email : {modalData.email}</p>
+                            )
+                        }
+                        <p>opis : {modalData.description}</p>
+                    </div>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
-                                onClick={() => removeElement(modalData)}/>
                         <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>
+                        <Button label="Usuń" severity="danger" raised className={"bg-red-600 hover:bg-red-500 focus:bg-red-500 border-red-600"}
+                                onClick={() => removeElement(modalData)}/>
+                    </div>
+                </Dialog>
+            }
+
+            {
+                modalContactData &&
+
+                <Dialog header={`Dane kontaktowe : "${modalContactData.name}"`} visible={visibleContact} maximizable
+                        style={{width: '50vw'}} onHide={() => setVisible(false)}>
+                    <div className="flex flex-col gap-y-2 m-0 ">
+                        <p>tytuł : {modalContactData.title}</p>
+                        {
+                            modalContactData.phone_number &&  (
+                                <p>phone number : {modalContactData.phone_number}</p>
+                            )
+                        }
+                        {
+                            modalContactData.email &&  (
+                                <p>email : {modalContactData.email}</p>
+                            )
+                        }
+                        <p>opis : {modalContactData.description}</p>
+                    </div>
+                    <div className="flex flex-row gap-x-2 justify-end">
+                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                                onClick={() => setVisibleContact(false)}/>
+                        <Button label="Skontaktowano"  className={"bg-green-600 hover:bg-green-500 focus:bg-green-500 border-green-600"}
+                                onClick={() => setResponse(modalContactData)}/>
                     </div>
                 </Dialog>
             }

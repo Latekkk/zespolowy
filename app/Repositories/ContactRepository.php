@@ -16,6 +16,7 @@ class ContactRepository
 
     public function create(ContactRequest $request): void
     {
+        $request->response = false;
         $this->model->create(array_merge($request->all()));
     }
 
@@ -27,5 +28,11 @@ class ContactRepository
     public function remove(Contact $contact): void
     {
         $contact->delete();
+    }
+
+    public function setResponse(Contact $contact): void
+    {
+
+        $contact->update(!$contact->response);
     }
 }

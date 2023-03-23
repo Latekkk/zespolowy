@@ -27,7 +27,7 @@ export default function Form(props) {
         title: '',
         email: '',
         phone_number: '',
-        response: '',
+        response: false,
         description: '',
         remember: true,
     })
@@ -87,6 +87,14 @@ export default function Form(props) {
                                                name='email'
                                                value={data.email}
                                                error={errors.email}
+                                               onChange={handleChange}
+                                               placeholder='Wprowadz email...'
+                                        />
+
+                                        <Input labelText={contactTranslation.t('phone_number')}
+                                               name='phone_number'
+                                               value={data.phone_number}
+                                               error={errors.phone_number}
                                                onChange={handleChange}
                                                placeholder='Wprowadz email...'
                                         />

@@ -14,9 +14,9 @@
     "path.create": "Dodaj ścieżke",
 
 
-    "path": "Kontakt",
-    "path.index": "Lista próśb o kontakt",
-    "path.create": "Poproś o kontakt",
+    "contact": "Kontakt",
+    "contact.index": "Lista próśb o kontakt",
+    "contact.create": "Poproś o kontakt",
 
 
     "login": "Logowanie",

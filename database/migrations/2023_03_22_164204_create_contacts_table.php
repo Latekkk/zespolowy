@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('email');
             $table->string('phone_number');
-            $table->string('description',255);
-            $table->boolean('response')->default('false');
+            $table->string('description');
+            $table->boolean('response')->default(false)->nullable();
             $table->timestamps();
         });
     }
