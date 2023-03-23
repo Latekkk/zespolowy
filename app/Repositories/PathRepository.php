@@ -33,8 +33,10 @@ class PathRepository
 
     private function getPointFromRequest($request): Path
     {
-        return new Path(['name' => $request->name, 'entry_points' => $request->markers[0]['entry_points'], 'points_for_descent' => $request->markers[0]['points_for_descent'],
-            'distance' => $request->markers[0]['distance'], 'first_point' => $request->markers[0]['first_point'], 'second_point' => $request->markers[0]['second_point'],
+        return new Path(['name' => $request->name,
+            'entry_points' => $request->markers[0]['entry_points'],
+            'points_for_descent' => $request->markers[0]['points_for_descent'],
+            'distance' => $request->markers[0]['distance'],
             'slug' => SlugHelper::getSlug($request->name)]);
     }
 

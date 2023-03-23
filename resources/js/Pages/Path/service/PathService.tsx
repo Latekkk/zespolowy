@@ -5,8 +5,6 @@ export interface Path {
     entry_points: string;
     points_for_descent: string;
     distance: string;
-    first_point: string;
-    second_point: string;
 }
 
 class PathService {

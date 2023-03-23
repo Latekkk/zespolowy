@@ -17,8 +17,6 @@ return new class extends Migration
             $table->integer('entry_points');
             $table->integer('points_for_descent');
             $table->integer('distance');
-            $table->string('first_point');
-            $table->string('second_point');
             $table->timestamps();
         });
     }
