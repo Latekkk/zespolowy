@@ -26,4 +26,9 @@ class Point extends Model
         return $this->belongsToMany(Path::class, 'paths_points');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

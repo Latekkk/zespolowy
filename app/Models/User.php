@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->morphToMany(Photo::class, 'photoable');
     }
+
+    public function points()
+    {
+        return $this->hasMany(Point::class);
+    }
 }
