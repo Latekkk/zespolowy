@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\PhotoExceptions\PhotoSaveException;
+use App\Exceptions\PhotoExceptions\PhotoUpdateException;
+use App\Helpers\ToastHelper;
 use App\Http\Requests\BadgeRequest;
 use App\Models\Badge;
 use App\Repositories\BadgeRepository;
@@ -47,11 +49,14 @@ class BadgeController extends Controller
         ]);
     }
 
+    /**
+     * @throws PhotoUpdateException
+     */
     public function update(Badge $badge, BadgeRequest $badgeRequest): RedirectResponse
     {
         $this->repository->update($badgeRequest, $badge->load('photos'));
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(ToastHelper::update('badge'));
     }
 
     /**
@@ -61,7 +66,7 @@ class BadgeController extends Controller
     {
         $this->repository->create($request);
 
-        return redirect()->route('badge.index')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
+        return redirect()->route('badge.index')->with(ToastHelper::create('badge'));
     }
 
 

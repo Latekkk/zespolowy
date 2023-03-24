@@ -7,7 +7,6 @@ import {Toast} from "primereact/toast";
 
 export default function Layout({props, header, children,}) {
     const {t} = useTranslation(['navbar'])
-    console.log('tutaj propus', props)
     const auth = props.auth.user
 
 
@@ -19,7 +18,7 @@ export default function Layout({props, header, children,}) {
 
     useEffect((() => {
         const toastData = props.toast.value;
-        if (toastData !== null) toastShow(toastData.operation || '', toastData.type || 'info', t(toastData.message) || '')
+        if (toastData !== null) toastShow(toastData.summary || '', toastData.severity || 'info', t(toastData.content) || '')
     }),[])
 
     return (

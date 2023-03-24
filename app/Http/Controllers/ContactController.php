@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Path;
@@ -52,7 +53,7 @@ class ContactController extends Controller
     {
         $this->repository->update($contactRequest, $contact);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('contact.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(ToastHelper::update('contact'));
     }
 
     public function store(ContactRequest $request): RedirectResponse
@@ -60,7 +61,7 @@ class ContactController extends Controller
 
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('contact.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(ToastHelper::create('contact'));
     }
 
     public function getAll(): JsonResponse

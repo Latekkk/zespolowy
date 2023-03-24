@@ -8,6 +8,9 @@ import Button from "@/Components/Button";
 export default function Form(props) {
 
     const {t} = useTranslation(['points'])
+
+    const point = props.point ?? null;
+
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
         markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
         name: props?.point?.name || '',
@@ -26,7 +29,7 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('point.store', data))
+        point === null ? post(route('point.store')) : put(route('point.update', point.id))
     }
 
     const setDefaultForm = () => {
