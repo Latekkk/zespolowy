@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PhotoExceptions\PhotoSaveException;
 use App\Http\Requests\BadgeRequest;
 use App\Models\Badge;
 use App\Repositories\BadgeRepository;
@@ -23,7 +24,7 @@ class BadgeController extends Controller
     public function index(): Response
     {
         return Inertia::render('Badge/Index', [
-
+            'badges'=> Badge::with('photos')->get()
         ]);
     }
 
@@ -48,16 +49,19 @@ class BadgeController extends Controller
 
     public function update(Badge $badge, BadgeRequest $badgeRequest): RedirectResponse
     {
-        $this->repository->update($badgeRequest, $badge);
+        $this->repository->update($badgeRequest, $badge->load('photos'));
 
         return redirect()->route('home')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
     }
 
+    /**
+     * @throws PhotoSaveException
+     */
     public function store(BadgeRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
+        return redirect()->route('badge.index')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
     }
 
 

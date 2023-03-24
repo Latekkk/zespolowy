@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('badges', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 200);
-            $table->integer('point');
+        Schema::create('imageables', function (Blueprint $table) {
+            $table->unsignedBigInteger('imageable_id');
+            $table->string('imageable_type');
+            $table->unsignedBigInteger('photo_id');
+            $table->foreign('photo_id')->references('id')->on('photos')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('badges');
+        Schema::dropIfExists('imageables');
     }
 };
