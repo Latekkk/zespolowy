@@ -21,10 +21,12 @@ export default function Form(props) {
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
         let value = e?.target?.value || val || e || '';
+        console.log(...value, keyName)
         setData(data => ({
             ...data,
             [key]: value,
         }))
+        console.log('markers',...data.markers)
     }
 
     function handleSubmit(e) {
@@ -35,7 +37,6 @@ export default function Form(props) {
     const setDefaultForm = () => {
         reset();
         clearErrors()
-        console.log(data);
     }
 
     return (
