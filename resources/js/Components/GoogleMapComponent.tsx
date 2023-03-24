@@ -17,7 +17,6 @@ const options = {
 }
 
 function createKey(location) {
-    console.log(location)
     return location.lat + location.lng
 }
 
@@ -33,7 +32,6 @@ export default function GoogleMapComponent(props) {
     };
 
     const zoom = props?.markers[0] === undefined? 6 : 10;
-    console.log(zoom)
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLEMAPSAPIKEY}
