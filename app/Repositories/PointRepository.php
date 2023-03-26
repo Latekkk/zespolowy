@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Helpers\SlugHelper;
 use App\Http\Requests\PointRequest;
 use App\Models\Point;
+use Illuminate\Support\Facades\Auth;
 
 class PointRepository
 {
@@ -35,7 +36,8 @@ class PointRepository
 
     private function getPointFromRequest($request, $update = false): Point|array
     {
-        $data = ['name' => $request->name, 'lat' => $request->markers[0]['lat'], 'lng' => $request->markers[0]['lng'], 'slug' => SlugHelper::getSlug($request->name)];
+
+        $data = ['user_id' => Auth::user()->id, 'name' => $request->name, 'lat' => $request->markers[0]['lat'], 'lng' => $request->markers[0]['lng'], 'slug' => SlugHelper::getSlug($request->name)];
         if ($update) {
             return $data;
         }
