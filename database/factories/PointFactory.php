@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Point;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -18,6 +19,8 @@ class PointFactory extends Factory
      */
     #[ArrayShape(['name' => "string", 'lat' => "string", 'lng' => "string"])] public function definition(): array
     {
+
+
         return [
             'name' => $this->faker->name,
             'lat' => $this->faker->numerify('50.############'),

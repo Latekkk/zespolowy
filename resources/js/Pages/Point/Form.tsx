@@ -3,13 +3,15 @@ import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import Input from "@/Components/Input"
-import SecondaryButton from "@/Components/SecondaryButton";
 import Button from "@/Components/Button";
 
 export default function Form(props) {
 
     const {t} = useTranslation(['points'])
     const globalTranslation = useTranslation(['global'])
+
+    const point = props.point ?? null;
+
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
         markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
         name: props?.point?.name || '',
@@ -28,13 +30,12 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('point.store', data))
+        point === null ? post(route('point.store')) : put(route('point.update', point.id))
     }
 
     const setDefaultForm = () => {
         reset();
         clearErrors()
-        console.log(data);
     }
 
     return (
@@ -50,6 +51,7 @@ export default function Form(props) {
 
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
+                                <GoogleMapComponent markers={data.markers} setMarkers={handleChange}/>
 
                                 <div className="flex flex-col gap-2 w-max">
                                     <Input labelText={t('point.name')}

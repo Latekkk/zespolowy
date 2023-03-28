@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\PointRequest;
 use App\Models\Point;
 use App\Repositories\PointRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -36,16 +36,18 @@ class PointController extends Controller
         return Inertia::render('Point/Form', ['point' => $point]);
     }
 
-    public function Update(Point $point): Response
+    public function update(Point $point, PointRequest $pointRequest): RedirectResponse
     {
-        return Inertia::render('Point/Form', []);
+        $this->repository->update($pointRequest, $point);
+
+        return redirect()->route('point.index')->with(ToastHelper::update('point'));
     }
 
     public function store(PointRequest $pointRequest): RedirectResponse
     {
         $this->repository->create($pointRequest);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('point.create.toast'), 'type' => 'success']]);
+        return redirect()->route('point.index')->with(ToastHelper::create('point'));
     }
 
 
@@ -54,7 +56,7 @@ class PointController extends Controller
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $points = Point::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $points = Point::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')->paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
         return response()->json($points);
     }
 

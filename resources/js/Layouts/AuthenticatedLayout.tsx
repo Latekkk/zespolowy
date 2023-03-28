@@ -56,6 +56,34 @@ export default function Authenticated({props, header, children}) {
                     "route": "create"
                 }
             ]
+        },
+        {
+            "name": "contact",
+            "route": "contact.index",
+            "subLinks": [
+                {
+                    "name": "contact",
+                    "route": "index"
+                },
+                {
+                    "name": "contact",
+                    "route": "create"
+                }
+            ]
+        },
+        {
+            "name": "badge",
+            "route": "badge.index",
+            "subLinks": [
+                {
+                    "name": "badge",
+                    "route": "index"
+                },
+                {
+                    "name": "badge",
+                    "route": "create"
+                }
+            ]
         }
     ]
 

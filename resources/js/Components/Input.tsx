@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 
-export default function input({labelText, name, value, onChange, error, readOnly = false, type = 'text'}) {
+export default function Input({labelText, name, value, onChange, error, readOnly = false, type = 'text', placeholder}) {
 
     const {t} = useTranslation(['input'])
 
@@ -11,7 +11,7 @@ export default function input({labelText, name, value, onChange, error, readOnly
                 className={`rounded border px-1 w-min-[200px]'+ ${error ? 'border-red-500' : 'border-black'}`}
                 id={name}
                 value={typeof value == "object" ? '' : value}
-                placeholder={!readOnly && (t('entryValue') + ' ' + name)}
+                placeholder={!readOnly && placeholder || (t('entryValue') + ' ' + name) || ''}
                 type={type}
                 readOnly={readOnly} onChange={((e) => onChange(e))}/>
             {

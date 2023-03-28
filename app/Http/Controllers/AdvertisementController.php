@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\AdvertisementRequest;
 use App\Models\Advertisement;
 use App\Repositories\AdvertisementRepository;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -52,14 +50,13 @@ class AdvertisementController extends Controller
     {
         $this->repository->update($advertisementRequest, $advertisement);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('advertisement.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(ToastHelper::update('advertisement'));
     }
 
     public function store(AdvertisementRequest $request): RedirectResponse
     {
-
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('advertisement.create.toast'), 'type' => 'success']]);
+        return redirect()->route('home')->with(ToastHelper::create('advertisement'));
     }
 }
