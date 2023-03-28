@@ -17,6 +17,7 @@ interface Point {
     lng: string;
 }
 
+
 interface ColumnMeta {
     field: string;
     header: string;
@@ -31,6 +32,9 @@ export default function Form(props) {
     const [sortOrder, setSortOrder] = useState<string>('1');
     const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
         name: '',
+        entry_points: '',
+        points_for_descent: '',
+        remember: true
     })
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState<Point>();
@@ -43,6 +47,15 @@ export default function Form(props) {
         {field: 'lng', header: 'Len'}
     ];
     const toast = useRef<Toast>(null);
+    function handleChange(e, keyName, val) {
+        const key = e?.target?.id || keyName;
+        let value = e?.target?.value || val || e || '';
+        setData(data => ({
+            ...data,
+            [key]: value,
+        }))
+    }
+
     function addToList(){
         setSelectedPointsList([...selectedPointsList, selectedPoint]);
     }
@@ -104,7 +117,6 @@ export default function Form(props) {
         post(route('path.store', data))
     }
 
-
     const setDefaultForm = () => {
         reset();
         clearErrors()
@@ -147,13 +159,31 @@ export default function Form(props) {
                                         <Button type='button' onClick={addToList} disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
 
                                     </div>
-
-
+                                    <div className="flex flex-row gap-2 w-max">
                                     <Input labelText={t('name')}
                                            name='name'
                                            value={data.name}
                                            error={errors.name}
+                                           onChange={handleChange}
+                                           placeholder='Nazwa ścieżki'
                                     />
+                                    <Input labelText={t('entry_points')}
+                                           name='entry_points'
+                                           value={data.entry_points}
+                                           error={errors.entry_points}
+                                           onChange={handleChange}
+                                           placeholder='Punkty wejścia'
+                                           type='number'
+                                    />
+                                    <Input labelText={t('points_for_descent')}
+                                           name='points_for_descent'
+                                           value={data.points_for_descent}
+                                           error={errors.points_for_descent}
+                                           onChange={handleChange}
+                                           placeholder='Punkty zejścia '
+                                           type='number'
+                                    />
+                                    </div>
                                 </div>
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="card w-full p-fluid">

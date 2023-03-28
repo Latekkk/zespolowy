@@ -16,13 +16,12 @@ class PathFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['name' => "string", 'entry_points' => "string", 'points_for_descent' => "string", 'distance' => "string"])]
+    #[ArrayShape(['name' => "string", 'entry_points' => "string", 'points_for_descent' => "string"])]
     public function definition(): array{
         return [
             'name' => $this->faker->name,
             'entry_points' => $this->faker->numerify('17.############'),
             'points_for_descent' => $this->faker->numerify('17.############'),
-            'distance' => $this->faker->numerify('17.############'),
         ];
     }
 }

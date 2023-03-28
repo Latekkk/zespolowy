@@ -19,7 +19,6 @@ class Path extends Model
         'name',
         'entry_points',
         'points_for_descent',
-        'distance'
     ];
 
     public function points(): BelongsToMany

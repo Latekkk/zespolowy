@@ -16,7 +16,6 @@ interface Path {
     name: string;
     entry_points: string;
     points_for_descent: string;
-    distance: string;
 }
 interface ColumnMeta {
     field: string;
@@ -49,7 +48,6 @@ export default function Index(  props: any) {
         {field: 'name', header: 'Name'},
         {field: 'entry_points', header: 'entry'},
         {field: 'points_for_descent', header: 'descent'},
-        {field: 'distance', header: 'distance'}
     ];
     useEffect(() => {
 
@@ -151,7 +149,6 @@ export default function Index(  props: any) {
                     <p className="m-0">
                         {t('entry_points')}: {modalData.entry_points}
                         {t('points_for_descent')}: {modalData.points_for_descent}
-                        {t('distance')}: {modalData.distance}
                     </p>
                     <div className="flex flex-row gap-x-2 justify-end">
                         <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}

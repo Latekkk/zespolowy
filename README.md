@@ -71,3 +71,4 @@
 
 <p style="color: cyan">Inne info</p>
 <p>Tłumacznia wźięte z https://dev.to/adrai/how-to-properly-internationalize-a-react-application-using-i18next-3hdb</p>
+<a style="display: flex; align-items: center; column-gap: 10px; height: 50px;" href="https://pttkhts.hg.pl/ktg/komisja-tg/got/got.html">Ścieżki i punktacja pttk</a>
