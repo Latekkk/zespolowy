@@ -17,8 +17,10 @@ export default function Layout({props, header, children,}) {
     };
 
     useEffect((() => {
-        const toastData = props.toast.value;
-        if (toastData !== null) toastShow(toastData.summary || '', toastData.severity || 'info', t(toastData.content) || '')
+        if (props.toast !== undefined) {
+            const toastData = props.toast.value;
+            if (toastData !== null) toastShow(toastData.summary || '', toastData.severity || 'info', t(toastData.content) || '')
+        }
     }),[])
 
     return (
