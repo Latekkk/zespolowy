@@ -1,3 +1,6 @@
 {
-    "name": "Moje punkty"
+    "name": "My points",
+    "point.name": "Point name",
+    "latitude": "Latitude",
+    "longitude": "Longitude"
 }

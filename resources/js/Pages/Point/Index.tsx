@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Inertia} from '@inertiajs/inertia'
 
 import Layout from '@/Layouts/Layout';
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 
 import {Column} from 'primereact/column';
@@ -14,6 +14,7 @@ import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
 import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
+import GoogleMapComponent from "@/Components/GoogleMapComponent";
 interface Point {
     name: string;
     lat: string;
@@ -27,6 +28,7 @@ interface ColumnMeta {
 
 export default function Index(props: any) {
     const {t} = useTranslation(['points'])
+    const globalTranslation = useTranslation(['global'])
     const [points, setPoints] = useState<Point[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [page, setPage] = useState(1);
@@ -42,9 +44,9 @@ export default function Index(props: any) {
 
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
-        {field: 'name', header: 'Name'},
-        {field: 'lat', header: 'Lat'},
-        {field: 'lng', header: 'Len'}
+        {field: 'name', header: t('point.name')},
+        {field: 'lat', header: t('latitude')},
+        {field: 'lng', header: t('longitude')}
     ];
 
     const toastShow = (summary, severity, content) => {
@@ -73,6 +75,11 @@ export default function Index(props: any) {
             setTotalRecords(data.total)
         });
     }
+    const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
+        markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
+        name: props?.point?.name || '',
+        remember: true,
+    })
 
     const visit = (id) => {
         Inertia.visit(route('point.edit', {id: id}))
@@ -148,16 +155,18 @@ export default function Index(props: any) {
             {
                 modalData &&
 
-                <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
+                <Dialog header={globalTranslation.t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
-                    <p className="m-0">
-                        Szerokość : {modalData.lat}
-                        Długość {modalData.lng}
+                    <GoogleMapComponent markers={data.markers} />
+                    <p className="m-0 gap-x-2 flex">
+                        <p>{t('latitude')}: {modalData.lat}</p>
+                        <p>{t('longitude')}: {modalData.lng}</p>
+
                     </p>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
+                        <Button label={globalTranslation.t('delete')} className={"bg-red-600 hover:bg-red-500"}
                                 onClick={() => removeElement(modalData)}/>
-                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                        <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>
                     </div>
                 </Dialog>

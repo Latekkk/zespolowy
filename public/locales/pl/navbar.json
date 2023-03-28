@@ -23,5 +23,6 @@
     "register": "Rejestracja",
     "settings": "Ustawienia",
     "logout": "Wyloguj się",
-    "profile": "Profil"
+    "profile": "Profil",
+    "cancel": "Anuluj"
 }

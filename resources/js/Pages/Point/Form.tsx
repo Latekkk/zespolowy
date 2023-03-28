@@ -8,6 +8,7 @@ import Button from "@/Components/Button";
 export default function Form(props) {
 
     const {t} = useTranslation(['points'])
+    const globalTranslation = useTranslation(['global'])
 
     const point = props.point ?? null;
 
@@ -21,12 +22,10 @@ export default function Form(props) {
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
         let value = e?.target?.value || val || e || '';
-        console.log(...value, keyName)
         setData(data => ({
             ...data,
             [key]: value,
         }))
-        console.log('markers',...data.markers)
     }
 
     function handleSubmit(e) {
@@ -55,19 +54,19 @@ export default function Form(props) {
                                 <GoogleMapComponent markers={data.markers} setMarkers={handleChange}/>
 
                                 <div className="flex flex-col gap-2 w-max">
-                                    <Input labelText={t('name')}
+                                    <Input labelText={t('point.name')}
                                            name='name'
                                            value={data.name}
                                            error={errors.name}
                                            onChange={handleChange}
                                     />
-                                    <Input labelText={t('szerokosc_geograficzna')}
+                                    <Input labelText={t('latitude')}
                                            name={'geoLat'}
                                            value={data.markers[0]?.lat ?? ''}
                                            error={errors.geoLat || errors.markers}
                                            readOnly={true}
                                     />
-                                    <Input labelText={t('długosc_geograficzna')}
+                                    <Input labelText={t('longitude')}
                                            name={'geoLng'}
                                            value={data.markers[0]?.lng ?? ''}
                                            error={errors.geoLng || errors.markers}
@@ -76,10 +75,10 @@ export default function Form(props) {
 
                                 </div>
                                 <div className={'flex flex-row gap-x-2'}>
-                                    <Button type='submit' disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
-                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={'reset'} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
+                                    <Button type='submit' disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
+                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={globalTranslation.t('reset')} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
 
-                                    <Button type='button' children={'cancel'} onClick={cancel}/>
+                                    <Button type='button' children={globalTranslation.t('cancel')} onClick={cancel}/>
                                 </div>
                             </div>
                         </div>
