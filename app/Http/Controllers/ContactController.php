@@ -26,8 +26,13 @@ class ContactController extends Controller
 
     public function index(): Response
     {
+        //TODO: Zależnie od roli
+
+        if (Auth::check()) {
+            $contact = Contact::paginate(15);
+        }
         return Inertia::render('Contact/Index', [
-            'contacts' => Contact::paginate(15)
+            'contacts' => $contact ?? []
         ]);
     }
 
