@@ -4,17 +4,20 @@ import {useTranslation} from 'react-i18next';
 import Input from "@/Components/Input"
 import Button from "@/Components/Button";
 import FileInput from '@/Components/FileInput';
+import React from "react";
 
 
 
 export default function Form(props) {
 
-    const badge = useTranslation(['contact'])
+    const badge = useTranslation(['badge'])
     const global = useTranslation(['global'])
-    const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
-        name: '',
-        img_url: [],
-        point: '',
+    const host = window.location.origin + '/storage/photos/'
+
+    const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
+        name: props?.badge?.name ||  '',
+        img_url: props?.badge?.photos[0] ||  [],
+        point: props?.badge?.point ||  '',
         remember: true,
     })
 
@@ -35,7 +38,11 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('badge.store', data))
+        if(props?.badge === undefined ) {
+            post(route('badge.store'))
+        } else {
+            put(route('badge.update', props.badge.id))
+        }
     }
 
     const setDefaultForm = () => {
@@ -84,6 +91,14 @@ export default function Form(props) {
                                                onChange={handleFile}
                                         />
                                     </div>
+
+                                    {
+                                        props?.badge?.photos[0] !== undefined &&
+                                        <div className="w-full flex flex-col justify-center gap-y-2">
+                                            <h1 className="text-center">podgląd zdjęcia</h1>
+                                            <img src={host + data.img_url.file_name} width="256"/>
+                                        </div>
+                                    }
 
 
                                 </div>

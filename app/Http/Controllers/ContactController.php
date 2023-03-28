@@ -10,6 +10,7 @@ use App\Repositories\ContactRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -53,15 +54,17 @@ class ContactController extends Controller
     {
         $this->repository->update($contactRequest, $contact);
 
-        return redirect()->route('home')->with(ToastHelper::update('contact'));
+        return redirect()->route('contact.index')->with(ToastHelper::update('contact'));
     }
 
     public function store(ContactRequest $request): RedirectResponse
     {
 
         $this->repository->create($request);
-
-        return redirect()->route('home')->with(ToastHelper::create('contact'));
+        $route = 'home';
+        //TODO: wzgledem uprawnien przekierowanie
+        Auth::check()? $route = 'contact.index': '';
+        return redirect()->route($route)->with(ToastHelper::create('contact'));
     }
 
     public function getAll(): JsonResponse

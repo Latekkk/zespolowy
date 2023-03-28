@@ -48,7 +48,7 @@ export default function Index(props: any) {
 
     const [visibleContact, setVisibleContact] = useState<boolean>(false);
     const [modalContactData, setContactModalData] = useState<Contact>();
-    const [responseSwitch, setResponseSwitch] = useState()
+    const [responseSwitch, setResponseSwitch] = useState(false)
     const toast = useRef<Toast>(null);
 
     const columns: ColumnMeta[] = [
@@ -97,9 +97,8 @@ export default function Index(props: any) {
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
-
-                <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500 w-[42px] justify-center"
-                        onClick={() => showContactModal(rowData)} rounded><BiShow/></Button>
+                <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500 justify-center"
+                        onClick={() => showContactModal(rowData)} rounded style={{width: 42}}><BiShow/></Button>
 
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
@@ -121,7 +120,7 @@ export default function Index(props: any) {
         ContactService.setResponse(data.id).then((e) => {
                 getPoints()
                 setVisible(false)
-                toastShow('Skontaktowano', 'error', data.name)
+                toastShow('Skontaktowano', 'info', data.name)
             }
         );
     }
@@ -215,14 +214,16 @@ export default function Index(props: any) {
                         <p>opis : {modalContactData.description}</p>
                     </div>
                     <div className="flex flex-row gap-x-2 justify-end">
-
                         {
-                            modalContactData.response == 1 && (
+                            modalContactData.response == 0 && (
                                 <>
                                     <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
                                             onClick={() => setVisibleContact(false)}/>
                                     <Button label="Skontaktowano"  className={"bg-green-600 hover:bg-green-500 focus:bg-green-500 border-green-600"}
-                                            onClick={() => setResponse(modalContactData)}/>
+                                            onClick={() => {
+                                                setResponse(modalContactData)
+                                                setVisibleContact(false)
+                                            }}/>
                                 </>
                             )
                         }
