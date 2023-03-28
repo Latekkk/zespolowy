@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class BadgeRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class BadgeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,10 +23,8 @@ class BadgeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:200|min:3',
-            'img_url' => 'required',
-            'description' => 'required|max:10000',
-            'point' => 'required|max:200|min:3',
+            'name' => 'required|max:200|min:1',
+            'point' => 'required|integer|max:200|min:3',
         ];
     }
 }

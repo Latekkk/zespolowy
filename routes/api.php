@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/contacts', [ContactController::class, 'getAll'])->name('api.contacts.index');
 Route::delete('/contacts/{contact}', [ContactController::class, 'removeAPI'])->name('api.contacts.destroy');
-Route::delete('/contacts/{contact}/response', [ContactController::class, 'setResponseFromApi'])->name('api.contacts.response');
+Route::post('/contacts/{contact}/response', [ContactController::class, 'setResponseFromApi'])->name('api.contacts.response');
 
 
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');

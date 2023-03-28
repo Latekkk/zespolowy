@@ -19,11 +19,17 @@ class Point extends Model
         'name',
         'lat',
         'lng',
+        'user_id'
     ];
 
     public function paths(): BelongsToMany
     {
         return $this->belongsToMany(Path::class, 'paths_points');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

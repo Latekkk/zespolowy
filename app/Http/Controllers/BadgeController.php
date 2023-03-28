@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PhotoExceptions\PhotoRemoveException;
+use App\Exceptions\PhotoExceptions\PhotoSaveException;
+use App\Exceptions\PhotoExceptions\PhotoUpdateException;
+use App\Helpers\ToastHelper;
 use App\Http\Requests\BadgeRequest;
 use App\Models\Badge;
 use App\Repositories\BadgeRepository;
@@ -23,7 +27,7 @@ class BadgeController extends Controller
     public function index(): Response
     {
         return Inertia::render('Badge/Index', [
-
+            'badges'=> Badge::with('photos')->get()
         ]);
     }
 
@@ -41,24 +45,39 @@ class BadgeController extends Controller
 
     public function edit(Badge $badge): Response
     {
+        $badge->load('photos');
         return Inertia::render('Badge/Form', [
             'badge' => $badge
         ]);
     }
 
+    /**
+     * @throws PhotoUpdateException
+     */
     public function update(Badge $badge, BadgeRequest $badgeRequest): RedirectResponse
     {
-        $this->repository->update($badgeRequest, $badge);
+        $this->repository->update($badgeRequest, $badge->load('photos'));
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
+        return redirect()->route('badge.index')->with(ToastHelper::update('badge'));
     }
 
+    /**
+     * @throws PhotoSaveException
+     */
     public function store(BadgeRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('badge.create.toast'), 'type' => 'success']]);
+        return redirect()->route('badge.index')->with(ToastHelper::create('badge'));
     }
 
+    /**
+     * @throws PhotoRemoveException
+     */
+    public function destroy(Badge $badge): RedirectResponse
+    {
+        $this->repository->remove($badge);
 
+        return redirect()->route('badge.index')->with(ToastHelper::remove('badge'));
+    }
 }

@@ -11,9 +11,9 @@ interface Contact {
 }
 
 class ContactService {
-    async getContacts(paginate: number = 15, page: number = 1, sort: string = 'id', sortOrder?: string, responseSwitch: boolean = false): Promise<Contact[]> {
+    async getContacts(paginate: number = 15, page: number = 1, sort: string = 'id', sortOrder: number = 0, responseSwitch: boolean = false ): Promise<Contact[]> {
         const API_URL_GET_CONTACTS = route('api.contacts.index');
-        responseSwitch = !responseSwitch;
+
         const params = { params: { paginate, page, sort, sortOrder, responseSwitch } };
         const response = await axios.get<Contact[]>(API_URL_GET_CONTACTS, params);
         return response.data;

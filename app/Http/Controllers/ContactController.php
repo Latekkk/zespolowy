@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Models\Path;
@@ -9,6 +10,7 @@ use App\Repositories\ContactRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,8 +26,13 @@ class ContactController extends Controller
 
     public function index(): Response
     {
+        //TODO: Zależnie od roli
+
+        if (Auth::check()) {
+            $contact = Contact::paginate(15);
+        }
         return Inertia::render('Contact/Index', [
-            'contacts' => Contact::paginate(15)
+            'contacts' => $contact ?? []
         ]);
     }
 
@@ -52,21 +59,23 @@ class ContactController extends Controller
     {
         $this->repository->update($contactRequest, $contact);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('contact.create.toast'), 'type' => 'success']]);
+        return redirect()->route('contact.index')->with(ToastHelper::update('contact'));
     }
 
     public function store(ContactRequest $request): RedirectResponse
     {
 
         $this->repository->create($request);
-
-        return redirect()->route('home')->with(['toast' => ['message' => __('contact.create.toast'), 'type' => 'success']]);
+        $route = 'home';
+        //TODO: wzgledem uprawnien przekierowanie
+        Auth::check()? $route = 'contact.index': '';
+        return redirect()->route($route)->with(ToastHelper::create('contact'));
     }
 
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $paths = Contact::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $paths = Contact::where('response', $params['responseSwitch'] !== 'true' ? 1 : 0)->orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )->paginate((int)$params['paginate'] ?? 15);
         return response()->json($paths);
     }
 

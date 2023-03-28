@@ -2,12 +2,25 @@ import {usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import GuestLayout from '@/Layouts/GuestLayout';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import React, {useEffect, useRef} from "react";
+import {Toast} from "primereact/toast";
 
 export default function Layout({props, header, children,}) {
     const {t} = useTranslation(['navbar'])
-    const {toast} = usePage().props
-
     const auth = props.auth.user
+
+
+    const toast = useRef<Toast>(null);
+
+    const toastShow = (summary, severity, content) => {
+        toast.current?.show({severity: severity, summary: summary, detail: content});
+    };
+
+    useEffect((() => {
+        const toastData = props.toast.value;
+        if (toastData !== null) toastShow(toastData.summary || '', toastData.severity || 'info', t(toastData.content) || '')
+    }),[])
+
     return (
         <>
             {auth == undefined &&
@@ -27,11 +40,8 @@ export default function Layout({props, header, children,}) {
                     header={header}
                     props={props}>
                     <main>
-                        <div>
-                            {toast.message && (
-                                <div className="alert">{toast.message}</div>
-                            )}
-                        </div>
+
+                        <Toast ref={toast}/>
                         {children}
                     </main>
                 </AuthenticatedLayout>

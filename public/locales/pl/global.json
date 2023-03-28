@@ -3,5 +3,11 @@
     "remove": "Usuń",
     "news": "Aktualności",
     "save": "Zapisz",
-    "saved": "Zapisane."
+    "saved": "Zapisane.",
+    "cancel": "Anuluj",
+    "reset": "Resetuj",
+    "submit": "Prześlij",
+    "delete": "Usuń",
+    "deleted": "Usunięto",
+    "delete.descr": "Czy chcesz usunąć: "
 }

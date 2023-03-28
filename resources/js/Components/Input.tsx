@@ -8,7 +8,7 @@ export default function Input({labelText, name, value, onChange, error, readOnly
         <div className="flex flex-col gap-y-2 shadow-xl bg-gray-200 rounded p-2">
             <label htmlFor={name}>{labelText}</label>
             <input
-                className={`rounded border px-1 w-min-[200px]'+ ${error ? 'border-red-500' : 'border-black'}`}
+                className={`rounded border px-1 w-min-[200px] '+ ${error ? ' border-red-500 ' : ' border-black '}`}
                 id={name}
                 value={typeof value == "object" ? '' : value}
                 placeholder={!readOnly && placeholder || (t('entryValue') + ' ' + name) || ''}

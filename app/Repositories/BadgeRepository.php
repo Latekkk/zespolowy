@@ -2,32 +2,55 @@
 
 namespace App\Repositories;
 
+use App\Exceptions\PhotoExceptions\PhotoRemoveException;
+use App\Exceptions\PhotoExceptions\PhotoSaveException;
+use App\Exceptions\PhotoExceptions\PhotoUpdateException;
 use App\Http\Requests\BadgeRequest;
 use App\Models\Badge;
-use Illuminate\Support\Str;
+use App\Services\PhotoService;
 
 class BadgeRepository
 {
     protected Badge $model;
-
-    public function __construct(Badge $model)
+    protected PhotoService $photoService;
+    public function __construct(Badge $model, PhotoService $photoService)
     {
         $this->model = $model;
+        $this->photoService = $photoService;
     }
 
-    public function create(Badge $request): void
+    /**
+     * @throws PhotoSaveException
+     */
+    public function create(BadgeRequest $request): void
     {
-        $this->model->create(array_merge($request->all()));
+        $badge = $this->model->create(array_merge($request->all()));
+        $this->photoService->savePhoto($this->getFile($request), $badge);
     }
 
+    /**
+     * @throws PhotoUpdateException
+     */
     public function update(BadgeRequest $request, Badge $badge): void
     {
-        $badge->update(array_merge($request->all()));
+        $badge->update(["name" => $request->name, "point" => $request->point]);
+        if ($request->has('file')) {
+             $this->photoService->updatePhoto($this->getFile($request), $badge->photos()->first());
+        }
     }
 
+    /**
+     * @throws PhotoRemoveException
+     */
     public function remove(Badge $badge): void
     {
         $badge->delete();
+        $this->photoService->deletePhoto($badge->photos()->first());
     }
 
+
+    private function getFile($request)
+    {
+        return $request->img_url;
+    }
 }

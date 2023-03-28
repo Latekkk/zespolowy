@@ -20,7 +20,6 @@ export default function Form(props) {
         remember: true,
     })
 
-    console.log(data, errors)
 
     const modules = {
         toolbar: [

@@ -1,23 +1,48 @@
 import Dropdown from "@/Components/Dropdown";
 import {useTranslation} from "react-i18next";
+import {Inertia} from "@inertiajs/inertia";
+import {Link} from "@inertiajs/react";
+import React from "react";
 
 export default function NavBar(props) {
 
 
     const {t} = useTranslation(['navbar'])
+    const getLink = (link) => {
+        return link.subLinks[0].name +
+            (link.subLinks[0].name !== "" ? "." : "") +
+            link.subLinks[0].route
 
+    }
     return (
         <>
             {props.navbar.map((link, index) => {
                 return (
+
                     <div className="ml-3 relative" key={index}>
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <span className="inline-flex rounded-md">
+                        {
+                            link.subLinks.length <= 1 ?
+                                <>
+                                 <span className="inline-flex rounded-md">
+                                  <Link href={route(getLink(link))}
+                                        method="get"
+                                        as="button"
+                                        type="button"
+                                        className={"inline-flex items-center px-3 py-2 text-sm leading-4 font-medium text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                            + (route().current() == getLink(link) ? ' border-b-2 border-purple-600' : ' border-transparent')}>
+                                      {t(link.name)}
+                                  </Link>
+
+                                </span>
+                                </> :
+                                <Dropdown>
+                                    <Dropdown.Trigger>
+                                <span className="inline-flex">
                                   <button
                                       type="button"
-                                      className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                  >
+                                      className={"inline-flex items-center px-3 py-2 text-sm leading-4 font-medium text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                          + (route().current().includes(link.name) ? ' border-b-2 border-purple-600' : ' border-transparent')}>
+
                                     {t(link.name)}
 
                                       <svg
@@ -34,30 +59,35 @@ export default function NavBar(props) {
                                     </svg>
                                   </button>
                                 </span>
-                            </Dropdown.Trigger>
+                                    </Dropdown.Trigger>
 
-                            <Dropdown.Content>
-                                {link.subLinks.map((subLink, index) => {
-                                    return (
-                                        <Dropdown.Link
-                                            href={route(
-                                                subLink.name +
-                                                (subLink.name !== "" ? "." : "") +
-                                                subLink.route
-                                            )}
-                                            key={index}
-                                        >
-                                            {t(
-                                                subLink.name +
-                                                (subLink.name !== "" ? "." : "") +
-                                                subLink.route
-                                            )}
-                                            {/*{subLink.name + (subLink.name !== ''? '.' : '') +subLink.route}*/}
-                                        </Dropdown.Link>
-                                    );
-                                })}
-                            </Dropdown.Content>
-                        </Dropdown>
+                                    <Dropdown.Content>
+                                        {link.subLinks.map((subLink, index) => {
+                                            return (
+                                                <Dropdown.Link
+                                                    href={route(
+                                                        subLink.name +
+                                                        (subLink.name !== "" ? "." : "") +
+                                                        subLink.route
+                                                    )}
+                                                    key={index}
+                                                    className={(route().current() == (subLink.name +
+                                                        (subLink.name !== "" ? "." : "") +
+                                                        subLink.route) ? ' border-b-2 border-purple-600' : ' border-transparent')}
+                                                >
+                                                    {t(subLink.text === undefined ?
+                                                        subLink.name +
+                                                        (subLink.name !== "" ? "." : "") +
+                                                        subLink.route : subLink.text
+                                                    )}
+                                                </Dropdown.Link>
+                                            );
+                                        })}
+                                    </Dropdown.Content>
+
+
+                                </Dropdown>
+                        }
                     </div>
                 );
             })}
