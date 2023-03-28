@@ -40,6 +40,7 @@ Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
 Route::resource('path', PathController::class)->middleware(['auth', 'verified']);
 
-Route::resource('contact', ContactController::class)->middleware(['auth', 'verified']);
+Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 require __DIR__.'/auth.php';
