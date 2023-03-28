@@ -25,7 +25,7 @@ class StatuteController extends Controller
     public function index(): Response
     {
         return Inertia::render('Statute/Index', [
-            'statute' => Statute::first()
+            'statute' => Statute::paginate(1)
         ]);
     }
 

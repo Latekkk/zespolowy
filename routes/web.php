@@ -4,6 +4,7 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PathController;
 use App\Http\Controllers\StatuteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,8 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('advertisement', AdvertisementController::class)->middleware(['auth', 'verified'])->except('index');
 Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
-
+Route::resource('path', PathController::class)->middleware(['auth', 'verified']);
+Route::resource('statute', StatuteController::class)->only('index');
 Route::resource('statute', StatuteController::class)->middleware(['auth', 'verified'])->except('index');
 
 require __DIR__.'/auth.php';
