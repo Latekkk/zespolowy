@@ -19,6 +19,7 @@ class Point extends Model
         'name',
         'lat',
         'lng',
+        'user_id'
     ];
 
     public function paths(): BelongsToMany
