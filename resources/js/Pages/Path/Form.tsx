@@ -1,9 +1,8 @@
 import Layout from '@/Layouts/Layout';
-import {Head, Link, useForm} from '@inertiajs/react';
+import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Button from "@/Components/Button";
 import React, {useEffect, useRef, useState} from "react";
-import PathService from "@/Pages/Path/service/PathService";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
 import PointService, {Point} from "@/Pages/Point/service/PointService";
@@ -17,7 +16,6 @@ interface Point {
     lng: string;
 }
 
-
 interface ColumnMeta {
     field: string;
     header: string;
@@ -30,23 +28,25 @@ export default function Form(props) {
     const [loading, setLoading] = useState<boolean>(true);
     const [sort, setSort] = useState<string>('id');
     const [sortOrder, setSortOrder] = useState<string>('1');
+    const [visible, setVisible] = useState<boolean>(false);
+    const [modalData, setModalData] = useState<Point>();
+    const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
+    const [selectedPointsList, setSelectedPointsList ] = useState<Point[]>([]);
+    const toast = useRef<Toast>(null);
     const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
         name: '',
         entry_points: '',
         points_for_descent: '',
         remember: true
     })
-    const [visible, setVisible] = useState<boolean>(false);
-    const [modalData, setModalData] = useState<Point>();
-    const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
-    const [selectedPointsList, setSelectedPointsList ] = useState<Point[]>([]);
+
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: 'Name'},
         {field: 'lat', header: 'Lat'},
         {field: 'lng', header: 'Len'}
     ];
-    const toast = useRef<Toast>(null);
+
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
         let value = e?.target?.value || val || e || '';
@@ -56,9 +56,15 @@ export default function Form(props) {
         }))
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+        post(route('path.store', data))
+    }
+
     function addToList(){
         setSelectedPointsList([...selectedPointsList, selectedPoint]);
     }
+
     const selectedPointTemplate = (option: Point, props) => {
         if (option) {
             return (
@@ -67,27 +73,7 @@ export default function Form(props) {
                 </div>
             );
         }
-
         return <span>{props.placeholder}</span>;
-    };
-    const showModal = (data) => {
-        setVisible(true)
-        setModalData(data)
-    }
-    const removeElement = (data) => {
-        let list:Point[] = Array.from(selectedPointsList);
-        list.forEach((element,index)=>{
-            console.log(element);
-            console.log(index);
-            if(element==data){
-                list.splice(index);
-                setVisible(false);
-            }
-        });
-        setSelectedPointsList(list);
-    }
-    const toastShow = (summary, severity, content) => {
-        toast.current?.show({severity: severity, summary: summary, detail: content});
     };
 
     const pointOptionTemplate = (option: Point) => {
@@ -98,6 +84,38 @@ export default function Form(props) {
         );
     };
 
+    const showModal = (data) => {
+        setVisible(true)
+        setModalData(data)
+    }
+
+    const removeElement = (data) => {
+        let list:Point[] = Array.from(selectedPointsList);
+        list.forEach((element,index)=>{
+            if(element==data){
+                list.splice(index);
+                setVisible(false);
+            }
+        });
+        setSelectedPointsList(list);
+    }
+
+    const toastShow = (summary, severity, content) => {
+        toast.current?.show({severity: severity, summary: summary, detail: content});
+    };
+
+    const getPoints = () => {
+        PointService.getPoints( sort, sortOrder).then((data: Point[]) => {
+            setPoints(data.data);
+            setLoading(false);
+        });
+    }
+
+    const setDefaultForm = () => {
+        reset();
+        clearErrors()
+    }
+
     useEffect(() => {
         getPoints()
     }, []);
@@ -106,22 +124,6 @@ export default function Form(props) {
         getPoints()
     }, [ sort, sortOrder]);
 
-    const getPoints = () => {
-        PointService.getPoints( sort, sortOrder).then((data: Point[]) => {
-            setPoints(data.data);
-            setLoading(false);
-        });
-    }
-    function handleSubmit(e) {
-        e.preventDefault()
-        post(route('path.store', data))
-    }
-
-    const setDefaultForm = () => {
-        reset();
-        clearErrors()
-        console.log(data);
-    }
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
@@ -129,11 +131,9 @@ export default function Form(props) {
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
         );
-
     };
 
     return (
-
         <Layout
             props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('name')}</h2>}
@@ -202,7 +202,6 @@ export default function Form(props) {
                                 </div>
                                 {
                                     modalData &&
-
                                     <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
                                             style={{width: '50vw'}} onHide={() => setVisible(false)}>
                                         <p className="m-0">
