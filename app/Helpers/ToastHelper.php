@@ -25,7 +25,7 @@ class ToastHelper
         return [
             'toast' => [
                 'summary' => __('global.remove'),
-                'content' => __($model . '.update.toast'),
+                'content' => __($model . '.remove.toast'),
                 'severity' => $severity
             ]
         ];

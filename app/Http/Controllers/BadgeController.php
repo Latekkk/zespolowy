@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\PhotoExceptions\PhotoRemoveException;
 use App\Exceptions\PhotoExceptions\PhotoSaveException;
 use App\Exceptions\PhotoExceptions\PhotoUpdateException;
 use App\Helpers\ToastHelper;
@@ -44,6 +45,7 @@ class BadgeController extends Controller
 
     public function edit(Badge $badge): Response
     {
+        $badge->load('photos');
         return Inertia::render('Badge/Form', [
             'badge' => $badge
         ]);
@@ -56,7 +58,7 @@ class BadgeController extends Controller
     {
         $this->repository->update($badgeRequest, $badge->load('photos'));
 
-        return redirect()->route('home')->with(ToastHelper::update('badge'));
+        return redirect()->route('badge.index')->with(ToastHelper::update('badge'));
     }
 
     /**
@@ -69,5 +71,13 @@ class BadgeController extends Controller
         return redirect()->route('badge.index')->with(ToastHelper::create('badge'));
     }
 
+    /**
+     * @throws PhotoRemoveException
+     */
+    public function destroy(Badge $badge): RedirectResponse
+    {
+        $this->repository->remove($badge);
 
+        return redirect()->route('badge.index')->with(ToastHelper::remove('badge'));
+    }
 }
