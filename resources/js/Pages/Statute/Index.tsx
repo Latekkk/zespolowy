@@ -6,11 +6,11 @@ import Pagination from "@/Components/Pagination";
 export default function Index(  props: any) {
 
     const { t } = useTranslation(['statute'])
-
+    console.log(props)
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('name')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Regulamin</h2>}
         >
             <Head title="Regulamin" />
 
@@ -24,7 +24,7 @@ export default function Index(  props: any) {
                                 auth={props.auth.user !== null}
                             />
                         </div>
-                        <Pagination props={props.statutes}/>
+                        <Pagination props={props.statute}/>
                     </div>
                 </div>
             </div>
