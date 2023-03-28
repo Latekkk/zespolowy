@@ -75,7 +75,8 @@ function LanguageSwitcher() {
 
     const getFlag = () => {
         return (
-            <Flag code={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} height="16"  />
+            <Flag code={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} height="16" alt={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} />
+
         )
     }
 
