@@ -6,7 +6,6 @@ import Pagination from "@/Components/Pagination";
 export default function Index(  props: any) {
 
     const { t } = useTranslation(['statute'])
-    console.log(props)
     return (
         <Layout
             props={props}
@@ -20,7 +19,7 @@ export default function Index(  props: any) {
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                            <Statute
                                 key={'statute'}
-                                statute={props.statute}
+                                statute={props.statute.data[0]}
                                 auth={props.auth.user !== null}
                             />
                         </div>

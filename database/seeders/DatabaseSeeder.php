@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PointSeeder::class,
-            PathSeeder::class
+            PathSeeder::class,
+            StatuteSeeder::class
         ]);
 
         User::factory(10)->create();

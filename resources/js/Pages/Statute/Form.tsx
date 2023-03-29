@@ -6,13 +6,12 @@ import 'react-quill/dist/quill.snow.css';
 
 export default function Form(props) {
 
-    const advertisement = props.advertisement ?? null;
+    const statute = props.statute ?? null;
 
-    const { t } = useTranslation(['advertisement'])
+    const { t } = useTranslation(['statute'])
 
     const {data, setData, post, put, processing, errors} = useForm({
-        title: advertisement?.title || "",
-        description: advertisement?.description ?? "",
+        content: statute?.content ?? "",
         remember: true,
     })
 
@@ -42,7 +41,7 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        advertisement === null? post(route('advertisement.store')): put(route('advertisement.update', advertisement.slug))
+        statute === null? post(route('statute.store')): put(route('statute.update', 1))
     }
 
     return (
@@ -57,11 +56,8 @@ export default function Form(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
                             <form onSubmit={handleSubmit}>
-                                <label htmlFor="title">{t('title')}</label>
-                                <input id="title" value={data.title} onChange={handleChange}/>
-                                {errors.title && <div>{errors.title}</div>}
-                                <ReactQuill theme="snow" modules={modules} value={data.description} onChange={((e) => handleChange(e, 'description'))}/>
-                                {errors.description && <div>{errors.description}</div>}
+                                <ReactQuill theme="snow" modules={modules} value={data.content} onChange={((e) => handleChange(e, 'content'))}/>
+                                {errors.content && <div>{errors.content}</div>}
                                 <button type="submit" disabled={processing}>{t('submit')}</button>
                             </form>
                         </div>
