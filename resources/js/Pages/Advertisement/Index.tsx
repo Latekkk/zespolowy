@@ -5,7 +5,7 @@ import Advertisement from './Partials/Advertisement';
 import Pagination from "@/Components/Pagination";
 export default function Index(  props: any) {
 
-    const { t } = useTranslation(['advertisement'])
+    const { t } = useTranslation(['statute'])
     console.log(props)
     return (
         <Layout
