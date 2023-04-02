@@ -55,7 +55,7 @@ export default function Form(props) {
             props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('new.announcement')}</h2>}
         >
-            <Head title="Aktualności"/>
+            <Head title={t('new.announcement')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -64,7 +64,7 @@ export default function Form(props) {
                             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                                 <div className="flex flex-row gap-x-8 items-center">
                                     <Input labelText={t('title')} name={'title'} value={data.title ?? ''}
-                                           onChange={handleChange} error={errors.title}/>
+                                           onChange={handleChange} error={errors.title} placeholder={t('enter.title')}/>
                                     <Input labelText={t('time_from')} name={'time_from'} value={data.time_from ?? ''}
                                                onChange={handleChange} error={errors.time_from} type='date'/>
                                     <Input labelText={t('time_to')} name={'time_to'} value={data.time_to ?? ''}
@@ -73,7 +73,7 @@ export default function Form(props) {
                                 </div>
                                 <ReactQuill theme="snow" modules={modules} value={data.description} className=" h-[300px] py-4 pb-[50px]"
                                             onChange={((e) => handleChange(e, 'description'))}/>
-                                {errors.description && <div className={'text-red-500'}>{errors.description}</div>}
+                                {errors.description && <div className={'text-red-500'}>{errors.description} </div>}
 
                                 <div className="flex flex-row w-full justify-end">
                                     <Button label={t('submit')} type={'submit'} disabled={processing}

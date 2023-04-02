@@ -11,8 +11,11 @@
 
     "path": "Ścieżki",
     "path.index": "Lista ścieżek",
-    "path.create": "Dodaj ścieżke",
+    "path.create": "Dodaj ścieżkę",
 
+    "badge": "Odznaki",
+    "badge.index": "Lista odznak",
+    "badge.create": "Dodaj odznakę",
 
     "contact": "Kontakt",
     "contact.index": "Lista próśb o kontakt",

@@ -2,7 +2,7 @@ import {useTranslation} from 'react-i18next';
 
 export default function FileInput({labelText, name, value, onChange, error}) {
 
-    const {t} = useTranslation(['input'])
+    const inputTranslation = useTranslation(['input'])
 
     return (
         <div className="flex flex-col gap-y-2 shadow-xl bg-gray-200 rounded p-2 ">
@@ -16,7 +16,7 @@ export default function FileInput({labelText, name, value, onChange, error}) {
                     onChange={((e) => onChange(e))}/>
 
             </div>
-            <p>Wybrany plik: {value.name}</p>
+            <p>{inputTranslation.t('selected.file')}: {value.name}</p>
             {
                 error && <div className="text-red-500">{error}</div>
             }

@@ -1,6 +1,14 @@
 {
     "name": "Announcements",
+    "news": "News",
     "submit": "Submit",
     "title": "Title:",
-    "new.announcement": "New announcement"
+    "new.announcement": "New announcement",
+    "time_from": "From when effective",
+    "time_to": "Until when effective",
+    "valid.time.from": "Effective from",
+    "valid.time.to": "until",
+    "time.of.creation": "Time of creation",
+    "time.of.updating": "Time of updating",
+    "enter.title": "Enter title"
 }

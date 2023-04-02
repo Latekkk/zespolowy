@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 
 export default function DeleteUserForm({ className }) {
     const { t } = useTranslation(['auth'])
+    const globalTranslation = useTranslation(['global'])
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef();
 
@@ -86,7 +87,7 @@ export default function DeleteUserForm({ className }) {
                     </div>
 
                     <div className="mt-6 flex justify-end">
-                        <SecondaryButton onClick={closeModal}>{t('cancel')}</SecondaryButton>
+                        <SecondaryButton onClick={closeModal}>{globalTranslation.t('cancel')}</SecondaryButton>
 
                         <DangerButton className="ml-3" disabled={processing}>
                             {t('delete.account')}

@@ -22,6 +22,7 @@ interface ColumnMeta {
 }
 export default function Index(  props: any) {
     const {t} = useTranslation(['paths'])
+    const globalTranslation = useTranslation(['global'])
     const [paths, setPaths] = useState<Path[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [page, setPage] = useState(1);
@@ -44,10 +45,10 @@ export default function Index(  props: any) {
     }
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
-        {field: 'name', header: 'Name'},
-        {field: 'entry_points', header: 'entry'},
-        {field: 'points_for_descent', header: 'descent'},
-        {field: 'distance', header: 'distance'}
+        {field: 'name', header: t('path.name')},
+        {field: 'entry_points', header: t('entrance.points')},
+        {field: 'points_for_descent', header: t('points.for.descent')},
+        {field: 'distance', header: t('distance')}
     ];
     useEffect(() => {
 
@@ -93,9 +94,9 @@ export default function Index(  props: any) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('name')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('my.paths')}</h2>}
         >
-            <Head title="Aktualności" />
+            <Head title={t('name')} />
             <div className="py-12">
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

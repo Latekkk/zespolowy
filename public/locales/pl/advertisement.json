@@ -1,8 +1,14 @@
 {
     "name": "Ogłoszenia",
+    "news": "Aktualności",
     "submit": "Wyślij",
     "title": "Tytuł:",
     "new.announcement": "Nowe ogłoszenie",
     "time_from": "Od kiedy obowiązuje",
-    "time_to": "Do kiedy"
+    "time_to": "Do kiedy",
+    "valid.time.from": "Obowiązuje od",
+    "valid.time.to": "do",
+    "time.of.creation": "Czas utworzenia",
+    "time.of.updating": "Czas aktualizacji",
+    "enter.title": "Wprowadź tytuł"
 }
