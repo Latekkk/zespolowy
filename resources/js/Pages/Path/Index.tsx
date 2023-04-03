@@ -12,6 +12,7 @@ import {Paginator} from "primereact/paginator";
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import PointService from "@/Pages/Point/service/PointService";
+import GoogleMapComponent from "@/Components/GoogleMapComponent";
 interface Path {
     name: string;
     entry_points: string;
@@ -72,7 +73,9 @@ export default function Index(  props: any) {
         setPaginate(event.rows);
     };
     function pathMap(e: any){
-        //wyświetlenie mapy
+        // return(
+        //     <GoogleMapComponent markers={e.markers} />
+        // );
     }
     const showModal = (data) => {
         setVisible(true)

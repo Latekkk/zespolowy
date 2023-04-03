@@ -10,7 +10,6 @@ import Input from "@/Components/Input"
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import {Dialog} from "primereact/dialog";
 import {Toast} from "primereact/toast";
-import {put} from "axios";
 interface Point {
     name: string;
     lat: string;
@@ -33,12 +32,14 @@ export default function Form(props) {
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState<Point>();
     const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
+    const [selectedPoints, setSelectedPoints] = useState<Point[]>([]);
     const toast = useRef<Toast>(null);
+    const [namePath, setNamePath] = useState<string>('choose point');
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         name: path?.name || "",
         entry_points: path?.entry_points || "",
         points_for_descent: path?.points_for_descent || "",
-        // selectedPointsList:path?.name || "",
+        // selectedPointsList:null,
         remember: true
     })
 
@@ -64,10 +65,35 @@ export default function Form(props) {
     }
 
     function addToList(){
+        makeTwoObjectList();
         setData(data=>({
             ...data,
-            ["selectedPointsList"]:[selectedPoint]
+            ["selectedPointsList"]:selectedPoints
         }));
+
+    }
+    function makeTwoObjectList(){
+        let list = selectedPoints;
+        if (selectedPoint) {
+            if(list.length == 0){
+                list.push(selectedPoint);
+                setNamePath(list[0].name);
+            }
+            if(list.length == 1 && list[0] != selectedPoint){
+                list[1] = selectedPoint;
+                setNamePath(list[0].name + ' - ' + list[1].name);
+            }
+            if(list.length == 2){
+                if(list[0] != selectedPoint) {
+                    if (selectedPoint) {
+                        list[1] = list[0];
+                        list[0] = selectedPoint;
+                        setNamePath(list[0].name + ' - ' + list[1].name);
+                    }
+                }
+            }
+        }
+        setSelectedPoints(list);
     }
 
     const selectedPointTemplate = (option: Point, props) => {
@@ -169,14 +195,9 @@ console.log(data);
                                         <Button type='button' onClick={addToList} disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
 
                                     </div>
+                                    <p> name: {namePath}</p>
                                     <div className="flex flex-row gap-2 w-max">
-                                    <Input labelText={t('name')}
-                                           name='name'
-                                           value={data.name}
-                                           error={errors.name}
-                                           onChange={handleChange}
-                                           placeholder='Nazwa ścieżki'
-                                    />
+
                                     <Input labelText={t('entry_points')}
                                            name='entry_points'
                                            value={data.entry_points}
