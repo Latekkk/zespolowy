@@ -22,6 +22,7 @@ export interface Contact {
 export default function Form(props) {
 
     const contactTranslation = useTranslation(['contact'])
+    const globalTranslation = useTranslation(['global'])
     const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
         name: '',
         title: '',
@@ -55,9 +56,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{contactTranslation.t('name')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{contactTranslation.t('contact.name')}</h2>}
         >
-            <Head title=""/>
+            <Head title={contactTranslation.t('contact.us')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -68,8 +69,8 @@ export default function Form(props) {
 
                                 <div className="flex flex-row gap-2 w-full">
                                     <div className="flex flex-col w-full basis-1/2 gap-y-8 mt-12">
-                                        <p className="text-xl font-bold">Nazwa aplikacji</p>
-                                        <p className="text-xl font-bold">Jeśli masz pytania, skorzystaj z poniższych kanałów komunikacji:</p>
+                                        <p className="text-xl font-bold">{contactTranslation.t('contact.us')}</p>
+                                        <p className="text-xl font-bold">{contactTranslation.t('contact.us.descr')}</p>
                                         <p className="flex flex-row gap-x-2 items-center text-2xl font-bold"><GrPhone/> 123 - 321 123</p>
                                         <p className="flex flex-row gap-x-2 items-center text-2xl font-bold"><AiOutlineMail/> gory@mail.com</p>
 
@@ -80,7 +81,7 @@ export default function Form(props) {
                                                value={data.name}
                                                error={errors.name}
                                                onChange={handleChange}
-                                               placeholder='Wprowadz imie, nazwisko'
+                                               placeholder={contactTranslation.t('enter.name')}
                                         />
 
                                         <Input labelText={contactTranslation.t('email')}
@@ -88,15 +89,15 @@ export default function Form(props) {
                                                value={data.email}
                                                error={errors.email}
                                                onChange={handleChange}
-                                               placeholder='Wprowadz email...'
+                                               placeholder={contactTranslation.t('enter.email')}
                                         />
 
-                                        <Input labelText={contactTranslation.t('phone_number')}
+                                        <Input labelText={contactTranslation.t('phone.number')}
                                                name='phone_number'
                                                value={data.phone_number}
                                                error={errors.phone_number}
                                                onChange={handleChange}
-                                               placeholder='Wprowadz email...'
+                                               placeholder={contactTranslation.t('enter.phone.number')}
                                         />
 
                                         <Input labelText={contactTranslation.t('title')}
@@ -104,7 +105,7 @@ export default function Form(props) {
                                                value={data.title}
                                                error={errors.title}
                                                onChange={handleChange}
-                                               placeholder='Treść tytuł...'
+                                               placeholder={contactTranslation.t('enter.title')}
                                         />
 
                                         <TextArea labelText={contactTranslation.t('description')}
@@ -112,15 +113,15 @@ export default function Form(props) {
                                                   value={data.description}
                                                   error={errors.description}
                                                   onChange={handleChange}
-                                                  placeholder='Treść tytuł...'
+                                                  placeholder={contactTranslation.t('description.descr')}
                                         />
                                     </div>
 
 
                                 </div>
                                 <div className='flex flex-row gap-x-2 w-full justify-end mt-4'>
-                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={'reset'} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
-                                    <Button type='submit' disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
+                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={globalTranslation.t('reset')} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
+                                    <Button type='submit' disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
                                 </div>
                             </div>
                         </div>

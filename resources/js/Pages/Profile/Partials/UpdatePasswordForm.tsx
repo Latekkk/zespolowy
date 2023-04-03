@@ -8,7 +8,8 @@ import { Transition } from '@headlessui/react';
 import {useTranslation} from "react-i18next";
 
 export default function UpdatePasswordForm({ className }) {
-    const { t } = useTranslation(['auth', 'global'])
+    const { t } = useTranslation(['auth'])
+    const globalTranslation = useTranslation(['global'])
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -97,7 +98,7 @@ export default function UpdatePasswordForm({ className }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>{t('save')}</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{globalTranslation.t('save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -105,7 +106,7 @@ export default function UpdatePasswordForm({ className }) {
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600">{t('saved')}</p>
+                        <p className="text-sm text-gray-600">{globalTranslation.t('saved')}</p>
                     </Transition>
                 </div>
             </form>

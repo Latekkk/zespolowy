@@ -2,5 +2,9 @@
     "name": "My points",
     "point.name": "Point name",
     "latitude": "Latitude",
-    "longitude": "Longitude"
+    "longitude": "Longitude",
+    "enter.the.point.name": "Enter the point name",
+    "enter.longitude": "Enter longitude",
+    "enter.latitude": "Enter latitude",
+    "creating.a.new.point": "Creating a new point"
 }

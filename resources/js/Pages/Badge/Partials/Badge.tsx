@@ -7,7 +7,8 @@ import Button from '@/Components/Button';
 export default function Badge({badges, auth, setModalData,setVisible}) {
 
     const host = window.location.origin + '/storage/photos/'
-    const {t} = useTranslation(['global'])
+    const badgeTranslation = useTranslation(['badge'])
+    const globalTranslation = useTranslation(['global'])
     return (
         <>
             {
@@ -49,10 +50,10 @@ export default function Badge({badges, auth, setModalData,setVisible}) {
 
                                                         <Dropdown.Content>
                                                             <Dropdown.Link href={route('badge.edit', badge.id)}>
-                                                                {t('edit')}
+                                                                {globalTranslation.t('edit')}
                                                             </Dropdown.Link>
 
-                                                            <button className="block border-none w-full px-4 py-2 text-left text-base  leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out " onClick={() => {setModalData(badge); setVisible(true)}}>{t('remove')}</button>
+                                                            <button className="block border-none w-full px-4 py-2 text-left text-base  leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out " onClick={() => {setModalData(badge); setVisible(true)}}>{globalTranslation.t('remove')}</button>
 
 
                                                         </Dropdown.Content>
@@ -65,7 +66,7 @@ export default function Badge({badges, auth, setModalData,setVisible}) {
                         </div>
                         <img src={host + badge.photos[0].file_name}/>
                         <p className="text-center">
-                            Wymagane punkty do zdobycia odznaki: {badge.point}
+                            {badgeTranslation.t('badge.points')} {badge.point}
                         </p>
                     </div>
                 )
