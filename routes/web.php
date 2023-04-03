@@ -44,7 +44,7 @@ Route::resource('path', PathController::class)->middleware(['auth', 'verified'])
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
-Route::resource('statute', StatuteController::class)->only('index');
+Route::get('statute', StatuteController::class)->only('index');
 Route::resource('statute', StatuteController::class)->middleware(['auth', 'verified'])->except('index');
 
 require __DIR__.'/auth.php';

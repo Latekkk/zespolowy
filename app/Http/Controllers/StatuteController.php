@@ -50,7 +50,6 @@ class StatuteController extends Controller
 
     public function update(Statute $statute, StatuteRequest $statuteRequest): RedirectResponse
     {
-        //dd($statute);
         $this->repository->update($statuteRequest, $statute);
 
         return redirect()->route('statute.index')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
