@@ -10,6 +10,7 @@ import Input from "@/Components/Input"
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import {Dialog} from "primereact/dialog";
 import {Toast} from "primereact/toast";
+import {put} from "axios";
 interface Point {
     name: string;
     lat: string;
@@ -22,6 +23,7 @@ interface ColumnMeta {
 }
 
 export default function Form(props) {
+    const path = props.path ?? null;
 
     const {t} = useTranslation(['paths']);
     const [points, setPoints] = useState<Point[]>([]);
@@ -31,12 +33,12 @@ export default function Form(props) {
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState<Point>();
     const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
-    const [selectedPointsList, setSelectedPointsList ] = useState<Point[]>([]);
     const toast = useRef<Toast>(null);
-    const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
-        name: '',
-        entry_points: '',
-        points_for_descent: '',
+    const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
+        name: path?.name || "",
+        entry_points: path?.entry_points || "",
+        points_for_descent: path?.points_for_descent || "",
+        // selectedPointsList:path?.name || "",
         remember: true
     })
 
@@ -58,11 +60,14 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('path.store', data))
+        path === null ?post(route('path.store')): put(route('path.update', path.slug))
     }
 
     function addToList(){
-        setSelectedPointsList([...selectedPointsList, selectedPoint]);
+        setData(data=>({
+            ...data,
+            ["selectedPointsList"]:[selectedPoint]
+        }));
     }
 
     const selectedPointTemplate = (option: Point, props) => {
@@ -89,15 +94,20 @@ export default function Form(props) {
         setModalData(data)
     }
 
-    const removeElement = (data) => {
-        let list:Point[] = Array.from(selectedPointsList);
+    const removeElement = (data1) => {
+        let list = [data];
+        console.log(data);
         list.forEach((element,index)=>{
-            if(element==data){
+            if(element==data1){
                 list.splice(index);
                 setVisible(false);
             }
         });
-        setSelectedPointsList(list);
+        console.log(data);
+        setData(data=>({
+            ...data,
+            ["selectedPointsList"]:[list]
+        }));
     }
 
     const toastShow = (summary, severity, content) => {
@@ -132,7 +142,7 @@ export default function Form(props) {
             </div>
         );
     };
-
+console.log(data);
     return (
         <Layout
             props={props}
@@ -188,7 +198,7 @@ export default function Form(props) {
                                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                                     <div className="card w-full p-fluid">
                                         <DataTable
-                                            value={selectedPointsList}
+                                            value={data.selectedPointsList}
                                             removableSort
                                             tableStyle={{width: "max-content"}} loading={loading}
                                         >

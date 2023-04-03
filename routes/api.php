@@ -30,5 +30,7 @@ Route::post('/contacts/{contact}/response', [ContactController::class, 'setRespo
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
 Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');
 
-Route::get('/paths', [PathController::class, 'getAll'])->name('api.paths.index');
-Route::delete('/paths/{path}', [PathController::class, 'removeAPI'])->name('api.paths.destroy');
+Route::get('/path', [PathController::class, 'getAll'])->name('api.paths.index');
+Route::delete('/path/{path}', [PathController::class, 'removeAPI'])->name('api.paths.destroy');
+Route::put('/path/{path}/edit', [PathController::class, 'updateAPI'])->name('api.path.edit');
+Route::post('/path/{path}', [PathController::class, 'createAPI'])->name('api.path.create');
