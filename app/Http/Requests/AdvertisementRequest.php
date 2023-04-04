@@ -29,7 +29,7 @@ class AdvertisementRequest extends FormRequest
         return [
             'title' => 'required|max:200|min:3',
             'description' => 'required|max:10000',
-            'time_to' => 'required|date',
+            'time_to' => 'required|date|after:time_from',
             'time_from' => 'required|date'
         ];
     }
