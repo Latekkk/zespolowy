@@ -1,2 +1,11 @@
 {
+    "name": "Badges",
+    "badge.name": "Badge name",
+    "name.badge.descr": "Enter a badge name",
+    "creating.new.badge": "Creating a new badge",
+    "badge.points": "Required points to earn a badge:",
+    "point": "Points",
+    "point.descr": "Enter the number of points",
+    "img.url": "Photo",
+    "photo.preview": "Photo preview"
 }

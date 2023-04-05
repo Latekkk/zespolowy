@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\Auth;
 /**
  * @property mixed $title
  */
-class AdvertisementRequest extends FormRequest
+class StatuteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return Auth::user()->id !== null;
     }
 
     /**
@@ -27,10 +27,7 @@ class AdvertisementRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:200|min:3',
-            'description' => 'required|max:10000',
-            'time_to' => 'required|date|after:time_from',
-            'time_from' => 'required|date'
+            'content' => 'required|max:10000'
         ];
     }
 }

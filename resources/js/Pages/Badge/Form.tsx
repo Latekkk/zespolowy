@@ -10,8 +10,8 @@ import React from "react";
 
 export default function Form(props) {
 
-    const badge = useTranslation(['badge'])
-    const global = useTranslation(['global'])
+    const badgeTranslation  = useTranslation(['badge'])
+    const globalTranslation  = useTranslation(['global'])
     const host = window.location.origin + '/storage/photos/'
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
@@ -53,9 +53,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{badge.t('name')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{badgeTranslation.t('creating.new.badge')}</h2>}
         >
-            <Head title=""/>
+            <Head title={badgeTranslation.t('creating.new.badge')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -67,24 +67,24 @@ export default function Form(props) {
                                 <div className="flex flex-col gap-2 w-full">
 
                                     <div className="w-full basis-1/2">
-                                        <Input labelText={badge.t('name')}
+                                        <Input labelText={badgeTranslation.t('badge.name')}
                                                name='name'
                                                value={data.name}
                                                error={errors.name}
                                                onChange={handleChange}
-                                               placeholder='Wprowadz nazwe odznaki'
+                                               placeholder={badgeTranslation.t('badge.name.descr')}
                                         />
 
-                                        <Input labelText={badge.t('point')}
+                                        <Input labelText={badgeTranslation.t('point')}
                                                name='point'
                                                value={data.point}
                                                error={errors.point}
                                                onChange={handleChange}
                                                type={"number"}
-                                               placeholder='Wprowadz ilosc punktów...'
+                                               placeholder={badgeTranslation.t('point.descr')}
                                         />
 
-                                        <FileInput labelText={badge.t('img_url')}
+                                        <FileInput labelText={badgeTranslation.t('img.url')}
                                                name='img_url'
                                                value={data.img_url}
                                                error={errors.img_url}
@@ -95,7 +95,7 @@ export default function Form(props) {
                                     {
                                         props?.badge?.photos[0] !== undefined &&
                                         <div className="w-full flex flex-col justify-center gap-y-2">
-                                            <h1 className="text-center">podgląd zdjęcia</h1>
+                                            <h1 className="text-center">{badgeTranslation.t('photo.preview')}</h1>
                                             <img src={host + data.img_url.file_name} width="256"/>
                                         </div>
                                     }
@@ -103,8 +103,8 @@ export default function Form(props) {
 
                                 </div>
                                 <div className='flex flex-row gap-x-2 w-full justify-end mt-4'>
-                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={'reset'} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
-                                    <Button type='submit' disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
+                                    <Button type='button' onClick={setDefaultForm} disabled={processing} children={globalTranslation.t('reset')} background="bg-red-500" textColor={"text-white"} hoverColor={"bg-red-400"}/>
+                                    <Button type='submit' disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
                                 </div>
                             </div>
                         </div>

@@ -115,6 +115,13 @@ export default function Index(props: any) {
         );
     }
 
+    const getMarkers = (obj) => {
+        return [{
+                'lat': Number(obj?.lat),
+                'lng': Number(obj?.lng)
+            }];
+
+    }
     return (
         <Layout
             props={props}
@@ -157,7 +164,7 @@ export default function Index(props: any) {
 
                 <Dialog header={globalTranslation.t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
-                    <GoogleMapComponent markers={data.markers} />
+                    <GoogleMapComponent markers={getMarkers(modalData)} />
                     <p className="m-0 gap-x-2 flex">
                         <p>{t('latitude')}: {modalData.lat}</p>
                         <p>{t('longitude')}: {modalData.lng}</p>

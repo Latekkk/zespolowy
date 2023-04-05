@@ -6,6 +6,9 @@ import 'react-quill/dist/quill.snow.css';
 import {Button} from "primereact/button";
 import Input from "@/Components/Input";
 
+import { DateTime } from "luxon";
+import {Simulate} from "react-dom/test-utils";
+import invalid = Simulate.invalid;
 export default function Form(props) {
 
     const advertisement = props.advertisement ?? null;
@@ -50,12 +53,30 @@ export default function Form(props) {
         advertisement === null ? post(route('advertisement.store')) : put(route('advertisement.update', advertisement.slug))
     }
 
+    const getInputDate = (date) => {
+        let d = new Date(date);
+
+        if (isDateValid(d)) {
+            d =  DateTime.fromISO(d.toISOString())
+            const year = d.year;
+            const month = d.month;
+            const day = d.day;
+
+            return(`${year}-${(month <= 9? '0': '')+month}-${(day <= 9? '0': '')+ day}`);
+        }
+    }
+
+    const isDateValid = (dateString) =>  {
+        const d = new Date(dateString);
+        return !(d instanceof Date && isNaN(d));
+    }
+
     return (
         <Layout
             props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('new.announcement')}</h2>}
         >
-            <Head title="Aktualności"/>
+            <Head title={t('new.announcement')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -64,16 +85,16 @@ export default function Form(props) {
                             <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
                                 <div className="flex flex-row gap-x-8 items-center">
                                     <Input labelText={t('title')} name={'title'} value={data.title ?? ''}
-                                           onChange={handleChange} error={errors.title}/>
-                                    <Input labelText={t('time_from')} name={'time_from'} value={data.time_from ?? ''}
-                                               onChange={handleChange} error={errors.time_from} type='date'/>
-                                    <Input labelText={t('time_to')} name={'time_to'} value={data.time_to ?? ''}
-                                               onChange={handleChange} error={errors.time_to} type='date'/>
+                                           onChange={handleChange} error={errors.title} placeholder={t('enter.title')} extraClass="h-[125px]"/>
+                                    <Input labelText={t('time_from')} name={'time_from'} value={getInputDate(data.time_from) ?? ''}
+                                               onChange={handleChange} error={errors.time_from} type='date' extraClass="h-[125px]"/>
+                                    <Input labelText={t('time_to')} name={'time_to'} value={getInputDate(data.time_to) ?? ''}
+                                               onChange={handleChange} error={errors.time_to} type='date' extraClass="h-[125px]"/>
 
                                 </div>
                                 <ReactQuill theme="snow" modules={modules} value={data.description} className=" h-[300px] py-4 pb-[50px]"
                                             onChange={((e) => handleChange(e, 'description'))}/>
-                                {errors.description && <div className={'text-red-500'}>{errors.description}</div>}
+                                {errors.description && <div className={'text-red-500'}>{errors.description} </div>}
 
                                 <div className="flex flex-row w-full justify-end">
                                     <Button label={t('submit')} type={'submit'} disabled={processing}

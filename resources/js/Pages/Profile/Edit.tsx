@@ -13,7 +13,7 @@ export default function Edit({ auth, mustVerifyEmail, status }) {
             props={{auth}}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('profile')}</h2>}
         >
-            <Head title="Profile" />
+            <Head title={t('profile')} />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
