@@ -51,14 +51,15 @@ class PathController extends Controller
     {
         $this->repository->update($pathRequest, $path);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
+        return redirect()->route('path.index')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
     }
 
     public function store(PathRequest $request): RedirectResponse
     {
+        dd();
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
+        return redirect()->route('path.index')->with(['toast' => ['message' => __('path.create.toast'), 'type' => 'success']]);
     }
     public function getAll(): JsonResponse
     {

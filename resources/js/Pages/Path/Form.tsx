@@ -10,6 +10,8 @@ import Input from "@/Components/Input"
 import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
 import {Dialog} from "primereact/dialog";
 import {Toast} from "primereact/toast";
+import {Simulate} from "react-dom/test-utils";
+import select = Simulate.select;
 interface Point {
     name: string;
     lat: string;
@@ -34,12 +36,11 @@ export default function Form(props) {
     const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
     const [selectedPoints, setSelectedPoints] = useState<Point[]>([]);
     const toast = useRef<Toast>(null);
-    const [namePath, setNamePath] = useState<string>('choose point');
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         name: path?.name || "",
         entry_points: path?.entry_points || "",
         points_for_descent: path?.points_for_descent || "",
-        // selectedPointsList:null,
+        selectedPointsList : path?.points || "",
         remember: true
     })
 
@@ -60,8 +61,21 @@ export default function Form(props) {
     }
 
     function handleSubmit(e) {
-        e.preventDefault()
-        path === null ?post(route('path.store')): put(route('path.update', path.slug))
+        if(selectedPoints.length == 2){
+            e.preventDefault();
+
+            console.log(data);
+            path === null ?post(route('path.store')): put(route('path.update', path.id))
+
+        }else {
+            toastShow('Dodaj kurwa drugi punkt', 'info', data.name);
+        }
+    }
+    const setName=(name)=>{
+        setData(data => ({
+            ...data,
+            ["name"]: name,
+        }))
     }
 
     function addToList(){
@@ -70,30 +84,33 @@ export default function Form(props) {
             ...data,
             ["selectedPointsList"]:selectedPoints
         }));
-
     }
     function makeTwoObjectList(){
         let list = selectedPoints;
         if (selectedPoint) {
             if(list.length == 0){
                 list.push(selectedPoint);
-                setNamePath(list[0].name);
+                setName(list[0].name);
             }
             if(list.length == 1 && list[0] != selectedPoint){
                 list[1] = selectedPoint;
-                setNamePath(list[0].name + ' - ' + list[1].name);
+                setName(list[0].name + ' - ' + list[1].name);
             }
             if(list.length == 2){
                 if(list[0] != selectedPoint) {
                     if (selectedPoint) {
                         list[1] = list[0];
                         list[0] = selectedPoint;
-                        setNamePath(list[0].name + ' - ' + list[1].name);
+                        setName(list[0].name + ' - ' + list[1].name);
                     }
                 }
             }
         }
         setSelectedPoints(list);
+        setData(data=>({
+            ...data,
+            ["selectedPointsList"]:selectedPoints
+        }));
     }
 
     const selectedPointTemplate = (option: Point, props) => {
@@ -121,19 +138,25 @@ export default function Form(props) {
     }
 
     const removeElement = (data1) => {
-        let list = [data];
-        console.log(data);
-        list.forEach((element,index)=>{
-            if(element==data1){
-                list.splice(index);
-                setVisible(false);
-            }
-        });
-        console.log(data);
+        removePointAndChangeName(data1);
         setData(data=>({
             ...data,
-            ["selectedPointsList"]:[list]
+            ["selectedPointsList"]:selectedPoints
         }));
+    }
+    function removePointAndChangeName(data1:Point){
+        let list = selectedPoints;
+        if(list[1] ==data1){
+            list.splice(1,1);
+            setVisible(false);
+            setName(list[0].name);
+        }
+        if(list[0] == data1){
+            list.splice(0,1);
+            setName(list[1].name);
+            setVisible(false);
+        }
+        setSelectedPoints(list);
     }
 
     const toastShow = (summary, severity, content) => {
@@ -195,7 +218,7 @@ console.log(data);
                                         <Button type='button' onClick={addToList} disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
 
                                     </div>
-                                    <p> name: {namePath}</p>
+                                    <p> name: {data.name}</p>
                                     <div className="flex flex-row gap-2 w-max">
 
                                     <Input labelText={t('entry_points')}
@@ -231,21 +254,6 @@ console.log(data);
                                         </DataTable>
                                     </div>
                                 </div>
-                                {
-                                    modalData &&
-                                    <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
-                                            style={{width: '50vw'}} onHide={() => setVisible(false)}>
-                                        <p className="m-0">
-                                            {t('name')}: {modalData.name}
-                                        </p>
-                                        <div className="flex flex-row gap-x-2 justify-end">
-                                            <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
-                                                    onClick={() => removeElement(modalData)}/>
-                                            <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
-                                                    onClick={() => setVisible(false)}/>
-                                        </div>
-                                    </Dialog>
-                                }
                                 <Toast ref={toast}/>
                                 <div className={'flex flex-row gap-x-2'}>
                                     <Button type='submit' disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
@@ -256,6 +264,24 @@ console.log(data);
                     </form>
                 </div>
             </div>
+            {
+                modalData &&
+                <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
+                        style={{width: '50vw'}} onHide={() => setVisible(false)}>
+                    <p className="m-0">
+                        {t('name')}: {modalData.name}
+                        {t('name')}: {modalData.lat}
+                        {t('name')}: {modalData.lng}
+                    </p>
+                    <div className="flex flex-row gap-x-2 justify-end">
+                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
+                                onClick={() => removeElement(modalData)}/>
+                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                                onClick={() => setVisible(false)}/>
+                    </div>
+                </Dialog>
+            }
+            <Toast ref={toast}/>
         </Layout>
     );
 }
