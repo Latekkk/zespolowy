@@ -2,10 +2,10 @@ import Layout from '@/Layouts/Layout';
 import {Head, Link} from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import Pagination from "@/Components/Pagination";
-import Path from "@/Pages/Path/Partials/Path";
+import MountainsSection from "@/Pages/MountainsSection/Partials/MountainsSection";
 import {Column} from 'primereact/column';
 import React, {useEffect, useRef, useState} from "react";
-import PathService from "@/Pages/Path/service/PathService";
+import MountainsSectionService from "@/Pages/MountainsSection/service/MountainsSectionService";
 import {Toast} from "primereact/toast";
 import {DataTable} from "primereact/datatable";
 import {Paginator} from "primereact/paginator";
@@ -13,7 +13,7 @@ import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import PointService from "@/Pages/Point/service/PointService";
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
-interface Path {
+interface MountainsSection {
     name: string;
     entry_points: string;
     points_for_descent: string;
@@ -23,8 +23,8 @@ interface ColumnMeta {
     header: string;
 }
 export default function Index(  props: any) {
-    const {t} = useTranslation(['paths'])
-    const [paths, setPaths] = useState<Path[]>([]);
+    const {t} = useTranslation(['mountainsSection'])
+    const [mountainsSection, setMountainsSection] = useState<MountainsSection[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [page, setPage] = useState(1);
     const [paginate, setPaginate] = useState(15);
@@ -34,14 +34,14 @@ export default function Index(  props: any) {
     const [sortOrder, setSortOrder] = useState<string>('1')
 
     const [visible, setVisible] = useState<boolean>(false);
-    const [modalData, setModalData] = useState<Path>();
+    const [modalData, setModalData] = useState<MountainsSection>();
     const toast = useRef<Toast>(null);
 
     function handleChange(e: any) {
         const value = e.target;
     }
 
-    function handleClick(path){
+    function handleClick(mountainsSection){
         //przejscie do mapy
     }
     const columns: ColumnMeta[] = [
@@ -52,16 +52,16 @@ export default function Index(  props: any) {
     ];
     useEffect(() => {
 
-        getPaths()
+        getMountainsSection()
     }, []);
 
     useEffect(() => {
-        getPaths()
+        getMountainsSection()
     }, [page, paginate, sort, sortOrder]);
 
-    const getPaths = () => {
-        PathService.getPaths(paginate, page, sort, sortOrder).then((data: Path[]) => {
-            setPaths(data.data);
+    const getMountainsSection = () => {
+        MountainsSectionService.getMountainsSections(paginate, page, sort, sortOrder).then((data: MountainsSection[]) => {
+            setMountainsSection(data.data);
             setLoading(false);
             setTotalRecords(data.total)
         });
@@ -72,7 +72,7 @@ export default function Index(  props: any) {
         setPage(event.page + 1);
         setPaginate(event.rows);
     };
-    function pathMap(e: any){
+    function mountainsSectionMap(e: any){
         // return(
         //     <GoogleMapComponent markers={e.markers} />
         // );
@@ -82,8 +82,8 @@ export default function Index(  props: any) {
         setModalData(data)
     }
     const removeElement = (data) => {
-        PathService.removePath(data.id).then((e) => {
-                getPaths()
+        MountainsSectionService.removeMountainsSection(data.id).then((e) => {
+                getMountainsSection()
                 setVisible(false)
                 toastShow('Usunięto', 'error', data.name)
             }
@@ -96,8 +96,8 @@ export default function Index(  props: any) {
         return (
             <div className="flex flex-wrap gap-2">
                 <Button type="button" className="bg-green-600 hover:bg-green-700" icon="pi pi-map"
-                        onClick={() => pathMap(rowData)} ></Button>
-                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('path.edit', {id: rowData.id})} method="get" as="button" type="button">
+                        onClick={() => mountainsSectionMap(rowData)} ></Button>
+                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('mountainsSection.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
                 </Link>
@@ -122,7 +122,7 @@ export default function Index(  props: any) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                             <DataTable
-                                value={paths}
+                                value={mountainsSection}
                                 sortField={sort}
                                 sortOrder={sortOrder}
                                 onSort={event => {

@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paths', function (Blueprint $table) {
+        Schema::create('mountains_sections', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50)->unique();
             $table->integer('entry_points');
             $table->integer('points_for_descent');
+            $table->unsignedBigInteger('start_point');
+            $table->unsignedBigInteger('end_point');
             $table->timestamps();
+            $table->foreign('start_point')->references('id')->on('points');
+            $table->foreign('end_point')->references('id')->on('points');
         });
     }
 
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paths');
+        Schema::dropIfExists('moutainsSections');
     }
 };

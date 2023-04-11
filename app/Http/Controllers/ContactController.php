@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ToastHelper;
 use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
-use App\Models\Path;
+use App\Models\MountainsSection;
 use App\Repositories\ContactRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;

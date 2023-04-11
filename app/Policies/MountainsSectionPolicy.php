@@ -3,11 +3,11 @@
 namespace App\Policies;
 
 use App\Models\Advertisement;
-use App\Models\Path;
+use App\Models\MountainsSection;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class PathPolicy
+class MountainsSectionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class PathPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Path $path): bool
+    public function view(User $user, MountainsSection $mountainsSection): bool
     {
         return true;
     }
@@ -40,10 +40,10 @@ class PathPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param Path $path
+     * @param MountainsSection $mountainsSection
      * @return Response|bool
      */
-    public function update(User $user, Path $path): Response|bool
+    public function update(User $user, MountainsSection $mountainsSection): Response|bool
     {
         return true;
     }
@@ -51,7 +51,7 @@ class PathPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Path $path): bool
+    public function delete(User $user, MountainsSection $mountainsSection): bool
     {
         return true;
     }
@@ -59,7 +59,7 @@ class PathPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user,Path $path): bool
+    public function restore(User $user, MountainsSection $mountainsSection): bool
     {
         return true;
     }
@@ -67,7 +67,7 @@ class PathPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Path $path): bool
+    public function forceDelete(User $user, MountainsSection $mountainsSection): bool
     {
         return true;
     }

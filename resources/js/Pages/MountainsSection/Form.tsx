@@ -24,9 +24,9 @@ interface ColumnMeta {
 }
 
 export default function Form(props) {
-    const path = props.path ?? null;
+    const mountainsSection = props.mountainsSection ?? null;
 
-    const {t} = useTranslation(['paths']);
+    const {t} = useTranslation(['mountainsSection']);
     const [points, setPoints] = useState<Point[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [sort, setSort] = useState<string>('id');
@@ -37,10 +37,10 @@ export default function Form(props) {
     const [selectedPoints, setSelectedPoints] = useState<Point[]>([]);
     const toast = useRef<Toast>(null);
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
-        name: path?.name || "",
-        entry_points: path?.entry_points || "",
-        points_for_descent: path?.points_for_descent || "",
-        selectedPointsList : path?.points || "",
+        name: mountainsSection?.name || "",
+        entry_points: mountainsSection?.entry_points || "",
+        points_for_descent: mountainsSection?.points_for_descent || "",
+        selectedPointsList : mountainsSection?.points || "",
         remember: true
     })
 
@@ -65,7 +65,7 @@ export default function Form(props) {
             e.preventDefault();
 
             console.log(data);
-            path === null ?post(route('path.store')): put(route('path.update', path.id))
+            mountainsSection === null ?post(route('mountainsSection.store')): put(route('mountainsSection.update', mountainsSection.id))
 
         }else {
             toastShow('Dodaj kurwa drugi punkt', 'info', data.name);

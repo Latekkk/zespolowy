@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 /**
  * @method create(Point $point)
@@ -22,14 +24,18 @@ class Point extends Model
         'user_id'
     ];
 
-    public function paths(): BelongsToMany
+    public function start_point(): HasOne
     {
-        return $this->belongsToMany(Path::class, 'paths_points');
+        return $this->hasOne(MountainsSection::class, 'start_point');
+    }
+
+    public function end_point(): HasOne
+    {
+        return $this->hasOne(MountainsSection::class, 'end_point');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
 }

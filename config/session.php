@@ -133,7 +133,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Session Cookie Path
+    | Session Cookie MountainsSection
     |--------------------------------------------------------------------------
     |
     | The session cookie path determines the path for which the cookie will

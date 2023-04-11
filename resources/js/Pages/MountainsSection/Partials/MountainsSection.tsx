@@ -3,7 +3,7 @@
 // import { FiSettings } from "react-icons/fi";
 // import {useTranslation} from "react-i18next";
 //
-// export default function Path({description, title, auth, slug}: any) {
+// export default function MountainsSection({description, title, auth, slug}: any) {
 //     const { t } = useTranslation(['global'])
 //     return (
 //         <>
@@ -62,7 +62,7 @@
 //     );
 // }
 
-export default function Path({name, entry_points, points_for_descent, created}) {
+export default function MountainsSection({name, entry_points, points_for_descent, created}) {
     return (
         <div>
             <p>{name}</p>
