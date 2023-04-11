@@ -14,7 +14,9 @@
     "path.index": "Path list",
     "path.create": "Create path",
 
-
+    "badge": "Badges",
+    "badge.index": "List of badges",
+    "badge.create": "Add a badge",
 
     "contact": "Contact",
     "contact.index": "List of contact requests",

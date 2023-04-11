@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
-use Database\Factories\MountainsSectionFactory;
+use Database\Factories\PathFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PointSeeder::class,
             MountainsSectionSeeder::class
+            StatuteSeeder::class
         ]);
 
         User::factory(10)->create();

@@ -4,16 +4,13 @@ import { FiSettings } from "react-icons/fi";
 import {useTranslation} from "react-i18next";
 import { DateTime } from "luxon";
 
-export default function Advertisement({advertisement,auth}: any) {
-    const {t} = useTranslation(['advertisement'])
-    const globalTranslation = useTranslation(['global'])
-
+export default function Statute({statute, auth}: any) {
+    const { t } = useTranslation(['global'])
     const getDate = (time, full) => {
-       const date =  DateTime.fromISO(time.replace(' ','T')).setLocale('pl');
+        const date =  DateTime.fromISO(time.replace(' ','T')).setLocale('pl');
 
         return full? date.toFormat("dd'.'LL'.'yyyy HH:MM:ss") : date.toFormat("dd'.'LL'.'yyyy")
     }
-
     return (
         <>
             <div className="rounded overflow-hidden shadow-lg w-full min-h-[150px]">
@@ -48,35 +45,25 @@ export default function Advertisement({advertisement,auth}: any) {
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
-                                                <Dropdown.Link href={route('advertisement.edit', advertisement.slug)}>
-                                                    {globalTranslation.t('edit')}
+                                                <Dropdown.Link href={route('statute.edit',1)}>
+                                                    {t('edit')}
                                                 </Dropdown.Link>
-
-                                                <Dropdown.Link href={route('advertisement.destroy', advertisement.slug)}>
-                                                    {globalTranslation.t('remove')}
-                                                </Dropdown.Link>
-
                                             </Dropdown.Content>
                                         </Dropdown>
                                     </div>
                                 </div>
                             </div>
                         }
-
                         <div className="flex flex-row justify-between font-bold text-xl mb-2 my-2 p-4 shadow-lg">
-                            <p>{advertisement.title}</p>
-                            <div className="flex gap-x-2 text-xs mr-12 bg-gray-200 p-4 rounded shadow">
-                                <p>{t('valid.time.from')} {getDate(advertisement.time_from)}</p>
-                                <p>{t('valid.time.to')} {getDate(advertisement.time_to)}</p>
-                            </div>
-
+                            {t('statute')}
                         </div>
-                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: advertisement.description }}>
+
+                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: statute.content }}>
                         </p>
                         <div className="text-xs">
-                            <p>{t('time.of.creation')} {getDate(advertisement.created_at, true)}</p>
-                            {advertisement.updated_at !== advertisement.created_at &&
-                                <p>{t('time.of.updating')} {getDate(advertisement.updated_at, true)}</p>
+                            <p>Czas utworzenia: {getDate(statute.created_at, true)}</p>
+                            {statute.updated_at !== statute.created_at &&
+                                <p>Czas aktualizacji: {getDate(statute.updated_at, true)}</p>
                             }
 
                         </div>

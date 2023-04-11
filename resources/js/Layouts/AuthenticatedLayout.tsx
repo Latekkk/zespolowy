@@ -4,8 +4,8 @@ import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import {Link} from '@inertiajs/react';
 import {useTranslation} from "react-i18next";
-import NavBar from "@/Components/NavBar";
 import LangueSwitcher from "@/Components/LangueSwitcher";
+import NavBar from '@/Components/Navbar';
 
 export default function Authenticated({props, header, children}) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -55,6 +55,16 @@ export default function Authenticated({props, header, children}) {
                     "name": "mountainsSection",
                     "route": "create"
                 }
+            ]
+        },
+        {
+            "name": "statute",
+            "route": "statute.index",
+            "subLinks": [
+                {
+                    "name": "statute",
+                    "route": "index"
+                },
             ]
         },
         {

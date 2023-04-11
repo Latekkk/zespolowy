@@ -1,3 +1,11 @@
 {
-
+    "name": "Odznaki",
+    "badge.name": "Nazwa odznaki",
+    "badge.name.descr": "Wprowadź nazwę odznaki",
+    "creating.new.badge": "Tworzenie nowej odznaki",
+    "badge.points": "Wymagane punkty do zdobycia odznaki:",
+    "point": "Punkty",
+    "point.descr": "Wprowadź ilość punktów",
+    "img.url": "Zdjęcie",
+    "photo.preview": "Podgląd zdjęcia"
 }

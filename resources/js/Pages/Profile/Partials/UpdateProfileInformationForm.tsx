@@ -8,6 +8,7 @@ import {useTranslation} from "react-i18next";
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className }) {
     const { t } = useTranslation(['auth'])
+    const globalTranslation = useTranslation(['global'])
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
@@ -89,7 +90,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>{t('save')}</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{globalTranslation.t('save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -97,7 +98,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         leaveTo="opacity-0"
                         className="transition ease-in-out"
                     >
-                        <p className="text-sm text-gray-600">{t('saved')}</p>
+                        <p className="text-sm text-gray-600">{globalTranslation.t('saved')}</p>
                     </Transition>
                 </div>
             </form>
