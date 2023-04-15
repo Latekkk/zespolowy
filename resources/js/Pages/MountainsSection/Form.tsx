@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 import Input from "@/Components/Input";
 
 export default function Form(props) {
-
+    const {t} = useTranslation(['mountains_Section'])
     const mountainsSectionTranslation = useTranslation(['mountainsSection']);
     const globalTranslation = useTranslation(['global'])
 
@@ -81,9 +81,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{mountainsSectionTranslation.t('mountains_Section')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{t('mountains_Section')}</h2>}
         >
-            <Head title={'xD'}/>
+            <Head title={t('mountains_Section')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -93,36 +93,36 @@ export default function Form(props) {
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
 
                                 <p> name: {firstName?.name} {secondName?.name}</p>
-                                <Dropdown value={firstName}
+                                <Dropdown value={t('firstName')}
                                           onChange={(e) => setFirstName(e.value)}
                                           options={props.points}
                                           optionLabel="name"
-                                          placeholder="Select a start Point"
+                                          placeholder={t('select_start_point')}
                                           className="w-full md:w-14rem"
                                           filter
                                 />
-                                <Dropdown value={secondName}
+                                <Dropdown value={t('secondName')}
                                           onChange={(e) => setSecondName(e.value)}
                                           options={props.points}
                                           optionLabel="name"
-                                          placeholder="Select a start Point"
+                                          placeholder={t('select_end_point')}
                                           className="w-full md:w-14rem"
                                           filter
                                 />
-                                <Input labelText={mountainsSectionTranslation.t('entry_points')}
+                                <Input labelText={t('entry_points')}
                                        name='entry_points'
                                        value={data.entry_points}
                                        error={errors.entry_points}
                                        onChange={handleChange}
-                                       placeholder='Punkty wejścia'
+                                       placeholder={t('entry_points')}
                                        type='number'
                                 />
-                                <Input labelText={mountainsSectionTranslation.t('points_for_descent')}
+                                <Input labelText={t('points_for_descent')}
                                        name='points_for_descent'
                                        value={data.points_for_descent}
                                        error={errors.points_for_descent}
                                        onChange={handleChange}
-                                       placeholder='Punkty zejścia '
+                                       placeholder={t('points_for_descent')}
                                        type='number'
                                 />
                                 <div className='flex flex-row gap-x-2 w-full justify-end mt-4'>
