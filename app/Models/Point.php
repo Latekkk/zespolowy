@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @method create(Point $point)
  * @method static paginate(int $int)
  * @method static orderBy(mixed $param, string $param1)
+ * @method static inRandomOrder()
  */
 class Point extends Model
 {

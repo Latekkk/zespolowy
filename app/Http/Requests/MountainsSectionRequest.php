@@ -25,8 +25,10 @@ class MountainsSectionRequest extends FormRequest
     {
         return [
             'name'=> 'required|max:200|min:3',
-            'entry_points'=> 'required',
-            'points_for_descent'=> 'required',
+            'start_point' => 'required|different:end_point|exists:points,id',
+            'end_point' => 'required|different:start_point|exists:points,id',
+            'entry_points'=> 'required|integer|min:1',
+            'points_for_descent'=> 'required|integer|min:1',
         ];
     }
 }
