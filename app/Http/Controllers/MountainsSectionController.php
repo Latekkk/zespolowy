@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MountainsSectionRequest;
 use App\Models\MountainsSection;
+use App\Models\Point;
 use App\Repositories\MountainsSectionRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -30,7 +31,9 @@ class MountainsSectionController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('MountainsSection/Form');
+        return Inertia::render('MountainsSection/Form', [
+            'points' => Point::all(),
+        ]);
     }
 
     public function show(MountainsSection $mountainsSection): Response
@@ -56,7 +59,6 @@ class MountainsSectionController extends Controller
 
     public function store(MountainsSectionRequest $request): RedirectResponse
     {
-        dd();
         $this->repository->create($request);
 
         return redirect()->route('mountainsSection.index')->with(['toast' => ['message' => __('mountainsSection.create.toast'), 'type' => 'success']]);
