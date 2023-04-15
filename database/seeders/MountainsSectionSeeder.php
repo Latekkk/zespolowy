@@ -2,18 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Path;
-use Database\Factories\PathFactory;
+use App\Models\MountainsSection;
+use Database\Factories\MountainsSectionFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PathSeeder extends Seeder
+class MountainsSectionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Path::factory()->count(10)->create();
+        MountainsSection::factory()->count(10)->create();
     }
 }

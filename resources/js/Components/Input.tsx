@@ -1,4 +1,5 @@
 import {useTranslation} from 'react-i18next';
+import InputError from "@/Components/InputError";
 
 export default function Input({labelText, name, value, onChange, error, readOnly = false, type = 'text', placeholder, extraClass}) {
 
@@ -14,9 +15,7 @@ export default function Input({labelText, name, value, onChange, error, readOnly
                 placeholder={placeholder || (t('entryValue') + ' ' + name) || ''}
                 type={type}
                 readOnly={readOnly} onChange={((e) => onChange(e))}/>
-            {
-                error && <div className="text-red-500">{error}</div>
-            }
+            <InputError message={error}/>
         </div>
     )
 }

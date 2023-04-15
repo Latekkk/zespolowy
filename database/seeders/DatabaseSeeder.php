@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PointSeeder::class,
-            PathSeeder::class,
+            MountainsSectionSeeder::class,
             StatuteSeeder::class
         ]);
 
