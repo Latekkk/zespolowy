@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PointSeeder::class,
             PathSeeder::class,
-            StatuteSeeder::class
+            StatuteSeeder::class,
+            SquadSeeder::class
         ]);
 
         User::factory(10)->create();

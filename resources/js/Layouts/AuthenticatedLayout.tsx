@@ -68,6 +68,16 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
+            "name": "squad",
+            "route": "squad.index",
+            "subLinks": [
+                {
+                    "name": "squad",
+                    "route": "index"
+                },
+            ]
+        },
+        {
             "name": "contact",
             "route": "contact.index",
             "subLinks": [
