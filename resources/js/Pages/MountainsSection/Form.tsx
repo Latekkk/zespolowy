@@ -3,15 +3,11 @@ import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Button from "@/Components/Button";
 import React, {useEffect, useRef, useState} from "react";
-import {DataTable} from "primereact/datatable";
-import {Column} from "primereact/column";
 import PointService, {Point} from "@/Pages/Point/service/PointService";
 import Input from "@/Components/Input"
-import { Dropdown, DropdownChangeEvent } from 'primereact/dropdown';
-import {Dialog} from "primereact/dialog";
+import { Dropdown, DropdownChangeEvent} from 'primereact/dropdown';
 import {Toast} from "primereact/toast";
 import {Simulate} from "react-dom/test-utils";
-import select = Simulate.select;
 interface Point {
     name: string;
     lat: string;
@@ -28,19 +24,18 @@ export default function Form(props) {
 
     const {t} = useTranslation(['mountainsSection']);
     const [points, setPoints] = useState<Point[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [sort, setSort] = useState<string>('id');
-    const [sortOrder, setSortOrder] = useState<string>('1');
+    const [sort] = useState<string>('id');
+    const [sortOrder] = useState<string>('1');
     const [visible, setVisible] = useState<boolean>(false);
-    const [modalData, setModalData] = useState<Point>();
-    const [selectedPoint, setSelectedPoint] = useState<Point | null>(null);
-    const [selectedPoints, setSelectedPoints] = useState<Point[]>([]);
+    const [selectedEndPoint, setSelectedEndPoint] = useState<String | null>('');
+    const [selectedStartPoint,setSelectedStartPoint] = useState<String | null>('');
     const toast = useRef<Toast>(null);
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         name: mountainsSection?.name || "",
         entry_points: mountainsSection?.entry_points || "",
         points_for_descent: mountainsSection?.points_for_descent || "",
-        selectedPointsList : mountainsSection?.points || "",
+        start_point : mountainsSection?.start_point || "",
+        end_point : mountainsSection?.end_point || "",
         remember: true
     })
 
@@ -61,56 +56,7 @@ export default function Form(props) {
     }
 
     function handleSubmit(e) {
-        if(selectedPoints.length == 2){
-            e.preventDefault();
-
-            console.log(data);
-            mountainsSection === null ?post(route('mountainsSection.store')): put(route('mountainsSection.update', mountainsSection.id))
-
-        }else {
-            toastShow('Dodaj kurwa drugi punkt', 'info', data.name);
-        }
-    }
-    const setName=(name)=>{
-        setData(data => ({
-            ...data,
-            ["name"]: name,
-        }))
-    }
-
-    function addToList(){
-        makeTwoObjectList();
-        setData(data=>({
-            ...data,
-            ["selectedPointsList"]:selectedPoints
-        }));
-    }
-    function makeTwoObjectList(){
-        let list = selectedPoints;
-        if (selectedPoint) {
-            if(list.length == 0){
-                list.push(selectedPoint);
-                setName(list[0].name);
-            }
-            if(list.length == 1 && list[0] != selectedPoint){
-                list[1] = selectedPoint;
-                setName(list[0].name + ' - ' + list[1].name);
-            }
-            if(list.length == 2){
-                if(list[0] != selectedPoint) {
-                    if (selectedPoint) {
-                        list[1] = list[0];
-                        list[0] = selectedPoint;
-                        setName(list[0].name + ' - ' + list[1].name);
-                    }
-                }
-            }
-        }
-        setSelectedPoints(list);
-        setData(data=>({
-            ...data,
-            ["selectedPointsList"]:selectedPoints
-        }));
+        mountainsSection === null ?post(route('mountainsSection.store')): put(route('mountainsSection.update', mountainsSection.id))
     }
 
     const selectedPointTemplate = (option: Point, props) => {
@@ -131,34 +77,29 @@ export default function Form(props) {
             </div>
         );
     };
+    function setNameAndStartOrEndPoint(number, value){
+        if(number == 1) {
+            setSelectedStartPoint(value.name);
+            setData(data => ({
+                ...data,
+                ["start_point"]: value.id,
+            }))
+        }else if(number == 2){
+            setSelectedEndPoint(value.name);
+            setData(data => ({
+                ...data,
+                ["end_point"]: value.id,
+            }))
+        }
+        setData(data => ({
+            ...data,
+            ["name"]: selectedStartPoint + " - " + selectedEndPoint,
+        }))
+    }
 
     const showModal = (data) => {
         setVisible(true)
-        setModalData(data)
     }
-
-    const removeElement = (data1) => {
-        removePointAndChangeName(data1);
-        setData(data=>({
-            ...data,
-            ["selectedPointsList"]:selectedPoints
-        }));
-    }
-    function removePointAndChangeName(data1:Point){
-        let list = selectedPoints;
-        if(list[1] ==data1){
-            list.splice(1,1);
-            setVisible(false);
-            setName(list[0].name);
-        }
-        if(list[0] == data1){
-            list.splice(0,1);
-            setName(list[1].name);
-            setVisible(false);
-        }
-        setSelectedPoints(list);
-    }
-
     const toastShow = (summary, severity, content) => {
         toast.current?.show({severity: severity, summary: summary, detail: content});
     };
@@ -166,7 +107,6 @@ export default function Form(props) {
     const getPoints = () => {
         PointService.getPoints( sort, sortOrder).then((data: Point[]) => {
             setPoints(data.data);
-            setLoading(false);
         });
     }
 
@@ -191,7 +131,6 @@ export default function Form(props) {
             </div>
         );
     };
-console.log(data);
     return (
         <Layout
             props={props}
@@ -212,15 +151,15 @@ console.log(data);
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                                 <div className="flex flex-col gap-2 w-max">
+                                    <p> name: {data.name}</p>
                                     <div className="card flex justify-content-center">
-                                        <Dropdown value={selectedPoint} onChange={(e: DropdownChangeEvent) => setSelectedPoint(e.value)} options={points} optionLabel="name" placeholder="Select a Point"
+                                        <Dropdown value={selectedStartPoint} onChange={(e:DropdownChangeEvent) => setNameAndStartOrEndPoint(1,e.value)} options={points} optionLabel="name" placeholder="Select a start Point"
                                                   filter valueTemplate={selectedPointTemplate} itemTemplate={pointOptionTemplate } className="w-full md:w-14rem" />
-                                        <Button type='button' onClick={addToList} disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
 
                                     </div>
-                                    <p> name: {data.name}</p>
+                                        <Dropdown value={selectedEndPoint} onChange={(e:DropdownChangeEvent) =>setNameAndStartOrEndPoint(2,e.value)} options={points} optionLabel="name" placeholder="Select a end Point"
+                                              filter valueTemplate={selectedPointTemplate} itemTemplate={pointOptionTemplate } className="w-full md:w-14rem" />
                                     <div className="flex flex-row gap-2 w-max">
-
                                     <Input labelText={t('entry_points')}
                                            name='entry_points'
                                            value={data.entry_points}
@@ -239,21 +178,6 @@ console.log(data);
                                     />
                                     </div>
                                 </div>
-                                <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                                    <div className="card w-full p-fluid">
-                                        <DataTable
-                                            value={data.selectedPointsList}
-                                            removableSort
-                                            tableStyle={{width: "max-content"}} loading={loading}
-                                        >
-                                            {columns.map((col, i) => (
-                                                <Column key={col.field} field={col.field} header={col.header} sortable/>
-                                            ))}
-
-                                            <Column body={actionTemplate} headerClassName="w-10rem" expander/>
-                                        </DataTable>
-                                    </div>
-                                </div>
                                 <Toast ref={toast}/>
                                 <div className={'flex flex-row gap-x-2'}>
                                     <Button type='submit' disabled={processing} children={'submit'} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
@@ -264,23 +188,6 @@ console.log(data);
                     </form>
                 </div>
             </div>
-            {
-                modalData &&
-                <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
-                        style={{width: '50vw'}} onHide={() => setVisible(false)}>
-                    <p className="m-0">
-                        {t('name')}: {modalData.name}
-                        {t('name')}: {modalData.lat}
-                        {t('name')}: {modalData.lng}
-                    </p>
-                    <div className="flex flex-row gap-x-2 justify-end">
-                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
-                                onClick={() => removeElement(modalData)}/>
-                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
-                                onClick={() => setVisible(false)}/>
-                    </div>
-                </Dialog>
-            }
             <Toast ref={toast}/>
         </Layout>
     );
