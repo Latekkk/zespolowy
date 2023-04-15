@@ -44,15 +44,15 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
-            "name": "path",
-            "route": "path.index",
+            "name": "mountainsSection",
+            "route": "mountainsSection.index",
             "subLinks": [
                 {
-                    "name": "path",
+                    "name": "mountainsSection",
                     "route": "index"
                 },
                 {
-                    "name": "path",
+                    "name": "mountainsSection",
                     "route": "create"
                 }
             ]

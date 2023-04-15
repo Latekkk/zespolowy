@@ -6,8 +6,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PathController;
 use App\Http\Controllers\SquadController;
+use App\Http\Controllers\MountainsSectionController;
 use App\Http\Controllers\StatuteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +40,9 @@ Route::resource('badge', BadgeController::class)->middleware(['auth', 'verified'
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 
 Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
-Route::resource('path', PathController::class)->middleware(['auth', 'verified']);
+
+Route::resource('mountainsSection', MountainsSectionController::class)->middleware(['auth', 'verified'])->except('index');
+Route::get('/mountainsSection', [MountainsSectionController::class, 'index'])->name('mountainsSection.index');
 
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
