@@ -46,7 +46,8 @@ class MountainsSectionController extends Controller
     public function edit(MountainsSection $mountainsSection): Response
     {
         return Inertia::render('MountainsSection/Form', [
-            'mountainsSection' => $mountainsSection
+            'mountainsSection' => $mountainsSection,
+            'points' => Point::all(),
         ]);
     }
 

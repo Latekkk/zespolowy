@@ -5,6 +5,7 @@ import Button from "@/Components/Button";
 import {Dropdown} from "primereact/dropdown";
 import React, {useEffect, useState} from "react";
 import Input from "@/Components/Input";
+import {put} from "axios";
 
 
 
@@ -14,11 +15,11 @@ export default function Form(props) {
     const mountainsSectionTranslation = useTranslation(['mountainsSection']);
     const globalTranslation = useTranslation(['global'])
 
-    const [firstName, setFirstName] = useState(null)
+    const [firstName, setFirstName] = useState(null )
     const [secondName, setSecondName] = useState(null)
     const mountainsSection = props.mountainsSection ?? null;
 
-    const {data, setData, post, processing, errors, reset, clearErrors } = useForm({
+    const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         name: mountainsSection?.name || "",
         entry_points: mountainsSection?.entry_points || "",
         points_for_descent: mountainsSection?.points_for_descent || "",
@@ -27,6 +28,11 @@ export default function Form(props) {
         remember: true
     })
 
+
+    function findPoint(id){
+        const result = props.points.find(point =>point.id === id);
+        return result || null;
+    }
 
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
@@ -39,7 +45,9 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        post(route('mountainsSection.store', data))
+        // post(route('mountainsSection.store', data))
+        mountainsSection === null ?post(route('mountainsSection.store',data)): put(route('mountainsSection.update', mountainsSection.id))
+
     }
 
     const setDefaultForm = () => {
@@ -67,6 +75,13 @@ export default function Form(props) {
             ["name"]: firstName?.name + " - " + secondName?.name,
         }))
     }, [firstName, secondName])
+
+    useEffect(()=>{
+        if(mountainsSection != null){
+            setFirstName(findPoint(mountainsSection.start_point));
+            setSecondName(findPoint(mountainsSection.end_point));
+        }
+    },[])
 
     return (
         <Layout
