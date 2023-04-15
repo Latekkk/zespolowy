@@ -5,10 +5,6 @@ import Button from "@/Components/Button";
 import {Dropdown} from "primereact/dropdown";
 import React, {useEffect, useState} from "react";
 import Input from "@/Components/Input";
-import {put} from "axios";
-
-
-
 
 export default function Form(props) {
 
@@ -45,7 +41,6 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        // post(route('mountainsSection.store', data))
         mountainsSection === null ?post(route('mountainsSection.store',data)): put(route('mountainsSection.update', mountainsSection.id))
 
     }
@@ -86,7 +81,7 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{'xD'}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{mountainsSectionTranslation.t('mountains_Section')}</h2>}
         >
             <Head title={'xD'}/>
 
