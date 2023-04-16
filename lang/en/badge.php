@@ -2,13 +2,13 @@
 
 return [
     'create' => [
-        'toast' => 'Advertisement successfully created'
+        'toast' => 'Successfully created a badge'
     ],
     'update' => [
-        'toast' => 'Advertisement successfully updated'
+        'toast' => 'Successfully updated badge'
     ],
     'remove' => [
-        'toast' => 'Advertisement successfully removed'
+        'toast' => 'Successfully removed the badge'
     ],
 
 ];

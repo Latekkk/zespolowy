@@ -23,7 +23,7 @@ export default function ForgotPassword({ status }) {
 
     return (
         <GuestLayout>
-            <Head title="Forgot Password" />
+            <Head title={t('forgot.password')} />
 
                 <div className="flex flex-col items-center justify-end mt-4 font-medium text-sm">
                 {t('forgot.password.descr')}
@@ -39,6 +39,7 @@ export default function ForgotPassword({ status }) {
                     id="email"
                     type="email"
                     name="email"
+                    placeholder={t('email.fg.ph')}
                     value={data.email}
                     className="mt-1 block w-full"
                     isFocused={true}

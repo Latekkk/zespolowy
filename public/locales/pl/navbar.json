@@ -9,10 +9,6 @@
     "point.index": "Lista punktów",
     "point.create": "Dodaj punkt",
 
-    "path": "Ścieżki",
-    "path.index": "Lista ścieżek",
-    "path.create": "Dodaj ścieżkę",
-
     "badge": "Odznaki",
     "badge.index": "Lista odznak",
     "badge.create": "Dodaj odznakę",
@@ -24,8 +20,9 @@
     "statute": "Regulamin",
     "statute.index": "Podgląd",
 
-    "statute": "Regulamin",
-    "statute.index": "Podgląd",
+    "mountainsSection": "Szlaki",
+    "mountainsSection.index": "Lista szlaków",
+    "mountainsSection.create": "Dodaj nowy szlak",
 
 
     "login": "Logowanie",

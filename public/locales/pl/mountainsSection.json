@@ -1,0 +1,15 @@
+{
+    "creating.editing.a.trail": "Tworzenie/Edycja szlaku",
+    "delete.descr": "Czy chcesz usunąć szlak: ",
+    "entrance.points": "Punkty za wejście",
+    "points.for.descent": "Punkty za zejście",
+    "entrance.points.ph": "Wprowadź ilość punktów za wejście",
+    "points.for.descent.ph": "Wprowadź ilość punktów za zejście",
+    "distance": "Dystans (m)",
+    "name": "Szlaki turystyczne",
+    "trail.name": "Nazwa szlaku",
+    "select.a.starting.point": "Wybierz punkt początkowy",
+    "select.an.endpoint": "Wybierz punkt końcowy",
+    "starting.point": "Punkt początkowy",
+    "endpoint": "Punkt końcowy"
+}

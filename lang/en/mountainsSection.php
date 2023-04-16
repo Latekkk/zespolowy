@@ -2,10 +2,10 @@
 
 return [
     'create' => [
-        'toast' => 'Successfully created a new path'
+        'toast' => 'A new trail has been successfully created'
     ],
     'update' => [
-        'toast' => 'Path updated successfully'
+        'toast' => 'Successfully updated the trail'
     ],
     'remove' => [
         'toast' => 'The path was successfully removed'

@@ -24,6 +24,7 @@ interface ColumnMeta {
 }
 export default function Index(  props: any) {
     const {t} = useTranslation(['mountainsSection'])
+    const globalTranslation = useTranslation(['global'])
     const [mountainsSection, setMountainsSection] = useState<MountainsSection[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [page, setPage] = useState(1);
@@ -46,9 +47,9 @@ export default function Index(  props: any) {
     }
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
-        {field: 'name', header: 'Name'},
-        {field: 'entry_points', header: 'entry'},
-        {field: 'points_for_descent', header: 'descent'},
+        {field: 'name', header: t('trail.name')},
+        {field: 'entry_points', header: t('entrance.points')},
+        {field: 'points_for_descent', header: t('points.for.descent')},
     ];
     useEffect(() => {
 
@@ -114,7 +115,7 @@ export default function Index(  props: any) {
             props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('name')}</h2>}
         >
-            <Head title="Aktualności" />
+            <Head title={t('name')} />
             <div className="py-12">
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -147,16 +148,16 @@ export default function Index(  props: any) {
             </div>{
             modalData &&
 
-                <Dialog header={`Czy chcesz usunąć : "${modalData.name}"`} visible={visible} maximizable
+                <Dialog header={t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <p className="m-0">
-                        {t('entry_points')}: {modalData.entry_points}
-                        {t('points_for_descent')}: {modalData.points_for_descent}
+                        <p>{t('entrance.points')}: {modalData.entry_points}</p>
+                        <p>{t('points.for.descent')}: {modalData.points_for_descent}</p>
                     </p>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Button label="Usuń" className={"bg-red-600 hover:bg-red-500"}
+                        <Button label={globalTranslation.t('delete')} className={"bg-red-600 hover:bg-red-500"}
                                 onClick={() => removeElement(modalData)}/>
-                        <Button label="Anuluj" className={"bg-blue-600 hover:bg-red-500"}
+                        <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>
                     </div>
                 </Dialog>
