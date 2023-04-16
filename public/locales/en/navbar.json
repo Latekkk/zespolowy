@@ -22,6 +22,12 @@
     "contact.index": "List of contact requests",
     "contact.create": "Ask for contact",
 
+    "statute": "Statute",
+    "statute.index": "View",
+
+    "squad": "Comitee Squad",
+    "squad.index": "View",
+
 
     "login": "Log in",
     "register": "Register",

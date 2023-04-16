@@ -44,6 +44,26 @@ export default function GuestLayout({props, header, children,}) {
             ]
         },
         {
+            "name": "statute",
+            "route": "statute.index",
+            "subLinks": [
+                {
+                    "name": "statute",
+                    "route": "index"
+                },
+            ]
+        },
+        {
+            "name": "squad",
+            "route": "squad.index",
+            "subLinks": [
+                {
+                    "name": "squad",
+                    "route": "index"
+                },
+            ]
+        },
+        {
             "name": "contact",
             "route": "contact.index",
             "subLinks": [
