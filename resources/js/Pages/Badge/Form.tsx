@@ -53,9 +53,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{badgeTranslation.t('creating.new.badge')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{badgeTranslation.t('creating.editing.a.badge')}</h2>}
         >
-            <Head title={badgeTranslation.t('creating.new.badge')}/>
+            <Head title={badgeTranslation.t('creating.editing.a.badge')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

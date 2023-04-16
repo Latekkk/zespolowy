@@ -9,11 +9,6 @@
     "point.index": "Points list",
     "point.create": "Add point",
 
-
-    "path": "Path",
-    "path.index": "Path list",
-    "path.create": "Create path",
-
     "badge": "Badges",
     "badge.index": "List of badges",
     "badge.create": "Add a badge",
@@ -22,12 +17,15 @@
     "contact.index": "List of contact requests",
     "contact.create": "Ask for contact",
 
-    "statute": "Statute",
-    "statute.index": "View",
+    "statute": "Statue",
+    "statute.index": "Statue preview",
+
+    "mountainsSection": "Trails",
+    "mountainsSection.index": "List of trails",
+    "mountainsSection.create": "Add a new trail",
 
     "squad": "Comitee Squad",
     "squad.index": "View",
-
 
     "login": "Log in",
     "register": "Register",

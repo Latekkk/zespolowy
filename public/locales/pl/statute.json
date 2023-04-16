@@ -1,6 +1,6 @@
 {
     "name": "Regulamin",
-    "submit": "Zapisz",
+    "creating.editing.statue": "Tworzenie/Edycja regulaminu"
     "time.of.creation": "Czas utworzenia",
     "time.of.updating": "Czas aktualizacji"
 }
