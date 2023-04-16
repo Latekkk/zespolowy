@@ -4,8 +4,8 @@ import { FiSettings } from "react-icons/fi";
 import {useTranslation} from "react-i18next";
 import { DateTime } from "luxon";
 
-export default function Statute({statute, auth}: any) {
-    const { t } = useTranslation(['statute'])
+export default function Squad({squad, auth}: any) {
+    const { t } = useTranslation(['squad'])
     const getDate = (time, full) => {
         const date =  DateTime.fromISO(time.replace(' ','T')).setLocale('pl');
 
@@ -13,6 +13,7 @@ export default function Statute({statute, auth}: any) {
     }
     return (
         <>
+
             <div className="rounded overflow-hidden shadow-lg w-full min-h-[150px]">
                     <div className="px-6 py-4 w-full">
                         {auth === true &&
@@ -45,7 +46,7 @@ export default function Statute({statute, auth}: any) {
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
-                                                <Dropdown.Link href={route('statute.edit',1)}>
+                                                <Dropdown.Link href={route('squad.edit',1)}>
                                                     {t('edit')}
                                                 </Dropdown.Link>
                                             </Dropdown.Content>
@@ -56,14 +57,15 @@ export default function Statute({statute, auth}: any) {
                         }
                         <div className="flex flex-row justify-between font-bold text-xl mb-2 my-2 p-4 shadow-lg">
                             {t('name')}
+
                         </div>
 
-                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: statute.content }}>
+                        <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: squad.content }}>
                         </p>
                         <div className="text-xs">
-                            <p>Czas utworzenia: {getDate(statute.created_at, true)}</p>
-                            {statute.updated_at !== statute.created_at &&
-                                <p>Czas aktualizacji: {getDate(statute.updated_at, true)}</p>
+                            <p>Czas utworzenia: {getDate(squad.created_at, true)}</p>
+                            {squad.updated_at !== squad.created_at &&
+                                <p>Czas aktualizacji: {getDate(squad.updated_at, true)}</p>
                             }
 
                         </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainsSectionController;
 use App\Http\Controllers\StatuteController;
 use Illuminate\Foundation\Application;
@@ -48,5 +49,8 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact.index
 
 Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
 Route::resource('statute', StatuteController::class)->middleware(['auth', 'verified'])->except('index');
+
+Route::get('/squad', [SquadController::class, 'index'])->name('squad.index');
+Route::resource('squad', SquadController::class)->middleware(['auth', 'verified'])->except('index');
 
 require __DIR__.'/auth.php';
