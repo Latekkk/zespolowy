@@ -1,7 +1,6 @@
 {
-
-    "creating.editing.statue": "Creating/Editing statue"
     "name": "Statute",
+    "creating.editing.statue": "Creating/Editing statue",
     "time.of.creation": "Time of creation",
     "time.of.updating": "Time of updating"
 

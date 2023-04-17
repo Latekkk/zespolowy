@@ -2,13 +2,13 @@
 
 return [
     'create' => [
-        'toast' => 'Udało się utworzyć nowy szlak'
+        'toast' => 'Udało się utworzyć nowy odcinek'
     ],
     'update' => [
-        'toast' => 'Pomyślnie zaktualizowano szlak'
+        'toast' => 'Pomyślnie zaktualizowano odcinek'
     ],
     'remove' => [
-        'toast' => 'Successfully removed the trail'
+        'toast' => 'Udało się usunąc odcinek'
     ],
 
 ];

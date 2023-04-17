@@ -20,12 +20,12 @@
     "statute": "Statue",
     "statute.index": "Statue preview",
 
-    "mountainsSection": "Trails",
-    "mountainsSection.index": "List of trails",
-    "mountainsSection.create": "Add a new trail",
+    "mountainsSection": "Mountain sections",
+    "mountainsSection.index": "List of mountain sections",
+    "mountainsSection.create": "Add new mountain section",
 
     "squad": "Comitee Squad",
-    "squad.index": "View",
+    "squad.index": "Comitee Squad",
 
     "login": "Log in",
     "register": "Register",

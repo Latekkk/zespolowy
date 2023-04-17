@@ -47,7 +47,7 @@ export default function Index(  props: any) {
     }
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
-        {field: 'name', header: t('trail.name')},
+        {field: 'name', header: t('mountain.section.name')},
         {field: 'entry_points', header: t('entrance.points')},
         {field: 'points_for_descent', header: t('points.for.descent')},
     ];

@@ -3,12 +3,15 @@ import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import Button from "@/Components/Button";
+import React from "react";
 
 export default function Form(props) {
 
     const squad = props.squad ?? null;
 
     const { t } = useTranslation(['squad'])
+    const globalTranslation = useTranslation(['global'])
 
     const {data, setData, post, put, processing, errors} = useForm({
         content: squad?.content ?? "",
@@ -47,9 +50,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('new.squad')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('creating.editing.squad')}</h2>}
         >
-            <Head title="Skład komisji"/>
+            <Head title={t('creating.editing.squad')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -58,7 +61,7 @@ export default function Form(props) {
                             <form onSubmit={handleSubmit}>
                                 <ReactQuill theme="snow" modules={modules} value={data.content} onChange={((e) => handleChange(e, 'content'))}/>
                                 {errors.content && <div>{errors.content}</div>}
-                                <button type="submit" disabled={processing}>{t('submit')}</button>
+                                <Button type='submit' disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
                             </form>
                         </div>
                     </div>
