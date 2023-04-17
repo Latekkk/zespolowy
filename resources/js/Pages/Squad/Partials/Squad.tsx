@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 
 export default function Squad({squad, auth}: any) {
     const { t } = useTranslation(['squad'])
+    const globalTranslation = useTranslation(['global'])
     const getDate = (time, full) => {
         const date =  DateTime.fromISO(time.replace(' ','T')).setLocale('pl');
 
@@ -47,7 +48,7 @@ export default function Squad({squad, auth}: any) {
 
                                             <Dropdown.Content>
                                                 <Dropdown.Link href={route('squad.edit',1)}>
-                                                    {t('edit')}
+                                                    {globalTranslation.t('edit')}
                                                 </Dropdown.Link>
                                             </Dropdown.Content>
                                         </Dropdown>
@@ -63,9 +64,9 @@ export default function Squad({squad, auth}: any) {
                         <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: squad.content }}>
                         </p>
                         <div className="text-xs">
-                            <p>Czas utworzenia: {getDate(squad.created_at, true)}</p>
+                            <p>{t('time.of.creation')} {getDate(squad.created_at, true)}</p>
                             {squad.updated_at !== squad.created_at &&
-                                <p>Czas aktualizacji: {getDate(squad.updated_at, true)}</p>
+                                <p>{t('time.of.updating')} {getDate(squad.updated_at, true)}</p>
                             }
 
                         </div>

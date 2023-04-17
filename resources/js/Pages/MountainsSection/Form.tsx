@@ -81,9 +81,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{t('creating.editing.a.trail')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{t('creating.editing.a.mountain.section')}</h2>}
         >
-            <Head title={t('creating.editing.a.trail')}/>
+            <Head title={t('creating.editing.a.mountain.section')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -92,7 +92,7 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
 
-                                <p> {t('trail.name')}: {firstName?.name}  -  {secondName?.name}</p>
+                                <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>
                                 <Dropdown value={t('starting.point')}
                                           onChange={(e) => setFirstName(e.value)}
                                           options={props.points}

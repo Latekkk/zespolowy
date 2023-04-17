@@ -6,6 +6,7 @@ import { DateTime } from "luxon";
 
 export default function Statute({statute, auth}: any) {
     const { t } = useTranslation(['statute'])
+    const globalTranslation = useTranslation(['global'])
     const getDate = (time, full) => {
         const date =  DateTime.fromISO(time.replace(' ','T')).setLocale('pl');
 
@@ -46,7 +47,7 @@ export default function Statute({statute, auth}: any) {
 
                                             <Dropdown.Content>
                                                 <Dropdown.Link href={route('statute.edit',1)}>
-                                                    {t('edit')}
+                                                    {globalTranslation.t('edit')}
                                                 </Dropdown.Link>
                                             </Dropdown.Content>
                                         </Dropdown>
@@ -61,9 +62,9 @@ export default function Statute({statute, auth}: any) {
                         <p className="shadow-lg p-4 min-h-[100px]"  dangerouslySetInnerHTML={{ __html: statute.content }}>
                         </p>
                         <div className="text-xs">
-                            <p>Czas utworzenia: {getDate(statute.created_at, true)}</p>
+                            <p>{t('time.of.creation')} {getDate(statute.created_at, true)}</p>
                             {statute.updated_at !== statute.created_at &&
-                                <p>Czas aktualizacji: {getDate(statute.updated_at, true)}</p>
+                                <p>{t('time.of.updating')} {getDate(statute.updated_at, true)}</p>
                             }
 
                         </div>
