@@ -7,8 +7,8 @@ import Input from "@/Components/Input";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
 
 export default function Form(props) {
-    const {t} = useTranslation(['mountains_Section'])
-    const mountainsSectionTranslation = useTranslation(['mountainsSection']);
+    const {t} = useTranslation(['mountainsSection'])
+    //const mountainsSectionTranslation = useTranslation(['mountainssection']);
     const globalTranslation = useTranslation(['global'])
 
     const [firstName, setFirstName] = useState(null )
@@ -81,9 +81,9 @@ export default function Form(props) {
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{t('mountains_Section')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight" >{t('creating.editing.a.mountain.section')}</h2>}
         >
-            <Head title={t('mountains_Section')}/>
+            <Head title={t('creating.editing.a.mountain.section')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -91,38 +91,37 @@ export default function Form(props) {
 
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-
-                                <p> name: {firstName?.name} {secondName?.name}</p>
-                                <DropdownWithErrorMessage value={t('firstName')}
+                                <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>
+                                <DropdownWithErrorMessage value={t('starting.point')}
                                                           onChange={(e) => setFirstName(e.value)}
                                                           options={props.points}
                                                           optionLabel="name"
-                                                          placeholder={t('select_start_point')}
+                                                          placeholder={t('select.a.starting.point')}
                                                           className="w-full md:w-14rem"
                                                           error={errors}
                                 />
-                                <DropdownWithErrorMessage value={t('secondName')}
+                                <DropdownWithErrorMessage value={t('endpoint')}
                                                           onChange={(e) => setSecondName(e.value)}
                                                           options={props.points}
                                                           optionLabel="name"
-                                                          placeholder={t('select_end_point')}
+                                                          placeholder={t('select.an.endpoint')}
                                                           className="w-full md:w-14rem"
                                                           error={errors}
                                 />
-                                <Input labelText={t('entry_points')}
+                                <Input labelText={t('entrance.points')}
                                        name='entry_points'
                                        value={data.entry_points}
                                        error={errors.entry_points}
                                        onChange={handleChange}
-                                       placeholder={t('entry_points')}
+                                       placeholder={t('entrance.points.ph')}
                                        type='number'
                                 />
-                                <Input labelText={t('points_for_descent')}
+                                <Input labelText={t('points.for.descent')}
                                        name='points_for_descent'
                                        value={data.points_for_descent}
                                        error={errors.points_for_descent}
                                        onChange={handleChange}
-                                       placeholder={t('points_for_descent')}
+                                       placeholder={t('points.for.descent.ph')}
                                        type='number'
                                 />
                                 <div className='flex flex-row gap-x-2 w-full justify-end mt-4'>

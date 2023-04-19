@@ -2,13 +2,13 @@
 
 return [
     'create' => [
-        'toast' => 'Udało się utworzyć ogłoszenie'
+        'toast' => 'Udało się utworzyć odznakę'
     ],
     'update' => [
-        'toast' => 'Pomyślnie zaktualizowano ogłoszenie'
+        'toast' => 'Pomyślnie zaktualizowano odznakę'
     ],
     'remove' => [
-        'toast' => 'Udało się usunąc ogłoszenie'
+        'toast' => 'Udało się usunąc odznakę'
     ],
 
 ];

@@ -34,7 +34,7 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title={t('log.in')} />
             {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
             <div className={"flex flex-col mx-36 my-12 items-center"}>
 

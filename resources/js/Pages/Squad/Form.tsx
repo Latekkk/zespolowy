@@ -8,13 +8,13 @@ import React from "react";
 
 export default function Form(props) {
 
-    const statute = props.statute ?? null;
+    const squad = props.squad ?? null;
 
-    const { t } = useTranslation(['statute'])
+    const { t } = useTranslation(['squad'])
     const globalTranslation = useTranslation(['global'])
 
     const {data, setData, post, put, processing, errors} = useForm({
-        content: statute?.content ?? "",
+        content: squad?.content ?? "",
         remember: true,
     })
 
@@ -44,15 +44,15 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        statute === null? post(route('statute.store')): put(route('statute.update', 1))
+        squad === null? post(route('squad.store')): put(route('squad.update', 1))
     }
 
     return (
         <Layout
             props={props}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('creating.editing.statue')}</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('creating.editing.squad')}</h2>}
         >
-            <Head title={t('creating.editing.statue')}/>
+            <Head title={t('creating.editing.squad')}/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

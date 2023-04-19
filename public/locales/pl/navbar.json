@@ -9,10 +9,6 @@
     "point.index": "Lista punktów",
     "point.create": "Dodaj punkt",
 
-    "path": "Ścieżki",
-    "path.index": "Lista ścieżek",
-    "path.create": "Dodaj ścieżkę",
-
     "badge": "Odznaki",
     "badge.index": "Lista odznak",
     "badge.create": "Dodaj odznakę",
@@ -24,9 +20,12 @@
     "statute": "Regulamin",
     "statute.index": "Podgląd",
 
-    "statute": "Regulamin",
-    "statute.index": "Podgląd",
+    "mountainsSection": "Odcinki górskie",
+    "mountainsSection.index": "Lista odcinków górskich",
+    "mountainsSection.create": "Dodaj nowy odcinek górski",
 
+    "squad": "Skład komisji",
+    "squad.index": "Skład komisji",
 
     "login": "Logowanie",
     "register": "Rejestracja",
