@@ -2,9 +2,9 @@ import Layout from '@/Layouts/Layout';
 import {Head, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Button from "@/Components/Button";
-import {Dropdown} from "primereact/dropdown";
 import React, {useEffect, useState} from "react";
 import Input from "@/Components/Input";
+import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
 
 export default function Form(props) {
     const {t} = useTranslation(['mountains_Section'])
@@ -93,21 +93,21 @@ export default function Form(props) {
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
 
                                 <p> name: {firstName?.name} {secondName?.name}</p>
-                                <Dropdown value={t('firstName')}
-                                          onChange={(e) => setFirstName(e.value)}
-                                          options={props.points}
-                                          optionLabel="name"
-                                          placeholder={t('select_start_point')}
-                                          className="w-full md:w-14rem"
-                                          filter
+                                <DropdownWithErrorMessage value={t('firstName')}
+                                                          onChange={(e) => setFirstName(e.value)}
+                                                          options={props.points}
+                                                          optionLabel="name"
+                                                          placeholder={t('select_start_point')}
+                                                          className="w-full md:w-14rem"
+                                                          error={errors}
                                 />
-                                <Dropdown value={t('secondName')}
-                                          onChange={(e) => setSecondName(e.value)}
-                                          options={props.points}
-                                          optionLabel="name"
-                                          placeholder={t('select_end_point')}
-                                          className="w-full md:w-14rem"
-                                          filter
+                                <DropdownWithErrorMessage value={t('secondName')}
+                                                          onChange={(e) => setSecondName(e.value)}
+                                                          options={props.points}
+                                                          optionLabel="name"
+                                                          placeholder={t('select_end_point')}
+                                                          className="w-full md:w-14rem"
+                                                          error={errors}
                                 />
                                 <Input labelText={t('entry_points')}
                                        name='entry_points'
