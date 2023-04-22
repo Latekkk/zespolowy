@@ -21,4 +21,13 @@ class MountainRanges extends Model
     {
         return 'slug';
     }
+    public function mountainPart()
+    {
+        return $this->belongsTo(MountainPart::class);
+    }
+
+    public function mountainsSections()
+    {
+        return $this->hasMany(MountainsSection::class);
+    }
 }

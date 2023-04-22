@@ -31,4 +31,8 @@ class MountainsSection extends Model
     {
         return $this->belongsTo(Point::class, 'end_point');
     }
+    public function mountainRanges()
+    {
+        return $this->belongsTo(MountainRanges::class);
+    }
 }
