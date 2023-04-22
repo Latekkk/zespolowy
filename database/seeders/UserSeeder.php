@@ -21,9 +21,17 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123456'),
         ]);
+
         User::create([
             'name' => 'Admin Test',
             'email' => 'test@test.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('123123123'),
+        ]);
+
+        User::create([
+            'name' => 'Admin Test',
+            'email' => 'test@test.pl',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
         ]);
