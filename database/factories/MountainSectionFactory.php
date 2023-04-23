@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\MountainsSection;
 use App\Models\Point;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JetBrains\PhpStorm\ArrayShape;
@@ -10,7 +9,7 @@ use JetBrains\PhpStorm\ArrayShape;
 /**
  * @extends Factory
  */
-class MountainsSectionFactory extends Factory
+class MountainSectionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -24,7 +23,7 @@ class MountainsSectionFactory extends Factory
             'entry_points' => $this->faker->numberBetween(1,100),
             'points_for_descent' => $this->faker->numberBetween(1,100),
             'start_point' => Point::inRandomOrder()->first()->id,
-            'end_point' =>Point::inRandomOrder()->first()->id ,
+            'end_point' => Point::inRandomOrder()->first()->id ,
         ];
     }
 }

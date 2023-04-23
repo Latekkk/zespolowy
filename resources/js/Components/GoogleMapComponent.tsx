@@ -31,7 +31,7 @@ export default function GoogleMapComponent(props) {
         props.setMarkers(event, 'markers', [newMarker]);
     };
 
-    const zoom = props?.markers[0] === undefined? 6 : 10;
+    const zoom = props?.markers[0] === undefined? 6 : 13;
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLEMAPSAPIKEY}

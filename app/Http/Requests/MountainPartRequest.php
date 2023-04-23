@@ -6,9 +6,8 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class PointRequest extends FormRequest
+class MountainPartRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -25,12 +24,7 @@ class PointRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'markers' => 'required|array|min:1',
-            'markers.*.lat' => 'required',
-            'markers.*.lng' => 'required',
-            'mountainMainParts' => 'required|array|min:1',
-            'mountainMainParts.*.id' => 'required|exists:mountain_main_parts,id',
+            'name'=> 'required|max:200|min:3',
         ];
     }
 }

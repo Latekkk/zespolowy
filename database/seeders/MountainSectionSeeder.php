@@ -2,19 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\MountainsSection;
-use Database\Factories\MountainsSectionFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\MountainSection;
 use Illuminate\Database\Seeder;
 
-class MountainsSectionSeeder extends Seeder
+class MountainSectionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        MountainsSection::truncate();
+        MountainSection::truncate();
         $mountainsSection =[
             [
                 'name' => 'Rozdroże pod Łysociną - Schronisko PTTK Przełęcz Okraj', 'entry_points' => '3', 'points_for_descent' => '3', 'start_point' => '2', 'end_point' => '1',
@@ -38,6 +36,6 @@ class MountainsSectionSeeder extends Seeder
                 'name' => 'Schronisko Orle - Harrachov, železniční stanice', 'entry_points' => '8', 'points_for_descent' => '10', 'start_point' => '13', 'end_point' => '14',
             ],
             ];
-        MountainsSection::insert($mountainsSection);
+        MountainSection::insert($mountainsSection);
     }
 }

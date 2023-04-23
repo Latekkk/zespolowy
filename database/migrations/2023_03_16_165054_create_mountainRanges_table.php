@@ -11,13 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mountain_sections', function (Blueprint $table) {
+        Schema::create('mountain_ranges', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->foreignIdFor(\App\Models\Point::class,'start_point');
-            $table->foreignIdFor(\App\Models\Point::class,'end_point');
-            $table->integer('entry_points');
-            $table->integer('points_for_descent');
             $table->timestamps();
         });
     }
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mountains_sections');
+        Schema::dropIfExists('mountain_ranges');
     }
 };

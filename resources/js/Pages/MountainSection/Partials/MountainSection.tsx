@@ -62,7 +62,7 @@
 //     );
 // }
 
-export default function MountainsSection({name, entry_points, points_for_descent, created}) {
+export default function MountainSection({name, entry_points, points_for_descent, created}) {
     return (
         <div>
             <p>{name}</p>

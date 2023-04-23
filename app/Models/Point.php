@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 
@@ -27,16 +27,21 @@ class Point extends Model
 
     public function start_point(): HasOne
     {
-        return $this->hasOne(MountainsSection::class, 'start_point');
+        return $this->hasOne(MountainSection::class, 'start_point');
     }
 
     public function end_point(): HasOne
     {
-        return $this->hasOne(MountainsSection::class, 'end_point');
+        return $this->hasOne(MountainSection::class, 'end_point');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function mountainMainParts(): BelongsToMany
+    {
+        return $this->belongsToMany(MountainMainPart::class, 'point_mountains_main_parts');
     }
 }

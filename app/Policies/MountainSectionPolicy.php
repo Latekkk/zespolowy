@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Advertisement;
-use App\Models\MountainsSection;
+use App\Models\MountainSection;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class MountainsSectionPolicy
+class MountainSectionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +19,7 @@ class MountainsSectionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, MountainsSection $mountainsSection): bool
+    public function view(User $user, MountainSection $mountainSection): bool
     {
         return true;
     }
@@ -40,10 +39,10 @@ class MountainsSectionPolicy
      * Determine whether the user can update the model.
      *
      * @param User $user
-     * @param MountainsSection $mountainsSection
+     * @param MountainSection $mountainSection
      * @return Response|bool
      */
-    public function update(User $user, MountainsSection $mountainsSection): Response|bool
+    public function update(User $user, MountainSection $mountainSection): Response|bool
     {
         return true;
     }
@@ -51,7 +50,7 @@ class MountainsSectionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, MountainsSection $mountainsSection): bool
+    public function delete(User $user, MountainSection $mountainSection): bool
     {
         return true;
     }
@@ -59,7 +58,7 @@ class MountainsSectionPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, MountainsSection $mountainsSection): bool
+    public function restore(User $user, MountainSection $mountainSection): bool
     {
         return true;
     }
@@ -67,7 +66,7 @@ class MountainsSectionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, MountainsSection $mountainsSection): bool
+    public function forceDelete(User $user, MountainSection $mountainSection): bool
     {
         return true;
     }

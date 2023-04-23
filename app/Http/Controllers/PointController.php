@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ToastHelper;
 use App\Http\Requests\PointRequest;
+use App\Models\MountainMainPart;
+use App\Models\MountainsSection;
 use App\Models\Point;
 use App\Repositories\PointRepository;
 use Illuminate\Http\JsonResponse;
@@ -23,17 +25,26 @@ class PointController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('Point/Index', ['points' => Point::paginate(5)]);
+        return Inertia::render('Point/Index', [
+            'points' => Point::paginate(5),
+            'mountainMainParts' => MountainMainPart::all(),
+        ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('Point/Form', []);
+        return Inertia::render('Point/Form', [
+            'mountainMainParts' => MountainMainPart::all()
+        ]);
     }
 
     public function edit(Point $point): Response
     {
-        return Inertia::render('Point/Form', ['point' => $point]);
+        $point->load('mountainMainParts');
+        return Inertia::render('Point/Form', [
+            'point' => $point,
+            'mountainMainParts' => MountainMainPart::all()
+        ]);
     }
 
     public function update(Point $point, PointRequest $pointRequest): RedirectResponse
@@ -56,7 +67,21 @@ class PointController extends Controller
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $points = Point::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')->paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $selectedMountainMainPart = $params['selectedMountainMain'] ?? null;
+
+        if ($selectedMountainMainPart !== null) {
+            $points = Point::whereHas('mountainMainParts', function ($query) use ($selectedMountainMainPart) {
+                $query->where('mountain_main_part_id', '=', $selectedMountainMainPart);
+            })
+                ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+                ->paginate((int)$params['paginate'] ?? 15)
+                ->appends(request()->query());
+        } else {
+            $points = Point::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+                ->paginate((int)$params['paginate'] ?? 15)
+                ->appends(request()->query());
+        }
+
         return response()->json($points);
     }
 

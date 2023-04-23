@@ -34,11 +34,11 @@ export default function GuestLayout({props, header, children,}) {
             ]
         },
         {
-            "name": "mountainsSection",
-            "route": "mountainsSection.index",
+            "name": "mountainSection",
+            "route": "mountainSection.index",
             "subLinks": [
                 {
-                    "name": "mountainsSection",
+                    "name": "mountainSection",
                     "route": "index"
                 },
             ]
