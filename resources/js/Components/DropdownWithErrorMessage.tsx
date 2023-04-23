@@ -2,13 +2,14 @@ import InputError from "@/Components/InputError";
 import {Dropdown} from "primereact/dropdown";
 import React from "react";
 
-export default function DropdownWithErrorMessage({name, value, onChange, error, placeholder, options, optionLabel, className, extraClass}) {
+export default function DropdownWithErrorMessage({name, value, onChange, error, placeholder, options, optionLabel, className, extraClass, label, valueTemplate}) {
 
     return (
         <div className={`flex flex-col gap-y-2 shadow-xl bg-gray-200 rounded p-2 w-full  + ${extraClass} `}>
-            <label htmlFor={name}>{value}</label>
+            <label htmlFor={name}>{label}</label>
 
-            <Dropdown value={typeof value == "object" ? '' : value}
+            <Dropdown value={typeof value ==="object" ? '' : value}
+                      valueTemplate={typeof valueTemplate === "object"? '' : valueTemplate}
                       onChange={(e) => onChange(e.value)}
                       options={options}
                       optionLabel={optionLabel}
@@ -16,7 +17,7 @@ export default function DropdownWithErrorMessage({name, value, onChange, error, 
                       className={className}
                       filter
             />
-            {/*<InputError message={error?error:''}/>*/}
+            <InputError message={error ? error:''}/>
         </div>
     );
 }

@@ -1,18 +1,18 @@
 import Layout from '@/Layouts/Layout';
 import {Head, Link} from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import MountainsSection from "@/Pages/MountainsSection/Partials/MountainsSection";
 import {Column} from 'primereact/column';
 import React, {useEffect, useRef, useState} from "react";
-import MountainsSectionService from "@/Pages/MountainsSection/service/MountainsSectionService";
 import {Toast} from "primereact/toast";
 import {DataTable} from "primereact/datatable";
 import {Paginator} from "primereact/paginator";
 import {Button} from "primereact/button";
 import {Dialog} from "primereact/dialog";
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
-import {Point} from "@/Pages/Point/service/PointService";
+import {Point} from "@/Models/Point";
 import PointService from "@/Pages/Point/service/PointService";
+import MountainSectionService from './service/MountainSectionService';
+
 interface MountainsSection {
     name: string;
     entry_points: string;
@@ -71,7 +71,7 @@ export default function Index(  props: any) {
     }, [page, paginate, sort, sortOrder]);
 
     const getMountainsSection = () => {
-        MountainsSectionService.getMountainsSections(paginate, page, sort, sortOrder).then((data: MountainsSection[]) => {
+        MountainSectionService.getMountainsSections(paginate, page, sort, sortOrder).then((data: MountainsSection[]) => {
             setMountainsSection(data.data);
             setLoading(false);
             setTotalRecords(data.total)
@@ -91,7 +91,7 @@ export default function Index(  props: any) {
         setModalDataToMap(data)
     }
     const removeElement = (data) => {
-        MountainsSectionService.removeMountainsSection(data.id).then(() => {
+        MountainSectionService.removeMountainsSection(data.id).then(() => {
                 getMountainsSection()
                 setVisible(false)
                 toastShow('Usunięto', 'error', data.name)
@@ -106,7 +106,7 @@ export default function Index(  props: any) {
             <div className="flex flex-wrap gap-2">
                 <Button type="button" className="bg-green-600 hover:bg-green-700" icon="pi pi-map"
                         onClick={() => showModalToMap(rowData)} ></Button>
-                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('mountainsSection.edit', {id: rowData.id})} method="get" as="button" type="button">
+                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('mountainSection.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
                 </Link>

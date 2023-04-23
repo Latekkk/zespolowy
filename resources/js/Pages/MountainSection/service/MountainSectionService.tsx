@@ -6,7 +6,7 @@ export interface MountainsSections {
     points_for_descent: string;
 }
 
-class MountainsSectionService {
+class MountainSectionService {
     async getMountainsSections(paginate: number = 15, page: number = 1, sort: string = 'id', sortOrder: number = 0 ): Promise<MountainsSections[]> {
         const API_URL_GET_PATHS = route('api.mountainsSection.index');
 
@@ -22,4 +22,4 @@ class MountainsSectionService {
     }
 }
 
-export default new MountainsSectionService();
+export default new MountainSectionService();

@@ -4,14 +4,14 @@ namespace App\Repositories;
 
 use App\Helpers\SlugHelper;
 use App\Http\Requests\MountainPartRequest;
-use App\Models\MountainPart;
+use App\Models\MountainMainPart;
 use Illuminate\Support\Str;
 
 class MountainPartRepository
 {
-    protected MountainPart $model;
+    protected MountainMainPart $model;
 
-    public function __construct(MountainPart $model)
+    public function __construct(MountainMainPart $model)
     {
         $this->model = $model;
     }
@@ -21,12 +21,12 @@ class MountainPartRepository
         $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function update(MountainPartRequest $request, MountainPart $mountainsSection): void
+    public function update(MountainPartRequest $request, MountainMainPart $mountainsSection): void
     {
         $mountainsSection->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function remove(MountainPart $mountainsSection): void
+    public function remove(MountainMainPart $mountainsSection): void
     {
         $mountainsSection->delete();
     }

@@ -6,11 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-/**
- * @method create(array|string[] $array_merge)
- * @method static orderBy(mixed $param, string $param1)
- */
-class MountainsSection extends Model
+class MountainSection extends Model
 {
     use HasFactory;
 
@@ -31,8 +27,15 @@ class MountainsSection extends Model
     {
         return $this->belongsTo(Point::class, 'end_point');
     }
+
     public function mountainRanges()
     {
         return $this->belongsTo(MountainRanges::class);
+    }
+
+    public function points()
+    {
+
+        return $this->belongsTo(Point::class, 'point_mountains_main_parts');
     }
 }

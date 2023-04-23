@@ -2,19 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\MountainPart;
+use App\Models\MountainMainPart;
 use Database\Factories\MountainPartFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MountainPartSeeder extends Seeder
+class MountainMainPartSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        MountainPart::truncate();
+        MountainMainPart::truncate();
         $mountainPart =[
             [
                 'name' => 'Tatry1',
@@ -38,6 +38,6 @@ class MountainPartSeeder extends Seeder
                 'name' => 'Tatry7',
             ],
             ];
-        MountainPart::insert($mountainPart);
+        MountainMainPart::insert($mountainPart);
     }
 }

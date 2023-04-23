@@ -31,4 +31,5 @@ class MountainRangeRepository
         $mountainsSection->delete();
     }
 
+
 }

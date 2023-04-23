@@ -4,7 +4,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PointController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MountainsSectionController;
+use App\Http\Controllers\MountainSectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,7 @@ Route::post('/contacts/{contact}/response', [ContactController::class, 'setRespo
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
 Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');
 
-Route::get('/mountainsSection', [MountainsSectionController::class, 'getAll'])->name('api.mountainsSection.index');
-Route::delete('/mountainsSection/{mountainsSection}', [MountainsSectionController::class, 'removeAPI'])->name('api.mountainsSection.destroy');
-Route::put('/mountainsSection/{mountainsSection}/edit', [MountainsSectionController::class, 'updateAPI'])->name('api.mountainsSection.edit');
-Route::post('/mountainsSection/{mountainsSection}', [MountainsSectionController::class, 'createAPI'])->name('api.mountainsSection.create');
+Route::get('/mountainsSection', [MountainSectionController::class, 'getAll'])->name('api.mountainsSection.index');
+Route::delete('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'removeAPI'])->name('api.mountainSection.destroy');
+Route::put('/mountainsSection/{mountainsSection}/edit', [MountainSectionController::class, 'updateAPI'])->name('api.mountainSection.edit');
+Route::post('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'createAPI'])->name('api.mountainSection.create');

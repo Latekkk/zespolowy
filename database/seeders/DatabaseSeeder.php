@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\MountainRanges;
 use App\Models\User;
 use Database\Factories\PathFactory;
 use Illuminate\Database\Seeder;
@@ -18,9 +19,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             PointSeeder::class,
-            MountainsSectionSeeder::class,
+            MountainSectionSeeder::class,
             StatuteSeeder::class,
-            SquadSeeder::class
+            SquadSeeder::class,
+            MountainRangesSeeder::class,
+            MountainMainPartSeeder::class,
         ]);
 
         User::factory(10)->create();

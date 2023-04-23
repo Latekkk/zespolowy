@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,7 @@ class PointRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array<string, Rule|array|string>
      */
     public function rules(): array
     {
@@ -28,6 +29,8 @@ class PointRequest extends FormRequest
             'markers' => 'required|array|min:1',
             'markers.*.lat' => 'required',
             'markers.*.lng' => 'required',
+            'mountainMainParts' => 'required|array|min:1',
+            'mountainMainParts.*.id' => 'required|exists:mountain_main_parts,id',
         ];
     }
 }

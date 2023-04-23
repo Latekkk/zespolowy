@@ -3,37 +3,37 @@
 namespace App\Repositories;
 
 use App\Helpers\SlugHelper;
-use App\Http\Requests\MountainsSectionRequest;
-use App\Models\MountainsSection;
+use App\Http\Requests\MountainSectionRequest;
+use App\Models\MountainSection;
 use Illuminate\Support\Str;
 
-class MountainsSectionRepository
+class MountainSectionRepository
 {
-    protected MountainsSection $model;
+    protected MountainSection $model;
 
-    public function __construct(MountainsSection $model)
+    public function __construct(MountainSection $model)
     {
         $this->model = $model;
     }
 
-    public function create(MountainsSectionRequest $request): void
+    public function create(MountainSectionRequest $request): void
     {
         $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function update(MountainsSectionRequest $request, MountainsSection $mountainsSection): void
+    public function update(MountainSectionRequest $request, MountainSection $mountainsSection): void
     {
         $mountainsSection->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function remove(MountainsSection $mountainsSection): void
+    public function remove(MountainSection $mountainsSection): void
     {
         $mountainsSection->delete();
     }
 
-    private function getPointFromRequest($request): MountainsSection
+    private function getPointFromRequest($request): MountainSection
     {
-        return new MountainsSection(['name' => $request->name,
+        return new MountainSection(['name' => $request->name,
             'entry_points' => $request->markers[0]['entry_points'],
             'points_for_descent' => $request->markers[0]['points_for_descent'],
             'slug' => SlugHelper::getSlug($request->name)]);

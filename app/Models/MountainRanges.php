@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @method create(array|string[] $array_merge)
@@ -21,13 +22,15 @@ class MountainRanges extends Model
     {
         return 'slug';
     }
-    public function mountainPart()
+
+    public function mountainMainPart()
     {
-        return $this->belongsTo(MountainPart::class);
+        return $this->belongsTo(MountainMainPart::class);
     }
 
-    public function mountainsSections()
+    public function mountainSections()
     {
-        return $this->hasMany(MountainsSection::class);
+        return $this->hasMany(MountainSection::class);
     }
+
 }

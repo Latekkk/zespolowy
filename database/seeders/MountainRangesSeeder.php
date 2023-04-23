@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\MountainRanges;
-use Database\Factories\MountainRangesFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MountainRangesSeeder extends Seeder
@@ -32,6 +30,6 @@ class MountainRangesSeeder extends Seeder
                 'name' => 'Podtatrze5',
             ],
             ];
-        MountainsSection::insert($mountainRanges);
+        MountainRanges::insert($mountainRanges);
     }
 }

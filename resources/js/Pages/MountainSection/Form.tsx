@@ -13,14 +13,15 @@ export default function Form(props) {
 
     const [firstName, setFirstName] = useState(null )
     const [secondName, setSecondName] = useState(null)
-    const mountainsSection = props.mountainsSection ?? null;
+    const mountainSection = props.mountainSection ?? null;
+
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
-        name: mountainsSection?.name || "",
-        entry_points: mountainsSection?.entry_points || "",
-        points_for_descent: mountainsSection?.points_for_descent || "",
-        start_point : mountainsSection?.start_point || "",
-        end_point : mountainsSection?.end_point || "",
+        name: mountainSection?.name || "",
+        entry_points: mountainSection?.entry_points || "",
+        points_for_descent: mountainSection?.points_for_descent || "",
+        start_point : mountainSection?.start_point || "",
+        end_point : mountainSection?.end_point || "",
         remember: true
     })
 
@@ -41,7 +42,7 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        mountainsSection === null ?post(route('mountainsSection.store',data)): put(route('mountainsSection.update', mountainsSection.id))
+        mountainSection === null ?post(route('mountainSection.store',data)): put(route('mountainSection.update', mountainSection.id))
 
     }
 
@@ -72,9 +73,9 @@ export default function Form(props) {
     }, [firstName, secondName])
 
     useEffect(()=>{
-        if(mountainsSection != null){
-            setFirstName(findPoint(mountainsSection.start_point));
-            setSecondName(findPoint(mountainsSection.end_point));
+        if(mountainSection != null){
+            setFirstName(findPoint(mountainSection.start_point));
+            setSecondName(findPoint(mountainSection.end_point));
         }
     },[])
 
@@ -92,21 +93,24 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                                 <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>
-                                <DropdownWithErrorMessage value={t('starting.point')}
-                                                          onChange={(e) => setFirstName(e.value)}
+                                <DropdownWithErrorMessage label={t('starting.point')}
+                                                          value={firstName?.name }
+                                                          valueTemplate={firstName?.name }p
+                                                          onChange={(e) => {setFirstName(e)}}
                                                           options={props.points}
                                                           optionLabel="name"
                                                           placeholder={t('select.a.starting.point')}
                                                           className="w-full md:w-14rem"
-                                                          error={errors}
+                                                          error={errors.start_point}
                                 />
-                                <DropdownWithErrorMessage value={t('endpoint')}
-                                                          onChange={(e) => setSecondName(e.value)}
+                                <DropdownWithErrorMessage label={t('endpoint')}
+                                                          valueTemplate={secondName?.name }
+                                                          onChange={(e) => setSecondName(e)}
                                                           options={props.points}
                                                           optionLabel="name"
                                                           placeholder={t('select.an.endpoint')}
                                                           className="w-full md:w-14rem"
-                                                          error={errors}
+                                                          error={errors.end_point}
                                 />
                                 <Input labelText={t('entrance.points')}
                                        name='entry_points'

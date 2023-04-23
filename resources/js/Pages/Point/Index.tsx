@@ -15,6 +15,7 @@ import {Dialog} from 'primereact/dialog';
 import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
+import {MultiSelect} from "primereact/multiselect";
 interface Point {
     name: string;
     lat: string;
@@ -40,6 +41,8 @@ export default function Index(props: any) {
 
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState<Point>();
+    const [selectedMountainMain, setSelectedMountainMain] = useState(null);
+
     const toast = useRef<Toast>(null);
 
     const columns: ColumnMeta[] = [
@@ -66,10 +69,10 @@ export default function Index(props: any) {
 
     useEffect(() => {
         getPoints()
-    }, [page, paginate, sort, sortOrder]);
+    }, [page, paginate, sort, sortOrder, selectedMountainMain]);
 
     const getPoints = () => {
-        PointService.getPoints(paginate, page, sort, sortOrder).then((data: Point[]) => {
+        PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id)).then((data: Point[]) => {
             setPoints(data.data);
             setLoading(false);
             setTotalRecords(data.total)
@@ -122,6 +125,8 @@ export default function Index(props: any) {
             }];
 
     }
+
+
     return (
         <Layout
             props={props}
@@ -131,6 +136,16 @@ export default function Index(props: any) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+                    <div className="flex flex-row w-full justify-end pb-2">
+                        <div className="w-[350px]">
+                            <MultiSelect value={selectedMountainMain} onChange={(e) => setSelectedMountainMain(e.value)} options={props.mountainMainParts} optionLabel="name" display="chip"
+                                         placeholder="Wszystkie"  className="w-full md:w-20rem"
+                                         maxSelectedLabels={5}
+                            />
+
+                        </div>
+                    </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="card w-full p-fluid">
                             <DataTable
