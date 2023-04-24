@@ -34,8 +34,10 @@ class PointController extends Controller
     public function create(): Response
     {
         return Inertia::render('Point/Form', [
-            'mountainMainParts' => MountainMainPart::all()
+            'mountainMainParts' => MountainMainPart::all(),
+            'lastPoint'=>Point::latest()->first()
         ]);
+
     }
 
     public function edit(Point $point): Response
