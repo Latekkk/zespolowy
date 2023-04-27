@@ -17,6 +17,7 @@ export default function Form(props) {
     const [secondName, setSecondName] = useState(null)
     const [selectedMountainMain, setSelectedMountainMain] = useState(null)
     const mountainSection = props.mountainSection ?? null;
+    const [points, setPoints] = useState<Point[]>([]);
 
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
@@ -80,15 +81,19 @@ export default function Form(props) {
             setFirstName(findPoint(mountainSection.start_point));
             setSecondName(findPoint(mountainSection.end_point));
         }
+        getPoints()
     },[])
     useEffect(() => {
-        getMountainMain()
+        getPoints()
+        console.log(selectedMountainMain)
     }, [selectedMountainMain]);
 
-    const getMountainMain = () => {
-        PointService.getPoints(selectedMountainMain?.map(obj => obj.id)).then((data: Point[]) => {
-            setFirstName(data.data);
-            setSecondName(data.data);
+    useEffect(() => {
+        console.log(points);
+    }, [points]);
+    const getPoints = () => {
+        PointService.getPoints(selectedMountainMain?.id).then((data: Point[]) => {
+            setPoints(data.data);
         });
     }
     return (
@@ -104,9 +109,9 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                                 <DropdownWithErrorMessage label={t('mountains_ranges')}
-                                                          value={selectedMountainMain}
-                                                          valueTemplate={selectedMountainMain}
-                                                          onChange={(e) => {setSelectedMountainMain(e.value)}}
+                                                          value={selectedMountainMain?.name}
+                                                          valueTemplate={selectedMountainMain?.name }
+                                                          onChange={(e) => {setSelectedMountainMain(e)}}
                                                           options={props.mountainMainParts}
                                                           optionLabel="name"
                                                           placeholder={t('select.a.mountains_ranges')}
