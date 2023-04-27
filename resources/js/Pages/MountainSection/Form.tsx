@@ -7,6 +7,7 @@ import Input from "@/Components/Input";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
 import PointService from "@/Pages/Point/service/PointService";
 import {Point} from "@/Models/Point";
+import Errors from "@/Components/Errors";
 
 export default function Form(props) {
     const {t} = useTranslation(['mountainsSection'])
@@ -96,6 +97,7 @@ export default function Form(props) {
             setPoints(data.data);
         });
     }
+    console.log(props);
     return (
         <Layout
             props={props}
@@ -105,6 +107,8 @@ export default function Form(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    {/*<Errors errors={props.errors}></Errors>*/}
+
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
