@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MountainSectionRequest extends FormRequest
 {
@@ -23,12 +24,25 @@ class MountainSectionRequest extends FormRequest
      */
     public function rules(): array
     {
+//        dd($this->name);
         return [
-            'name'=> 'required|max:200|min:3',
+
+            'name'=> 'required|max:200|min:3|unique:mountain_sections,name,'.$this->name,
             'start_point' => 'required|different:end_point|exists:points,id',
             'end_point' => 'required|different:start_point|exists:points,id',
             'entry_points'=> 'required|integer|min:1',
             'points_for_descent'=> 'required|integer|min:1',
+            'start_end_points' => [
+                function ($attribute, $value, $fail) {
+                    $exists = DB::table('mountain_sections')
+                        ->where('start_point', '=', request()->input('end_point'))
+                        ->where('end_point', '=', request()->input('start_point'))
+                        ->exists();
+                    if ($exists) {
+                        $fail('The start and end points combination already exists.');
+                    }
+                },
+            ],
         ];
     }
 }

@@ -5,6 +5,9 @@ import Button from "@/Components/Button";
 import React, {useEffect, useState} from "react";
 import Input from "@/Components/Input";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
+import PointService from "@/Pages/Point/service/PointService";
+import {Point} from "@/Models/Point";
+import Errors from "@/Components/Errors";
 
 export default function Form(props) {
     const {t} = useTranslation(['mountainsSection'])
@@ -13,7 +16,9 @@ export default function Form(props) {
 
     const [firstName, setFirstName] = useState(null )
     const [secondName, setSecondName] = useState(null)
+    const [selectedMountainMain, setSelectedMountainMain] = useState(null)
     const mountainSection = props.mountainSection ?? null;
+    const [points, setPoints] = useState<Point[]>([]);
 
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
@@ -77,8 +82,22 @@ export default function Form(props) {
             setFirstName(findPoint(mountainSection.start_point));
             setSecondName(findPoint(mountainSection.end_point));
         }
+        getPoints()
     },[])
+    useEffect(() => {
+        getPoints()
+        console.log(selectedMountainMain)
+    }, [selectedMountainMain]);
 
+    useEffect(() => {
+        console.log(points);
+    }, [points]);
+    const getPoints = () => {
+        PointService.getPoints(selectedMountainMain?.id).then((data: Point[]) => {
+            setPoints(data.data);
+        });
+    }
+    console.log(props);
     return (
         <Layout
             props={props}
@@ -88,16 +107,26 @@ export default function Form(props) {
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <form onSubmit={handleSubmit}>
+                    {/*<Errors errors={props.errors}></Errors>*/}
 
+                    <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
+                                <DropdownWithErrorMessage label={t('mountains_ranges')}
+                                                          value={selectedMountainMain?.name}
+                                                          valueTemplate={selectedMountainMain?.name }
+                                                          onChange={(e) => {setSelectedMountainMain(e)}}
+                                                          options={props.mountainMainParts}
+                                                          optionLabel="name"
+                                                          placeholder={t('select.a.mountains_ranges')}
+                                                          className="w-full md:w-14rem"
+                                />
                                 <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>
                                 <DropdownWithErrorMessage label={t('starting.point')}
                                                           value={firstName?.name }
-                                                          valueTemplate={firstName?.name }p
+                                                          valueTemplate={firstName?.name }
                                                           onChange={(e) => {setFirstName(e)}}
-                                                          options={props.points}
+                                                          options={points}
                                                           optionLabel="name"
                                                           placeholder={t('select.a.starting.point')}
                                                           className="w-full md:w-14rem"
@@ -106,7 +135,7 @@ export default function Form(props) {
                                 <DropdownWithErrorMessage label={t('endpoint')}
                                                           valueTemplate={secondName?.name }
                                                           onChange={(e) => setSecondName(e)}
-                                                          options={props.points}
+                                                          options={points}
                                                           optionLabel="name"
                                                           placeholder={t('select.an.endpoint')}
                                                           className="w-full md:w-14rem"

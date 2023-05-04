@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MountainSectionRequest;
+use App\Models\MountainMainPart;
 use App\Models\MountainSection;
 use App\Models\Point;
 use App\Repositories\MountainSectionRepository;
@@ -33,6 +34,7 @@ class MountainSectionController extends Controller
     {
         return Inertia::render('MountainSection/Form', [
             'points' => Point::all(),
+            'mountainMainParts' => MountainMainPart::all()
         ]);
     }
 
@@ -47,6 +49,7 @@ class MountainSectionController extends Controller
     {
         return Inertia::render('MountainSection/Form', [
             'mountainSection' => $mountainSection,
+            'mountainMainParts' => MountainMainPart::all(),
             'points' => Point::all(),
         ]);
     }
