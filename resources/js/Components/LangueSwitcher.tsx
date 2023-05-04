@@ -76,8 +76,12 @@ function LanguageSwitcher() {
     const getFlag = () => {
         return (
             <Flag code={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} height="16" alt={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} />
-
         )
+    }
+
+    const changeLanguage = (e) => {
+        setLanguage()
+        menu.current.toggle(e)
     }
 
     return (
@@ -85,7 +89,7 @@ function LanguageSwitcher() {
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
                 <Menu model={items} popup ref={menu}/>
-                <Button label={getFlag()} className="w-12 p-0 bg-white border-black" onClick={(e) => menu.current.toggle(e)}>{getFlag()} </Button>
+                <Button label={getFlag()} className="w-12 p-0 bg-white border-black" onClick={(e) => changeLanguage(e)}>{getFlag()} </Button>
             </div>
         </div>
     );
