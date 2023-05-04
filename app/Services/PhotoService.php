@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class PhotoService
 {
@@ -72,14 +73,13 @@ class PhotoService
     /**
      * @throws PhotoUpdateException
      */
-    public function updatePhoto(UploadedFile $file, Photo $photo): Photo
+    public function updatePhoto(UploadedFile $file, Photo $photo, Model $model): Photo
     {
         DB::beginTransaction();
 
         try {
             $photo->deleteImage();
-            $photo->saveImage($file);
-
+            $this->savePhoto($file, $model);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();

@@ -20,7 +20,7 @@ class Badge extends Model
     ];
 
 
-    public function photos()
+    public function photos(): MorphToMany
     {
         return $this->morphToMany(Photo::class, 'imageable');
     }

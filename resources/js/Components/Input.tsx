@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import InputError from "@/Components/InputError";
 
-export default function Input({labelText, name, value, onChange, error, readOnly = false, type = 'text', placeholder, extraClass}) {
+export default function Input({labelText, name, value, onChange , error, readOnly = false, type = 'text', placeholder, extraClass = ''}) {
 
     const {t} = useTranslation(['input'])
 

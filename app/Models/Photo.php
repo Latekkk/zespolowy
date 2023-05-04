@@ -32,13 +32,8 @@ class Photo extends Model
 
     public function deleteImage(): void
     {
-        Storage::delete($this->file_name);
+        Storage::delete('photos/'. $this->file_name);
+        $this->delete();
     }
 
-    public function saveImage($image): void
-    {
-        $file_name = $image->store('photos');
-        $this->file_name = $file_name;
-        $this->save();
-    }
 }

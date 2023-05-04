@@ -34,8 +34,12 @@ class BadgeRepository
     public function update(BadgeRequest $request, Badge $badge): void
     {
         $badge->update(["name" => $request->name, "point" => $request->point]);
-        if ($request->has('file')) {
-             $this->photoService->updatePhoto($this->getFile($request), $badge->photos()->first());
+        if ($request->has('img_url')) {
+            if ($badge->photos()->first() === null) {
+                $this->photoService->savePhoto($this->getFile($request), $badge);
+            } else {
+                $this->photoService->updatePhoto($this->getFile($request), $badge->photos()->first(), $badge);
+            }
         }
     }
 

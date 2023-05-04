@@ -1,24 +1,18 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import Layout from '@/Layouts/Layout';
-import {Inertia} from '@inertiajs/inertia'
 import {useTranslation} from 'react-i18next';
-import Badge from './Partials/Badge';
 import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
 import {Toast} from "primereact/toast";
-
+import {Badge} from "@/Models/Badge";
 import {Head, Link} from '@inertiajs/react';
+import PartialBadge from "@/Pages/Badge/Partials/PartialBadge";
 
-interface Badge {
-    'id': number,
-    'name': string,
-    'point': number,
-}
 
 export default function Index(props: any) {
-    const badgeTranslation = useTranslation(['badge'])
-    const globalTranslation = useTranslation(['global'])
+    const badgeTranslation = useTranslation<string[]>(['badge'])
+    const globalTranslation = useTranslation<string[]>(['global'])
     const [visible, setVisible] = useState<boolean>(false);
 
     const [modalData, setModalData] = useState<Badge>();
@@ -42,7 +36,7 @@ export default function Index(props: any) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <Badge
+                        <PartialBadge
                             badges={props.badges}
                             auth={props.auth.user !== null}
                             setModalData={setModalData}

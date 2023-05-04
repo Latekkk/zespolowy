@@ -1,6 +1,6 @@
 import {useTranslation} from 'react-i18next';
 
-export default function FileInput({labelText, name, value, onChange, error}) {
+export default function FileInput({labelText, name, value = {}, onChange, error}) {
 
     const inputTranslation = useTranslation(['input'])
 

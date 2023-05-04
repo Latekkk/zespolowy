@@ -24,7 +24,7 @@ class SignController extends Controller
     public function index(): Response
     {
         return Inertia::render('Sign/Index', [
-
+            
         ]);
     }
 

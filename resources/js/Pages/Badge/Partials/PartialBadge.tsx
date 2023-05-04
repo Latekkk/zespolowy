@@ -3,8 +3,9 @@ import Dropdown from "../../../Components/Dropdown";
 import {FiSettings} from "react-icons/fi";
 import {useTranslation} from "react-i18next";
 import Button from '@/Components/Button';
+import undefinedImages from "@/Functions/undefinedImages";
 
-export default function Badge({badges, auth, setModalData,setVisible}) {
+export default function PartialBadge({badges, auth, setModalData,setVisible}) {
 
     const host = window.location.origin + '/storage/photos/'
     const badgeTranslation = useTranslation(['badge'])
@@ -13,7 +14,7 @@ export default function Badge({badges, auth, setModalData,setVisible}) {
         <>
             {
                 badges.map((badge, index) =>
-                    <div className="flex flex-col w-full justify-center gap-y-3 p-4" key={badge}>
+                    <div className="flex flex-col w-full justify-center gap-y-3 p-4" key={'badge-' + index }>
 
                         <div className="flex flex-row justify-center w-full text-2xl font-bold">
                             <h1 className="w-full ml-10 text-center">{badge.name}</h1>
@@ -64,7 +65,7 @@ export default function Badge({badges, auth, setModalData,setVisible}) {
                                 }
                             </div>
                         </div>
-                        <img src={host + badge.photos[0].file_name}/>
+                        <img src={undefinedImages(badge.photos[0]?.file_name, host, 'images/undefined/badgeNotFound.jpg')} alt={badge.photos[0]?.file_name}/>
                         <p className="text-center">
                             {badgeTranslation.t('badge.points')} {badge.point}
                         </p>

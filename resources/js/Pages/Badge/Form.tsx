@@ -1,11 +1,12 @@
 import Layout from '@/Layouts/Layout';
-import {Head, useForm} from '@inertiajs/react';
+import {Head, router, useForm} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Input from "@/Components/Input"
 import Button from "@/Components/Button";
 import FileInput from '@/Components/FileInput';
-import React from "react";
-
+import React, {useEffect} from "react";
+import useFileList from '@/Functions/fileList'
+import undefinedImages from "@/Functions/undefinedImages";
 
 
 export default function Form(props) {
@@ -13,17 +14,21 @@ export default function Form(props) {
     const badgeTranslation  = useTranslation(['badge'])
     const globalTranslation  = useTranslation(['global'])
     const host = window.location.origin + '/storage/photos/'
+    const badge = props?.badge ?? null;
+    const mainPhoto = useFileList();
+    const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
-        name: props?.badge?.name ||  '',
-        img_url: props?.badge?.photos[0] ||  [],
-        point: props?.badge?.point ||  '',
+        name: badge?.name ||  '',
+        point: badge?.point ||  '',
+        img_url: badge?.img_url,
         remember: true,
     })
 
     const handleFile = (e) => {
         if (e.currentTarget.files) {
             setData("img_url", e.currentTarget.files[0]);
+            mainPhoto.addFile(e.target.files)
         }
     };
 
@@ -38,15 +43,25 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        if(props?.badge === undefined ) {
+        if(badge === null ) {
             post(route('badge.store'))
         } else {
-            put(route('badge.update', props.badge.id))
+
+            router.post(route('badge.update',badge.id),
+                {
+                    _method: 'put',
+                    name: data.name,
+                    point: data.point,
+                    img_url: data.img_url
+                })
+            //
+            // put(route('badge.update', props.badge.id))
         }
     }
 
     const setDefaultForm = () => {
         reset();
+        mainPhoto.clear();
         clearErrors()
     }
 
@@ -93,11 +108,10 @@ export default function Form(props) {
                                     </div>
 
                                     {
-                                        props?.badge?.photos[0] !== undefined &&
-                                        <div className="w-full flex flex-col justify-center gap-y-2">
+                                        (<div className="w-full flex flex-col justify-center gap-y-2 h-[256px] mt-4">
                                             <h1 className="text-center">{badgeTranslation.t('photo.preview')}</h1>
-                                            <img src={host + data.img_url.file_name} width="256"/>
-                                        </div>
+                                            <img src={undefinedImages(mainPhoto.files.length >= 1? mainPhoto.files[0].url: badge?.photos[0].file_name !== undefined? badge?.photos[0].file_name : '',mainPhoto.files.length >= 1? '' : badge?.photos[0].file_name !== undefined? host :  undefinedUrl)} width="256" height="256"/>
+                                        </div>)
                                     }
 
 
