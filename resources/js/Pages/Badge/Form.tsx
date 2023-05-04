@@ -108,9 +108,9 @@ export default function Form(props) {
                                     </div>
 
                                     {
-                                        (<div className="w-full flex flex-col justify-center gap-y-2 h-[256px] mt-4">
+                                        (<div className="w-full flex flex-col justify-center gap-y-2 mt-4">
                                             <h1 className="text-center">{badgeTranslation.t('photo.preview')}</h1>
-                                            <img src={undefinedImages(mainPhoto.files.length >= 1? mainPhoto.files[0].url: badge?.photos[0].file_name !== undefined? badge?.photos[0].file_name : '',mainPhoto.files.length >= 1? '' : badge?.photos[0].file_name !== undefined? host :  undefinedUrl)} width="256" height="256"/>
+                                            <img class="w-[256px] h-[256px] object-contain" src={undefinedImages(mainPhoto.files.length >= 1? mainPhoto.files[0].url: badge?.photos[0].file_name !== undefined? badge?.photos[0].file_name : '',mainPhoto.files.length >= 1? '' : badge?.photos[0].file_name !== undefined? host :  undefinedUrl)} width="256" height="256"/>
                                         </div>)
                                     }
 
