@@ -30,7 +30,6 @@ export default function GoogleMapComponent(props) {
         };
         props.setMarkers(event, 'markers', [newMarker]);
     };
-    console.log(props);
     const zoom = props?.markers[0] === undefined? 8 : 13;
     return (
         <LoadScript

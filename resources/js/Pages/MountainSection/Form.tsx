@@ -86,18 +86,15 @@ export default function Form(props) {
     },[])
     useEffect(() => {
         getPoints()
-        console.log(selectedMountainMain)
     }, [selectedMountainMain]);
 
     useEffect(() => {
-        console.log(points);
     }, [points]);
     const getPoints = () => {
         PointService.getPoints(selectedMountainMain?.id).then((data: Point[]) => {
             setPoints(data.data);
         });
     }
-    console.log(props);
     return (
         <Layout
             props={props}

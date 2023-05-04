@@ -57,7 +57,6 @@ export default function Index(props: any) {
     };
 
     const onPageChange = (event) => {
-        console.log(event)
         setFirst(event.first);
         setPage(event.page + 1);
         setPaginate(event.rows);
