@@ -30,8 +30,8 @@ export default function GoogleMapComponent(props) {
         };
         props.setMarkers(event, 'markers', [newMarker]);
     };
-
-    const zoom = props?.markers[0] === undefined? 6 : 13;
+    console.log(props);
+    const zoom = props?.markers[0] === undefined? 8 : 13;
     return (
         <LoadScript
             googleMapsApiKey={import.meta.env.VITE_GOOGLEMAPSAPIKEY}
@@ -39,7 +39,7 @@ export default function GoogleMapComponent(props) {
             <GoogleMap id='marker-example'
                        mapContainerStyle={mapContainerStyle}
                        zoom={zoom}
-                       center={props?.markers[0] === undefined? center : props?.markers[0] }
+                       center={props?.lastPoint ===undefined? (props?.markers[0] === undefined? center : props?.markers[0]) : {'lat': Number(props?.lastPoint.lat) , 'lng': Number(props?.lastPoint.lng)} }
                        onClick={handleMapClick}>
                 <MarkerClusterer options={options}>
                     {(clusterer) =>

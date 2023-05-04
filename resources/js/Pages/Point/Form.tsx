@@ -85,7 +85,7 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex flex-row p-2 text-gray-900 gap-x-4">
                                 <div className="flex flex-col gap-y-4">
-                                    <GoogleMapComponent markers={data.markers} setMarkers={handleChange}/>
+                                    <GoogleMapComponent markers={data.markers} setMarkers={handleChange} lastPoint={props.lastPoint}/>
 
                                 </div>
                                 <div className="flex flex-col gap-y-6 w-full pt-4">
