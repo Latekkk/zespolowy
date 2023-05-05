@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mountain_section_trip', function (Blueprint $table) {
+        Schema::create('mountain_section_trips', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignIdFor(MountainSection::class);
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mountain_section_trip');
+        Schema::dropIfExists('mountain_section_trips');
     }
 };

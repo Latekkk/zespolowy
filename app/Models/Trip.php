@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @method create(array|string[] $array_merge)
  * @method static paginate(int $int)
+ *  @method static inRandomOrder()
  */
 class Trip extends Model
 {

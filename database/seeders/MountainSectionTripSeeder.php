@@ -15,7 +15,7 @@ class MountainSectionTripSeeder extends Seeder
         MountainSectionTrip::truncate();
         $mountainsSectionTrip =[
             [
-
+                'mountain_section_id' => '1', 'trip_id' => '1'
             ]];
         MountainSectionTrip::insert($mountainsSectionTrip);
     }
