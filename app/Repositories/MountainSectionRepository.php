@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Helpers\SlugHelper;
-use App\Http\Requests\TripRequest;
+use App\Http\Requests\MountainSectionRequest;
 use App\Models\MountainSection;
 use Illuminate\Support\Str;
 
@@ -16,12 +16,12 @@ class MountainSectionRepository
         $this->model = $model;
     }
 
-    public function create(TripRequest $request): void
+    public function create(MountainSectionRequest $request): void
     {
         $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function update(TripRequest $request, MountainSection $mountainsSection): void
+    public function update(MountainSectionRequest $request, MountainSection $mountainsSection): void
     {
         $mountainsSection->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }

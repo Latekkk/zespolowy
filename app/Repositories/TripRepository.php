@@ -20,13 +20,19 @@ class TripRepository
         $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function update(TripRequest $request, Trip $mountainsSection): void
+    public function update(TripRequest $request, Trip $trip): void
     {
-        $mountainsSection->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
+        $trip->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
-    public function remove(Trip $mountainsSection): void
+    public function remove(Trip $trip): void
     {
-        $mountainsSection->delete();
+        $trip->delete();
+    }
+    private function getTripFromRequest($request): Trip
+    {
+        return new Trip(['name' => $request->name,
+            'totalPoints' => $request->markers[0]['totalPoints'],
+            'slug' => SlugHelper::getSlug($request->name)]);
     }
 }

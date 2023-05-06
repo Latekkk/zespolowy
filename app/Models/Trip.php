@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * @method create(array|string[] $array_merge)
  * @method static paginate(int $int)
+ * @method static orderBy(mixed $param, string $param1)
  *  @method static inRandomOrder()
  */
 class Trip extends Model
@@ -19,11 +20,6 @@ class Trip extends Model
         'name',
         'totalPoints',
     ];
-
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
 
     public function mountainSections(): BelongsToMany
     {
