@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
+ * @method create(MountainSection $mountainSection)
+ * @method static paginate(int $int)
+ * @method static orderBy(mixed $param, string $param1)
  * @method static inRandomOrder()
  */
 class MountainSection extends Model
