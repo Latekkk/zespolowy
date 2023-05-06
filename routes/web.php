@@ -46,6 +46,8 @@ Route::resource('mountainSection', MountainSectionController::class)->middleware
 Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');
 
 Route::resource('trip', TripController::class);
+Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
+
 
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

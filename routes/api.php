@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\TripController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MountainSectionController;
@@ -34,3 +35,8 @@ Route::get('/mountainsSection', [MountainSectionController::class, 'getAll'])->n
 Route::delete('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'removeAPI'])->name('api.mountainSection.destroy');
 Route::put('/mountainsSection/{mountainsSection}/edit', [MountainSectionController::class, 'updateAPI'])->name('api.mountainSection.edit');
 Route::post('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'createAPI'])->name('api.mountainSection.create');
+
+Route::get('/trip', [TripController::class, 'getAll'])->name('api.trip.index');
+Route::delete('/trip/{trip}', [TripController::class, 'removeAPI'])->name('api.trip.destroy');
+Route::put('/trip/{trip}/edit', [TripController::class, 'updateAPI'])->name('api.trip.edit');
+Route::post('/trip/{trip}', [TripController::class, 'createAPI'])->name('api.trip.create');
