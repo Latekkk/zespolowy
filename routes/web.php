@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainSectionController;
 use App\Http\Controllers\StatuteController;
+use App\Http\Controllers\TripController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -43,6 +44,8 @@ Route::resource('point', PointController::class)->middleware(['auth', 'verified'
 
 Route::resource('mountainSection', MountainSectionController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');
+
+Route::resource('trip', TripController::class);
 
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

@@ -58,6 +58,20 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
+            "name": "trip",
+            "route": "trip.index",
+            "subLinks": [
+                {
+                    "name": "trip",
+                    "route": "index"
+                },
+                {
+                    "name": "trip",
+                    "route": "create"
+                }
+            ]
+        },
+        {
             "name": "statute",
             "route": "statute.index",
             "subLinks": [
