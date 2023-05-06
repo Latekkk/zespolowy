@@ -1,7 +1,7 @@
-export interface Badge {
+export interface Sign {
     'id': number,
     'name': string,
-    'point': number,
+    'description': string,
     'img_url': File
 }
 

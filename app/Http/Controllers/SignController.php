@@ -24,7 +24,7 @@ class SignController extends Controller
     public function index(): Response
     {
         return Inertia::render('Sign/Index', [
-            
+            'sign' => Sign::with('photos')->get(),
         ]);
     }
 
@@ -43,7 +43,7 @@ class SignController extends Controller
     public function edit(Sign $sign): Response
     {
         return Inertia::render('Sign/Form', [
-            'sign' => $sign
+            'sign' => $sign->load('photos')
         ]);
     }
 

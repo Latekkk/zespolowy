@@ -4,6 +4,7 @@ import {Toast} from 'primereact/toast';
 import {useEffect, useRef, useState} from 'react';
 import {Button} from 'primereact/button';
 import Flag from 'react-world-flags'
+import axios from 'axios';
 
 
 function LanguageSwitcher() {
@@ -75,21 +76,36 @@ function LanguageSwitcher() {
 
     const getFlag = () => {
         return (
-            <Flag code={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} height="16" alt={i18n.language.slice(0,2) === 'en'? 'gb' : i18n.language.slice(0,2) ?? 'gb'} />
+            <Flag code={i18n.language.slice(0, 2) === 'en' ? 'gb' : i18n.language.slice(0, 2) ?? 'gb'} height="16"
+                  alt={i18n.language.slice(0, 2) === 'en' ? 'gb' : i18n.language.slice(0, 2) ?? 'gb'}/>
         )
     }
 
     const changeLanguage = (e) => {
-        setLanguage()
-        menu.current.toggle(e)
+
+        menu.current.toggle(e);
+        setLanguage();
+
+
     }
+
+    const setLanguageBackend = () => {
+        axios.post('/language', {locale: i18n.language.slice(0, 2)})
+            .then((response) => {
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
+
 
     return (
         <div className="relative ">
             <div className="card flex justify-content-center">
                 <Toast ref={toast}></Toast>
                 <Menu model={items} popup ref={menu}/>
-                <Button label={getFlag()} className="w-12 p-0 bg-white border-black" onClick={(e) => changeLanguage(e)}>{getFlag()} </Button>
+                <Button label={getFlag()} className="w-12 p-0 bg-white border-black"
+                        onClick={(e) => changeLanguage(e)}>{getFlag()} </Button>
             </div>
         </div>
     );
