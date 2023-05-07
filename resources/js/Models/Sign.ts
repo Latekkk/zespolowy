@@ -1,6 +1,6 @@
 export interface Sign {
     'id': number,
-    'name': string,
+    'hiking_trail': string,
     'description': string,
     'img_url': File
 }

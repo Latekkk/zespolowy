@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\SignRequest;
+use App\Models\Badge;
 use App\Models\Sign;
 use App\Repositories\SignRepository;
 use Illuminate\Http\RedirectResponse;
@@ -61,5 +63,10 @@ class SignController extends Controller
         return redirect()->route('sign.index')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
     }
 
+    public function destroy(Sign $sign): RedirectResponse
+    {
+        $this->repository->remove($sign);
 
+        return redirect()->route('sign.index')->with(ToastHelper::remove('sign'));
+    }
 }

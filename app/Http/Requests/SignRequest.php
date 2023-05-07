@@ -23,7 +23,7 @@ class SignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:200|min:3',
+            'hiking_trail' => 'required|max:200|min:3',
             'img_url' => $this->getImageUrl(),
             'description' => 'required|max:10000',
         ];

@@ -20,7 +20,7 @@ export default function Form(props) {
     const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
-        title: sign?.title ||  '',
+        hiking_trail: sign?.hiking_trail ||  '',
         description: sign?.description ||  '',
         img_url: sign?.img_url,
         remember: true,
@@ -51,7 +51,7 @@ export default function Form(props) {
             router.post(route('sign.update',sign.id),
                 {
                     _method: 'put',
-                    title: data.title,
+                    hiking_trail: data.hiking_trail,
                     description: data.description,
                     img_url: data.img_url
                 })
@@ -85,19 +85,19 @@ export default function Form(props) {
 
                                     <div className="w-full basis-1/2">
                                         <Input labelText={signTranslation.t('sign.title')}
-                                               name='title'
-                                               value={data.title}
-                                               error={errors.title}
+                                               name='hiking_trail'
+                                               value={data.hiking_trail}
+                                               error={errors.hiking_trail}
                                                onChange={handleChange}
                                                placeholder={signTranslation.t('sign.title')}
                                         />
 
-                                        <TextArea labelText={signTranslation.t('description')}
+                                        <TextArea labelText={signTranslation.t('sign.description')}
                                                name='description'
                                                value={data.description}
                                                error={errors.description}
                                                onChange={handleChange}
-                                               placeholder={signTranslation.t('description')}
+                                               placeholder={signTranslation.t('sign.description.placeholder')}
                                         />
 
                                         <FileInput labelText={signTranslation.t('img.url')}

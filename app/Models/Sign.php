@@ -15,7 +15,7 @@ class Sign extends Model
 
 
     protected $fillable = [
-        'title',
+        'hiking_trail',
         'description',
     ];
 

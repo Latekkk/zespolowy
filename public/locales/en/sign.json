@@ -1,0 +1,10 @@
+{
+    "name": "Hiking trail sign",
+    "sign.title": "Hiking trail sign name",
+    "sign.title.descr": "Enter hiking trail name",
+    "creating.editing.a.sign": "Create/Edit a hiking trail sign",
+    "sign.description": "Description of a hiking trail sign:",
+    "sign.description.placeholder": "Enter description",
+    "img.url": "photo",
+    "photo.preview": "photo preview"
+}

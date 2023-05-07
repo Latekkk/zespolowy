@@ -17,7 +17,7 @@ export default function PartialSign({sign, auth, setModalData,setVisible}) {
                     <div className="flex flex-col w-full justify-center gap-y-3 p-4" key={'sign-' + index }>
 
                         <div className="flex flex-row justify-center w-full text-2xl font-bold">
-                            <h1 className="w-full ml-10 text-center">{sign.name}</h1>
+                            <h1 className="w-full ml-10 text-center">{sign.hiking_trail}</h1>
                             <div className="flex w-auto justify-end">
                                 {auth === true &&
                                     <div className="relative w-full items-end ">

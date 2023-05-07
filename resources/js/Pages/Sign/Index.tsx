@@ -50,10 +50,10 @@ export default function Index(props: any) {
             {
                 modalData &&
 
-                <Dialog header={globalTranslation.t('delete.descr') + modalData.name} visible={visible} maximizable
+                <Dialog header={globalTranslation.t('delete.descr') + modalData.hiking_trail} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Link href={route('badge.destroy', modalData.id)} method="delete" as="button" type="button"
+                        <Link href={route('sign.destroy', modalData.id)} method="delete" as="button" type="button"
                               className="block bg-red-600 hover:bg-red-500 px-4 py-2 text-left text-sm leading-5 text-white hover:bg-gray-100 focus:outline-none focus:bg-red-500 transition duration-150 ease-in-out">{globalTranslation.t('delete')}</Link>
                         <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>

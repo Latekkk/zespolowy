@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('signs', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 200);
+            $table->string('hiking_trail', 200);
             $table->text('description');
             $table->timestamps();
         });
