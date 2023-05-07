@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\SignRequest;
+use App\Models\Badge;
 use App\Models\Sign;
 use App\Repositories\SignRepository;
 use Illuminate\Http\RedirectResponse;
@@ -24,7 +26,7 @@ class SignController extends Controller
     public function index(): Response
     {
         return Inertia::render('Sign/Index', [
-            
+            'sign' => Sign::with('photos')->get(),
         ]);
     }
 
@@ -43,7 +45,7 @@ class SignController extends Controller
     public function edit(Sign $sign): Response
     {
         return Inertia::render('Sign/Form', [
-            'sign' => $sign
+            'sign' => $sign->load('photos')
         ]);
     }
 
@@ -51,15 +53,20 @@ class SignController extends Controller
     {
         $this->repository->update($signRequest, $sign);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
+        return redirect()->route('sign.index')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
     }
 
     public function store(SignRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('home')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
+        return redirect()->route('sign.index')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
     }
 
+    public function destroy(Sign $sign): RedirectResponse
+    {
+        $this->repository->remove($sign);
 
+        return redirect()->route('sign.index')->with(ToastHelper::remove('sign'));
+    }
 }
