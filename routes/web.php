@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SignController;
 use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainSectionController;
 use App\Http\Controllers\StatuteController;
@@ -38,7 +39,10 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('advertisement', AdvertisementController::class)->middleware(['auth', 'verified'])->except('index');
 Route::resource('badge', BadgeController::class)->middleware(['auth', 'verified'])->except('index');
+Route::resource('sign', SignController::class)->middleware(['auth', 'verified'])->except('index');
+
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+Route::get('/sign', [SignController::class, 'index'])->name('sign.index');
 
 Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
 

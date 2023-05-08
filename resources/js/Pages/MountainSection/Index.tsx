@@ -157,7 +157,7 @@ export default function Index(  props: any) {
             {
                 modalDataToMap &&
                 <div className="flex flex-row gap-x-2 justify-end" style={{marginTop: '20px'}}>
-                <Dialog header={globalTranslation.t('map') + modalDataToMap.name} visible={visibleMap} maximizable
+                <Dialog header={globalTranslation.t('map') + ' ' +  modalDataToMap.name} visible={visibleMap} maximizable
                         style={{width: '40vw'}} onHide={() => setVisibleMap(false)}>
 
                     <GoogleMapComponent markers={getMarkers(modalDataToMap)}/>
