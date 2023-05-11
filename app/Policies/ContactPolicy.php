@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Point;
+use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 
-class PointPolicy
+class ContactPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -35,25 +35,17 @@ class PointPolicy
      */
     public function create(): bool
     {
-        switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
-                return true;
-            default:
-                return false;
-        }
+        return true;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Point $point): bool
+    public function update(): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
             case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
@@ -68,7 +60,6 @@ class PointPolicy
         switch (Auth::user()->role) {
             case 'admin':
             case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
@@ -85,7 +76,6 @@ class PointPolicy
         switch (Auth::user()->role) {
             case 'admin':
             case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;

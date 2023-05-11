@@ -39,7 +39,7 @@ Route::resource('advertisement', AdvertisementController::class)->middleware(['a
 Route::resource('badge', BadgeController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 
-Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
+Route::resource('point', PointController::class);
 
 Route::resource('mountainSection', MountainSectionController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');

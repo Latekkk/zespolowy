@@ -33,6 +33,7 @@ class BadgeController extends Controller
 
     public function create(): Response
     {
+        $this->authorize('create', Badge::class);
         return Inertia::render('Badge/Form');
     }
 
@@ -45,6 +46,7 @@ class BadgeController extends Controller
 
     public function edit(Badge $badge): Response
     {
+        $this->authorize('update', Badge::class);
         $badge->load('photos');
         return Inertia::render('Badge/Form', [
             'badge' => $badge
@@ -56,8 +58,8 @@ class BadgeController extends Controller
      */
     public function update(Badge $badge, BadgeRequest $badgeRequest): RedirectResponse
     {
+        $this->authorize('update', Badge::class);
         $this->repository->update($badgeRequest, $badge->load('photos'));
-
         return redirect()->route('badge.index')->with(ToastHelper::update('badge'));
     }
 
@@ -66,8 +68,8 @@ class BadgeController extends Controller
      */
     public function store(BadgeRequest $request): RedirectResponse
     {
+        $this->authorize('update', Badge::class);
         $this->repository->create($request);
-
         return redirect()->route('badge.index')->with(ToastHelper::create('badge'));
     }
 
@@ -76,8 +78,8 @@ class BadgeController extends Controller
      */
     public function destroy(Badge $badge): RedirectResponse
     {
+        $this->authorize('delete', Badge::class);
         $this->repository->remove($badge);
-
         return redirect()->route('badge.index')->with(ToastHelper::remove('badge'));
     }
 }

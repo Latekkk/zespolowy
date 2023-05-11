@@ -75,6 +75,20 @@ export default function GuestLayout({props, header, children,}) {
             ]
         },
         {
+            "name": "badge",
+            "route": "badge.index",
+            "subLinks": [
+                {
+                    "name": "badge",
+                    "route": "index"
+                },
+                {
+                    "name": "badge",
+                    "route": "create"
+                }
+            ]
+        },
+        {
             "name": "settings",
             "route": "settings",
             "subLinks": [

@@ -20,6 +20,7 @@ class PointController extends Controller
 
     public function __construct(PointRepository $repository)
     {
+        $this->authorizeResource(Point::class);
         $this->repository = $repository;
     }
 
@@ -88,6 +89,7 @@ class PointController extends Controller
 
     public function removeAPI(Point $point): JsonResponse
     {
+        $this->authorize('delete', Point::class);
         $this->repository->remove($point);
         return response()->json(['status' => 'ok']);
     }

@@ -32,6 +32,7 @@ class SquadController extends Controller
 
     public function create(): Response
     {
+        $this->authorize('create', Squad::class);
         return Inertia::render('Squad/Form');
     }
 
@@ -44,6 +45,7 @@ class SquadController extends Controller
 
     public function edit(Squad $squad): Response
     {
+        $this->authorize('update', Squad::class);
         return Inertia::render('Squad/Form', [
             'squad' => $squad
         ]);
@@ -51,15 +53,15 @@ class SquadController extends Controller
 
     public function update(Squad $squad, SquadRequest $squadRequest): RedirectResponse
     {
+        $this->authorize('update', Squad::class);
         $this->repository->update($squadRequest, $squad);
-
         return redirect()->route('squad.index')->with(['toast' => ['message' => __('squad.create.toast'), 'type' => 'success']]);
     }
 
     public function store(SquadRequest $request): RedirectResponse
     {
+        $this->authorize('update', Squad::class);
         $this->repository->create($request);
-
         return redirect()->route('squad.index')->with(['toast' => ['message' => __('squad.create.toast'), 'type' => 'success']]);
     }
 }
