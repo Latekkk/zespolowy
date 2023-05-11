@@ -27,8 +27,7 @@ class ContactController extends Controller
     public function index(): Response
     {
         //TODO: Zależnie od roli
-
-        if (Auth::check()) {
+        if (Auth::check() && (Auth::user()->role==='squaduser' || Auth::user()->role==='admin')) {
             $contact = Contact::paginate(15);
         }
         return Inertia::render('Contact/Index', [
