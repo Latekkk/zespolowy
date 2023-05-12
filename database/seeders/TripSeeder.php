@@ -15,13 +15,13 @@ class TripSeeder extends Seeder
         Trip::truncate();
         $trip =[
             [
-                'name' => 'twoja stra1', 'totalPoints' => '6'
+                'name' => 'twoja stra1', 'date' => '16-10-20'
             ],
             [
-                'name' => 'twoja stra1', 'totalPoints' => '9'
+                'name' => 'twoja stra2', 'date' => '17-10-20'
             ],
             [
-                'name' => 'twoja stra', 'totalPoints' => '8'
+                'name' => 'twoja stra', 'date' => '26-10-20'
             ],
             ];
         Trip::insert($trip);

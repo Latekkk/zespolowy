@@ -18,7 +18,7 @@ class Trip extends Model
 
     protected $fillable = [
         'name',
-        'totalPoints',
+        'date',
     ];
 
     public function mountainSections(): BelongsToMany

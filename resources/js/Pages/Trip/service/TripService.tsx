@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export interface Trip {
     name: string;
-    totalPoints: string;
+    date: string;
 }
 
 class TripService {

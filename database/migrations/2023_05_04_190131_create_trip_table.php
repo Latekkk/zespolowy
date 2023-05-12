@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('totalPoints');
+            $table->date('date');
 
             $table->timestamps();
         });

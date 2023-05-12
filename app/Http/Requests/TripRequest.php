@@ -26,7 +26,7 @@ class TripRequest extends FormRequest
     {
         return [
             'name'=> 'required|max:200|min:3',
-            'totalPoints'=>'required|integer|min:1',
+            'date'=>'required|date',
         ];
     }
 }

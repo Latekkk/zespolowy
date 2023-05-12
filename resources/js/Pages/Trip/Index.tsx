@@ -14,7 +14,7 @@ import {Point} from "@/Models/Point";
 
 interface Trip {
     name: string;
-    totalPoints: string;
+    date: string;
 }
 interface ColumnMeta {
     field: string;
@@ -66,7 +66,7 @@ export default function Index(  props: any) {
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: t('trip.name')},
-        {field: 'totalPoints', header: t('trip.totalPoints')},
+        {field: 'date', header: t('trip.date')},
     ];
 
     const onPageChange = (event) => {
@@ -168,7 +168,6 @@ export default function Index(  props: any) {
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <p className="m-0">
                         <p>{t('name')}: {modalData.name}</p>
-                        <p>{t('totalPoints')}: {modalData.totalPoints}</p>
                     </p>
                     <div className="flex flex-row gap-x-2 justify-end">
                         <Button label={globalTranslation.t('delete')} className={"bg-red-600 hover:bg-red-500"}

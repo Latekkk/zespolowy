@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\TripRequest;
 use App\Models\MountainSection;
 use App\Models\MountainSectionTrip;
@@ -26,7 +27,8 @@ class TripController extends Controller
     public function index(): Response
     {
         return Inertia::render('Trip/Index', [
-            'Trip' => Trip::paginate(5)
+            'Trip' => Trip::paginate(5),
+            'mountainSectionTrip' => MountainSectionTrip::all(),
         ]);
     }
 
@@ -46,7 +48,7 @@ class TripController extends Controller
 
     public function edit(Trip $trip): Response
     {
-        return Inertia::render('MountainSection/Form', [
+        return Inertia::render('Trip/Form', [
             'trip' => $trip,
             'mountainSectionTrip' => MountainSectionTrip::all(),
             'mountainSection' => MountainSection::all(),
@@ -57,14 +59,14 @@ class TripController extends Controller
     {
         $this->repository->update($tripRequest, $trip);
 
-        return redirect()->route('trip.index')->with(['toast' => ['message' => __('trip.create.toast'), 'type' => 'success']]);
+        return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
 
     public function store(TripRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('trip.index')->with(['toast' => ['message' => __('trip.create.toast'), 'type' => 'success']]);
+        return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
     public function getAll(): JsonResponse
     {

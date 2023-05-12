@@ -15,11 +15,11 @@ class TripFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    #[ArrayShape(['name' => "string", 'totalPoints' => "string"])]
+    #[ArrayShape(['name' => "string", 'date' => "date"])]
     public function definition(): array{
         return [
             'name' => $this->faker->name,
-            'totalPoints' => $this->faker->numberBetween(1,100),
+            'date' => $this->faker->date('d-m-Y'),
         ];
     }
 }
