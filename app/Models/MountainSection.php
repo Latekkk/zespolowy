@@ -45,6 +45,6 @@ class MountainSection extends Model
     }
     public function trips(): BelongsToMany
     {
-        return $this->belongsToMany(Trip::class, 'mountain_section_trip', 'mountain_section_id', 'trip_id');
+        return $this->belongsToMany(Trip::class, 'mountain_section_trips', 'mountain_section_id', 'trip_id');
     }
 }

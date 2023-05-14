@@ -61,7 +61,7 @@ class MountainSectionController extends Controller
         return redirect()->route('mountainSection.index')->with(['toast' => ['message' => __('mountainSection.create.toast'), 'type' => 'success']]);
     }
 
-    public function store(TripRequest $request): RedirectResponse
+    public function store(MountainSectionRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 

@@ -3,8 +3,10 @@
 namespace App\Repositories;
 
 use App\Helpers\SlugHelper;
+
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
+use Illuminate\Support\Carbon;
 
 class TripRepository
 {
@@ -17,12 +19,30 @@ class TripRepository
 
     public function create(TripRequest $request): void
     {
-        $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
+        $inputDate = $request->input('date');
+        $formattedDate = substr($inputDate, 0, 19);
+
+        $carbonDate = Carbon::createFromFormat('Y-m-d\TH:i:s', $formattedDate);
+        $this->model->create([
+            'name' => $request->input('name'),
+            'date' => $carbonDate,
+            'slug' => SlugHelper::getSlug($request->name)
+        ]);
     }
 
     public function update(TripRequest $request, Trip $trip): void
     {
-        $trip->update(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
+        $inputDate = $request->input('date');
+        $formattedDate = substr($inputDate, 0, 19);
+
+        $carbonDate = Carbon::createFromFormat('Y-m-d\TH:i:s', $formattedDate);
+        $trip->update(array_merge([
+            'name' => $request->input('name'),
+            'date' => $carbonDate,
+            'slug' => SlugHelper::getSlug($request->name)
+        ]));
+//        $trip->update(array_merge(
+//            $request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
     public function remove(Trip $trip): void

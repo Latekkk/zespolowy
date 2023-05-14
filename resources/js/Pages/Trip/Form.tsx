@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Head, useForm } from "@inertiajs/react";
-// @ts-ignore
+import { format } from 'date-fns';
 import { MountainSection } from "@/Models/MountainSection";
 import Layout from "@/Layouts/Layout";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
@@ -43,9 +43,12 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        const formattedDate = format(data.date, 'dd-MM-yyyy');
+        const requestData = { ...data, date: formattedDate, mountainSections: selectedMountainSections };
+        console.log(requestData);
         trip === null
-            ? post(route("trip.store", { ...data, mountainSections: selectedMountainSections }))
-            : put(route("trip.update", { ...data, mountainSections: selectedMountainSections }));
+            ? post(route("trip.store", requestData))
+            : put(route("trip.update", requestData));
     }
 
     const setDefaultForm = () => {
@@ -56,8 +59,7 @@ export default function Form(props) {
 
     useEffect(() => {
         if (trip != null) {
-            setMountainSections(findMountainSection(trip.id));
-            setSelectedMountainSections(trip.mountainSections);
+            setSelectedMountainSections(trip.mountain_sections || []);
         }
         getMountainSections();
     }, []);
@@ -67,10 +69,13 @@ export default function Form(props) {
     }, [selectedMountainSections]);
 
     function findMountainSection(id) {
-        const result = props.mountainSections.find(
-            (mountainSections) => mountainSections.id === id
-        );
-        return result || null;
+        if (Array.isArray(props.mountainSection)) {
+            const result = props.mountainSection.find(
+                (mountainSection) => mountainSection.id === id
+            );
+            return result || null;
+        }
+        return null;
     }
 
     const getMountainSections = () => {
@@ -80,7 +85,6 @@ export default function Form(props) {
             }
         );
     };
-
 
     const handleAddMountainSection = (mountainSection) => {
         const updatedMountainSections = [...selectedMountainSections, mountainSection];
@@ -112,7 +116,7 @@ export default function Form(props) {
                                 <DatePicker
                                     selected={new Date(data.date)}
                                     onChange={(date) => handleChange(null, "date", date)}
-                                    dateFormat="dd-mm-yyyy"
+                                    dateFormat="dd-MM-yyyy"
                                     className="form-control"
                                     placeholderText={t("select.date")}
                                 />

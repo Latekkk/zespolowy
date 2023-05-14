@@ -48,9 +48,9 @@ class TripController extends Controller
 
     public function edit(Trip $trip): Response
     {
+        $trip->load('mountainSections');
         return Inertia::render('Trip/Form', [
             'trip' => $trip,
-            'mountainSectionTrip' => MountainSectionTrip::all(),
             'mountainSection' => MountainSection::all(),
         ]);
     }

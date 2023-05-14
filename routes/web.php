@@ -49,7 +49,7 @@ Route::resource('point', PointController::class)->middleware(['auth', 'verified'
 Route::resource('mountainSection', MountainSectionController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');
 
-Route::resource('trip', TripController::class);
+Route::resource('trip', TripController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
 
 

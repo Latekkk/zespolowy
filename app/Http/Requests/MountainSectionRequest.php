@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class TripRequest extends FormRequest
+class MountainSectionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
