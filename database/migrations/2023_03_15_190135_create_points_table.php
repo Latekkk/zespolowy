@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('lat');
             $table->string('lng');
             $table->foreignIdFor(User::class);
+            $table->boolean('is_global')->default(true);
             $table->timestamps();
         });
     }

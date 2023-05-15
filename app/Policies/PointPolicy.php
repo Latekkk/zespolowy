@@ -39,6 +39,7 @@ class PointPolicy
             case 'admin':
             case 'squaduser':
             case 'pathuser':
+            case 'user':
                 return true;
             default:
                 return false;
@@ -55,6 +56,9 @@ class PointPolicy
             case 'squaduser':
             case 'pathuser':
                 return true;
+            case 'user':
+                if(Auth::id()===$point->user_id) return true;
+                else return false;
             default:
                 return false;
         }

@@ -10,6 +10,7 @@ use App\Models\Point;
 use App\Repositories\PointRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,20 +21,20 @@ class PointController extends Controller
 
     public function __construct(PointRepository $repository)
     {
-        $this->authorizeResource(Point::class);
         $this->repository = $repository;
     }
 
     public function index(): Response
     {
         return Inertia::render('Point/Index', [
-            'points' => Point::paginate(5),
+            'points' => Point::where('user_id',Auth::id())->orwhere('is_global',true)->paginate(5),
             'mountainMainParts' => MountainMainPart::all(),
         ]);
     }
 
     public function create(): Response
     {
+        $this->authorize('create', Point::class);
         return Inertia::render('Point/Form', [
             'mountainMainParts' => MountainMainPart::all(),
             'lastPoint'=>Point::latest()->first()
@@ -43,6 +44,7 @@ class PointController extends Controller
 
     public function edit(Point $point): Response
     {
+        $this->authorize('update', [$point]);
         $point->load('mountainMainParts');
         return Inertia::render('Point/Form', [
             'point' => $point,
@@ -52,15 +54,15 @@ class PointController extends Controller
 
     public function update(Point $point, PointRequest $pointRequest): RedirectResponse
     {
+        $this->authorize('update', $point);
         $this->repository->update($pointRequest, $point);
-
         return redirect()->route('point.index')->with(ToastHelper::update('point'));
     }
 
     public function store(PointRequest $pointRequest): RedirectResponse
     {
+        $this->authorize('update', Point::class);
         $this->repository->create($pointRequest);
-
         return redirect()->route('point.index')->with(ToastHelper::create('point'));
     }
 
@@ -79,7 +81,9 @@ class PointController extends Controller
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
         } else {
-            $points = Point::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+            $points = Point::where('user_id',Auth::id())
+                ->orwhere('is_global',true)
+                ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
         }
