@@ -81,7 +81,7 @@ class PointController extends Controller
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
         } else {
-            $points = Point::where('user_id',Auth::id())
+            $points = Point::where('user_id',$params['userId'])
                 ->orwhere('is_global',true)
                 ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->paginate((int)$params['paginate'] ?? 15)

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Inertia} from '@inertiajs/inertia'
 
 import Layout from '@/Layouts/Layout';
-import {Head, Link, useForm} from '@inertiajs/react';
+import {Head, Link, useForm, usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 
 import {Column} from 'primereact/column';
@@ -70,8 +70,11 @@ export default function Index(props: any) {
         getPoints()
     }, [page, paginate, sort, sortOrder, selectedMountainMain]);
 
+    const userId = usePage().props.auth.user.id;
+    console.log(userId)
+
     const getPoints = () => {
-        PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id)).then((data: Point[]) => {
+        PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id),userId ).then((data: Point[]) => {
             setPoints(data.data);
             setLoading(false);
             setTotalRecords(data.total)
