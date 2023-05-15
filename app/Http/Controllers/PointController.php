@@ -89,7 +89,6 @@ class PointController extends Controller
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
 
-
         }
         return response()->json($points);
     }
