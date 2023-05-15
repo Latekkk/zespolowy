@@ -48,7 +48,7 @@ export default function Form(props) {
         console.log(requestData);
         trip === null
             ? post(route("trip.store", requestData))
-            : put(route("trip.update", requestData));
+            : put(route("trip.update", { trip: trip.id }));
     }
 
     const setDefaultForm = () => {
@@ -62,6 +62,7 @@ export default function Form(props) {
             setSelectedMountainSections(trip.mountain_sections || []);
         }
         getMountainSections();
+        console.log(trip);
     }, []);
 
     useEffect(() => {
