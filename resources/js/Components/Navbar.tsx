@@ -39,7 +39,7 @@ export default function NavBar({navbar, user = null}) {
 
                     <div className="ml-3 relative" key={index}>
                         {
-                            countOccurrencesInSubLinks(link, user.role) <= 1 ?
+                            countOccurrencesInSubLinks(link, user?.role) <= 1 ?
                                 <>
                                  <span className="inline-flex rounded-md">
                                   <Link href={route(getLink(link))}
