@@ -9,5 +9,6 @@
     "submit": "Prześlij",
     "delete": "Usuń",
     "deleted": "Usunięto",
-    "delete.descr": "Czy chcesz usunąć: "
+    "delete.descr": "Czy chcesz usunąć: ",
+    "map": "Mapa "
 }

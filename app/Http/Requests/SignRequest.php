@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SignRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class SignRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -22,9 +23,14 @@ class SignRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|max:200|min:3',
-            'img_url' => 'required',
+            'hiking_trail' => 'required|max:200|min:3',
+            'img_url' => $this->getImageUrl(),
             'description' => 'required|max:10000',
         ];
+    }
+
+    private function getImageUrl(): string
+    {
+        return $this->isMethod('POST')? 'required|image' : 'nullable|';
     }
 }

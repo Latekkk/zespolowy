@@ -147,6 +147,9 @@ return [
 
     'attributes' => [
         'name' => 'nazwa',
-        'markers' => 'Pozycja geograficzna'
+        'markers' => 'Pozycja geograficzna',
+        'hiking_trail' => 'nazwa oznaczenie szlaku turystycznego',
+        'description' => 'opis',
+        'img_url' => 'zdjęcie'
     ],
 ];

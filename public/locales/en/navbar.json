@@ -13,6 +13,10 @@
     "badge.index": "List of badges",
     "badge.create": "Add a badge",
 
+    "sign": "Marking of hiking trails",
+    "sign.index": "List of hiking trail markers",
+    "sign.create": "Add a hiking trail",
+
     "contact": "Contact",
     "contact.index": "List of contact requests",
     "contact.create": "Ask for contact",

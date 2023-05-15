@@ -24,7 +24,6 @@ class MountainSectionRequest extends FormRequest
      */
     public function rules(): array
     {
-//        dd($this->name);
         return [
 
             'name'=> 'required|max:200|min:3|unique:mountain_sections,name,'.$this->name,
