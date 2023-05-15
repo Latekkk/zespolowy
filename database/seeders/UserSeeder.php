@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRolesEnum;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -21,7 +22,7 @@ class UserSeeder extends Seeder
             'email' => 'test@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
-            'role' => 'admin',
+            'role' => UserRolesEnum::ADMIN->value,
         ]);
 
         User::create([
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
             'email' => 'pathuser@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
-            'role' => 'pathuser',
+            'role' =>UserRolesEnum::PATHUSER->value,
         ]);
 
         User::create([
@@ -37,7 +38,7 @@ class UserSeeder extends Seeder
             'email' => 'squaduser@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
-            'role' => 'squaduser',
+            'role' =>UserRolesEnum::SQUADUSER->value,
         ]);
 
         User::create([
@@ -45,7 +46,7 @@ class UserSeeder extends Seeder
             'email' => 'user@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
-            'role' => 'user',
+            'role' => UserRolesEnum::USER->value,
         ]);
     }
 }
