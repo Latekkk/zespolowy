@@ -20,7 +20,6 @@ class PointController extends Controller
 
     public function __construct(PointRepository $repository)
     {
-        $this->authorizeResource(Point::class);
         $this->repository = $repository;
     }
 
@@ -34,6 +33,7 @@ class PointController extends Controller
 
     public function create(): Response
     {
+        $this->authorize('create', Point::class);
         return Inertia::render('Point/Form', [
             'mountainMainParts' => MountainMainPart::all(),
             'lastPoint'=>Point::latest()->first()
@@ -43,6 +43,7 @@ class PointController extends Controller
 
     public function edit(Point $point): Response
     {
+        $this->authorize('update', Point::class);
         $point->load('mountainMainParts');
         return Inertia::render('Point/Form', [
             'point' => $point,
@@ -52,15 +53,15 @@ class PointController extends Controller
 
     public function update(Point $point, PointRequest $pointRequest): RedirectResponse
     {
+        $this->authorize('update', Point::class, $point);
         $this->repository->update($pointRequest, $point);
-
         return redirect()->route('point.index')->with(ToastHelper::update('point'));
     }
 
     public function store(PointRequest $pointRequest): RedirectResponse
     {
+        $this->authorize('update', Point::class);
         $this->repository->create($pointRequest);
-
         return redirect()->route('point.index')->with(ToastHelper::create('point'));
     }
 

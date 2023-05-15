@@ -39,6 +39,7 @@ class PointPolicy
             case 'admin':
             case 'squaduser':
             case 'pathuser':
+            case 'user':
                 return true;
             default:
                 return false;
@@ -48,7 +49,7 @@ class PointPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Point $point): bool
+    public function update(Point $point): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
