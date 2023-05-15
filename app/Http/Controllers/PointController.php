@@ -84,7 +84,7 @@ class PointController extends Controller
             $points = Point::where('is_global', true)
                 ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->when(array_key_exists('userId', $params), function ($query) use ($params) {
-                    return $query->where('user_id', $params['userId']);
+                    return $query->orWhere('user_id', $params['userId']);
                 })
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
