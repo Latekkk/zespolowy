@@ -70,8 +70,7 @@ export default function Index(props: any) {
         getPoints()
     }, [page, paginate, sort, sortOrder, selectedMountainMain]);
 
-    const userId = usePage().props.auth.user.id;
-    console.log(userId)
+    const userId = usePage().props?.auth?.user?.id || null;
 
     const getPoints = () => {
         PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id),userId ).then((data: Point[]) => {
