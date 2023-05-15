@@ -27,7 +27,7 @@ class PointController extends Controller
     public function index(): Response
     {
         return Inertia::render('Point/Index', [
-            'points' => Point::paginate(5),
+            'points' => Point::where('user_id',Auth::id())->orwhere('is_global',true)->paginate(5),
             'mountainMainParts' => MountainMainPart::all(),
         ]);
     }
@@ -81,7 +81,9 @@ class PointController extends Controller
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
         } else {
-            $points = Point::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+            $points = Point::where('user_id',Auth::id())
+                ->orwhere('is_global',true)
+                ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
         }
