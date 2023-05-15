@@ -10,6 +10,7 @@ use App\Models\Point;
 use App\Repositories\PointRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -43,7 +44,7 @@ class PointController extends Controller
 
     public function edit(Point $point): Response
     {
-        $this->authorize('update', Point::class);
+        $this->authorize('update', [$point]);
         $point->load('mountainMainParts');
         return Inertia::render('Point/Form', [
             'point' => $point,
@@ -53,7 +54,7 @@ class PointController extends Controller
 
     public function update(Point $point, PointRequest $pointRequest): RedirectResponse
     {
-        $this->authorize('update', Point::class, $point);
+        $this->authorize('update', $point);
         $this->repository->update($pointRequest, $point);
         return redirect()->route('point.index')->with(ToastHelper::update('point'));
     }
