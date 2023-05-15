@@ -10,6 +10,7 @@ use App\Models\Trip;
 use App\Repositories\TripRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -55,19 +56,58 @@ class TripController extends Controller
         ]);
     }
 
-    public function update(Trip $trip, TripRequest $tripRequest): RedirectResponse
-    {
-        $this->repository->update($tripRequest, $trip);
-
-        return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
-    }
-
     public function store(TripRequest $request): RedirectResponse
     {
-        $this->repository->create($request);
+        $trip = new Trip();
+        $trip->name = $request->input('name');
+        $inputDate = $request->input('date');
+        $formattedDate = Carbon::createFromFormat('Y-m-d\TH:i:s.u\Z', $inputDate)->format('Y-m-d');
+        $trip->date = $formattedDate;
+        $trip->save();
+
+        $mountainSections = $request->input('mountainSections');
+        foreach ($mountainSections as $mountainSectionData) {
+            $mountainSection = new MountainSection();
+            $mountainSection->id = $mountainSectionData['id'];
+
+            $mountainSectionTrip = new MountainSectionTrip();
+            $mountainSectionTrip->trip_id = $trip->id;
+            $mountainSectionTrip->mountain_section_id = $mountainSection->id;
+            $mountainSectionTrip->save();
+        }
+        return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
+    }
+
+
+
+    public function update(TripRequest $request, Trip $trip): RedirectResponse
+    {
+        $trip->name = $request->input('name');
+        $inputDate = $request->input('date');
+        $formattedDate = Carbon::createFromFormat('Y-m-d\TH:i:s.u\Z', $inputDate)->format('Y-m-d');
+        $trip->date = $formattedDate;
+        $trip->save();
+
+        $mountainSections = $request->input('mountainSections');
+        foreach ($mountainSections as $mountainSectionData) {
+            $mountainSectionId = $mountainSectionData['id'];
+            $mountainSection = MountainSection::find($mountainSectionId);
+
+            if (!$mountainSection) {
+                $mountainSection = new MountainSection();
+                $mountainSection->id = $mountainSectionId;
+                // Ustaw inne właściwości dla nowo utworzonego obiektu $mountainSection
+            }
+
+            $mountainSectionTrip = new MountainSectionTrip();
+            $mountainSectionTrip->trip_id = $trip->id;
+            $mountainSectionTrip->mountain_section_id = $mountainSection->id;
+            $mountainSectionTrip->save();
+        }
 
         return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
+
     public function getAll(): JsonResponse
     {
         $params = request()->query();

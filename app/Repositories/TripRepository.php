@@ -29,7 +29,6 @@ class TripRepository
             'date' => $carbonDate,
             'slug' => SlugHelper::getSlug($request->name)
         ]);
-
         $mountainSections = $request->input('mountainSections', []);
         $trip->mountainSections()->attach($mountainSections);
     }
@@ -44,8 +43,8 @@ class TripRepository
             'date' => $carbonDate,
             'slug' => SlugHelper::getSlug($request->name)
         ]));
-//        $trip->update(array_merge(
-//            $request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
+        $trip->update(array_merge(
+            $request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
     public function remove(Trip $trip): void
