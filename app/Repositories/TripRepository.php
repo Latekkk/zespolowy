@@ -7,6 +7,7 @@ use App\Helpers\SlugHelper;
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class TripRepository
 {
@@ -23,13 +24,15 @@ class TripRepository
         $formattedDate = substr($inputDate, 0, 19);
 
         $carbonDate = Carbon::createFromFormat('Y-m-d\TH:i:s', $formattedDate);
-        $this->model->create([
+        $trip = $this->model->create([
             'name' => $request->input('name'),
             'date' => $carbonDate,
             'slug' => SlugHelper::getSlug($request->name)
         ]);
-    }
 
+        $mountainSections = $request->input('mountainSections', []);
+        $trip->mountainSections()->attach($mountainSections);
+    }
     public function update(TripRequest $request, Trip $trip): void
     {
         $inputDate = $request->input('date');

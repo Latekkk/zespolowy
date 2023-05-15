@@ -45,7 +45,6 @@ export default function Form(props) {
         e.preventDefault();
         const formattedDate = format(data.date, 'dd-MM-yyyy');
         const requestData = { ...data, date: formattedDate, mountainSections: selectedMountainSections };
-        console.log(requestData);
         trip === null
             ? post(route("trip.store", requestData))
             : put(route("trip.update", { trip: trip.id }));
@@ -62,7 +61,6 @@ export default function Form(props) {
             setSelectedMountainSections(trip.mountain_sections || []);
         }
         getMountainSections();
-        console.log(trip);
     }, []);
 
     useEffect(() => {

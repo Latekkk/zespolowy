@@ -18,9 +18,15 @@ import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import {MultiSelect} from "primereact/multiselect";
 interface Point {
     name: string;
+    mountainPart: string;
+    mountainMainPart: {
+        id: number;
+        name: string;
+    };
     lat: string;
     lng: string;
 }
+
 
 interface ColumnMeta {
     field: string;
@@ -48,6 +54,7 @@ export default function Index(props: any) {
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: t('point.name')},
+        { field: 'mountainMainPartName', header: 'Mountain Main Part' },
         {field: 'lat', header: t('latitude')},
         {field: 'lng', header: t('longitude')}
     ];
@@ -63,20 +70,31 @@ export default function Index(props: any) {
     };
 
     useEffect(() => {
-        getPoints()
+        getPoints();
     }, []);
 
     useEffect(() => {
-        getPoints()
+        getPoints();
     }, [page, paginate, sort, sortOrder, selectedMountainMain]);
 
     const getPoints = () => {
         PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id)).then((data: Point[]) => {
-            setPoints(data.data);
+            const updatedPoints = data.data.map((point: Point) => ({
+                ...point,
+                mountainMainPartName: getMountainMainPartName(point.mountain_main_part_id) || ''
+            }));
+            console.log(updatedPoints);
+            setPoints(updatedPoints);
             setLoading(false);
-            setTotalRecords(data.total)
+            setTotalRecords(data.total);
         });
-    }
+    };
+
+    const getMountainMainPartName = (id) => {
+        const mountainMainPart = props.mountainMainParts.find((part) => part.id === id);
+        return mountainMainPart ? mountainMainPart.name : '';
+    };
+
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
         markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
         name: props?.point?.name || '',
@@ -90,8 +108,8 @@ export default function Index(props: any) {
     const showModal = (data) => {
         setVisible(true)
         setModalData(data)
+        console.log(points);
     }
-
 
     const actionTemplate = (rowData, column) => {
         return (
@@ -105,7 +123,6 @@ export default function Index(props: any) {
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
         );
-
     };
 
     const removeElement = (data) => {
@@ -122,9 +139,7 @@ export default function Index(props: any) {
                 'lat': Number(obj?.lat),
                 'lng': Number(obj?.lng)
             }];
-
     }
-
 
     return (
         <Layout
@@ -142,7 +157,6 @@ export default function Index(props: any) {
                                          placeholder="Wszystkie"  className="w-full md:w-20rem"
                                          maxSelectedLabels={5}
                             />
-
                         </div>
                     </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -153,16 +167,17 @@ export default function Index(props: any) {
                                 sortOrder={sortOrder}
                                 onSort={event => {
                                     setSort(event.sortField);
-                                    setSortOrder(event.sortOrder)
+                                    setSortOrder(event.sortOrder);
                                 }}
                                 removableSort
-                                tableStyle={{width: "max-content"}} loading={loading}
+                                tableStyle={{ width: "max-content" }}
+                                loading={loading}
                             >
                                 {columns.map((col, i) => (
-                                    <Column key={col.field} field={col.field} header={col.header} sortable/>
+                                    <Column key={col.field} field={col.field} header={col.header} sortable />
                                 ))}
 
-                                <Column body={actionTemplate} headerClassName="w-10rem" expander/>
+                                <Column body={actionTemplate} headerClassName="w-10rem" expander />
                             </DataTable>
                             <Paginator first={first} rows={paginate} totalRecords={totalRecords}
                                        rowsPerPageOptions={[5, 15, 20, 30]} pageLinkSize={7}

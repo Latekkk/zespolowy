@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
+            MountainMainPartSeeder::class,
             PointSeeder::class,
             MountainSectionSeeder::class,
             StatuteSeeder::class,
             SquadSeeder::class,
             MountainRangesSeeder::class,
-            MountainMainPartSeeder::class,
             TripSeeder::class,
             MountainSectionTripSeeder::class,
         ]);

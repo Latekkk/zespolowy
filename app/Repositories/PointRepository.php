@@ -72,5 +72,4 @@ class PointRepository
         }
         return new Point($data);
     }
-
 }
