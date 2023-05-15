@@ -83,7 +83,6 @@ export default function Index(props: any) {
                 ...point,
                 mountainMainPartName: getMountainMainPartName(point.mountain_main_part_id) || ''
             }));
-            console.log(updatedPoints);
             setPoints(updatedPoints);
             setLoading(false);
             setTotalRecords(data.total);
@@ -108,7 +107,6 @@ export default function Index(props: any) {
     const showModal = (data) => {
         setVisible(true)
         setModalData(data)
-        console.log(points);
     }
 
     const actionTemplate = (rowData, column) => {
