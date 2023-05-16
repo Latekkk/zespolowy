@@ -40,10 +40,28 @@ export default function Form(props) {
         }));
     }
 
+    const validateDate = (selectedDate) => {
+        const currentDate = new Date();
+        const nextYear = new Date();
+        nextYear.setFullYear(currentDate.getFullYear() + 1);
+
+        if (selectedDate < currentDate || selectedDate >= nextYear) {
+            return false;
+        }
+        return true;
+    };
+
     function handleSubmit(e) {
         e.preventDefault();
         const formattedDate = format(data.date, 'dd-MM-yyyy');
         const requestData = { ...data, date: formattedDate, mountainSections: selectedMountainSections };
+        if (!validateDate(data.date)) {
+            setData((data) => ({
+                ...data,
+                errors: "Zła data",
+            }));
+            return;
+        }
         trip === null
             ? post(route("trip.store", requestData))
             : put(route("trip.update", { requestData,trip: trip.id }));
@@ -104,6 +122,7 @@ export default function Form(props) {
                                 <DatePicker
                                     selected={new Date(data.date)}
                                     onChange={(date) => handleChange(null, "date", date)}
+                                    error={errors.date}
                                     dateFormat="dd-MM-yyyy"
                                     className="form-control"
                                     placeholderText={t("select.date")}
