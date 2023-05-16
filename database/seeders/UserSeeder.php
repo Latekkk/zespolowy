@@ -15,25 +15,37 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $admin = User::create([
-            'name' => 'Admin Test',
-            'email' => 'admin@localhost.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => Hash::make('123456'),
-        ]);
 
         User::create([
             'name' => 'Admin Test',
             'email' => 'test@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
+            'role' => 'admin',
         ]);
 
         User::create([
-            'name' => 'Admin Test',
-            'email' => 'test@test.pl',
+            'name' => 'PathUser Test',
+            'email' => 'pathuser@test.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('123123123'),
+            'role' => 'pathuser',
+        ]);
+
+        User::create([
+            'name' => 'SquadUser Test',
+            'email' => 'squaduser@test.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('123123123'),
+            'role' => 'squaduser',
+        ]);
+
+        User::create([
+            'name' => 'User Test',
+            'email' => 'user@test.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => Hash::make('123123123'),
+            'role' => 'user',
         ]);
     }
 }

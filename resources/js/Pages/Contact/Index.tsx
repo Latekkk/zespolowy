@@ -161,7 +161,7 @@ export default function Index(props: any) {
             </div>
         )
     }
-
+    const roles = ['squaduser', 'admin'];
     return (
         <Layout
             props={props}
@@ -170,9 +170,9 @@ export default function Index(props: any) {
             <Head title={contactTranslation.t('contact.name')}/>
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <TabView activeIndex={props.auth.user !== null? 0: 1}>
+                    <TabView activeIndex={((roles.includes(props.auth?.user?.role)))? 0: 1}>
                         {
-                            props.auth.user !== null &&
+                            ((roles.includes(props.auth?.user?.role))) &&
                             <TabPanel header={contactTranslation.t('contact.list')} leftIcon="pi pi-calendar mr-2">
                                 <ListPage/>
                             </TabPanel>

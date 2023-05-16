@@ -22,7 +22,8 @@ class Point extends Model
         'name',
         'lat',
         'lng',
-        'user_id'
+        'user_id',
+        'is_global'
     ];
 
     public function start_point(): HasOne
