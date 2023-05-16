@@ -29,6 +29,7 @@ class AdvertisementController extends Controller
 
     public function create(): Response
     {
+        $this->authorize('create', Advertisement::class);
         return Inertia::render('Advertisement/Form');
     }
 
@@ -41,6 +42,7 @@ class AdvertisementController extends Controller
 
     public function edit(Advertisement $advertisement): Response
     {
+        $this->authorize('update', Advertisement::class);
         return Inertia::render('Advertisement/Form', [
             'advertisement' => $advertisement
         ]);
@@ -48,15 +50,15 @@ class AdvertisementController extends Controller
 
     public function update(Advertisement $advertisement, AdvertisementRequest $advertisementRequest): RedirectResponse
     {
+        $this->authorize('update', Advertisement::class);
         $this->repository->update($advertisementRequest, $advertisement);
-
         return redirect()->route('home')->with(ToastHelper::update('advertisement'));
     }
 
     public function store(AdvertisementRequest $request): RedirectResponse
     {
+        $this->authorize('update', Advertisement::class);
         $this->repository->create($request);
-
         return redirect()->route('home')->with(ToastHelper::create('advertisement'));
     }
 }

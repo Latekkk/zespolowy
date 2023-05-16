@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\MountainSection;
+use App\Models\Statute;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Auth;
 
-class MountainSectionPolicy
+class StatutePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -20,7 +20,7 @@ class MountainSectionPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, MountainSection $mountainSection): bool
+    public function view(User $user, Point $point): bool
     {
         return true;
     }
@@ -32,16 +32,11 @@ class MountainSectionPolicy
 
     /**
      * Determine whether the user can create models.
-     *
-     * @param User $user
-     * @return Response|bool
      */
-    public function create():  Response|bool
+    public function create(): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
-            case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
@@ -50,17 +45,11 @@ class MountainSectionPolicy
 
     /**
      * Determine whether the user can update the model.
-     *
-     * @param User $user
-     * @param MountainSection $mountainSection
-     * @return Response|bool
      */
-    public function update(): Response|bool
+    public function update(): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
-            case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
@@ -70,27 +59,25 @@ class MountainSectionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(): bool
+    public function delete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
-            case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
         }
     }
 
+
+
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(): bool
+    public function restore(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
             case 'admin':
-            case 'squaduser':
-            case 'pathuser':
                 return true;
             default:
                 return false;
@@ -100,7 +87,7 @@ class MountainSectionPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(): bool
+    public function forceDelete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
             case 'admin':

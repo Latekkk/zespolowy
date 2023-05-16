@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('lng');
             $table->foreignIdFor(MountainMainPart::class);
             $table->foreignIdFor(User::class);
+            $table->boolean('is_global')->default(true);
             $table->timestamps();
         });
     }
