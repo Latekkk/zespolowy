@@ -13,7 +13,6 @@ import {ScrollPanel} from "primereact/scrollpanel";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 export default function Form(props) {
     const { t } = useTranslation(["trip"]);
     const globalTranslation = useTranslation(["global"]);
@@ -47,7 +46,7 @@ export default function Form(props) {
         const requestData = { ...data, date: formattedDate, mountainSections: selectedMountainSections };
         trip === null
             ? post(route("trip.store", requestData))
-            : put(route("trip.update", { trip: trip.id }));
+            : put(route("trip.update", { requestData,trip: trip.id }));
     }
 
     const setDefaultForm = () => {
@@ -66,16 +65,6 @@ export default function Form(props) {
     useEffect(() => {
 
     }, [selectedMountainSections]);
-
-    function findMountainSection(id) {
-        if (Array.isArray(props.mountainSection)) {
-            const result = props.mountainSection.find(
-                (mountainSection) => mountainSection.id === id
-            );
-            return result || null;
-        }
-        return null;
-    }
 
     const getMountainSections = () => {
         MountainSectionService.getMountainsSections(selectedTrip?.id).then(

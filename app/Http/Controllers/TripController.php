@@ -16,14 +16,12 @@ use Inertia\Response;
 
 class TripController extends Controller
 {
-
     protected TripRepository $repository;
 
     public function __construct(TripRepository $tripRepository)
     {
         $this->repository = $tripRepository;
     }
-
 
     public function index(): Response
     {
@@ -77,9 +75,6 @@ class TripController extends Controller
         }
         return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
-
-
-
     public function update(TripRequest $request, Trip $trip): RedirectResponse
     {
         $trip->name = $request->input('name');
@@ -88,23 +83,17 @@ class TripController extends Controller
         $trip->date = $formattedDate;
         $trip->save();
 
-        $mountainSections = $request->input('mountainSections');
+        $mountainSections = $request->input('requestData.mountainSections');
+        MountainSectionTrip::where('trip_id', $trip->id)->delete();
+
         foreach ($mountainSections as $mountainSectionData) {
             $mountainSectionId = $mountainSectionData['id'];
-            $mountainSection = MountainSection::find($mountainSectionId);
-
-            if (!$mountainSection) {
-                $mountainSection = new MountainSection();
-                $mountainSection->id = $mountainSectionId;
-                // Ustaw inne właściwości dla nowo utworzonego obiektu $mountainSection
-            }
 
             $mountainSectionTrip = new MountainSectionTrip();
             $mountainSectionTrip->trip_id = $trip->id;
-            $mountainSectionTrip->mountain_section_id = $mountainSection->id;
+            $mountainSectionTrip->mountain_section_id = $mountainSectionId;
             $mountainSectionTrip->save();
         }
-
         return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
 
@@ -120,5 +109,4 @@ class TripController extends Controller
         $this->repository->remove($trip);
         return response()->json(['status' => 'ok']);
     }
-
 }
