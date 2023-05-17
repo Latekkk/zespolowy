@@ -1,10 +1,9 @@
 import Dropdown from "@/Components/Dropdown";
 import {useTranslation} from "react-i18next";
-import {Inertia} from "@inertiajs/inertia";
 import {Link} from "@inertiajs/react";
 import React from "react";
 
-export default function NavBar(props) {
+export default function NavBar({navbar, user = null}) {
 
 
     const {t} = useTranslation(['navbar'])
@@ -14,14 +13,33 @@ export default function NavBar(props) {
             link.subLinks[0].route
 
     }
+
+    const countOccurrencesInSubLinks = (object, role) => {
+        if ( role === null? role = 'guest' : '')
+
+        if (!object.subLinks) {
+            return 0;
+        }
+
+        const occurrences = object.subLinks.reduce((count, sublink) => {
+            if (sublink.can && sublink.can.includes(role)) {
+                return count + 1;
+            }
+            return count;
+        }, 0);
+
+        return occurrences;
+    }
+
+
     return (
         <>
-            {props.navbar.map((link, index) => {
+            {navbar.map((link, index) => {
                 return (
 
                     <div className="ml-3 relative" key={index}>
                         {
-                            link.subLinks.length <= 1 ?
+                            countOccurrencesInSubLinks(link, user?.role) <= 1 ?
                                 <>
                                  <span className="inline-flex rounded-md">
                                   <Link href={route(getLink(link))}

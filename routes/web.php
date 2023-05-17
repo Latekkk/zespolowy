@@ -11,6 +11,7 @@ use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainSectionController;
 use App\Http\Controllers\StatuteController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,39 +28,43 @@ use Inertia\Inertia;
 */
 
 Route::get('/', [AdvertisementController::class, 'index'])->name('home');
+Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
+Route::get('/sign', [SignController::class, 'index'])->name('sign.index');
+Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
+Route::get('/squad', [SquadController::class, 'index'])->name('squad.index');
+
+Route::resource('point', PointController::class);
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::middleware('verified')->group(function () {
+        Route::resource('advertisement', AdvertisementController::class)->except('index');
+        Route::resource('badge', BadgeController::class)->except('index');
+        Route::resource('sign', SignController::class)->except('index');
+        Route::resource('mountainSection', MountainSectionController::class)->except('index');
+        Route::resource('contact', ContactController::class)->except('index');
+        Route::resource('statute', StatuteController::class)->except('index');
+        Route::resource('squad', SquadController::class)->except('index');
+        Route::resource('user', UserController::class);
+    });
 });
-
-Route::resource('advertisement', AdvertisementController::class)->middleware(['auth', 'verified'])->except('index');
-Route::resource('badge', BadgeController::class)->middleware(['auth', 'verified'])->except('index');
-Route::resource('sign', SignController::class)->middleware(['auth', 'verified'])->except('index');
-
-Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
-Route::get('/sign', [SignController::class, 'index'])->name('sign.index');
-
-Route::resource('point', PointController::class)->middleware(['auth', 'verified']);
-
-Route::resource('mountainSection', MountainSectionController::class)->middleware(['auth', 'verified'])->except('index');
-Route::get('/mountainSection', [MountainSectionController::class, 'index'])->name('mountainSection.index');
 
 Route::resource('trip', TripController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
-
 
 Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
 Route::resource('statute', StatuteController::class)->middleware(['auth', 'verified'])->except('index');
-
-Route::get('/squad', [SquadController::class, 'index'])->name('squad.index');
-Route::resource('squad', SquadController::class)->middleware(['auth', 'verified'])->except('index');
 
 require __DIR__.'/auth.php';

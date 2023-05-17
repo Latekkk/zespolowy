@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PointPolicy
 {
@@ -24,12 +25,25 @@ class PointPolicy
         return true;
     }
 
+    public function index(): Response|bool
+    {
+        return true;
+    }
+
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case 'admin':
+            case 'squaduser':
+            case 'pathuser':
+            case 'user':
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -37,7 +51,17 @@ class PointPolicy
      */
     public function update(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case 'admin':
+            case 'squaduser':
+            case 'pathuser':
+                return true;
+            case 'user':
+                if(Auth::id()===$point->user_id) return true;
+                else return false;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -45,15 +69,31 @@ class PointPolicy
      */
     public function delete(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case 'admin':
+            case 'squaduser':
+            case 'pathuser':
+                return true;
+            default:
+                return false;
+        }
     }
+
+
 
     /**
      * Determine whether the user can restore the model.
      */
     public function restore(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case 'admin':
+            case 'squaduser':
+            case 'pathuser':
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -61,6 +101,11 @@ class PointPolicy
      */
     public function forceDelete(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case 'admin':
+                return true;
+            default:
+                return false;
+        }
     }
 }

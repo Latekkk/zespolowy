@@ -17,27 +17,24 @@ class MountainMainPartSeeder extends Seeder
         MountainMainPart::truncate();
         $mountainPart =[
             [
-                'name' => 'Tatry1',
+                'name' => 'Tatry i Podtatrze',
             ],
             [
-                'name' => 'Tatry2',
+                'name' => 'Beskidy Zachodnie',
             ],
             [
-                'name' => 'Tatry3',
+                'name' => 'Beskidy Wschodnie',
             ],
             [
-                'name' => 'Tatry4',
+                'name' => 'Góry Świętokorzyskie',
             ],
             [
-                'name' => 'Tatry5',
+                'name' => 'Sudety',
             ],
             [
-                'name' => 'Tatry6',
+                'name' => 'Słowacja',
             ],
-            [
-                'name' => 'Tatry7',
-            ],
-            ];
+        ];
         MountainMainPart::insert($mountainPart);
     }
 }

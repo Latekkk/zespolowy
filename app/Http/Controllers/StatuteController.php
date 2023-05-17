@@ -31,6 +31,7 @@ class StatuteController extends Controller
 
     public function create(): Response
     {
+        $this->authorize('create', Statute::class);
         return Inertia::render('Statute/Form');
     }
 
@@ -43,6 +44,7 @@ class StatuteController extends Controller
 
     public function edit(Statute $statute): Response
     {
+        $this->authorize('update', Statute::class);
         return Inertia::render('Statute/Form', [
             'statute' => $statute
         ]);
@@ -50,15 +52,15 @@ class StatuteController extends Controller
 
     public function update(Statute $statute, StatuteRequest $statuteRequest): RedirectResponse
     {
+        $this->authorize('update', Statute::class);
         $this->repository->update($statuteRequest, $statute);
-
         return redirect()->route('statute.index')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
     }
 
     public function store(StatuteRequest $request): RedirectResponse
     {
+        $this->authorize('update', Statute::class);
         $this->repository->create($request);
-
         return redirect()->route('statute.index')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
     }
 }

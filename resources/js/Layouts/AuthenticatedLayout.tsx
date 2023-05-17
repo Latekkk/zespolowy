@@ -14,46 +14,56 @@ export default function Authenticated({props, header, children}) {
 
     const auth = props.auth;
 
+
     const navbar = [
         {
             "name": "advertisement",
             "route": "home",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
                     "name": "",
-                    "route": "home"
+                    "route": "home",
+                    "can": ['user', 'admin']
                 },
                 {
                     "name": "advertisement",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['admin']
                 }
             ]
         },
         {
             "name": "point",
             "route": "point.index",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
                     "name": "point",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user', 'admin'],
                 },
                 {
                     "name": "point",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['user'],
                 }
             ]
         },
         {
             "name": "mountainSection",
             "route": "mountainSection.index",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
                     "name": "mountainSection",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user', 'admin'],
                 },
                 {
                     "name": "mountainSection",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['admin'],
                 }
             ]
         },
@@ -74,10 +84,12 @@ export default function Authenticated({props, header, children}) {
         {
             "name": "statute",
             "route": "statute.index",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
                     "name": "statute",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user', 'admin'],
                 },
             ]
         },
@@ -87,7 +99,8 @@ export default function Authenticated({props, header, children}) {
             "subLinks": [
                 {
                     "name": "squad",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user', 'admin'],
                 },
             ]
         },
@@ -97,39 +110,47 @@ export default function Authenticated({props, header, children}) {
             "subLinks": [
                 {
                     "name": "contact",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['admin'],
                 },
                 {
                     "name": "contact",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['user', 'admin'],
                 }
             ]
         },
         {
             "name": "badge",
             "route": "badge.index",
+            "can": ['user'],
             "subLinks": [
                 {
                     "name": "badge",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user']
                 },
                 {
                     "name": "badge",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['user', 'admin']
                 }
             ]
         },
         {
             "name": "sign",
             "route": "sign.index",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
                     "name": "sign",
-                    "route": "index"
+                    "route": "index",
+                    "can": ['user', 'admin'],
                 },
                 {
                     "name": "sign",
-                    "route": "create"
+                    "route": "create",
+                    "can": ['admin'],
                 }
             ]
         }
@@ -150,13 +171,13 @@ export default function Authenticated({props, header, children}) {
 
 
                             <div className="hidden sm:flex sm:items-center sm:ml-6">
-                                <NavBar navbar={navbar}/>
+                                <NavBar navbar={navbar} user={auth.user}/>
                             </div>
                         </div>
 
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
-                                <LangueSwitcher/>
+                            <LangueSwitcher/>
                             <div className="ml-3 relative">
 
                                 <Dropdown>
