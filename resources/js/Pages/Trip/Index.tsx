@@ -48,16 +48,15 @@ export default function Index(  props: any) {
     const toast = useRef<Toast>(null);
     const getMarkers = (trip) => {
         const markers = [];
-        console.log(trip);
-        trip.mountainSections.forEach((section) => {
+        trip.mountain_sections.forEach((section) => {
             markers.push({
-                'lat': section.start_point.lat,
-                'lng': section.start_point.lng
+                'lat':  Number(section.start_point.lat),
+                'lng':  Number(section.start_point.lng)
             });
 
             markers.push({
-                'lat': section.end_point.lat,
-                'lng': section.end_point.lng
+                'lat':  Number(section.end_point.lat),
+                'lng':  Number(section.end_point.lng)
             });
         });
         return markers;

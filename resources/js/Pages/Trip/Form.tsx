@@ -10,7 +10,6 @@ import Button from "@/Components/Button";
 import MountainSectionService from "@/Pages/MountainSection/service/MountainSectionService";
 import Trip from "@/Pages/Trip/Partials/Trip";
 import {ScrollPanel} from "primereact/scrollpanel";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function Form(props) {
@@ -23,7 +22,8 @@ export default function Form(props) {
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         name: trip?.name || "",
-        date: trip?.date ? new Date(trip.date) : new Date(),
+        date: trip?.date || "",
+        mountainSection: trip?.mountainSections || "",
         remember: true,
     });
 
@@ -53,18 +53,9 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const formattedDate = format(data.date, 'dd-MM-yyyy');
-        const requestData = { ...data, date: formattedDate, mountainSections: selectedMountainSections };
-        if (!validateDate(data.date)) {
-            setData((data) => ({
-                ...data,
-                errors: "Zła data",
-            }));
-            return;
-        }
         trip === null
-            ? post(route("trip.store", requestData))
-            : put(route("trip.update", { requestData,trip: trip.id }));
+            ? post(route("trip.store", data))
+            : put(route("trip.update", { data,trip: trip.id }));
     }
 
     const setDefaultForm = () => {
@@ -95,6 +86,10 @@ export default function Form(props) {
     const handleAddMountainSection = (mountainSection) => {
         const updatedMountainSections = [...selectedMountainSections, mountainSection];
         setSelectedMountainSections(updatedMountainSections);
+        setData((data) => ({
+            ...data,
+            ["mountainSection"]: updatedMountainSections,
+        }));
     };
 
     const handleRemoveMountainSection = (mountainSection) => {
@@ -102,6 +97,10 @@ export default function Form(props) {
             (section) => section.id !== mountainSection.id
         );
         setSelectedMountainSections(updatedMountainSections);
+        setData((data) => ({
+            ...data,
+            ["mountainSection"]: updatedMountainSections,
+        }));
     };
 
     return (<Layout
@@ -119,13 +118,14 @@ export default function Form(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                                <DatePicker
-                                    selected={new Date(data.date)}
-                                    onChange={(date) => handleChange(null, "date", date)}
+                                <Input
+                                    labelText={t("entrance.trip.date")}
+                                    name="date"
+                                    value={data.date}
                                     error={errors.date}
-                                    dateFormat="dd-MM-yyyy"
-                                    className="form-control"
-                                    placeholderText={t("select.date")}
+                                    onChange={handleChange}
+                                    placeholder={t("entrance.trip.date.ph")}
+                                    type="date"
                                 />
                                 <div className="mb-4"></div>
                                 <Input
