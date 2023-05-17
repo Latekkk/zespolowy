@@ -11,7 +11,6 @@ import {Paginator} from "primereact/paginator";
 import {Dialog} from "primereact/dialog";
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import {Trip} from "@/Models/Trip";
-import {MountainSection} from "@/Models/MountainSection";
 
 interface ColumnMeta {
     field: string;
