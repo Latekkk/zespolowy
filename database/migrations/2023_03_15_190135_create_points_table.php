@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\MountainMainPart;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,6 +17,7 @@ return new class extends Migration {
             $table->string('name');
             $table->string('lat');
             $table->string('lng');
+            $table->foreignIdFor(MountainMainPart::class);
             $table->foreignIdFor(User::class);
             $table->boolean('is_global')->default(true);
             $table->timestamps();

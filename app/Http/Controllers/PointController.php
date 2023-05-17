@@ -74,9 +74,7 @@ class PointController extends Controller
         $params = request()->query();
         $selectedMountainMainPart = $params['selectedMountainMain'] ?? null;
         if ($selectedMountainMainPart !== null) {
-            $points = Point::whereHas('mountainMainParts', function ($query) use ($selectedMountainMainPart) {
-                $query->whereIn('mountain_main_part_id', $selectedMountainMainPart);
-            })
+            $points = Point::whereIn('mountain_main_part_id', $selectedMountainMainPart)
                 ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
