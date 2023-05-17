@@ -119,6 +119,15 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                                 <Input
+                                    labelText={t("entrance.trip.name")}
+                                    name="name"
+                                    value={data.name}
+                                    error={errors.name}
+                                    onChange={handleChange}
+                                    placeholder={t("entrance.trip.name.ph")}
+                                />
+                                <div className="mb-4"></div>
+                                <Input
                                     labelText={t("entrance.trip.date")}
                                     name="date"
                                     value={data.date}
@@ -126,15 +135,7 @@ export default function Form(props) {
                                     onChange={handleChange}
                                     placeholder={t("entrance.trip.date.ph")}
                                     type="date"
-                                />
-                                <div className="mb-4"></div>
-                                <Input
-                                    labelText={t("entrance.trip.name")}
-                                    name="name"
-                                    value={data.name}
-                                    error={errors.name}
-                                    onChange={handleChange}
-                                    placeholder={t("entrance.trip.name.ph")}
+                                    extraClass="block w-40 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
                                 <div className="mb-4"></div>
                                 <DropdownWithErrorMessage
