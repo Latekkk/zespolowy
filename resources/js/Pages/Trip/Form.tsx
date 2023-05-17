@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 export default function Form(props) {
     const { t } = useTranslation(["trip"]);
     const globalTranslation = useTranslation(["global"]);
-
+    const [selectedMountainSections, setSelectedMountainSections] = useState<MountainSection[] >([]);
     const [selectedTrip, setSelectedTrip] = useState(null);
     const trip = props.trip ?? null;
     const [mountainSections, setMountainSections] = useState<MountainSection[]>([]);
@@ -25,9 +25,6 @@ export default function Form(props) {
         mountainSection: trip?.mountainSections || "",
         remember: true,
     });
-    const [selectedMountainSections, setSelectedMountainSections] = useState<
-        MountainSection[]
-    >([]);
 
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
