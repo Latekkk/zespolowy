@@ -12,16 +12,10 @@ import {DataTable} from 'primereact/datatable';
 import {Paginator} from 'primereact/paginator';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
-import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import {MultiSelect} from "primereact/multiselect";
-interface Point {
-    name: string;
-    lat: string;
-    lng: string;
-}
-
+import {Point} from "@/Models/Point";
 interface ColumnMeta {
     field: string;
     header: string;
@@ -48,6 +42,7 @@ export default function Index(props: any) {
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: t('point.name')},
+        {field: 'mountainMainPartName', header: 'Mountain Main Part' },
         {field: 'lat', header: t('latitude')},
         {field: 'lng', header: t('longitude')}
     ];
@@ -63,22 +58,32 @@ export default function Index(props: any) {
     };
 
     useEffect(() => {
-        getPoints()
+        getPoints();
     }, []);
 
     useEffect(() => {
-        getPoints()
+        getPoints();
     }, [page, paginate, sort, sortOrder, selectedMountainMain]);
 
     const userId = usePage().props?.auth?.user?.id || null;
 
     const getPoints = () => {
-        PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id),userId ).then((data: Point[]) => {
-            setPoints(data.data);
+        PointService.getPoints(paginate, page, sort, sortOrder, selectedMountainMain?.map(obj => obj.id)).then((data: Point[]) => {
+            const updatedPoints = data.data.map((point: Point) => ({
+                ...point,
+                mountainMainPartName: getMountainMainPartName(point.mountain_main_part_id) || ''
+            }));
+            setPoints(updatedPoints);
             setLoading(false);
-            setTotalRecords(data.total)
+            setTotalRecords(data.total);
         });
-    }
+    };
+
+    const getMountainMainPartName = (id) => {
+        const mountainMainPart = props.mountainMainParts.find((part) => part.id === id);
+        return mountainMainPart ? mountainMainPart.name : '';
+    };
+
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors } = useForm({
         markers: props?.point === undefined? [] : [ {'lat': Number(props?.point?.lat), 'lng': Number( props?.point?.lng)}],
         name: props?.point?.name || '',
@@ -94,7 +99,6 @@ export default function Index(props: any) {
         setModalData(data)
     }
 
-
     const actionTemplate = (rowData, column) => {
         return (
             <div className="flex flex-wrap gap-2">
@@ -107,7 +111,6 @@ export default function Index(props: any) {
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
         );
-
     };
 
     const removeElement = (data) => {
@@ -124,9 +127,7 @@ export default function Index(props: any) {
                 'lat': Number(obj?.lat),
                 'lng': Number(obj?.lng)
             }];
-
     }
-
 
     return (
         <Layout
@@ -144,7 +145,6 @@ export default function Index(props: any) {
                                          placeholder="Wszystkie"  className="w-full md:w-20rem"
                                          maxSelectedLabels={5}
                             />
-
                         </div>
                     </div>
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -155,16 +155,17 @@ export default function Index(props: any) {
                                 sortOrder={sortOrder}
                                 onSort={event => {
                                     setSort(event.sortField);
-                                    setSortOrder(event.sortOrder)
+                                    setSortOrder(event.sortOrder);
                                 }}
                                 removableSort
-                                tableStyle={{width: "max-content"}} loading={loading}
+                                tableStyle={{ width: "max-content" }}
+                                loading={loading}
                             >
                                 {columns.map((col, i) => (
-                                    <Column key={col.field} field={col.field} header={col.header} sortable/>
+                                    <Column key={col.field} field={col.field} header={col.header} sortable />
                                 ))}
 
-                                <Column body={actionTemplate} headerClassName="w-10rem" expander/>
+                                <Column body={actionTemplate} headerClassName="w-10rem" expander />
                             </DataTable>
                             <Paginator first={first} rows={paginate} totalRecords={totalRecords}
                                        rowsPerPageOptions={[5, 15, 20, 30]} pageLinkSize={7}

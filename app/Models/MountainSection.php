@@ -5,7 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+/**
+ * @method create(MountainSection $mountainSection)
+ * @method static paginate(int $int)
+ * @method static orderBy(mixed $param, string $param1)
+ * @method static inRandomOrder()
+ */
 class MountainSection extends Model
 {
     use HasFactory;
@@ -35,7 +41,10 @@ class MountainSection extends Model
 
     public function points()
     {
-
         return $this->belongsTo(Point::class, 'point_mountains_main_parts');
+    }
+    public function trips(): BelongsToMany
+    {
+        return $this->belongsToMany(Trip::class, 'mountain_section_trips', 'mountain_section_id', 'trip_id');
     }
 }

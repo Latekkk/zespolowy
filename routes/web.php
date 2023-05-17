@@ -10,6 +10,7 @@ use App\Http\Controllers\SignController;
 use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainSectionController;
 use App\Http\Controllers\StatuteController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,6 @@ use Inertia\Inertia;
 |
 */
 
-
 Route::get('/', [AdvertisementController::class, 'index'])->name('home');
 Route::get('/badge', [BadgeController::class, 'index'])->name('badge.index');
 Route::get('/sign', [SignController::class, 'index'])->name('sign.index');
@@ -34,6 +34,7 @@ Route::get('/mountainSection', [MountainSectionController::class, 'index'])->nam
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
 Route::get('/squad', [SquadController::class, 'index'])->name('squad.index');
+Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
 
 Route::resource('point', PointController::class);
 
@@ -46,7 +47,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
     Route::middleware('verified')->group(function () {
         Route::resource('advertisement', AdvertisementController::class)->except('index');
         Route::resource('badge', BadgeController::class)->except('index');
@@ -55,12 +55,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('contact', ContactController::class)->except('index');
         Route::resource('statute', StatuteController::class)->except('index');
         Route::resource('squad', SquadController::class)->except('index');
+        Route::resource('trip', TripController::class)->except('index');
+
         Route::resource('user', UserController::class);
     });
 });
-
-
-
-
 
 require __DIR__.'/auth.php';

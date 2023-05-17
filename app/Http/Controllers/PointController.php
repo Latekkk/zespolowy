@@ -66,15 +66,14 @@ class PointController extends Controller
         return redirect()->route('point.index')->with(ToastHelper::create('point'));
     }
 
-
-    //api
-
     public function getAll(): JsonResponse
     {
         $params = request()->query();
         $selectedMountainMainPart = $params['selectedMountainMain'] ?? null;
         if ($selectedMountainMainPart !== null) {
-            $points = Point::whereIn('mountain_main_part_id', $selectedMountainMainPart)
+            $points = Point::whereHas('mountainMainParts', function ($query) use ($selectedMountainMainPart) {
+                $query->whereIn('mountain_main_parts_id', $selectedMountainMainPart);
+            })
                 ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
@@ -86,7 +85,6 @@ class PointController extends Controller
                 })
                 ->paginate((int)$params['paginate'] ?? 15)
                 ->appends(request()->query());
-
         }
         return response()->json($points);
     }
