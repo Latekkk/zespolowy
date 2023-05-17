@@ -26,8 +26,7 @@ class TripController extends Controller
     public function index(): Response
     {
         return Inertia::render('Trip/Index', [
-            'Trip' => Trip::paginate(5),
-            'mountainSectionTrip' => MountainSectionTrip::all(),
+            'trips' => Trip::with('mountainSections')->paginate(5),
         ]);
     }
 
@@ -40,8 +39,9 @@ class TripController extends Controller
 
     public function show(Trip $trip): Response
     {
+        $trip->load('mountainSections');
         return Inertia::render('Trip/index', [
-            'Trip' => $trip
+            'trip' => $trip,
         ]);
     }
 
@@ -108,5 +108,46 @@ class TripController extends Controller
     {
         $this->repository->remove($trip);
         return response()->json(['status' => 'ok']);
+    }
+    public function getPoints(Trip $trip): JsonResponse
+    {
+        $mountainSections = DB::table('mountain_section_trip')
+            ->where('trip_id', $trip->id)
+            ->join('mountain_sections', 'mountain_section_trip.mountain_section_id', '=', 'mountain_sections.id')
+            ->join('points as start_point', 'mountain_sections.start_point_id', '=', 'start_point.id')
+            ->join('points as end_point', 'mountain_sections.end_point_id', '=', 'end_point.id')
+            ->select(
+                'start_point.id as start_point_id',
+                'start_point.lat as start_point_lat',
+                'start_point.lng as start_point_lng',
+                'start_point.name as start_point_name',
+                'end_point.id as end_point_id',
+                'end_point.lat as end_point_lat',
+                'end_point.lng as end_point_lng',
+                'end_point.name as end_point_name'
+            )
+            ->get();
+
+        $points = [];
+        foreach ($mountainSections as $section) {
+            $startPoint = new Point();
+            $startPoint->id = $section->start_point_id;
+            $startPoint->lat = $section->start_point_lat;
+            $startPoint->lng = $section->start_point_lng;
+            $startPoint->name = $section->start_point_name;
+
+            $endPoint = new Point();
+            $endPoint->id = $section->end_point_id;
+            $endPoint->lat = $section->end_point_lat;
+            $endPoint->lng = $section->end_point_lng;
+            $endPoint->name = $section->end_point_name;
+
+            $points[] = [
+                'start_point' => $startPoint,
+                'end_point' => $endPoint,
+            ];
+        }
+
+        return response()->json($points);
     }
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {MountainSection} from "@/Models/MountainSection";
 
 export interface Trip {
     name: string;
@@ -10,13 +11,6 @@ class TripService {
         const API_URL_GET_TRIPS = route('api.trip.index');
 
         const params = { params: { paginate, page, sort, sortOrder } };
-        const response = await axios.get<Trip[]>(API_URL_GET_TRIPS, params);
-        return response.data;
-    }
-    async getMountainSectionByTrip(paginate: number = 15, page: number = 1, sort: string = 'id', sortOrder: number = 0, mountainsSectionId: string = 'id'): Promise<Trip[]> {
-        const API_URL_GET_TRIPS = route('api.trip.index');
-
-        const params = { params: { paginate, page, sort, sortOrder, mountainsSectionId } };
         const response = await axios.get<Trip[]>(API_URL_GET_TRIPS, params);
         return response.data;
     }

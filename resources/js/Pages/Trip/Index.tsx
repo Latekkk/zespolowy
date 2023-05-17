@@ -15,6 +15,7 @@ import {Point} from "@/Models/Point";
 interface Trip {
     name: string;
     date: string;
+    mountainSections: MountainSection[];
 }
 interface ColumnMeta {
     field: string;
@@ -45,11 +46,22 @@ export default function Index(  props: any) {
     const [modalData, setModalData] = useState<Trip>();
     const [modalDataToMap, setModalDataToMap] = useState<Trip>();
     const toast = useRef<Toast>(null);
-    const getMarkers = (obj) => {
-        return [
-           //ustaw markery
-        ];
-    }
+    const getMarkers = (trip) => {
+        const markers = [];
+        console.log(trip);
+        trip.mountainSections.forEach((section) => {
+            markers.push({
+                'lat': section.start_point.lat,
+                'lng': section.start_point.lng
+            });
+
+            markers.push({
+                'lat': section.end_point.lat,
+                'lng': section.end_point.lng
+            });
+        });
+        return markers;
+    };
 
     const getTrips = () => {
         TripService.getTrips(paginate, page, sort, sortOrder).then((data: Trip[]) => {
