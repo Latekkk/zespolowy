@@ -28,7 +28,6 @@ export default function Index(  props: any) {
     const [sort, setSort] = useState<string>('id');
     const [sortOrder, setSortOrder] = useState<string>('1');
     const [first, setFirst] = useState(0);
-    const [mountainSection, setMountainSection] = useState<MountainSection[]>([]);
 
     const [visible, setVisible] = useState<boolean>(false);
     const [visibleMap, setVisibleMap] = useState<boolean>(false);
