@@ -56,40 +56,12 @@ class TripController extends Controller
 
     public function store(TripRequest $request): RedirectResponse
     {
-
-        $trip = new Trip();
-        $trip->name = $request->input('name');
-        $trip->date = $request->input('date');
-        $trip->save();
-
-        $mountainSections = $request->input('mountainSection');
-        foreach ($mountainSections as $mountainSectionData) {
-            $mountainSection = new MountainSection();
-            $mountainSection->id = $mountainSectionData['id'];
-
-            $mountainSectionTrip = new MountainSectionTrip();
-            $mountainSectionTrip->trip_id = $trip->id;
-            $mountainSectionTrip->mountain_section_id = $mountainSection->id;
-            $mountainSectionTrip->save();
-        }
+        $this->repository->create($request);
         return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
     public function update(TripRequest $request, Trip $trip): RedirectResponse
     {
-        $trip->name = $request->input('name');
-        $trip->date = $request->input('date');
-        $trip->save();
-        $mountainSections = $request->input('mountainSection');
-        MountainSectionTrip::where('trip_id', $trip->id)->delete();
-
-        foreach ($mountainSections as $mountainSectionData) {
-            $mountainSectionId = $mountainSectionData['id'];
-
-            $mountainSectionTrip = new MountainSectionTrip();
-            $mountainSectionTrip->trip_id = $trip->id;
-            $mountainSectionTrip->mountain_section_id = $mountainSectionId;
-            $mountainSectionTrip->save();
-        }
+        $this->repository->update($request,$trip);
         return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
     }
 

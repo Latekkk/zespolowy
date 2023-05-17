@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Head, useForm } from "@inertiajs/react";
-import { format } from 'date-fns';
 import { MountainSection } from "@/Models/MountainSection";
 import Layout from "@/Layouts/Layout";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
@@ -26,7 +25,6 @@ export default function Form(props) {
         mountainSection: trip?.mountainSections || "",
         remember: true,
     });
-
     const [selectedMountainSections, setSelectedMountainSections] = useState<
         MountainSection[]
     >([]);
@@ -39,17 +37,6 @@ export default function Form(props) {
             [key]: value,
         }));
     }
-
-    const validateDate = (selectedDate) => {
-        const currentDate = new Date();
-        const nextYear = new Date();
-        nextYear.setFullYear(currentDate.getFullYear() + 1);
-
-        if (selectedDate < currentDate || selectedDate >= nextYear) {
-            return false;
-        }
-        return true;
-    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -70,10 +57,6 @@ export default function Form(props) {
         }
         getMountainSections();
     }, []);
-
-    useEffect(() => {
-
-    }, [selectedMountainSections]);
 
     const getMountainSections = () => {
         MountainSectionService.getMountainsSections(selectedTrip?.id).then(
@@ -112,7 +95,6 @@ export default function Form(props) {
             }
         >
             <Head title={t("creating.editing.a.trip")} />
-
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <form onSubmit={handleSubmit}>
@@ -121,11 +103,13 @@ export default function Form(props) {
                                 <Input
                                     labelText={t("entrance.trip.name")}
                                     name="name"
+                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     value={data.name}
                                     error={errors.name}
                                     onChange={handleChange}
                                     placeholder={t("entrance.trip.name.ph")}
                                 />
+                                <div className="block w-40">
                                 <div className="mb-4"></div>
                                 <Input
                                     labelText={t("entrance.trip.date")}
@@ -135,8 +119,9 @@ export default function Form(props) {
                                     onChange={handleChange}
                                     placeholder={t("entrance.trip.date.ph")}
                                     type="date"
-                                    extraClass="block w-40 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
+                                </div>
                                 <div className="mb-4"></div>
                                 <DropdownWithErrorMessage
                                     label={t("mountainSection")}
@@ -163,7 +148,6 @@ export default function Form(props) {
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div className="flex flex-row gap-x-2 w-full justify-end mt-4">
                                     <Button

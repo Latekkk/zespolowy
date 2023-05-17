@@ -1,6 +1,10 @@
+import {Point} from "@/Models/Point";
+
 export interface MountainSection {
-    'id': number,
-    'name': string,
-    'date': string,
+    name: string;
+    entry_points: string;
+    points_for_descent: string;
+    start_point: Point;
+    end_point: Point;
 }
 

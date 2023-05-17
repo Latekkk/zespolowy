@@ -26,7 +26,7 @@ class TripRequest extends FormRequest
     {
         return [
             'name'=> 'required|max:200|min:3',
-            'date'=>'required|date',
+            'date' => ['required', 'date', 'after_or_equal:today', 'before_or_equal:'.now()->addYear()],
         ];
     }
 }

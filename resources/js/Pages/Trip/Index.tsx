@@ -10,23 +10,12 @@ import {Column} from "primereact/column";
 import {Paginator} from "primereact/paginator";
 import {Dialog} from "primereact/dialog";
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
-import {Point} from "@/Models/Point";
+import {Trip} from "@/Models/Trip";
+import {MountainSection} from "@/Models/MountainSection";
 
-interface Trip {
-    name: string;
-    date: string;
-    mountainSections: MountainSection[];
-}
 interface ColumnMeta {
     field: string;
     header: string;
-}
-interface MountainSection {
-    name: string;
-    entry_points: string;
-    points_for_descent: string;
-    start_point: Point;
-    end_point: Point;
 }
 export default function Index(  props: any) {
     const {t} = useTranslation(['trip'])
@@ -119,7 +108,6 @@ export default function Index(  props: any) {
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>
         );
-
     };
 
     return (
@@ -129,9 +117,7 @@ export default function Index(  props: any) {
         >
             <Head title={t('name')} />
             <div className="py-12">
-
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                             <DataTable
@@ -148,7 +134,6 @@ export default function Index(  props: any) {
                                 {columns.map((col, i) => (
                                     <Column key={col.field} field={col.field} header={col.header} sortable/>
                                 ))}
-
                                 <Column body={actionTemplate} headerClassName="w-10rem" expander/>
                             </DataTable>
                         </div>
@@ -174,7 +159,6 @@ export default function Index(  props: any) {
             }
             {
                 modalData &&
-
                 <Dialog header={t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <p className="m-0">

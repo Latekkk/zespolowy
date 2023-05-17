@@ -12,22 +12,10 @@ import {DataTable} from 'primereact/datatable';
 import {Paginator} from 'primereact/paginator';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
-import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
 import GoogleMapComponent from "@/Components/GoogleMapComponent";
 import {MultiSelect} from "primereact/multiselect";
-interface Point {
-    name: string;
-    mountainPart: string;
-    mountainMainPart: {
-        id: number;
-        name: string;
-    };
-    lat: string;
-    lng: string;
-}
-
-
+import {Point} from "@/Models/Point";
 interface ColumnMeta {
     field: string;
     header: string;
@@ -54,7 +42,7 @@ export default function Index(props: any) {
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: t('point.name')},
-        { field: 'mountainMainPartName', header: 'Mountain Main Part' },
+        {field: 'mountainMainPartName', header: 'Mountain Main Part' },
         {field: 'lat', header: t('latitude')},
         {field: 'lng', header: t('longitude')}
     ];

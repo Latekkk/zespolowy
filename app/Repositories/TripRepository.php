@@ -5,6 +5,8 @@ namespace App\Repositories;
 use App\Helpers\SlugHelper;
 
 use App\Http\Requests\TripRequest;
+use App\Models\MountainSection;
+use App\Models\MountainSectionTrip;
 use App\Models\Trip;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -20,31 +22,41 @@ class TripRepository
 
     public function create(TripRequest $request): void
     {
-        $inputDate = $request->input('date');
-        $formattedDate = substr($inputDate, 0, 19);
+        $trip = new Trip();
+        $trip->name = $request->input('name');
+        $trip->date = $request->input('date');
+        $trip->save();
 
-        $carbonDate = Carbon::createFromFormat('Y-m-d\TH:i:s', $formattedDate);
-        $trip = $this->model->create([
-            'name' => $request->input('name'),
-            'date' => $carbonDate,
-            'slug' => SlugHelper::getSlug($request->name)
-        ]);
-        $mountainSections = $request->input('mountainSections', []);
-        $trip->mountainSections()->attach($mountainSections);
+        $mountainSections = $request->input('mountainSection');
+        if($mountainSections){
+            foreach ($mountainSections as $mountainSectionData) {
+                $mountainSection = new MountainSection();
+                $mountainSection->id = $mountainSectionData['id'];
+
+                $mountainSectionTrip = new MountainSectionTrip();
+                $mountainSectionTrip->trip_id = $trip->id;
+                $mountainSectionTrip->mountain_section_id = $mountainSection->id;
+                $mountainSectionTrip->save();
+            }
+        }
     }
     public function update(TripRequest $request, Trip $trip): void
     {
-        $inputDate = $request->input('date');
-        $formattedDate = substr($inputDate, 0, 19);
+        $trip->name = $request->input('name');
+        $trip->date = $request->input('date');
+        $trip->save();
+        $mountainSections = $request->input('mountainSection');
+        if($mountainSections){
+        MountainSectionTrip::where('trip_id', $trip->id)->delete();
+        foreach ($mountainSections as $mountainSectionData) {
+            $mountainSectionId = $mountainSectionData['id'];
 
-        $carbonDate = Carbon::createFromFormat('Y-m-d\TH:i:s', $formattedDate);
-        $trip->update(array_merge([
-            'name' => $request->input('name'),
-            'date' => $carbonDate,
-            'slug' => SlugHelper::getSlug($request->name)
-        ]));
-        $trip->update(array_merge(
-            $request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
+            $mountainSectionTrip = new MountainSectionTrip();
+            $mountainSectionTrip->trip_id = $trip->id;
+            $mountainSectionTrip->mountain_section_id = $mountainSectionId;
+            $mountainSectionTrip->save();
+        }
+        }
     }
 
     public function remove(Trip $trip): void
