@@ -29,15 +29,7 @@ class TripRepository
 
         $mountainSections = $request->input('mountainSection');
         if($mountainSections){
-            foreach ($mountainSections as $mountainSectionData) {
-                $mountainSection = new MountainSection();
-                $mountainSection->id = $mountainSectionData['id'];
-
-                $mountainSectionTrip = new MountainSectionTrip();
-                $mountainSectionTrip->trip_id = $trip->id;
-                $mountainSectionTrip->mountain_section_id = $mountainSection->id;
-                $mountainSectionTrip->save();
-            }
+            $this->createMountainSection($mountainSections, $trip);
         }
     }
     public function update(TripRequest $request, Trip $trip): void
@@ -47,7 +39,17 @@ class TripRepository
         $trip->save();
         $mountainSections = $request->input('mountainSection');
         if($mountainSections){
-        MountainSectionTrip::where('trip_id', $trip->id)->delete();
+            MountainSectionTrip::where('trip_id', $trip->id)->delete();
+            $this->createMountainSection($mountainSections, $trip);
+        }
+    }
+
+    public function remove(Trip $trip): void
+    {
+        $trip->delete();
+    }
+
+    private function createMountainSection($mountainSections, $trip){
         foreach ($mountainSections as $mountainSectionData) {
             $mountainSectionId = $mountainSectionData['id'];
 
@@ -56,12 +58,6 @@ class TripRepository
             $mountainSectionTrip->mountain_section_id = $mountainSectionId;
             $mountainSectionTrip->save();
         }
-        }
-    }
-
-    public function remove(Trip $trip): void
-    {
-        $trip->delete();
     }
     private function getTripFromRequest($request): Trip
     {
