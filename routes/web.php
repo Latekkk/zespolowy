@@ -34,6 +34,7 @@ Route::get('/mountainSection', [MountainSectionController::class, 'index'])->nam
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
 Route::get('/squad', [SquadController::class, 'index'])->name('squad.index');
+Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
 
 Route::resource('point', PointController::class);
 
@@ -54,17 +55,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('contact', ContactController::class)->except('index');
         Route::resource('statute', StatuteController::class)->except('index');
         Route::resource('squad', SquadController::class)->except('index');
+        Route::resource('trip', TripController::class)->except('index');
+
         Route::resource('user', UserController::class);
     });
 });
-
-Route::resource('trip', TripController::class)->middleware(['auth', 'verified'])->except('index');
-Route::get('/trip', [TripController::class, 'index'])->name('trip.index');
-
-Route::resource('contact', ContactController::class)->middleware(['auth', 'verified'])->except('index');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-
-Route::get('/statute', [StatuteController::class, 'index'])->name('statute.index');
-Route::resource('statute', StatuteController::class)->middleware(['auth', 'verified'])->except('index');
 
 require __DIR__.'/auth.php';
