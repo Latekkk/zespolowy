@@ -14,7 +14,8 @@ export default function Input({labelText, name, value, onChange , error, readOnl
                 value={typeof value == "object" ? '' : value}
                 placeholder={placeholder || (t('entryValue') + ' ' + name) || ''}
                 type={type}
-                readOnly={readOnly} onChange={((e) => onChange(e))}/>
+                readOnly={readOnly}
+                onChange={((e) => onChange(e))}/>
             <InputError message={error}/>
         </div>
     )

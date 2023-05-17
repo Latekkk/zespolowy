@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MountainSectionController;
@@ -29,6 +30,10 @@ Route::post('/contacts/{contact}/response', [ContactController::class, 'setRespo
 
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
 Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');
+
+
+Route::get('/users', [UserController::class, 'getAll'])->name('api.users.index');
+Route::delete('/users/{user}', [UserController::class, 'removeAPI'])->name('api.users.destroy');
 
 Route::get('/mountainsSection', [MountainSectionController::class, 'getAll'])->name('api.mountainsSection.index');
 Route::delete('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'removeAPI'])->name('api.mountainSection.destroy');
