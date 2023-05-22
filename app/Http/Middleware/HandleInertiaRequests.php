@@ -43,6 +43,7 @@ class HandleInertiaRequests extends Middleware
                 // in your case, you named your flash message "success"
                 'value' => fn () => $request->session()->get('toast')
             ],
+            'locale' => session('language', 'pl')
         ]);
     }
 }

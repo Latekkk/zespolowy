@@ -2,7 +2,7 @@ import {useState} from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import {Link} from '@inertiajs/react';
+import {Link, usePage} from '@inertiajs/react';
 import {useTranslation} from "react-i18next";
 import LangueSwitcher from "@/Components/LangueSwitcher";
 import NavBar from '@/Components/Navbar';
@@ -13,7 +13,7 @@ export default function Authenticated({props, header, children}) {
     const {t} = useTranslation(['navbar'])
 
     const auth = props.auth;
-
+    console.log(props)
 
     const navbar = [
         {
@@ -64,20 +64,6 @@ export default function Authenticated({props, header, children}) {
                     "name": "mountainSection",
                     "route": "create",
                     "can": ['admin'],
-                }
-            ]
-        },
-        {
-            "name": "trip",
-            "route": "trip.index",
-            "subLinks": [
-                {
-                    "name": "trip",
-                    "route": "index"
-                },
-                {
-                    "name": "trip",
-                    "route": "create"
                 }
             ]
         },
