@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ToastHelper;
 use App\Http\Requests\TripRequest;
+use App\Http\Resources\UserResource;
 use App\Models\MountainSection;
 use App\Models\MountainSectionTrip;
 use App\Models\Trip;
+use App\Models\User;
 use App\Repositories\TripRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -23,7 +25,7 @@ class TripController extends Controller
         $this->repository = $tripRepository;
     }
 
-    public function index(): Response
+    public function index()
     {
         return Inertia::render('Trip/Index', [
             'trips' => Trip::with(['mountainSections.start_point','mountainSections.end_point' ]),
@@ -41,9 +43,8 @@ class TripController extends Controller
     public function show(Trip $trip): Response
     {
         $trip->load('mountainSections');
-        return Inertia::render('Trip/Form', [
+        return Inertia::render('Trip/Show', [
             'trip' => $trip,
-            'mountainSection' => MountainSection::all(),
         ]);
     }
 

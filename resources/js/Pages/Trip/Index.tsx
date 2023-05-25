@@ -102,6 +102,10 @@ export default function Index(  props: any) {
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
                 </Link>
+                <Link className="bg-yellow-600 px-2 hover:bg-blue-500" href={route('trip.show', {id: rowData.id})} method="get" as="button" type="button">
+                    <i className="pi pi-eye text-white" style={{ fontSize: '1.5rem' }}>
+                    </i>
+                </Link>
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
                         onClick={() => showModal(rowData)} rounded></Button>
             </div>

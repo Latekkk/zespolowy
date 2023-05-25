@@ -10,7 +10,8 @@ import MountainSectionService from "@/Pages/MountainSection/service/MountainSect
 import Trip from "@/Pages/Trip/Partials/Trip";
 import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
-
+import Heading1 from "@/Components/Heading1";
+import { Card } from 'primereact/card';
 export default function Form(props) {
     const { t } = useTranslation(["trip"]);
     const globalTranslation = useTranslation(["global"]);
@@ -83,6 +84,16 @@ export default function Form(props) {
         }));
     };
 
+    const header = (
+        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
+    );
+    const footer = (
+        <div className="flex flex-wrap justify-content-end gap-2">
+            <Button label="Save" icon="pi pi-check" />
+            <Button label="Cancel" icon="pi pi-times" className="p-button-outlined p-button-secondary" />
+        </div>
+    );
+
     return (<Layout
             props={props}
             header={
@@ -97,73 +108,20 @@ export default function Form(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                                <Input
-                                    labelText={t("entrance.trip.name")}
-                                    name="name"
-                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                    value={data.name}
-                                    error={errors.name}
-                                    onChange={handleChange}
-                                    placeholder={t("entrance.trip.name.ph")}
-                                />
-                                <div className="block w-40">
-                                <div className="mb-4"></div>
-                                <Input
-                                    labelText={t("entrance.trip.date")}
-                                    name="date"
-                                    value={data.date}
-                                    error={errors.date}
-                                    onChange={handleChange}
-                                    placeholder={t("entrance.trip.date.ph")}
-                                    type="date"
-                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                />
-                                </div>
-                                <div className="mb-4"></div>
-                                <DropdownWithErrorMessage
-                                    label={t("mountainSection")}
-                                    value={mountainSections?.name}
-                                    valueTemplate={mountainSections?.name}
-                                    onChange={handleAddMountainSection}
-                                    options={mountainSections}
-                                    optionLabel="name"
-                                    placeholder={t("select.a.mountainSection")}
-                                    className="w-full md:w-14rem"
-                                />
-                                <div className="mb-4"></div>
-                                <div className=''>
-                                    <h3>{t("selectedMountainSections")}</h3>
-                                    <div className="mb-4"></div>
-                                    <div className="card scrollpanel-demo">
-                                        <div className="flex flex-column md:flex-row gap-5">
-                                            <div className="flex-auto">
-                                                <ScrollPanel style={{ width: '100%', height: '400px'}} >
-                                                    {selectedMountainSections.map((section) => (
-                                                        <Trip section={section} handleRemoveMountainSection={handleRemoveMountainSection}/>
-                                                    ))}
-                                                </ScrollPanel>
+                                <div className="card flex justify-content-center">
+                                    <Card title={data.name} subTitle={data.date} footer={footer} header={header} className="w-full">
+                                        <div className="card scrollpanel-demo">
+                                            <div className="flex flex-column md:flex-row gap-5">
+                                                <div className="flex-auto">
+                                                    <ScrollPanel style={{ width: '100%', height: '400px'}} >
+                                                        {selectedMountainSections.map((section) => (
+                                                            <Trip section={section} handleRemoveMountainSection={handleRemoveMountainSection}/>
+                                                        ))}
+                                                    </ScrollPanel>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="flex flex-row gap-x-2 w-full justify-end mt-4">
-                                    <Button
-                                        type="button"
-                                        onClick={setDefaultForm}
-                                        disabled={processing}
-                                        children={globalTranslation.t("reset")}
-                                        background="bg-red-500"
-                                        textColor={"text-white"}
-                                        hoverColor={"bg-red-400"}
-                                    />
-                                    <Button
-                                        type="submit"
-                                        disabled={processing}
-                                        children={globalTranslation.t("submit")}
-                                        background="bg-blue-500"
-                                        textColor={"text-white"}
-                                        hoverColor={"bg-blue-400"}
-                                    />
+                                    </Card>
                                 </div>
                             </div>
                         </div>

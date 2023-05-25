@@ -34,7 +34,7 @@ class UserPointsRequest extends FormRequest
                 'required',
                 Rule::in(PointsMountainSectionEnum::toArray()),
                 function ($attribute, $value, $fail) use ($userId, $mountainSectionId) {
-                    $existingUserPoint = UserPoint::where('user_id', $userId)
+                    $existingUserPoint = UserPoints::where('user_id', $userId)
                         ->where('mountain_section_id', $mountainSectionId)
                         ->where(function ($query) use ($value) {
                             $query->where('points_mountain_section', $value)
@@ -43,7 +43,7 @@ class UserPointsRequest extends FormRequest
                         ->exists();
 
                     if ($existingUserPoint) {
-                        $fail('The selected points_mountain_section is already assigned for this user and mountain section, or the previous record has not been rejected.');
+                        $fail('Wybrany points_mountain_section jest już przypisany dla tego użytkownika i sekcji górskiej lub poprzedni rekord nie został odrzucony.');
                     }
                 }
             ],

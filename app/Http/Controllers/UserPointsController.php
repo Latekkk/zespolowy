@@ -45,14 +45,14 @@ class UserPointsController extends Controller
     {
         $this->repository->update($userPointsRequest, $userPoints);
 
-        return redirect()->route('userPoints.index')->with(ToastHelper::update('userPoints'));
+        return redirect()->back();
     }
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
         $this->repository->create($userPointsRequest);
 
-        return redirect()->route('userPoints.index')->with(ToastHelper::create('userPoints'));
+        return redirect()->back();
     }
 
 
