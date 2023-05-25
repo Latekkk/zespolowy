@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Helpers\SlugHelper;
 use App\Http\Requests\MountainSectionTripRequest;
 use App\Models\MountainSectionTrip;
+use App\Models\Trip;
 
 class MountainSectionTripRepository
 {

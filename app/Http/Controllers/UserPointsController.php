@@ -2,63 +2,83 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Helpers\ToastHelper;
+use App\Http\Requests\UserPointsRequest;
+use App\Models\UserPoints;
+use App\Repositories\UserPointsRepository;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class UserPointsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    protected UserPointsRepository $repository;
+
+    public function __construct(UserPointsRepository $repository)
     {
-        //
+        $this->repository = $repository;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(): Response
     {
-        //
+        return Inertia::render('UserPointsPoints/Index', [
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(): Response
     {
-        //
+        return Inertia::render('UserPointsPoints/Form', [
+        ]);
+
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(UserPoints $userPoints): Response
     {
-        //
+        return Inertia::render('UserPointsPoints/Form', [
+            'userPoints' => $userPoints,
+            'roles' => ['userPoints', 'admin']
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(UserPoints $userPoints, UserPointsRequest $userPointsRequest): RedirectResponse
     {
-        //
+        $this->repository->update($userPointsRequest, $userPoints);
+
+        return redirect()->route('userPoints.index')->with(ToastHelper::update('userPoints'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
-        //
+        $this->repository->create($userPointsRequest);
+
+        return redirect()->route('userPoints.index')->with(ToastHelper::create('userPoints'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    //api
+
+    public function getAll(): JsonResponse
     {
-        //
+        $params = request()->query();
+        $userPointsName = $params['userPointsName'] ?? null;
+        if ($userPointsName !== null) {
+            $userPoints = UserPoints::where('name', 'like', '%' . $userPointsName . '%')
+                ->orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+                ->paginate((int)$params['paginate'] ?? 15)
+                ->appends(request()->query());
+        } else {
+            $userPoints = UserPoints::orderBy($params['sort'] ?? 'id', (int)$params['sortOrder'] >= 0 ? 'asc' : 'desc')
+                ->paginate((int)$params['paginate'] ?? 15)
+                ->appends(request()->query());
+        }
+
+        return response()->json($userPoints);
+    }
+
+    public function removeAPI(UserPoints $userPoints): JsonResponse
+    {
+        $this->repository->remove($userPoints);
+        return response()->json(['status' => 'ok']);
     }
 }

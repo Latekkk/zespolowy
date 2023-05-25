@@ -40,8 +40,10 @@ class TripController extends Controller
 
     public function show(Trip $trip): Response
     {
-        return Inertia::render('Trip/index', [
+        $trip->load('mountainSections');
+        return Inertia::render('Trip/Form', [
             'trip' => $trip,
+            'mountainSection' => MountainSection::all(),
         ]);
     }
 

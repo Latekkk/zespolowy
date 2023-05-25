@@ -140,6 +140,40 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
+            "name": "trip",
+            "route": "trip.index",
+            "can": ['user', 'admin'],
+            "subLinks": [
+                {
+                    "name": "trip",
+                    "route": "index",
+                    "can": ['user', 'admin'],
+                },
+                {
+                    "name": "trip",
+                    "route": "create",
+                    "can": ['user', 'admin'],
+                }
+            ]
+        },
+        {
+            "name": "userPoints",
+            "route": "userPoints.index",
+            "can": ['user', 'admin'],
+            "subLinks": [
+                {
+                    "name": "userPoints",
+                    "route": "index",
+                    "can": ['user', 'admin'],
+                },
+                {
+                    "name": "userPoints",
+                    "route": "create",
+                    "can": ['user', 'admin'],
+                }
+            ]
+        },
+        {
             "name": "user",
             "route": "user.index",
             "can": [ 'admin'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MountainSectionRequest;
 use App\Http\Requests\TripRequest;
 use App\Models\MountainMainPart;
 use App\Models\MountainSection;
@@ -58,7 +59,7 @@ class MountainSectionController extends Controller
         ]);
     }
 
-    public function update(MountainSection $mountainSection, TripRequest $mountainSectionRequest): RedirectResponse
+    public function update(MountainSection $mountainSection, MountainSectionRequest $mountainSectionRequest): RedirectResponse
     {
         $this->authorize('update', MountainSection::class);
         $this->repository->update($mountainSectionRequest, $mountainSection);
