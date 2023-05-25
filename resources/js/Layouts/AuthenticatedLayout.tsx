@@ -13,7 +13,6 @@ export default function Authenticated({props, header, children}) {
     const {t} = useTranslation(['navbar'])
 
     const auth = props.auth;
-    console.log(props)
 
     const navbar = [
         {
@@ -135,6 +134,23 @@ export default function Authenticated({props, header, children}) {
                 },
                 {
                     "name": "sign",
+                    "route": "create",
+                    "can": ['admin'],
+                }
+            ]
+        },
+        {
+            "name": "user",
+            "route": "user.index",
+            "can": [ 'admin'],
+            "subLinks": [
+                {
+                    "name": "user",
+                    "route": "index",
+                    "can": [ 'admin'],
+                },
+                {
+                    "name": "user",
                     "route": "create",
                     "can": ['admin'],
                 }

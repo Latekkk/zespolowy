@@ -36,9 +36,11 @@ class UserRepository
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
             'role' => $request->input('role')
         ];
+        if($request->input('password')) {
+            array_push($data,  ['password' => $request->input('password')]);
+        }
 
         if ($update) {
             return $data;

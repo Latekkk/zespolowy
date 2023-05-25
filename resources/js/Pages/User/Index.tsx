@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Inertia} from '@inertiajs/inertia'
 
 import Layout from '@/Layouts/Layout';
-import {Head, Link, useForm, usePage} from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 
 import {Column} from 'primereact/column';
@@ -11,15 +11,10 @@ import {DataTable} from 'primereact/datatable';
 import {Paginator} from 'primereact/paginator';
 import {Button} from 'primereact/button';
 import {Dialog} from 'primereact/dialog';
-import Point from "@/Pages/Point/Partials/Point";
 import {Toast} from 'primereact/toast';
-import GoogleMapComponent from "@/Components/GoogleMapComponent";
-import {MultiSelect} from "primereact/multiselect";
 import UserService from "@/Pages/User/service/UserService";
 import { User } from '@/Models/User';
 import {InputText} from "primereact/inputtext";
-import {logDOM} from "@testing-library/dom";
-import {name} from "react-quill";
 
 interface ColumnMeta {
     field: string;
@@ -46,9 +41,9 @@ export default function Index(props: any) {
 
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
-        {field: 'name', header: t('point.name')},
-        {field: 'email', header: t('email')},
-        {field: 'role', header: t('role')}
+        {field: 'name', header: t('user.name')},
+        {field: 'email', header: t('user.email')},
+        {field: 'role', header: t('user.role')}
     ];
 
     const toastShow = (summary, severity, content) => {

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Enums\UserRolesEnum;
 use App\Helpers\ToastHelper;
 use App\Http\Requests\UserRequest;
-use App\Models\MountainMainPart;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
@@ -52,14 +51,14 @@ class UserController extends Controller
     {
         $this->repository->update($userRequest, $user);
 
-        return redirect()->route('$user.index')->with(ToastHelper::update('$user'));
+        return redirect()->route('user.index')->with(ToastHelper::update('user'));
     }
 
     public function store(UserRequest $userRequest): RedirectResponse
     {
         $this->repository->create($userRequest);
 
-        return redirect()->route('user.index')->with(ToastHelper::create('$user'));
+        return redirect()->route('user.index')->with(ToastHelper::create('user'));
     }
 
 

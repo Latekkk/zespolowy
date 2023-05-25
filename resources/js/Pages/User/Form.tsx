@@ -115,12 +115,12 @@ export default function Form(props) {
                                                               onChange={(e) => setSelectedRole(e)}
                                                               options={roles}
                                                               optionLabel="name"
-                                                              placeholder={'wybierz jakis no xD'}
+                                                              placeholder={'rola'}
                                                               className="w-full md:w-14rem"
                                                               error={errors.role}
                                                               name={'role'}
                                                               extraClass={undefined}
-                                                              label={undefined}
+                                                              label={user === null? (t('user.role') + ' obecna:' + user?.role): t('user.role') }
                                                               valueTemplate={undefined}
                                     />
 
