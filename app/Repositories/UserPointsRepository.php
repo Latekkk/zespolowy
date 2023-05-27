@@ -15,9 +15,9 @@ class UserPointsRepository
     }
     public function create(UserPointsRequest $request): void
     {
-        $user = $this->getUserPointsFromRequest($request);
-        $user->save();
-
+        $userPointsRequest = $this->getUserPointsFromRequest($request);
+        $userPointsRequest->save();
+        dd($userPointsRequest);
     }
 
     public function update(UserPointsRequest $request, UserPoints $user): void

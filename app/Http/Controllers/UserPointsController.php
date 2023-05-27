@@ -8,6 +8,7 @@ use App\Models\UserPoints;
 use App\Repositories\UserPointsRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -50,9 +51,10 @@ class UserPointsController extends Controller
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
+        dd('xD');
         $this->repository->create($userPointsRequest);
 
-        return redirect()->back();
+        return Redirect::back();
     }
 
 

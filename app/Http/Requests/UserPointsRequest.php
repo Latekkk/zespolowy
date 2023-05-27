@@ -27,14 +27,17 @@ class UserPointsRequest extends FormRequest
      */
     public function rules(): array
     {
+        $user_id = $this->user_id;
+        $mountainSectionId =  $this->mountain_section_id;
+        
         return [
             'user_id' => 'required|exists:users,id',
             'mountain_section_id' => 'required|exists:mountain_sections,id',
-            'points_mountain_section' => [
-                'required',
+            'points_mountain_section' => 'required|array|',
+            'points_mountain_section.*' => [
                 Rule::in(PointsMountainSectionEnum::toArray()),
-                function ($attribute, $value, $fail) use ($userId, $mountainSectionId) {
-                    $existingUserPoint = UserPoints::where('user_id', $userId)
+                function ($attribute, $value, $fail) use ($user_id, $mountainSectionId) {
+                    $existingUserPoint = UserPoints::where('user_id', $user_id)
                         ->where('mountain_section_id', $mountainSectionId)
                         ->where(function ($query) use ($value) {
                             $query->where('points_mountain_section', $value)
@@ -51,7 +54,7 @@ class UserPointsRequest extends FormRequest
                 'required',
                 Rule::in(StatusEnum::toArray()),
             ],
-            'approved_id' => 'required|exists:users,id',
+            'approved_id' => 'nullable|exists:users,id',
         ];
     }
 }
