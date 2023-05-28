@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -36,10 +37,10 @@ class PointPolicy
     public function create(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
-            case 'user':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
+            case UserRolesEnum::USER->value:
                 return true;
             default:
                 return false;
@@ -52,9 +53,9 @@ class PointPolicy
     public function update(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             case 'user':
                 if(Auth::id()===$point->user_id) return true;
@@ -70,9 +71,9 @@ class PointPolicy
     public function delete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -87,9 +88,9 @@ class PointPolicy
     public function restore(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -102,7 +103,7 @@ class PointPolicy
     public function forceDelete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;

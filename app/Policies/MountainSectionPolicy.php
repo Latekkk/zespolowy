@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\MountainSection;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -39,9 +40,9 @@ class MountainSectionPolicy
     public function create():  Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -58,9 +59,9 @@ class MountainSectionPolicy
     public function update(): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -73,9 +74,9 @@ class MountainSectionPolicy
     public function delete(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -88,9 +89,9 @@ class MountainSectionPolicy
     public function restore(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
-            case 'pathuser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+            case UserRolesEnum::PATHUSER->value:
                 return true;
             default:
                 return false;
@@ -103,7 +104,7 @@ class MountainSectionPolicy
     public function forceDelete(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;

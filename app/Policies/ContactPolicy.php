@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Contact;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -44,8 +45,8 @@ class ContactPolicy
     public function update(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -58,8 +59,8 @@ class ContactPolicy
     public function delete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -74,8 +75,8 @@ class ContactPolicy
     public function restore(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -88,7 +89,7 @@ class ContactPolicy
     public function forceDelete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;
