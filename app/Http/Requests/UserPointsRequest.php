@@ -29,7 +29,7 @@ class UserPointsRequest extends FormRequest
     {
         $user_id = $this->user_id;
         $mountainSectionId =  $this->mountain_section_id;
-        
+
         return [
             'user_id' => 'required|exists:users,id',
             'mountain_section_id' => 'required|exists:mountain_sections,id',

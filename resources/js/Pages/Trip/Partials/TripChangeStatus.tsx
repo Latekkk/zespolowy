@@ -2,12 +2,22 @@ import Button from "@/Components/Button";
 import React from "react";
 import {useTranslation} from "react-i18next";
 import {Inertia} from "@inertiajs/inertia";
-import PointsMountainSectionEnum from "@/Enums/PointsMountainSectionEnum ";
+import PointsMountainSectionENUM from "@/Enums/PointsMountainSectionENUM ";
+import StatusENUM from "@/Enums/StausEnum";
 
-export default function TripChangeStatus({section, trip, user, mountainPointSection}) {
+export default function TripChangeStatus({section, trip, user}) {
 
 
-
+    function sendUserPoints(zaCo){
+        console.log(section);
+        Inertia.post(route('userPoints.store', {
+            trip_id: trip.id,
+            user_id: user.id,
+            mountain_section_id: section.id,
+            points_mountain_section: zaCo,
+            status: StatusENUM.PENDING,
+        }));
+    }
 
     const globalTranslation = useTranslation(["global"]);
     return (
@@ -15,7 +25,7 @@ export default function TripChangeStatus({section, trip, user, mountainPointSect
             <span className='w-[520px]'>{section.name}</span>
             <Button
                 type="button"
-                onClick={() => Inertia.post(route('userPoints.store', { trip_id: trip.id, user_id: user.id, points_mountain_section: [PointsMountainSectionEnum.ENTRY] }))}
+                onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY])}
                 children={'punkty za wejscie'}
                 background="bg-blue-500"
                 textColor={"text-white"}
@@ -23,7 +33,7 @@ export default function TripChangeStatus({section, trip, user, mountainPointSect
             />
             <Button
                 type="button"
-                onClick={() => (section)}
+                onClick={() => sendUserPoints([PointsMountainSectionENUM.DESCENT])}
                 children={'punkty za zejscie'}
                 background="bg-blue-500"
                 textColor={"text-white"}
@@ -31,7 +41,7 @@ export default function TripChangeStatus({section, trip, user, mountainPointSect
             />
             <Button
                 type="button"
-                onClick={() => (section)}
+                onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY, PointsMountainSectionENUM.DESCENT])}
                 children={'wejscie i zejscie'}
                 background="bg-blue-500"
                 textColor={"text-white"}

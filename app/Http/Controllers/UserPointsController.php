@@ -36,6 +36,7 @@ class UserPointsController extends Controller
 
     public function edit(UserPoints $userPoints): Response
     {
+
         return Inertia::render('UserPointsPoints/Form', [
             'userPoints' => $userPoints,
             'roles' => ['userPoints', 'admin']
@@ -51,14 +52,10 @@ class UserPointsController extends Controller
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
-        dd('xD');
         $this->repository->create($userPointsRequest);
 
         return Redirect::back();
     }
-
-
-    //api
 
     public function getAll(): JsonResponse
     {

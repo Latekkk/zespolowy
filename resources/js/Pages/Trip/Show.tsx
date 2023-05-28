@@ -84,8 +84,7 @@ export default function Form(props) {
                                             <ScrollPanel style={{width: '100%', height: '400px'}}>
                                                 {selectedMountainSections.map((section) => (
                                                     <TripChangeStatus trip={trip} section={section}
-                                                                      user={user}
-                                                                      mountainPointSection={undefined}/>
+                                                                      user={user}/>
                                                 ))}
                                             </ScrollPanel>
                                         </div>
