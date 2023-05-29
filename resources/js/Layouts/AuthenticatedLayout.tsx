@@ -18,80 +18,82 @@ export default function Authenticated({props, header, children}) {
         {
             "name": "advertisement",
             "route": "home",
-            "can": ['user', 'admin'],
+            "can": ['guest','user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "",
                     "route": "home",
-                    "can": ['user', 'admin']
+                    "can": ['user', 'pathuser', 'squaduser', 'admin']
                 },
                 {
                     "name": "advertisement",
                     "route": "create",
-                    "can": ['admin']
+                    "can": ['squaduser', 'squaduser', 'admin']
                 }
             ]
         },
         {
             "name": "point",
             "route": "point.index",
-            "can": ['user', 'admin'],
+            "can": ['user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "point",
                     "route": "index",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "point",
                     "route": "create",
-                    "can": ['user'],
+                    "can": ['user','pathuser', 'squaduser', 'admin'],
                 }
             ]
         },
         {
             "name": "mountainSection",
             "route": "mountainSection.index",
-            "can": ['user', 'admin'],
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "mountainSection",
                     "route": "index",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "mountainSection",
                     "route": "create",
-                    "can": ['admin'],
+                    "can": ['pathuser','squaduser', 'squaduser', 'admin'],
                 }
             ]
         },
         {
             "name": "statute",
             "route": "statute.index",
-            "can": ['user', 'admin'],
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "statute",
                     "route": "index",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'squaduser', 'admin'],
                 },
             ]
         },
         {
             "name": "squad",
             "route": "squad.index",
+            "can": ['user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "squad",
                     "route": "index",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 },
             ]
         },
         {
             "name": "contact",
             "route": "contact.index",
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "contact",
@@ -101,14 +103,14 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "contact",
                     "route": "create",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 }
             ]
         },
         {
             "name": "badge",
             "route": "badge.index",
-            "can": ['user'],
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "badge",
@@ -118,24 +120,24 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "badge",
                     "route": "create",
-                    "can": ['user', 'admin']
+                    "can": ['squaduser', 'admin']
                 }
             ]
         },
         {
             "name": "sign",
             "route": "sign.index",
-            "can": ['user', 'admin'],
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "sign",
                     "route": "index",
-                    "can": ['user', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "sign",
                     "route": "create",
-                    "can": ['admin'],
+                    "can": ['squaduser', 'admin'],
                 }
             ]
         },

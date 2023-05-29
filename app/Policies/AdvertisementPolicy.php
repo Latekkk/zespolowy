@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Advertisement;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -38,8 +39,8 @@ class AdvertisementPolicy
     public function create(): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -56,8 +57,8 @@ class AdvertisementPolicy
     public function update(): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -74,8 +75,8 @@ class AdvertisementPolicy
     public function delete(User $user, Advertisement $advertisement): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -92,8 +93,8 @@ class AdvertisementPolicy
     public function restore(User $user, Advertisement $advertisement): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
-            case 'squaduser':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -110,7 +111,7 @@ class AdvertisementPolicy
     public function forceDelete(User $user, Advertisement $advertisement): Response|bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;

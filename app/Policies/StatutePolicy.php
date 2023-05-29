@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Statute;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -36,7 +37,7 @@ class StatutePolicy
     public function create(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;
@@ -49,7 +50,8 @@ class StatutePolicy
     public function update(): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
                 return true;
             default:
                 return false;
@@ -62,7 +64,7 @@ class StatutePolicy
     public function delete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;
@@ -76,8 +78,9 @@ class StatutePolicy
      */
     public function restore(User $user, Point $point): bool
     {
+
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;
@@ -90,7 +93,7 @@ class StatutePolicy
     public function forceDelete(User $user, Point $point): bool
     {
         switch (Auth::user()->role) {
-            case 'admin':
+            case UserRolesEnum::ADMIN->value:
                 return true;
             default:
                 return false;
