@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {Head, useForm, usePage} from "@inertiajs/react";
 import {MountainSection} from "@/Models/MountainSection";
@@ -9,6 +9,7 @@ import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
 import {Card} from 'primereact/card';
 import TripChangeStatus from "@/Pages/Trip/Partials/TripChangeStatus";
+import {Toast} from "primereact/toast";
 
 export default function Form(props) {
     const {t} = useTranslation(["trip"]);
@@ -24,7 +25,7 @@ export default function Form(props) {
         mountainSection: trip?.mountainSections || "",
         remember: true,
     });
-
+    const toast = useRef<Toast>(null);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -95,6 +96,7 @@ export default function Form(props) {
                     </div>
                 </div>
             </div>
+            <Toast ref={toast}/><Toast ref={toast}/>
         </Layout>
     );
 }

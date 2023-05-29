@@ -47,7 +47,7 @@ class UserPointsController extends Controller
     {
         $this->repository->update($userPointsRequest, $userPoints);
 
-        return redirect()->back();
+        return redirect()->route('home')->with(ToastHelper::update('trip'));
     }
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
