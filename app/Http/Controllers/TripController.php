@@ -9,10 +9,12 @@ use App\Models\MountainSection;
 use App\Models\MountainSectionTrip;
 use App\Models\Trip;
 use App\Models\User;
+use App\Models\UserPoints;
 use App\Repositories\TripRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -42,9 +44,14 @@ class TripController extends Controller
 
     public function show(Trip $trip): Response
     {
+        $user = Auth::user();
         $trip->load('mountainSections');
+        $userPoints = UserPoints::where('user_id', $user->id)
+            ->whereIn('mountain_section_id', $trip->mountainSections->pluck('id'))
+            ->get();
         return Inertia::render('Trip/Show', [
             'trip' => $trip,
+            'userPoints' => $userPoints,
         ]);
     }
 

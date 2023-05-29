@@ -1,5 +1,6 @@
 import { Trip } from '@/Models/Trip';
 import axios from 'axios';
+import {UserPoints} from "@/Models/UserPoints";
 
 class TripService {
     async getTrips(paginate: number = 15, page: number = 1, sort: string = 'id', sortOrder: number = 0 ): Promise<Trip[]> {

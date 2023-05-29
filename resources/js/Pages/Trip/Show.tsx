@@ -11,7 +11,7 @@ import {Card} from 'primereact/card';
 import TripChangeStatus from "@/Pages/Trip/Partials/TripChangeStatus";
 import {Toast} from "primereact/toast";
 
-export default function Form(props) {
+export default function Show(props) {
     const {t} = useTranslation(["trip"]);
     const globalTranslation = useTranslation(["global"]);
     const [selectedMountainSections, setSelectedMountainSections] = useState<MountainSection[]>([]);
@@ -45,6 +45,7 @@ export default function Form(props) {
             setSelectedMountainSections(trip.mountain_sections || []);
         }
         getMountainSections();
+        console.log(props.userPoints);
     }, []);
 
     const getMountainSections = () => {
@@ -85,7 +86,7 @@ export default function Form(props) {
                                             <ScrollPanel style={{width: '100%', height: '400px'}}>
                                                 {selectedMountainSections.map((section) => (
                                                     <TripChangeStatus trip={trip} section={section}
-                                                                      user={user}/>
+                                                                      user={user} userPoints={props.userPoints}/>
                                                 ))}
                                             </ScrollPanel>
                                         </div>
