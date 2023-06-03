@@ -31,6 +31,18 @@
     "squad": "Skład komisji",
     "squad.index": "Skład komisji",
 
+    "trip": "Wycieczki",
+    "trip.index": "Lista wycieczek",
+    "trip.create": "Stwórz nową wycieczkę",
+
+    "userPoints": "Punkty użytkownika",
+    "userPoints.index": "Lista punktów użytkownika",
+    "userPoints.create": "Dodaj nowy puknt użytkownika",
+
+    "user": "Użytkownicy",
+    "user.index": "Lista użytkowników",
+    "user.create": "Stwórz nowego użytkownika",
+
     "login": "Logowanie",
     "register": "Rejestracja",
     "settings": "Ustawienia",

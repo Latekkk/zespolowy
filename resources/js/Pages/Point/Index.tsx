@@ -42,7 +42,7 @@ export default function Index(props: any) {
     const columns: ColumnMeta[] = [
         {field: 'id', header: '#'},
         {field: 'name', header: t('point.name')},
-        {field: 'mountainMainPartName', header: 'Mountain Main Part' },
+        {field: 'mountainMainPartName', header: t('mountain.range') },
         {field: 'lat', header: t('latitude')},
         {field: 'lng', header: t('longitude')}
     ];

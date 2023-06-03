@@ -1,6 +1,16 @@
 {
-    "name": "Użytkownicy",
-    "user.name": "Nazwa użytkownika",
-    "user.email": "adres email",
-    "user.role": "rola"
+    "name": "Users",
+    "user.name": "Username",
+    "user.email": "Email address",
+    "user.role": "Role ",
+    "creating.editing.a.user": "Creating/Editing a user",
+    "search.user.ph": "Enter username",
+    "enter.the.user.name": "Enter the username",
+    "enter.the.user.email": "Enter the user email",
+    "user.password": "User password",
+    "enter.the.user.password": "Enter the user password",
+    "user.password.repetition": "User password repetition",
+    "enter.the.user.password.repetition": "Enter the user password repetition",
+    "select.role": "Select role user",
+    "current.role": "current: "
 }

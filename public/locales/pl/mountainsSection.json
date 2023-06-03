@@ -1,8 +1,8 @@
 {
     "creating.editing.a.mountain.section": "Tworzenie/Edycja odcinka górksiego",
     "delete.descr": "Czy chcesz usunąć odcinek górski: ",
-    "entrance.points": "Punkty za wejście",
-    "points.for.descent": "Punkty za zejście",
+    "entrance.points": "Punkty tam",
+    "points.for.descent": "Punkty z powrotem",
     "entrance.points.ph": "Wprowadź ilość punktów za wejście",
     "points.for.descent.ph": "Wprowadź ilość punktów za zejście",
     "distance": "Dystans (m)",
@@ -11,5 +11,7 @@
     "select.a.starting.point": "Wybierz punkt początkowy",
     "select.an.endpoint": "Wybierz punkt końcowy",
     "starting.point": "Punkt początkowy",
-    "endpoint": "Punkt końcowy"
+    "endpoint": "Punkt końcowy",
+    "mountain.range": "Pasmo górskie",
+    "select.a.mountain.range": "Pasmo górskie"
 }

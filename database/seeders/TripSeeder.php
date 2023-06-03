@@ -15,13 +15,13 @@ class TripSeeder extends Seeder
         Trip::truncate();
         $trip =[
             [
-                'name' => 'twoja stra1', 'date' => '16-10-20'
+                'name' => 'Wycieczka do zamku Książ', 'date' => '23-06-11'
             ],
             [
-                'name' => 'twoja stra2', 'date' => '17-10-20'
+                'name' => 'Śnieżne kotły', 'date' => '23-06-18'
             ],
             [
-                'name' => 'twoja stra', 'date' => '26-10-20'
+                'name' => 'Przez granice Orle - Harrachov (Czechy) ', 'date' => '23-06-25'
             ],
             ];
         Trip::insert($trip);

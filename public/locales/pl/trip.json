@@ -1,0 +1,12 @@
+{
+    "name": "Wycieczki",
+    "trip.name": "Nazwa wycieczki",
+    "trip.date": "Data wycieczki",
+    "creating.editing.a.trip": "Tworzenie/Edycja wycieczki",
+    "enter.trip.name.ph": "Wprowadź nazwę wycieczki",
+    "trip.date.ph": "Wybierz datę kiedy odbędzie się wycieczka",
+    "mountainSection": "Odcinki górskie",
+    "select.a.mountain.section": "Wybierz odcinki górskie",
+    "selected.mountain.sections": "Wybrane odcinki górskie"
+
+}

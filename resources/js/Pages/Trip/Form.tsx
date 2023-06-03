@@ -98,23 +98,23 @@ export default function Form(props) {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                                 <Input
-                                    labelText={t("entrance.trip.name")}
+                                    labelText={t("trip.name")}
                                     name="name"
                                     extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     value={data.name}
                                     error={errors.name}
                                     onChange={handleChange}
-                                    placeholder={t("entrance.trip.name.ph")}
+                                    placeholder={t("enter.trip.name.ph")}
                                 />
                                 <div className="block w-40">
                                 <div className="mb-4"></div>
                                 <Input
-                                    labelText={t("entrance.trip.date")}
+                                    labelText={t("trip.date")}
                                     name="date"
                                     value={data.date}
                                     error={errors.date}
                                     onChange={handleChange}
-                                    placeholder={t("entrance.trip.date.ph")}
+                                    placeholder={t("trip.date.ph")}
                                     type="date"
                                     extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 />
@@ -127,12 +127,12 @@ export default function Form(props) {
                                     onChange={handleAddMountainSection}
                                     options={mountainSections}
                                     optionLabel="name"
-                                    placeholder={t("select.a.mountainSection")}
+                                    placeholder={t("select.a.mountain.section")}
                                     className="w-full md:w-14rem"
                                 />
                                 <div className="mb-4"></div>
                                 <div className=''>
-                                    <h3>{t("selectedMountainSections")}</h3>
+                                    <h3>{t("selected.mountain.sections")}</h3>
                                     <div className="mb-4"></div>
                                     <div className="card scrollpanel-demo">
                                         <div className="flex flex-column md:flex-row gap-5">

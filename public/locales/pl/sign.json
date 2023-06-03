@@ -6,5 +6,6 @@
     "sign.description": "Opis oznaczenia szlaku turystycznego:",
     "sign.description.placeholder": "Wprowadź opis",
     "img.url": "Zdjęcie",
-    "photo.preview": "Podgląd zdjęcia"
+    "photo.preview": "Podgląd zdjęcia",
+    "sign.points": "Oznaczenia na szlaku"
 }

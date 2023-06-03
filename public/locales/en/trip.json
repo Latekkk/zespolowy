@@ -1,0 +1,11 @@
+{
+    "name": "Trips",
+    "trip.name": "Trip name",
+    "trip.date": "Trip date",
+    "creating.editing.a.trip": "Creating/Editing a trip",
+    "enter.trip.name.ph": "Enter trip name",
+    "trip.date.ph": "Choose the date when the trip will take place",
+    "mountainSection": "Mountain sections",
+    "select.a.mountain.section": "Select mountain sections",
+    "selected.mountain.sections": "Selected mountain sections"
+}

@@ -109,10 +109,10 @@ export default function Index(props: any) {
 
     const SearchInput = () => {
         return (
-            <div className="flex justify-content-end">
+            <div className="flex justify-content-end ">
                 <span className="p-input-icon-left">
                     <i className="pi pi-search" />
-                    <InputText value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Keyword Search" autoFocus={true} />
+                    <InputText className="w-[265px] text-right" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder={t('search.user.ph')} autoFocus={true} />
                 </span>
             </div>
         );
@@ -168,7 +168,7 @@ export default function Index(props: any) {
                 <Dialog header={globalTranslation.t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <p className="m-0 gap-x-2 flex">
-                        <p>{t('latitude')}: {modalData.name}</p>
+                        <p></p>
 
                     </p>
                     <div className="flex flex-row gap-x-2 justify-end">
