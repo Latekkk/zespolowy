@@ -43,7 +43,7 @@ export default function Index(props: any) {
         {field: 'id', header: '#'},
         {field: 'name', header: t('user.name')},
         {field: 'email', header: t('user.email')},
-        {field: 'role', header: t('user.role')}
+        {field: 'roleFriendlyName', header: t('user.role')}
     ];
 
     const toastShow = (summary, severity, content) => {
