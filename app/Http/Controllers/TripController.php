@@ -42,9 +42,13 @@ class TripController extends Controller
 
     public function show(Trip $trip): Response
     {
-        $trip->load('mountainSections');
+        $trip->load(['mountainSections.mountainMainPart.userMountainMainParts.user' ]);
+        $guides = $trip->mountainSections->flatMap(function ($mountainSection) {
+            return $mountainSection->mountainMainPart->userMountainMainParts->pluck('user');
+        });
         return Inertia::render('Trip/Show', [
             'trip' => $trip,
+            'guides' => $guides
         ]);
     }
 

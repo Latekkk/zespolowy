@@ -57,7 +57,6 @@ export default function Form({user,
     }
 
     function handleSubmit(e) {
-        console.log(data)
         e.preventDefault()
         user === null ? post(route('user.store')) : put(route('user.update', user.id))
     }

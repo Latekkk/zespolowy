@@ -14,8 +14,8 @@ export default function Form(props) {
 
     const signTranslation  = useTranslation(['sign'])
     const globalTranslation  = useTranslation(['global'])
-    const host = window.location.origin + '/storage/photos/'
     const sign = props?.sign ?? null;
+    const host = window.location.origin + '/storage/photos/'
     const mainPhoto = useFileList();
     const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
 
@@ -66,7 +66,6 @@ export default function Form(props) {
         clearErrors()
     }
 
-    console.log(sign)
     return (
         <Layout
             props={props}

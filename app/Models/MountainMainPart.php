@@ -31,7 +31,6 @@ class MountainMainPart extends Model
         return $this->hasMany(MountainRanges::class);
     }
 
-
     public function points(): BelongsToMany
     {
         return $this->belongsToMany(Point::class, 'point_mountains_main_parts');

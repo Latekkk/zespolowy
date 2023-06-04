@@ -4,12 +4,14 @@ import {Head, useForm, usePage} from "@inertiajs/react";
 import {MountainSection} from "@/Models/MountainSection";
 import Layout from "@/Layouts/Layout";
 import Button from "@/Components/Button";
+import { Button as PrimeButton } from 'primereact/button';
 import MountainSectionService from "@/Pages/MountainSection/service/MountainSectionService";
 import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
 import {Card} from 'primereact/card';
 import TripChangeStatus from "@/Pages/Trip/Partials/TripChangeStatus";
 import {Toast} from "primereact/toast";
+import {Sidebar} from "primereact/sidebar";
 
 export default function Form(props) {
     const {t} = useTranslation(["trip"]);
@@ -26,7 +28,7 @@ export default function Form(props) {
         remember: true,
     });
     const toast = useRef<Toast>(null);
-
+    const [visible, setVisible] = useState<boolean>(false);
     function handleSubmit(e) {
         e.preventDefault();
         trip === null
@@ -56,13 +58,32 @@ export default function Form(props) {
     };
 
     const header = (
-        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png"/>
-    );
-    const footer = (
-        <div className="flex flex-wrap justify-content-end gap-2">
-            <Button label="Wróć" icon="pi pi-check"/>
+        <div className={'h-[0px]'}>
+            <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png"/>
         </div>
     );
+    const footer = (
+        <></>
+    );
+
+    const card = (
+        <Card title={trip.name} subTitle={trip.date} footer={footer} header={header}
+              className="w-full h-full">
+            <div className="card scrollpanel-demo">
+                <div className="flex flex-column md:flex-row gap-5">
+                    <div className="flex-auto">
+                        <ScrollPanel style={{width: '100%', height: '400px'}}>
+                            {selectedMountainSections.map((section, index) => (
+                                <TripChangeStatus trip={trip} section={section}
+                                                  user={user} guides={props.guides} collapsed={index !== 0}/>
+
+                            ))}
+                        </ScrollPanel>
+                    </div>
+                </div>
+            </div>
+        </Card>
+    )
 
     return (<Layout
             props={props}
@@ -75,23 +96,15 @@ export default function Form(props) {
             <Head title={t("show.a.trip")}/>
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                            <Card title={trip.name} subTitle={trip.date} footer={footer} header={header}
-                                  className="w-full">
-                                <div className="card scrollpanel-demo">
-                                    <div className="flex flex-column md:flex-row gap-5">
-                                        <div className="flex-auto">
-                                            <ScrollPanel style={{width: '100%', height: '400px'}}>
-                                                {selectedMountainSections.map((section) => (
-                                                    <TripChangeStatus trip={trip} section={section}
-                                                                      user={user}/>
-                                                ))}
-                                            </ScrollPanel>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card>
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
+                        <div className="card flex justify-items-end p-2">
+                            <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
+                                {card}
+                            </Sidebar>
+                            <PrimeButton icon="pi pi-th-large text-end" className={'p-2 text-end w-[150px]'} onClick={() => setVisible(true)} > Full screen </PrimeButton>
+                        </div>
+                        <div className="flex p-6 text-gray-900 flex flex-col ">
+                            {card}
                         </div>
                     </div>
                 </div>

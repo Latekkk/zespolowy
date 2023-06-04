@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ToastHelper;
 use App\Http\Requests\UserPointsRequest;
+use App\Models\MountainMainPart;
 use App\Models\UserPoints;
 use App\Repositories\UserPointsRepository;
 use Illuminate\Http\JsonResponse;
@@ -23,13 +24,14 @@ class UserPointsController extends Controller
 
     public function index(): Response
     {
-        return Inertia::render('UserPointsPoints/Index', [
+        return Inertia::render('Point/Index', [
+            'mountainMainParts' => MountainMainPart::all()
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('UserPointsPoints/Form', [
+        return Inertia::render('Point/Form', [
         ]);
 
     }
@@ -37,7 +39,7 @@ class UserPointsController extends Controller
     public function edit(UserPoints $userPoints): Response
     {
 
-        return Inertia::render('UserPointsPoints/Form', [
+        return Inertia::render('Point/Form', [
             'userPoints' => $userPoints,
             'roles' => ['userPoints', 'admin']
         ]);

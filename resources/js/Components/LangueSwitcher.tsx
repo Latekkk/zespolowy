@@ -96,9 +96,7 @@ function LanguageSwitcher() {
         axios.post('/language', {locale: i18n.language.slice(0, 2)})
             .then((response) => {
             })
-            .catch((error) => {
-                console.log(error);
-            });
+
     }
 
 

@@ -22,6 +22,7 @@ class MountainSection extends Model
         'points_for_descent',
         'start_point',
         'end_point',
+        'mountain_main_part_id'
     ];
 
     public function start_point(): BelongsTo
@@ -37,6 +38,11 @@ class MountainSection extends Model
     public function mountainRanges(): BelongsTo
     {
         return $this->belongsTo(MountainRanges::class);
+    }
+
+    public function mountainMainPart()
+    {
+        return $this->belongsTo(MountainMainPart::class);
     }
 
     public function points(): BelongsTo

@@ -16,7 +16,6 @@ export default function Form(props) {
 
     const [firstName, setFirstName] = useState(null )
     const [secondName, setSecondName] = useState(null)
-    const [selectedMountainMain, setSelectedMountainMain] = useState(null)
     const mountainSection = props.mountainSection ?? null;
     const [points, setPoints] = useState<Point[]>([]);
 
@@ -27,6 +26,7 @@ export default function Form(props) {
         points_for_descent: mountainSection?.points_for_descent || "",
         start_point : mountainSection?.start_point || "",
         end_point : mountainSection?.end_point || "",
+        mountain_main_part_id: mountainSection?.mountain_main_part_id || null,
         remember: true
     })
 
@@ -86,15 +86,21 @@ export default function Form(props) {
     },[])
     useEffect(() => {
         getPoints()
-    }, [selectedMountainMain]);
+    }, [data.mountain_main_part_id]);
 
     useEffect(() => {
     }, [points]);
     const getPoints = () => {
-        PointService.getPoints(selectedMountainMain?.id).then((data: Point[]) => {
+        PointService.getPoints(data.mountain_main_part_id?.id).then((data: Point[]) => {
             setPoints(data.data);
         });
     }
+
+    const getName = () => {
+        return props.mountainMainParts.find(item => item?.id === data?.mountain_main_part_id)
+    }
+
+
     return (
         <Layout
             props={props}
@@ -109,13 +115,13 @@ export default function Form(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                                <DropdownWithErrorMessage label={t('mountain.range')}
-                                                          value={selectedMountainMain?.name}
-                                                          valueTemplate={selectedMountainMain?.name }
-                                                          onChange={(e) => {setSelectedMountainMain(e)}}
+                                <DropdownWithErrorMessage label={t('mountain.main_parts')}
+                                                          value={getName()}
+                                                          valueTemplate={getName() }
+                                                          onChange={(e) => handleChange(e.id, 'mountain_main_part_id', e.id)}
                                                           options={props.mountainMainParts}
                                                           optionLabel="name"
-                                                          placeholder={t('select.a.mountain.range')}
+                                                          placeholder={t('select.a.mountain.main_parts')}
                                                           className="w-full md:w-14rem"
                                 />
                                 <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>

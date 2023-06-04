@@ -1,9 +1,8 @@
 import {useTranslation} from 'react-i18next';
 
-export default function FileInput({labelText, name, value = {}, onChange, error}) {
+export default function FileInput({labelText, name, value = {}, onChange, error, showName = true}) {
 
     const inputTranslation = useTranslation(['input'])
-
     return (
         <div className="flex flex-col gap-y-2 shadow-xl bg-gray-200 rounded p-2 ">
             <label htmlFor={name}>{labelText}</label>
@@ -16,7 +15,11 @@ export default function FileInput({labelText, name, value = {}, onChange, error}
                     onChange={((e) => onChange(e))}/>
 
             </div>
-            <p>{inputTranslation.t('selected.file')}: {value.name}</p>
+            {
+                showName && (
+                    <p>{inputTranslation.t('selected.file')}: {value.name}</p>
+                )
+            }
             {
                 error && <div className="text-red-500">{error}</div>
             }

@@ -42,6 +42,7 @@ class MountainSectionRequest extends FormRequest
                     }
                 },
             ],
+            'mountain_main_part_id' => 'required'
         ];
     }
 }

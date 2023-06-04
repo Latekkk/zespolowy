@@ -29,7 +29,7 @@ class UserPointsRequest extends FormRequest
     {
         $user_id = $this->user_id;
         $mountainSectionId =  $this->mountain_section_id;
-
+        dd($this);
         return [
             'user_id' => 'required|exists:users,id',
             'mountain_section_id' => 'required|exists:mountain_sections,id',
@@ -55,6 +55,8 @@ class UserPointsRequest extends FormRequest
                 Rule::in(StatusEnum::toArray()),
             ],
             'approved_id' => 'nullable|exists:users,id',
+            'guide' => 'required|exists:users,id',
+            'date' => 'date|date_format:Y-m-d|before_or_equal:today'
         ];
     }
 }
