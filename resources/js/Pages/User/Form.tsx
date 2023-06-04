@@ -103,12 +103,12 @@ export default function Form({user,
                                                onChange={handleChange}
                                                placeholder={t('enter.the.user.password')}
                                         />
-                                        <Input labelText={t('user.password_repetition')}
+                                        <Input labelText={t('user.password.repetition')}
                                                name='password_repetition'
                                                value={data.password_repetition}
                                                error={errors.password_repetition}
                                                onChange={handleChange}
-                                               placeholder={t('enter.the.user.password_repetition')}
+                                               placeholder={t('enter.the.user.password.repetition')}
                                         />
                                     </div>
 
@@ -116,12 +116,12 @@ export default function Form({user,
                                                               onChange={(e) => setSelectedRole(e)}
                                                               options={arrRoles}
                                                               optionLabel="name"
-                                                              placeholder={'rola'}
+                                                              placeholder={t('select.role')}
                                                               className="w-full md:w-14rem"
                                                               error={errors.role}
                                                               name={'role'}
                                                               extraClass={undefined}
-                                                              label={user === null? (t('user.role') + ' obecna:' + user?.role): t('user.role') }
+                                                              label={user === null? (t('user.role') + t('current.role') + user?.role): t('user.role') }
                                                               valueTemplate={undefined}
                                     />
 

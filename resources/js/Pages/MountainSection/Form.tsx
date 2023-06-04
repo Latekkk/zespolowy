@@ -109,13 +109,13 @@ export default function Form(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                                <DropdownWithErrorMessage label={t('mountains_ranges')}
+                                <DropdownWithErrorMessage label={t('mountain.range')}
                                                           value={selectedMountainMain?.name}
                                                           valueTemplate={selectedMountainMain?.name }
                                                           onChange={(e) => {setSelectedMountainMain(e)}}
                                                           options={props.mountainMainParts}
                                                           optionLabel="name"
-                                                          placeholder={t('select.a.mountains_ranges')}
+                                                          placeholder={t('select.a.mountain.range')}
                                                           className="w-full md:w-14rem"
                                 />
                                 <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>

@@ -114,17 +114,16 @@ export default function Form(props) {
                                             />
                                         </div>
                                     </div>
-
                                     <DropdownWithErrorMessage value={'Wybierz grupe górską'}
+                                                              label={t('mountain.range')}
                                                               onChange={(e) => addMountainRanges(e)}
                                                               options={props.mountainMainParts}
                                                               optionLabel="name"
-                                                              placeholder={'wybierz jakis no xD'}
+                                                              placeholder={t('choose.mountain.range')}
                                                               className="w-full md:w-14rem"
                                                               error={errors.mountainMainParts} name={'mountainRangesDropDown'}
                                                               extraClass={undefined}
                                     />
-
 
                                 </div>
 
