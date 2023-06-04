@@ -88,6 +88,27 @@ class UserController extends Controller
                 ->appends(request()->query());
         }
 
+        $users->map(function ($user) {
+            switch ($user->role) {
+                case UserRolesEnum::ADMIN->value:
+                    $user->roleFriendlyName = 'Administrator';
+                    break;
+                case UserRolesEnum::USER->value:
+                    $user->roleFriendlyName = 'Użytkownik';
+                    break;
+                case UserRolesEnum::PATHUSER->value:
+                    $user->roleFriendlyName = 'Użytkownik ścieżki';
+                    break;
+                case UserRolesEnum::SQUADUSER->value:
+                    $user->roleFriendlyName = 'Użytkownik komisji';
+                    break;
+                default:
+                    $user->roleFriendlyName = 'Nieznana rola';
+                    break;
+            }
+            return $user;
+        });
+
         return response()->json($users);
     }
 
