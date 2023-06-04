@@ -13,6 +13,7 @@ use App\Http\Controllers\StatuteController;
 use App\Http\Controllers\TranslationSwitcherController;
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserMountainMainPartController;
 use App\Http\Controllers\UserPointsController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('user', UserController::class);
         Route::resource('trip', TripController::class)->except('index');
         Route::resource('userPoints', UserPointsController::class);
+        Route::resource('userMountainMainPartController', UserMountainMainPartController::class)->only('store');
 
     });
 });

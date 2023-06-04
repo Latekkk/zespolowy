@@ -13,7 +13,7 @@ class ToastHelper
         return [
             'toast' => [
                 'summary' => __('global.update'),
-                'content' => __($model . '.update.toast'),
+                'content' => __('global.'.$model . '.update.toast'),
                 'severity' => $severity
             ]
         ];
@@ -25,7 +25,7 @@ class ToastHelper
         return [
             'toast' => [
                 'summary' => __('global.remove'),
-                'content' => __($model . '.remove.toast'),
+                'content' => __('global.'.$model . '.remove.toast'),
                 'severity' => $severity
             ]
         ];
@@ -37,7 +37,7 @@ class ToastHelper
         return [
             'toast' => [
                 'summary' => __('global.create'),
-                'content' => __($model . '.create.toast'),
+                'content' => __('global.'.$model . '.create.toast'),
                 'severity' => $severity
             ]
         ];

@@ -1,23 +1,24 @@
 import Layout from '@/Layouts/Layout';
-import { useForm} from '@inertiajs/react';
+import {useForm, usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Input from "@/Components/Input"
 import Button from "@/Components/Button";
 import DropdownWithErrorMessage from "@/Components/DropdownWithErrorMessage";
 import React, {useEffect, useRef, useState} from "react";
-import Chip from '@/Components/Chip';
-import deleteById from '@/Functions/deleteById';
 import {Toast} from 'primereact/toast';
-import { Dropdown } from 'primereact/dropdown';
-import {logDOM} from "@testing-library/dom";
+import {Accordion, AccordionTab} from "primereact/accordion";
+import PrimaryButton from "@/Components/PrimaryButton";
+import {Inertia} from "@inertiajs/inertia";
+import {ScrollPanel} from "primereact/scrollpanel";
 
-export default function Form(props) {
+export default function Form({user,
+                                 user_mountain_main_parts,
+                                 mountain_main_parts,
+                                 roles}) {
 
     const toast = useRef(null);
     const {t} = useTranslation(['users'])
     const globalTranslation = useTranslation(['global'])
-
-    const user = props.user ?? null;
 
     const createTemplateToDrop = (arr) => {
         return arr.map((item, index) => {
@@ -25,8 +26,8 @@ export default function Form(props) {
         })
     }
 
-    const roles = createTemplateToDrop(props.roles);
-
+    const arrRoles = createTemplateToDrop(roles);
+    const props = usePage().props;
 
     const [selectedRole, setSelectedRole] = useState( user?.role || '');
 
@@ -113,7 +114,7 @@ export default function Form(props) {
 
                                     <DropdownWithErrorMessage value={selectedRole}
                                                               onChange={(e) => setSelectedRole(e)}
-                                                              options={roles}
+                                                              options={arrRoles}
                                                               optionLabel="name"
                                                               placeholder={'rola'}
                                                               className="w-full md:w-14rem"
@@ -125,6 +126,62 @@ export default function Form(props) {
                                     />
 
                                 </div>
+
+                                <div className="card min-w-[300px] w-[800px]">
+                                    <Accordion activeIndex={0}>
+                                        <AccordionTab
+                                            header={
+                                                <div className="flex align-items-center">
+                                                    <i className="pi pi-calendar mr-2"></i>
+                                                    <span className="vertical-align-middle">Uprawnienia do ścieżek</span>
+                                                </div>
+                                            }
+                                        >
+
+                                            <ScrollPanel style={{ width: '100%', height: '425px' }}>
+                                            {user_mountain_main_parts?.data && user_mountain_main_parts?.data.map((user_mountain_main_part, index) => {
+                                                return (
+                                                        <div className={'w-full border border-1 p-2 my-2 '} key={user_mountain_main_part.name + '-' + index}>
+                                                            <p >{user_mountain_main_part.name} </p>
+                                                            <p>{user_mountain_main_part.created_at.split(' ')[0]}</p>
+                                                            <p>{user_mountain_main_part.granted}</p>
+                                                        </div>
+                                                );
+                                            })}
+
+                                            </ScrollPanel>
+                                        </AccordionTab>
+                                        <AccordionTab
+                                            header={
+                                                <div className="flex align-items-center">
+                                                    <i className="pi pi-calendar mr-2"></i>
+                                                    <span className="vertical-align-middle">Dostęp do ścieżek</span>
+                                                </div>
+                                            }
+                                        >
+                                            {mountain_main_parts.map((mountain_main_part, index) => {
+                                                return (
+                                                    <div key={mountain_main_part.name + '-' + index} className="flex flex-row justify-between border border-1 p-2 my-2">
+                                                        <p>{mountain_main_part.name}</p>
+                                                        <PrimaryButton
+                                                            type={'button'}
+                                                            onClick={() => {
+                                                                Inertia.post(route('userMountainMainPartController.store', {
+                                                                    user_id: user.id,
+                                                                    mountain_main_part_id: mountain_main_part.id
+                                                                }));
+                                                            }}
+                                                            key={mountain_main_part.name + '-add-button'}
+                                                        >
+                                                            Dodaj {mountain_main_part.id} {user.id}
+                                                        </PrimaryButton>
+                                                    </div>
+                                                )
+                                            })}
+                                        </AccordionTab>
+                                    </Accordion>
+                                </div>
+
                             </div>
 
                             <div className='flex flex-row gap-x-2 p-2 w-full justify-end'>

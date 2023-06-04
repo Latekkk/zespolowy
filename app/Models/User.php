@@ -7,6 +7,7 @@ use App\Enums\PointsMountainSectionEnum;
 use App\Enums\StatusEnum;
 use App\Http\Resources\UserResource;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -79,8 +80,24 @@ class User extends Authenticatable
                 : $userPoint->mountainSection->points_for_descent;
         });
     }
-//przykłąd uzycia resource
+
+    public function userMountainMainParts(): HasMany
+    {
+        return $this->hasMany(UserMountainMainPart::class);
+    }
+
+    public function grantedUserMountainMainParts(): HasMany
+    {
+        return $this->hasMany(UserMountainMainPart::class, 'granted');
+    }
+
+
+
+    //przykłąd uzycia resource
 //'user' => new UserResource(User::where('id', 1)->first()),
 //'users' => new UserResource::collection(User::where('id', '>' 1)->get()),
+
+
+
 
 }

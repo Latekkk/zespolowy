@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Traits\Timestamp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method create(array|string[] $array_merge)
@@ -14,6 +16,7 @@ class MountainMainPart extends Model
 {
     #main
     use HasFactory;
+    use Timestamp;
 
     protected $fillable = [
         'name',
@@ -32,5 +35,10 @@ class MountainMainPart extends Model
     public function points(): BelongsToMany
     {
         return $this->belongsToMany(Point::class, 'point_mountains_main_parts');
+    }
+
+    public function userMountainMainParts(): HasMany
+    {
+        return $this->hasMany(UserMountainMainPart::class);
     }
 }

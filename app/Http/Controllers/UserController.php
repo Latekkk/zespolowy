@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Enums\UserRolesEnum;
 use App\Helpers\ToastHelper;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserMountainMainPartResource;
+use App\Models\MountainMainPart;
+use App\Models\MountainRanges;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
@@ -31,7 +34,7 @@ class UserController extends Controller
     public function create(): Response
     {
         return Inertia::render('User/Form', [
-            'roles' => UserRolesEnum::toArray()
+            'roles' => UserRolesEnum::toArray(),
         ]);
 
 
@@ -40,10 +43,16 @@ class UserController extends Controller
 
     public function edit(User $user): Response
     {
+        $user->load('userMountainMainParts');
+
+        $excludedMountainRanges = $user->userMountainMainParts()->pluck('mountain_main_part_id')->all();
+        $allMountainRanges = MountainMainPart::whereNotIn('id', $excludedMountainRanges)->get();
+
         return Inertia::render('User/Form', [
             'user' => $user,
-
-            'roles' => ['user', 'admin']
+            'user_mountain_main_parts' => UserMountainMainPartResource::collection($user->userMountainMainParts),
+            'mountain_main_parts' => $allMountainRanges,
+            'roles' => UserRolesEnum::toArray(),
         ]);
     }
 
