@@ -23,6 +23,7 @@ class Point extends Model
         'lat',
         'lng',
         'user_id',
+        'mountain_main_part_id',
         'is_global'
     ];
 

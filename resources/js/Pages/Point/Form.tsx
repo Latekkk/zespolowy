@@ -16,7 +16,6 @@ export default function Form(props) {
     const toast = useRef(null);
     const {t} = useTranslation(['points'])
     const globalTranslation = useTranslation(['global'])
-
     const point = props.point ?? null;
 
     const [mountainMainParts, setMountainMainParts] = useState( props?.point?.mountain_main_parts || [])
@@ -26,7 +25,7 @@ export default function Form(props) {
             'lng': Number(props?.point?.lng)
         }],
         name: props?.point?.name || '',
-        mountainMainParts: mountainMainParts,
+        mountain_main_part_id: point?.mountain_main_part_id || null,
         remember: true,
     })
 
@@ -47,6 +46,10 @@ export default function Form(props) {
     const setDefaultForm = () => {
         reset();
         clearErrors()
+    }
+
+    const getName = () => {
+        return props.mountainMainParts.find(item => item?.id === data?.mountain_main_part_id)
     }
 
     const addMountainRanges = (object) => {
@@ -114,32 +117,18 @@ export default function Form(props) {
                                             />
                                         </div>
                                     </div>
-                                    <DropdownWithErrorMessage value={'Wybierz grupe górską'}
-                                                              label={t('mountain.range')}
-                                                              onChange={(e) => addMountainRanges(e)}
+                                    <DropdownWithErrorMessage label={t('mountain.main_parts')}
+                                                              value={getName()}
+                                                              valueTemplate={getName() }
+                                                              onChange={(e) => handleChange(e.id, 'mountain_main_part_id', e.id)}
                                                               options={props.mountainMainParts}
                                                               optionLabel="name"
                                                               placeholder={t('choose.mountain.range')}
                                                               className="w-full md:w-14rem"
                                                               error={errors.mountainMainParts} name={'mountainRangesDropDown'}
-                                                              extraClass={undefined}
                                     />
-
                                 </div>
 
-                            </div>
-                            <div className="flex flex-row flex-wrap gap-x-5 gap-y-1 px-2 pt-2 ml-2 min-h-[130px]">
-                                {
-                                    mountainMainParts.map((element, index) => {
-                                        return (
-                                            <Chip key={'chip' + element.name}
-                                                  label={element.name}
-                                                  onRemove={() => deleteById(element.id, 'mountainRanges', mountainMainParts, setMountainMainParts)}
-                                                  error={errors?.mountainMainParts}
-                                            />
-                                        )
-                                    })
-                                }
                             </div>
                             <div className='flex flex-row gap-x-2 p-2 w-full justify-end'>
 

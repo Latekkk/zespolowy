@@ -30,7 +30,7 @@ export default function Index(props: any) {
     const [paginate, setPaginate] = useState(15);
     const [totalRecords, setTotalRecords] = useState(0)
     const [first, setFirst] = useState(0);
-    const [sort, setSort] = useState<string>('id')
+    const [sort, setSort] = useState<string>('name')
     const [sortOrder, setSortOrder] = useState<string>('1')
 
     const [visible, setVisible] = useState<boolean>(false);

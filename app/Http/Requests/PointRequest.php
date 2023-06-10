@@ -29,8 +29,7 @@ class PointRequest extends FormRequest
             'markers' => 'required|array|min:1',
             'markers.*.lat' => 'required',
             'markers.*.lng' => 'required',
-            'mountainMainParts' => 'required|array|min:1',
-            'mountainMainParts.*.id' => 'required|exists:mountain_main_parts,id',
+            'mountain_main_part_id' => 'required|exists:mountain_main_parts,id',
         ];
     }
 }

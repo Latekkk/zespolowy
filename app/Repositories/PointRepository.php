@@ -27,9 +27,6 @@ class PointRepository
             DB::transaction(function () use ($request) {
                 $point = $this->getPointFromRequest($request);
                 $point->save();
-
-                $point->mountainMainParts()->attach(array_column($request->mountainMainParts, 'id'), ['point_id' => $point->id]);
-
             });
         } catch (PointExceptionsSaveWithMountainMainParts $e) {
             throw new PointExceptionsSaveWithMountainMainParts($e->getMessage());
@@ -64,7 +61,8 @@ class PointRepository
             'name' => $request->name,
             'lat' => $request->markers[0]['lat'],
             'lng' => $request->markers[0]['lng'],
-            'slug' => SlugHelper::getSlug($request->name)
+            'mountain_main_part_id' => $request->mountain_main_part_id,
+            'slug' => SlugHelper::getSlug($request->name),
         ];
 
         if ($update) {
