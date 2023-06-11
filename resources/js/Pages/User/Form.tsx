@@ -22,7 +22,7 @@ export default function Form({user,
 
     const createTemplateToDrop = (arr) => {
         return arr.map((item, index) => {
-            return {id: index+1, name: item}
+            return {id: index+1, name: t(item)}
         })
     }
 
