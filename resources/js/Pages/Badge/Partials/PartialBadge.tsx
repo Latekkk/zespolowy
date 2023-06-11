@@ -65,7 +65,8 @@ export default function PartialBadge({badges, auth, setModalData,setVisible}) {
                                 }
                             </div>
                         </div>
-                        <img src={undefinedImages(badge.photos[0]?.file_name, host, 'images/undefined/badgeNotFound.jpg')} alt={badge.photos[0]?.file_name}/>
+                        <img src={undefinedImages(badge.photos[0]?.file_name, host, 'images/undefined/badgeNotFound.jpg')} alt={badge.photos[0]?.file_name} style={{ display: 'block',
+                            margin: '0 auto', maxWidth: '50%', maxHeight: '50%' }}/>
                         <p className="text-center">
                             {badgeTranslation.t('badge.points')} {badge.point}
                         </p>
