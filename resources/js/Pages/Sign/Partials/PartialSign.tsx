@@ -67,7 +67,7 @@ export default function PartialSign({sign, auth, setModalData,setVisible}) {
                         </div>
                         <img src={undefinedImages(sign?.photos[0]?.file_name, host, 'images/undefined/signNotFound.jpg')} alt={sign.photos[0]?.file_name}/>
                         <p className="text-center">
-                            {signTranslation.t('sign.points')} {sign.point}
+                            {signTranslation.t('sign.points')} {sign.description}
                         </p>
                     </div>
                 )
