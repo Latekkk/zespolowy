@@ -115,12 +115,12 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "badge",
                     "route": "index",
-                    "can": ['user']
+                    "can": ['user'],
                 },
                 {
                     "name": "badge",
                     "route": "create",
-                    "can": ['squaduser', 'admin']
+                    "can": ['squaduser', 'admin'],
                 }
             ]
         },

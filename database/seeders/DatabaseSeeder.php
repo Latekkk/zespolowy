@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             MountainRangesSeeder::class,
             TripSeeder::class,
             MountainSectionTripSeeder::class,
-            UserMountainMainPartSeeder::class
+            UserMountainMainPartSeeder::class,
+            AdvertisementsSeeder::class
         ]);
 
         User::factory(10)->create();

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('slug', 200);
             $table->dateTime('time_from');
-            $table->dateTime('time_to' );
+            $table->dateTime('time_to' )->nullable();
             $table->timestamps();
         });
     }

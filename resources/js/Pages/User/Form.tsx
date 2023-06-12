@@ -132,7 +132,7 @@ export default function Form({user,
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">Uprawnienia do ścieżek</span>
+                                                    <span className="vertical-align-middle">Posiadane uprawnienia</span>
                                                 </div>
                                             }
                                         >
@@ -154,7 +154,7 @@ export default function Form({user,
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">Dostęp do ścieżek</span>
+                                                    <span className="vertical-align-middle">Dostępne uprawnienia</span>
                                                 </div>
                                             }
                                         >

@@ -50,15 +50,15 @@ class PointPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Point $point): bool
+    public function update(User $user, ?Point $point = null): bool
     {
         switch (Auth::user()->role) {
             case UserRolesEnum::ADMIN->value:
             case UserRolesEnum::SQUADUSER->value:
             case UserRolesEnum::PATHUSER->value:
                 return true;
-            case 'user':
-                if(Auth::id()===$point->user_id) return true;
+            case UserRolesEnum::USER->value:
+                if($point===null || Auth::id()===$point->user_id) return true;
                 else return false;
             default:
                 return false;

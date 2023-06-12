@@ -67,7 +67,7 @@ export default function Advertisement({advertisement,auth}: any) {
                             <p>{advertisement.title}</p>
                             <div className="flex gap-x-2 text-xs mr-12 bg-gray-200 p-4 rounded shadow">
                                 <p>{t('valid.time.from')} {getDate(advertisement.time_from)}</p>
-                                <p>{t('valid.time.to')} {getDate(advertisement.time_to)}</p>
+                                {advertisement.time_to && <p>{t('valid.time.to')} {getDate(advertisement.time_to)}</p>}
                             </div>
 
                         </div>

@@ -23,7 +23,7 @@ class AdvertisementController extends Controller
     public function index(): Response
     {
         return Inertia::render('Advertisement/Index', [
-            'advertisements' => Advertisement::paginate(5)
+            'advertisements' => Advertisement::orderByDesc("time_from")->paginate(5)
         ]);
     }
 
