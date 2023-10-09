@@ -56,7 +56,7 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                             <Dropdown value={selectedGuide}
                                       onChange={(e: DropdownChangeEvent) => setSelectedGuide(e.value)} options={guides}
                                       optionLabel="name"
-                                      editable placeholder="wybierz przewodnika" className="w-full md:w-14rem"/>
+                                      editable placeholder="wybierz przodownika" className="w-full md:w-14rem"/>
                         </div>
                     </div>
                     <div className={'w-[250px] max-w-[250px] px-2'}>

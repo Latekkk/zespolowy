@@ -12,6 +12,7 @@
     "select.an.endpoint": "Wybierz punkt końcowy",
     "starting.point": "Punkt początkowy",
     "endpoint": "Punkt końcowy",
-    "mountain.range": "Pasmo górskie",
-    "select.a.mountain.range": "Pasmo górskie"
+    "mountain.range": "Grupa górska",
+    "select.a.mountain.range": "Wybierz grupę górską",
+    "mountain.main_parts": "Część gór"
 }

@@ -12,5 +12,9 @@
     "user.password.repetition": "Powtórz hasło użytkownika",
     "enter.the.user.password.repetition": "Wprowadź ponownie hasło użytkownika",
     "select.role": "Wybierz rolę użytkownika",
-    "current.role": "obecna: "
+    "current.role": "obecna: ",
+    "admin": "administrator",
+    "user": "użytkownik",
+    "pathuser": "przodownik",
+    "squaduser": "członek komisji"
 }
