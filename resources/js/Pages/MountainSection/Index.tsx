@@ -1,6 +1,6 @@
 import Layout from '@/Layouts/Layout';
 import {Head, Link} from '@inertiajs/react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {Column} from 'primereact/column';
 import React, {useEffect, useRef, useState} from "react";
 import {Toast} from "primereact/toast";
@@ -18,11 +18,13 @@ interface MountainsSection {
     entry_points: string;
     points_for_descent: string;
 }
+
 interface ColumnMeta {
     field: string;
     header: string;
 }
-export default function Index(  props: any) {
+
+export default function Index(props: any) {
     const {t} = useTranslation(['mountainsSection'])
     const globalTranslation = useTranslation(['global'])
     const [mountainsSection, setMountainsSection] = useState<MountainsSection[]>([]);
@@ -58,7 +60,9 @@ export default function Index(  props: any) {
         {field: 'name', header: t('mountain.section.name')},
         {field: 'entry_points', header: t('entrance.points')},
         {field: 'points_for_descent', header: t('points.for.descent')},
+        {field: 'mountain_main_part.name', header: t('mountains_main_part')},
     ];
+
     useEffect(() => {
         getMountainsSection(),
             PointService.getPoints().then((data: Point[]) => {
@@ -71,11 +75,13 @@ export default function Index(  props: any) {
     }, [page, paginate, sort, sortOrder]);
 
     const getMountainsSection = () => {
-        MountainSectionService.getMountainsSections(paginate, page, sort, sortOrder).then((data: MountainsSection[]) => {
-            setMountainsSection(data.data);
-            setLoading(false);
-            setTotalRecords(data.total)
-        });
+        MountainSectionService.getMountainsSections(paginate, page, sort, sortOrder)
+            .then((data: MountainsSection[]) => {
+                setMountainsSection(data.data);
+                setLoading(false);
+                setTotalRecords(data.total);
+            });
+
     }
     const onPageChange = (event) => {
         setFirst(event.first);
@@ -105,9 +111,10 @@ export default function Index(  props: any) {
         return (
             <div className="flex flex-wrap gap-2">
                 <Button type="button" className="bg-green-600 hover:bg-green-700" icon="pi pi-map"
-                        onClick={() => showModalToMap(rowData)} ></Button>
-                <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('mountainSection.edit', {id: rowData.id})} method="get" as="button" type="button">
-                    <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
+                        onClick={() => showModalToMap(rowData)}></Button>
+                <Link className="bg-blue-700 px-2 hover:bg-blue-500"
+                      href={route('mountainSection.edit', {id: rowData.id})} method="get" as="button" type="button">
+                    <i className="pi pi-file-edit text-white" style={{fontSize: '1.5rem'}}>
                     </i>
                 </Link>
                 <Button type="button" className="bg-red-700 hover:bg-red-500 focus:bg-red-500" icon="pi pi-delete-left"
@@ -123,7 +130,7 @@ export default function Index(  props: any) {
             props={props}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">{t('name')}</h2>}
         >
-            <Head title={t('name')} />
+            <Head title={t('name')}/>
             <div className="py-12">
 
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -157,19 +164,20 @@ export default function Index(  props: any) {
             {
                 modalDataToMap &&
                 <div className="flex flex-row gap-x-2 justify-end" style={{marginTop: '20px'}}>
-                <Dialog header={globalTranslation.t('map') + ' ' +  modalDataToMap.name} visible={visibleMap} maximizable
-                        style={{width: '40vw'}} onHide={() => setVisibleMap(false)}>
+                    <Dialog header={globalTranslation.t('map') + ' ' + modalDataToMap.name} visible={visibleMap}
+                            maximizable
+                            style={{width: '40vw'}} onHide={() => setVisibleMap(false)}>
 
-                    <GoogleMapComponent markers={getMarkers(modalDataToMap)}/>
+                        <GoogleMapComponent markers={getMarkers(modalDataToMap)}/>
 
-                    <div className="flex flex-row gap-x-2 justify-end margin">
-                        <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
-                                onClick={() => setVisibleMap(false)}/>
-                    </div>
-                </Dialog></div>
+                        <div className="flex flex-row gap-x-2 justify-end margin">
+                            <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
+                                    onClick={() => setVisibleMap(false)}/>
+                        </div>
+                    </Dialog></div>
             }
             {
-            modalData &&
+                modalData &&
 
                 <Dialog header={t('delete.descr') + modalData.name} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
@@ -185,7 +193,7 @@ export default function Index(  props: any) {
                     </div>
                 </Dialog>
             }
-                <Toast ref={toast}/>
+            <Toast ref={toast}/>
         </Layout>
     );
 }

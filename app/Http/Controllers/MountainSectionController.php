@@ -28,7 +28,7 @@ class MountainSectionController extends Controller
     public function index(): Response
     {
         return Inertia::render('MountainSection/Index', [
-            'mountainSections' => MountainSection::paginate(5)
+            'mountainSections' => MountainSection::with('mountainMainPart')->paginate(5)
         ]);
     }
 
@@ -75,7 +75,7 @@ class MountainSectionController extends Controller
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $mountainSection = MountainSection::orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $mountainSection = MountainSection::with('mountainMainPart')->orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
         return response()->json($mountainSection);
     }
 
