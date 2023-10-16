@@ -191,6 +191,18 @@ export default function Authenticated({props, header, children}) {
                     "can": ['admin'],
                 }
             ]
+        },
+        {
+            "name": "userPointsToAccept",
+            "route": "userPointsToAccept.index",
+            "can": ['admin'],
+            "subLinks": [
+                {
+                    "name": "userPointsToAccept",
+                    "route": "index",
+                    "can": ['admin'],
+                },
+            ]
         }
     ]
 

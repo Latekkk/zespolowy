@@ -49,7 +49,8 @@ export default function Form(props) {
     }
 
     const getName = () => {
-        return props.mountainMainParts.find(item => item?.id === data?.mountain_main_part_id)
+        if (props.mountainMainParts === undefined) return '';
+        return props?.mountainMainParts.find(item => item?.id === data?.mountain_main_part_id)
     }
 
     const addMountainRanges = (object) => {

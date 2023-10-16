@@ -23,7 +23,6 @@ class PhotoService
     public function savePhoto(UploadedFile $file, Model $model): Photo
     {
         DB::beginTransaction();
-
         try {
             $this->validateImage($file);
 

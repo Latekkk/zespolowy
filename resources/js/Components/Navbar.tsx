@@ -5,7 +5,6 @@ import React from "react";
 
 export default function NavBar({navbar, user = null}) {
 
-
     const {t} = useTranslation(['navbar'])
     const getLink = (link) => {
         return link.subLinks[0].name +
@@ -13,7 +12,6 @@ export default function NavBar({navbar, user = null}) {
             link.subLinks[0].route
 
     }
-
     const countOccurrencesInSubLinks = (object, role) => {
         if ( role === null? role = 'guest' : '')
 
@@ -36,7 +34,6 @@ export default function NavBar({navbar, user = null}) {
         <>
             {navbar.map((link, index) => {
                 return (
-
                     <div className="ml-3 relative" key={index}>
                         {
                             countOccurrencesInSubLinks(link, user?.role) <= 1 ?

@@ -91,13 +91,9 @@ class User extends Authenticatable
         return $this->hasMany(UserMountainMainPart::class, 'granted');
     }
 
-
-
-    //przykłąd uzycia resource
-//'user' => new UserResource(User::where('id', 1)->first()),
-//'users' => new UserResource::collection(User::where('id', '>' 1)->get()),
-
-
-
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
 }

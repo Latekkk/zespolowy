@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class UserPoints extends Model
 {
@@ -31,6 +32,11 @@ class UserPoints extends Model
     public function approvedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approved_id');
+    }
+
+    public function photos(): MorphToMany
+    {
+        return $this->morphToMany(Photo::class, 'imageable');
     }
 
 }
