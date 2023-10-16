@@ -22,11 +22,12 @@
     "contact.create": "Poproś o kontakt",
 
     "statute": "Regulamin",
-    "statute.index": "Podgląd",
+    "statute.index": "Regulamin",
 
-    "mountainSection": "Odcinki górskie",
+    "mountainSection": "Odcinki i punkty górskie",
     "mountainSection.index": "Lista odcinków górskich",
     "mountainSection.create": "Dodaj nowy odcinek górski",
+    "mountainSectionAndPoints": "Odcinki i punkty górskie",
 
     "squad": "Skład komisji",
     "squad.index": "Skład komisji",
