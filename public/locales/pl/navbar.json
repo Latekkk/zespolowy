@@ -44,6 +44,8 @@
     "user.index": "Lista użytkowników",
     "user.create": "Stwórz nowego użytkownika",
 
+    "userPointsToAccept": "Lista punktów do zaakceptowania",
+
     "login": "Logowanie",
     "register": "Rejestracja",
     "settings": "Ustawienia",
