@@ -6,6 +6,7 @@ import {Card} from 'primereact/card';
 import {Toast} from "primereact/toast";
 import PrimaryButton from "@/Components/PrimaryButton";
 import {router} from "@inertiajs/react";
+import DataFormatter from "@/Components/DataFormatter";
 
 export default function Edit({userPoint}) {
     const {t} = useTranslation(["UserPointsToAccept"]);
@@ -25,35 +26,44 @@ export default function Edit({userPoint}) {
 
     const card = (
         <div>
-            <Card title="Title">
-                <p className="m-0">
-                    {userPoint.name}
-                </p>
-            </Card>
-            <Card title="STATUS">
-                <p className="m-0">
-                    {userPoint.status}
-                </p>
-            </Card>
-            <Card title="Title">
-                <p className="m-0">
-                    {userPoint.points_mountain_section}
-                </p>
-                <p>
-                    {userPoint.points_mountain_section === 'ENTRY' && userPoint.mountain_section.entry_points}
-                    {userPoint.points_mountain_section === 'DESCENT' && userPoint.mountain_section.entry_points}
-                </p>
-            </Card>
-            <Card title="Nazwa ">
-                <p className="m-0">
-                    {userPoint.mountain_section.name}
-                </p>
-            </Card>
-            <Card title="Kto zaakceptował ">
-                <p className="m-0">
-                    {userPoint?.approved_by?.name ?? '-'}
-                </p>
-            </Card>
+            <div className={'flex flex-col gap-y-4'}>
+               <div className={'flex flex-row gap-x-4'}>
+                   <Card title="Nazwa " className={'w-full'}>
+                       <p className="m-0">
+                           {userPoint.mountain_section.name}
+                       </p>
+                   </Card>
+                   <Card title="Kto był przewodnikiem" className={'w-full'}>
+                       <p className="m-0">
+                           {userPoint.path_user.name}
+                       </p>
+                   </Card>
+               </div>
+                <div className={'flex flex-row gap-x-4'}>
+                    <Card title="Uczestnik" className={'w-full'}>
+                        <p className="m-0">
+                            {userPoint.user.name}
+                        </p>
+                    </Card>
+                    <Card title="Kiedy było odbyte" className={'w-full'}>
+                        <p className="m-0">
+                            <DataFormatter date={userPoint.updated_at} />
+                        </p>
+                    </Card>
+                </div>
+                <div className={'flex flex-row gap-x-4'}>
+                    <Card title="Status" className={'w-full'}>
+                        <p className="m-0">
+                            {userPoint.status}
+                        </p>
+                    </Card>
+                    <Card title="Punkty za" className={'w-full'}>
+                        <p className="m-0">
+                            {userPoint.points_mountain_section}
+                        </p>
+                    </Card>
+                </div>
+            </div>
         </div>
     )
 

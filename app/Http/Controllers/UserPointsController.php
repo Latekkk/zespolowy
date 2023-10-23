@@ -55,7 +55,7 @@ class UserPointsController extends Controller
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
         $userPoint = $this->repository->create($userPointsRequest);
-        return Redirect::back();
+        return Redirect::back()->with(ToastHelper::create('UserPoint'));
     }
 
     public function getAll(): JsonResponse

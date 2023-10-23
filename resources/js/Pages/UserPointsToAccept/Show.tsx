@@ -4,6 +4,7 @@ import Layout from "@/Layouts/Layout";
 import "react-datepicker/dist/react-datepicker.css";
 import {Card} from 'primereact/card';
 import {Toast} from "primereact/toast";
+import DataFormatter from "@/Components/DataFormatter";
 
 export default function Show({userPoint}) {
     const {t} = useTranslation(["UserPointsToAccept"]);
@@ -31,6 +32,16 @@ export default function Show({userPoint}) {
             <Card title="Kto był przewodnikiem">
                 <p className="m-0">
                     {userPoint.path_user.name}
+                </p>
+            </Card>
+            <Card title="Uczestnik">
+                <p className="m-0">
+                    {userPoint.user.name}
+                </p>
+            </Card>
+            <Card title="Kiedy było odbyte">
+                <p className="m-0">
+                    <DataFormatter date={userPoint.updated_at} />
                 </p>
             </Card>
             <Card title="Status">

@@ -27,7 +27,14 @@ class UserPointsToAcceptController extends Controller
 
         $appends = ['sort' => $sort, 'sortOrder' => $sortOrder];
 
-        $userPointsToAccept = UserPoints::with(['user','mountainSection','approvedBy'])->orderBy($sort, $sortOrder)->paginate($perPage)->appends($appends);
+        $userPointsToAccept = UserPoints::with(['user','mountainSection','approvedBy']);
+        if (!\auth()->user()->isAdmin()) {
+            $userPointsToAccept = $userPointsToAccept->where('path_user_id', \auth()->user()->id);
+        }
+
+        $userPointsToAccept = $userPointsToAccept
+            ->orderBy($sort, $sortOrder)->paginate($perPage)->appends($appends);
+
 
         return Inertia::render('UserPointsToAccept/Index', [
             'data' => $userPointsToAccept,
@@ -61,6 +68,7 @@ class UserPointsToAcceptController extends Controller
     public function show(UserPoints $userPoints)
     {
         $userPoints->load(['user','mountainSection','approvedBy', 'pathUser']);
+
         return Inertia::render('UserPointsToAccept/Show', [
             'userPoint' => $userPoints,
         ]);
@@ -71,7 +79,7 @@ class UserPointsToAcceptController extends Controller
      */
     public function edit(UserPoints $userPoints)
     {
-        $userPoints->load(['user','mountainSection','approvedBy']);
+        $userPoints->load(['user','mountainSection','approvedBy', 'pathUser']);
 
         return Inertia::render('UserPointsToAccept/Edit', [
             'userPoint' => $userPoints,
