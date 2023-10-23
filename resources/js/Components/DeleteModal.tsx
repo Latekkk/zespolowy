@@ -14,6 +14,7 @@ const DeleteModal = ({modalData, visible, setVisible, removeElement, parameters 
     const handleClose = () => {
         setVisible(false);
     };
+
     const handleDelete = () => {
         if (typeof removeElement === 'string') {
             router.delete(route(removeElement, parameters), {

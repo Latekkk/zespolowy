@@ -6,6 +6,7 @@ use App\Enums\PointsMountainSectionEnum;
 use App\Http\Requests\UserPointsRequest;
 use App\Models\UserPoints;
 use App\Services\PhotoService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class UserPointsRepository
@@ -22,11 +23,9 @@ class UserPointsRepository
     public function create(UserPointsRequest $request): void
     {
         DB::transaction(function () use ($request) {
-            $userPointsRequests = $this->getUserPointsFromRequest($request);
-            foreach ($userPointsRequests as $userPointsRequest) {
-                $userPointsRequest->save();
-                $this->photoService->savePhoto($this->getFile($request), $userPointsRequest);
-            }
+            $userPointsRequest = $this->getUserPointsFromRequest($request);
+            $userPointsRequest->save();
+            $this->photoService->savePhoto($this->getFile($request), $userPointsRequest);
         });
 
     }
@@ -44,33 +43,42 @@ class UserPointsRepository
     private function getUserPointsFromRequest(UserPointsRequest $request, $update = false): UserPoints|array
     {
         $userPoints = [];
-
         $userId = $request->input('user_id');
+        $pathId = $request->input('guide');
         $mountainSectionId = $request->input('mountain_section_id');
         $status = $request->input('status');
         $approvedId = null;
 
         $pointsMountainSection = $request->input('points_mountain_section');
-
-        if (in_array(PointsMountainSectionEnum::ENTRY->value, $pointsMountainSection)) {
-            $userPoints[] = new UserPoints([
+        if (in_array(PointsMountainSectionEnum::ENTRY->value, $pointsMountainSection) && in_array(PointsMountainSectionEnum::DESCENT->value, $pointsMountainSection)) {
+            $userPoints = new UserPoints([
+                'user_id' => $userId,
+                'mountain_section_id' => $mountainSectionId,
+                'points_mountain_section' => PointsMountainSectionEnum::BOTH->value,
+                'status' => $status,
+                'approved_id' => $approvedId,
+                'path_user_id' => $pathId,
+            ]);
+        } else if (in_array(PointsMountainSectionEnum::ENTRY->value, $pointsMountainSection)) {
+            $userPoints = new UserPoints([
                 'user_id' => $userId,
                 'mountain_section_id' => $mountainSectionId,
                 'points_mountain_section' => PointsMountainSectionEnum::ENTRY->value,
                 'status' => $status,
                 'approved_id' => $approvedId,
+                'path_user_id' => $pathId,
             ]);
-        }
-
-        if (in_array(PointsMountainSectionEnum::DESCENT->value, $pointsMountainSection)) {
-            $userPoints[] = new UserPoints([
+        } else if (in_array(PointsMountainSectionEnum::DESCENT->value, $pointsMountainSection)) {
+            $userPoints = new UserPoints([
                 'user_id' => $userId,
                 'mountain_section_id' => $mountainSectionId,
                 'points_mountain_section' => PointsMountainSectionEnum::DESCENT->value,
                 'status' => $status,
                 'approved_id' => $approvedId,
+                'path_user_id' => $pathId,
             ]);
         }
+
         return $userPoints;
     }
 

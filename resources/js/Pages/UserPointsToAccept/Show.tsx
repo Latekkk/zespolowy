@@ -1,18 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useRef } from "react";
 import {useTranslation} from "react-i18next";
-import {Head, useForm, usePage} from "@inertiajs/react";
-import {MountainSection} from "@/Models/MountainSection";
 import Layout from "@/Layouts/Layout";
-import Button from "@/Components/Button";
-import { Button as PrimeButton } from 'primereact/button';
-import MountainSectionService from "@/Pages/MountainSection/service/MountainSectionService";
-import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
 import {Card} from 'primereact/card';
-import TripChangeStatus from "@/Pages/Trip/Partials/TripChangeStatus";
 import {Toast} from "primereact/toast";
-import {Sidebar} from "primereact/sidebar";
-import {use} from "i18next";
 
 export default function Show({userPoint}) {
     const {t} = useTranslation(["UserPointsToAccept"]);
@@ -31,31 +22,28 @@ export default function Show({userPoint}) {
     );
 
     const card = (
-        <div>
-            <Card title="Title">
-                <p className="m-0">
-                    {userPoint.name}
-                </p>
-            </Card>
-            <Card title="STATUS">
-                <p className="m-0">
-                    {userPoint.status}
-                </p>
-            </Card>
-            <Card title="Title">
-                <p className="m-0">
-                    {userPoint.points_mountain_section}
-                </p>
-                <p>
-                    {userPoint.points_mountain_section === 'ENTRY' &&  userPoint.mountain_section.entry_points}
-                    {userPoint.points_mountain_section === 'DESCENT' &&  userPoint.mountain_section.entry_points}
-                </p>
-            </Card>
+        <div className={'flex  flex-col gap-y-2'}>
             <Card title="Nazwa ">
                 <p className="m-0">
                     {userPoint.mountain_section.name}
                 </p>
             </Card>
+            <Card title="Kto był przewodnikiem">
+                <p className="m-0">
+                    {userPoint.path_user.name}
+                </p>
+            </Card>
+            <Card title="Status">
+                <p className="m-0">
+                    {userPoint.status}
+                </p>
+            </Card>
+            <Card title="Punkty za">
+                <p className="m-0">
+                    {userPoint.points_mountain_section}
+                </p>
+            </Card>
+
         </div>
     )
 

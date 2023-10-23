@@ -9,5 +9,5 @@ enum PointsMountainSectionEnum: string
     use EnumToArray;
     case  ENTRY = 'ENTRY';
     case  DESCENT = 'DESCENT';
-
+    case BOTH = 'BOTH';
 }

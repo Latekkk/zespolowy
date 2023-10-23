@@ -169,6 +169,9 @@ export default function Authenticated({props, header, children}) {
                     "route": "index",
                     "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 },
+            ]
+        }
+        ,{
             "name": "userPointsToAccept",
             "route": "userPointsToAccept.index",
             "can": ['admin'],

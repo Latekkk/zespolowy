@@ -27,9 +27,7 @@ class UserPointsToAcceptController extends Controller
 
         $appends = ['sort' => $sort, 'sortOrder' => $sortOrder];
 
-
         $userPointsToAccept = UserPoints::with(['user','mountainSection','approvedBy'])->orderBy($sort, $sortOrder)->paginate($perPage)->appends($appends);
-
 
         return Inertia::render('UserPointsToAccept/Index', [
             'data' => $userPointsToAccept,
@@ -62,8 +60,7 @@ class UserPointsToAcceptController extends Controller
      */
     public function show(UserPoints $userPoints)
     {
-       $userPoints->load(['user','mountainSection','approvedBy']);
-
+        $userPoints->load(['user','mountainSection','approvedBy', 'pathUser']);
         return Inertia::render('UserPointsToAccept/Show', [
             'userPoint' => $userPoints,
         ]);
@@ -92,8 +89,13 @@ class UserPointsToAcceptController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(UserPoints $userPoints)
     {
-        //
+        if (!$userPoints->delete()) {
+            abort(404);
+        }
+
+        return redirect()->back()->with(ToastHelper::remove('UserPoints'));
+
     }
 }

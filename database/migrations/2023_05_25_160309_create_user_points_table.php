@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\MountainSection::class);
             $table->enum('points_mountain_section', \App\Enums\PointsMountainSectionEnum::toArray());
             $table->enum('status', StatusEnum::toArray());
+            $table->foreignIdFor(\App\Models\User::class, 'path_user_id')->nullable();
             $table->foreignIdFor(\App\Models\User::class, 'approved_id')->nullable();
             $table->timestamps();
         });

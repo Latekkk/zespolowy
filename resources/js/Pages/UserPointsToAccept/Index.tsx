@@ -23,8 +23,7 @@ export default function Index({data, sort, sortOrder}) {
 
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState(null);
-    console.log(data)
-
+    console.log(modalData)
 
     const columns: ColumnMeta[] = [
         {field: 'mountain_section.name', header: userPointToAcceptTranslation.t('mountain_section.name')},
@@ -105,8 +104,8 @@ export default function Index({data, sort, sortOrder}) {
                 visible={visible}
                 setVisible={setVisible}
                 modalData={modalData}
-                removeElement={'documentToRead.destroy'}
-                parameters={{documentToRead: modalData?.id}}
+                removeElement={'userPointsToAccept.destroy'}
+                parameters={{userPoints: modalData?.id}}
             />
 
         </Layout>
