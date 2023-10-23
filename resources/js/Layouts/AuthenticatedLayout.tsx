@@ -33,23 +33,6 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
-            "name": "point",
-            "route": "point.index",
-            "can": ['user', 'pathuser', 'squaduser', 'admin'],
-            "subLinks": [
-                {
-                    "name": "point",
-                    "route": "index",
-                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
-                },
-                {
-                    "name": "point",
-                    "route": "create",
-                    "can": ['user','pathuser', 'squaduser', 'admin'],
-                }
-            ]
-        },
-        {
             "name": "mountainSection",
             "route": "mountainSection.index",
             "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
@@ -63,47 +46,33 @@ export default function Authenticated({props, header, children}) {
                     "name": "mountainSection",
                     "route": "create",
                     "can": ['pathuser','squaduser', 'squaduser', 'admin'],
+                },
+                {
+                    "name": "point",
+                    "route": "index",
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
+                },
+                {
+                    "name": "point",
+                    "route": "create",
+                    "can": ['user','pathuser', 'squaduser', 'admin'],
                 }
             ]
         },
         {
-            "name": "statute",
-            "route": "statute.index",
-            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
+            "name": "trip",
+            "route": "trip.index",
+            "can": ['user', 'admin'],
             "subLinks": [
                 {
-                    "name": "statute",
+                    "name": "trip",
                     "route": "index",
-                    "can": ['user', 'squaduser', 'admin'],
-                },
-            ]
-        },
-        {
-            "name": "squad",
-            "route": "squad.index",
-            "can": ['user', 'pathuser', 'squaduser', 'admin'],
-            "subLinks": [
-                {
-                    "name": "squad",
-                    "route": "index",
-                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
-                },
-            ]
-        },
-        {
-            "name": "contact",
-            "route": "contact.index",
-            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
-            "subLinks": [
-                {
-                    "name": "contact",
-                    "route": "index",
-                    "can": ['admin'],
+                    "can": ['user', 'admin'],
                 },
                 {
-                    "name": "contact",
+                    "name": "trip",
                     "route": "create",
-                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
+                    "can": ['user', 'admin'],
                 }
             ]
         },
@@ -115,7 +84,7 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "badge",
                     "route": "index",
-                    "can": ['user'],
+                    "can": ['user','admin'],
                 },
                 {
                     "name": "badge",
@@ -138,23 +107,6 @@ export default function Authenticated({props, header, children}) {
                     "name": "sign",
                     "route": "create",
                     "can": ['squaduser', 'admin'],
-                }
-            ]
-        },
-        {
-            "name": "trip",
-            "route": "trip.index",
-            "can": ['user', 'admin'],
-            "subLinks": [
-                {
-                    "name": "trip",
-                    "route": "index",
-                    "can": ['user', 'admin'],
-                },
-                {
-                    "name": "trip",
-                    "route": "create",
-                    "can": ['user', 'admin'],
                 }
             ]
         },
@@ -193,6 +145,30 @@ export default function Authenticated({props, header, children}) {
             ]
         },
         {
+            "name": "contact",
+            "route": "contact.index",
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
+            "subLinks": [
+                {
+                    "name": "contact",
+                    "route": "index",
+                    "can": ['admin'],
+                },
+                {
+                    "name": "contact",
+                    "route": "create",
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
+                },
+                {
+                    "name": "statute",
+                    "route": "index",
+                    "can": ['user', 'squaduser', 'admin'],
+                },
+                {
+                    "name": "squad",
+                    "route": "index",
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
+                },
             "name": "userPointsToAccept",
             "route": "userPointsToAccept.index",
             "can": ['admin'],
