@@ -95,7 +95,7 @@ export default function Index(  props: any) {
 
     const actionTemplate = (rowData) => {
         return (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex  gap-2">
                 <Button type="button" className="bg-green-600 hover:bg-green-700" icon="pi pi-map"
                         onClick={() => showModalToMap(rowData)} ></Button>
                 <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('trip.edit', {id: rowData.id})} method="get" as="button" type="button">
@@ -131,7 +131,7 @@ export default function Index(  props: any) {
                                     setSortOrder(event.sortOrder)
                                 }}
                                 removableSort
-                                tableStyle={{width: "max-content"}} loading={loading}
+                                 loading={loading}
                             >
                                 {columns.map((col, i) => (
                                     <Column key={col.field} field={col.field} header={col.header} sortable/>

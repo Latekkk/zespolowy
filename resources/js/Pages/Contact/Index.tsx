@@ -98,7 +98,7 @@ export default function Index(props: any) {
 
     const actionTemplate = (rowData, column) => {
         return (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex  gap-2">
                 <Button type="button" className="bg-blue-700 px-2 hover:bg-blue-500 justify-center"
                         onClick={() => showContactModal(rowData)} rounded style={{width: 42}}><BiShow/></Button>
 
@@ -145,7 +145,7 @@ export default function Index(props: any) {
                             setSortOrder(event.sortOrder)
                         }}
                         removableSort
-                        tableStyle={{width: "max-content"}}
+
                         loading={loading}
                     >
                         {columns.map((col, i) => (

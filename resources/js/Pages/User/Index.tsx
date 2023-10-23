@@ -84,7 +84,7 @@ export default function Index(props: any) {
 
     const actionTemplate = (rowData, column) => {
         return (
-            <div className="flex flex-wrap gap-2">
+            <div className="flex gap-2">
                 <Link className="bg-blue-700 px-2 hover:bg-blue-500" href={route('user.edit', {id: rowData.id})} method="get" as="button" type="button">
                     <i className="pi pi-file-edit text-white" style={{ fontSize: '1.5rem' }}>
                     </i>
@@ -145,7 +145,7 @@ export default function Index(props: any) {
                                     setSortOrder(event.sortOrder)
                                 }}
                                 removableSort
-                                tableStyle={{width: "max-content"}} loading={loading}
+                                loading={loading}
                             >
                                 {columns.map((col, i) => (
                                     <Column key={col.field} field={col.field} header={col.header} sortable/>
