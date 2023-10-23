@@ -11,38 +11,71 @@ import {User} from "@/Models/User";
 import FileInput from "@/Components/FileInput";
 import undefinedImages from "@/Functions/undefinedImages";
 import useFileList from "@/Functions/fileList";
+import {router, useForm, usePage} from "@inertiajs/react";
 
 
 export default function TripChangeStatus({section, trip, user, guides, collapsed}) {
     const globalTranslation = useTranslation(["global"]);
-
+    const pageProps = usePage().props;
     const [date, setDate] = useState<string | Date | Date[] | null>(null);
     let today = new Date();
-    const [selectedGuide, setSelectedGuide] = useState<User | null>(null);
-    const [img_url, setImg_url] = useState(null)
 
     const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
     const mainPhoto = useFileList();
 
-    function sendUserPoints(points_mountain_section = null, selectedDate = null, guide = null, img_url = null) {
-        Inertia.post(route('userPoints.store', {
-            trip_id: trip.id,
-            user_id: user.id,
-            mountain_section_id: section.id,
-            points_mountain_section: points_mountain_section,
-            date: selectedDate,
-            guide: guide?.id,
-            img_url: img_url,
-            status: StatusENUM.PENDING,
-        }));
-    }
+    const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
+        trip_id:'',
+        user_id: user.id,
+        mountain_section_id: section.id,
+        points_mountain_section: undefined,
+        date: '',
+        guide: undefined,
+        img_url: undefined,
+        status: StatusENUM.PENDING,
+        remember: true,
+    })
 
     const handleFile = (e) => {
         if (e.currentTarget.files) {
-            setImg_url(e.currentTarget.files[0]);
+            setData("img_url", e.currentTarget.files[0]);
             mainPhoto.addFile(e.target.files)
         }
     };
+
+    function handleChange(e, keyName, val) {
+        const key = e?.target?.id || keyName;
+        let value = e?.target?.value || val || e || '';
+        setData(data => ({
+            ...data,
+            [key]: value,
+        }))
+    }
+
+    const setDefaultForm = () => {
+        reset();
+        mainPhoto.clear();
+        clearErrors()
+    }
+
+    const sendUserPoints = async (type) => {
+        setData(data => ({
+            ...data,
+            points_mountain_section: type,
+        }));
+    }
+
+    useEffect(() => {
+        if (data.points_mountain_section !== undefined) {
+            post(route('userPoints.store'), {
+                onSuccess: params => {
+                    setData(data => ({
+                        ...data,
+                        points_mountain_section: undefined,
+                    }));
+                }
+            });
+        }
+    }, [data.points_mountain_section])
 
     return (
         <div key={'tripChangeStatus-' + section.id}
@@ -51,20 +84,21 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                 <div className={'flex flex-row gap-x-2'}>
                     <div className={'flex flex-col w-full gap-y-2'}>
                         <div className={'flex flex-col gap-y-2'}>
-                            <Calendar value={date} onChange={(e) => setDate(e.value)} maxDate={today} showIcon
+                            <Calendar value={data.date} onChange={(e) => handleChange(e.target.value, 'date', e.target.value)} maxDate={today} showIcon
                                       className={'bg-blue-500'}/>
-                            <Dropdown value={selectedGuide}
-                                      onChange={(e: DropdownChangeEvent) => setSelectedGuide(e.value)} options={guides}
+                            <Dropdown value={guides.find((guide) => guide.id === data.guide)?.name}
+                                      name={'guide'}
+                                      onChange={(e) =>handleChange(e.target.value.id, 'guide', e.target.value.id)} options={guides}
                                       optionLabel="name"
                                       editable placeholder="wybierz przodownika" className="w-full md:w-14rem"/>
                         </div>
                     </div>
                     <div className={'w-[250px] max-w-[250px] px-2'}>
-                        <FileInput labelText={'zdj'}
+                            <FileInput labelText={'img.url'}
                                    name='img_url'
-                                   value={img_url ?? undefined}
+                                   value={data.img_url}
+                                   error={errors.img_url}
                                    onChange={handleFile}
-                                   showName={false}
                         />
 
 
@@ -86,7 +120,7 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                 <div>
                     <Button
                         type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY], date, selectedGuide)}
+                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY])}
                         children={'punkty za wejscie'}
                         background="bg-blue-500"
                         textColor={"text-white"}
@@ -94,7 +128,7 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                     />
                     <Button
                         type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.DESCENT], date, selectedGuide)}
+                        onClick={() => sendUserPoints([PointsMountainSectionENUM.DESCENT])}
                         children={'punkty za zejscie'}
                         background="bg-blue-500"
                         textColor={"text-white"}
@@ -102,7 +136,7 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                     />
                     <Button
                         type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY, PointsMountainSectionENUM.DESCENT], date, selectedGuide)}
+                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY, PointsMountainSectionENUM.DESCENT])}
                         children={'wejscie i zejscie'}
                         background="bg-blue-500"
                         textColor={"text-white"}

@@ -12,9 +12,11 @@ use App\Http\Controllers\MountainSectionController;
 use App\Http\Controllers\StatuteController;
 use App\Http\Controllers\TranslationSwitcherController;
 use App\Http\Controllers\TripController;
+use App\Http\Controllers\TripToAcceptController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserMountainMainPartController;
 use App\Http\Controllers\UserPointsController;
+use App\Http\Controllers\UserPointsToAcceptController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -65,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::resource('trip', TripController::class)->except('index');
         Route::resource('userPoints', UserPointsController::class);
         Route::resource('userMountainMainPartController', UserMountainMainPartController::class)->only('store');
-
+        Route::resource('userPointsToAccept', UserPointsToAcceptController::class)->parameter('userPointsToAccept', 'userPoints');
     });
 });
 

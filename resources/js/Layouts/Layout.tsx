@@ -5,9 +5,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import React, {useEffect, useRef} from "react";
 import {Toast} from "primereact/toast";
 
-export default function Layout({props, header, children,}) {
+export default function Layout({props = null, header, children}) {
+    const pageProps = usePage().props;
     const {t} = useTranslation(['navbar'])
-    const auth = props.auth.user
+    const auth = pageProps.auth.user
 
 
     const toast = useRef<Toast>(null);
@@ -17,8 +18,8 @@ export default function Layout({props, header, children,}) {
     };
 
     useEffect((() => {
-        if (props.toast !== undefined) {
-            const toastData = props.toast.value;
+        if (pageProps.toast !== undefined) {
+            const toastData = pageProps.toast.value;
             if (toastData !== null) toastShow(toastData.summary || '', toastData.severity || 'info', t(toastData.content) || '')
         }
     }),[])
@@ -26,7 +27,7 @@ export default function Layout({props, header, children,}) {
     return (
         <>
             {auth == undefined &&
-                <GuestLayout header={header} props={props}>
+                <GuestLayout header={header} props={pageProps}>
                     <main>
                         <div>
                             {toast.message && (
@@ -40,7 +41,7 @@ export default function Layout({props, header, children,}) {
             {auth != undefined &&
                 <AuthenticatedLayout
                     header={header}
-                    props={props}>
+                    props={pageProps}>
                     <main>
 
                         <Toast ref={toast}/>

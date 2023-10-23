@@ -29,7 +29,6 @@ class UserPointsRequest extends FormRequest
     {
         $user_id = $this->user_id;
         $mountainSectionId =  $this->mountain_section_id;
-        dd($this);
         return [
             'user_id' => 'required|exists:users,id',
             'mountain_section_id' => 'required|exists:mountain_sections,id',
@@ -39,12 +38,12 @@ class UserPointsRequest extends FormRequest
                 function ($attribute, $value, $fail) use ($user_id, $mountainSectionId) {
                     $existingUserPoint = UserPoints::where('user_id', $user_id)
                         ->where('mountain_section_id', $mountainSectionId)
+                        ->where('points_mountain_section', $value)
                         ->where(function ($query) use ($value) {
                             $query->where('points_mountain_section', $value)
                                 ->orWhere('status', '!=', 'rejected');
                         })
                         ->exists();
-
                     if ($existingUserPoint) {
                         $fail('Wybrany points_mountain_section jest już przypisany dla tego użytkownika i sekcji górskiej lub poprzedni rekord nie został odrzucony.');
                     }
@@ -56,7 +55,8 @@ class UserPointsRequest extends FormRequest
             ],
             'approved_id' => 'nullable|exists:users,id',
             'guide' => 'required|exists:users,id',
-            'date' => 'date|date_format:Y-m-d|before_or_equal:today'
+            'date' => 'date|before_or_equal:today',
+            'img_url' => 'required|image|min:1',
         ];
     }
 }

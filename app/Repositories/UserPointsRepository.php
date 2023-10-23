@@ -5,21 +5,30 @@ namespace App\Repositories;
 use App\Enums\PointsMountainSectionEnum;
 use App\Http\Requests\UserPointsRequest;
 use App\Models\UserPoints;
+use App\Services\PhotoService;
+use Illuminate\Support\Facades\DB;
 
 class UserPointsRepository
 {
     protected UserPoints $model;
+    protected PhotoService $photoService;
 
-    public function __construct(UserPoints $model)
+    public function __construct(UserPoints $model, PhotoService $photoService)
     {
         $this->model = $model;
+        $this->photoService = $photoService;
     }
+
     public function create(UserPointsRequest $request): void
     {
-        $userPointsRequests = $this->getUserPointsFromRequest($request);
-        foreach ($userPointsRequests as $userPointsRequest) {
-            $userPointsRequest->save();
-        }
+        DB::transaction(function () use ($request) {
+            $userPointsRequests = $this->getUserPointsFromRequest($request);
+            foreach ($userPointsRequests as $userPointsRequest) {
+                $userPointsRequest->save();
+                $this->photoService->savePhoto($this->getFile($request), $userPointsRequest);
+            }
+        });
+
     }
 
     public function update(UserPointsRequest $request, UserPoints $user): void
@@ -63,5 +72,11 @@ class UserPointsRepository
             ]);
         }
         return $userPoints;
+    }
+
+    private function getFile($request)
+    {
+
+        return $request->img_url;
     }
 }

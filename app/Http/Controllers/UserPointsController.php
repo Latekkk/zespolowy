@@ -54,8 +54,7 @@ class UserPointsController extends Controller
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
-        $this->repository->create($userPointsRequest);
-
+        $userPoint = $this->repository->create($userPointsRequest);
         return Redirect::back();
     }
 
