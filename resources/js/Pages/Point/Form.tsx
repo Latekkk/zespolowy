@@ -118,7 +118,7 @@ export default function Form(props) {
                                             />
                                         </div>
                                     </div>
-                                    <DropdownWithErrorMessage label={t('mountain.main_parts')}
+                                    <DropdownWithErrorMessage label={t('mountain.range')}
                                                               value={getName()}
                                                               valueTemplate={getName() }
                                                               onChange={(e) => handleChange(e.id, 'mountain_main_part_id', e.id)}

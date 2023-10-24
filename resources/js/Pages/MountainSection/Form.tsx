@@ -115,13 +115,13 @@ export default function Form(props) {
                     <form onSubmit={handleSubmit}>
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
-                                <DropdownWithErrorMessage label={t('mountain.main_parts')}
+                                <DropdownWithErrorMessage label={t('mountain.range')}
                                                           value={getName()}
                                                           valueTemplate={getName() }
                                                           onChange={(e) => handleChange(e.id, 'mountain_main_part_id', e.id)}
                                                           options={props.mountainMainParts}
                                                           optionLabel="name"
-                                                          placeholder={t('select.a.mountain.main_parts')}
+                                                          placeholder={t('select.a.mountain.range')}
                                                           className="w-full md:w-14rem"
                                 />
                                 <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>

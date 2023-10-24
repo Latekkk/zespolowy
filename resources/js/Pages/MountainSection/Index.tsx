@@ -60,7 +60,7 @@ export default function Index(props: any) {
         {field: 'name', header: t('mountain.section.name')},
         {field: 'entry_points', header: t('entrance.points')},
         {field: 'points_for_descent', header: t('points.for.descent')},
-        {field: 'mountain_main_part.name', header: t('mountains_main_part')},
+        {field: 'mountain_main_part.name', header: t('mountain.range')},
     ];
 
     useEffect(() => {

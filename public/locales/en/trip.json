@@ -7,5 +7,9 @@
     "trip.date.ph": "Choose the date when the trip will take place",
     "mountainSection": "Mountain sections",
     "select.a.mountain.section": "Select mountain sections",
-    "selected.mountain.sections": "Selected mountain sections"
+    "selected.mountain.sections": "Selected mountain sections",
+    "select.a.leader": "Select a leader",
+    "points.for.entry": "Points for entry",
+    "points.for.descent": "Points for descent",
+    "entry.and.exit": "Entry and exit"
 }

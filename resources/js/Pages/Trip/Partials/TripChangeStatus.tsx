@@ -15,13 +15,15 @@ import {router, useForm, usePage} from "@inertiajs/react";
 
 
 export default function TripChangeStatus({section, trip, user, guides, collapsed}) {
-    const globalTranslation = useTranslation(["global"]);
+    const {t} = useTranslation(['trip'])
+    const globalTranslation = useTranslation(['global'])
     const pageProps = usePage().props;
     const [date, setDate] = useState<string | Date | Date[] | null>(null);
     let today = new Date();
 
     const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
     const mainPhoto = useFileList();
+    const entryAndExitPoints = section.entry_points + section.points_for_descent;
 
     const {data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
         trip_id:'',
@@ -90,24 +92,24 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                                       name={'guide'}
                                       onChange={(e) =>handleChange(e.target.value.id, 'guide', e.target.value.id)} options={guides}
                                       optionLabel="name"
-                                      editable placeholder="wybierz przodownika" className="w-full md:w-14rem"/>
+                                      editable
+                                      placeholder={t('select.a.leader')}
+                                      className="w-full md:w-14rem"/>
                         </div>
                     </div>
                     <div className={'w-[250px] max-w-[250px] px-2'}>
-                            <FileInput labelText={'img.url'}
+                        <FileInput labelText={'img.url'}
                                    name='img_url'
                                    value={data.img_url}
                                    error={errors.img_url}
                                    onChange={handleFile}
                         />
-
-
                     </div>
                     <div>
                         {
                             (
                                 <div className="w-full flex flex-col justify-center ">
-                                    <h1 className="text-center">Podgląd/preview</h1>
+                                    <h1 className="text-center">{globalTranslation.t("preview")}</h1>
                                     <img className=" w-[150px] h-[150px] object-contain"
                                          src={undefinedImages(mainPhoto?.files[0]?.url, '', undefinedUrl)}
                                          width="150" height="150" alt={'xD'}/>
@@ -116,36 +118,42 @@ export default function TripChangeStatus({section, trip, user, guides, collapsed
                         }
                     </div>
                 </div>
-
-                <div>
-                    <Button
-                        type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY])}
-                        children={'punkty za wejscie'}
-                        background="bg-blue-500"
-                        textColor={"text-white"}
-                        hoverColor={"bg-red-400"}
-                    />
-                    <Button
-                        type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.DESCENT])}
-                        children={'punkty za zejscie'}
-                        background="bg-blue-500"
-                        textColor={"text-white"}
-                        hoverColor={"bg-red-400"}
-                    />
-                    <Button
-                        type="button"
-                        onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY, PointsMountainSectionENUM.DESCENT])}
-                        children={'wejscie i zejscie'}
-                        background="bg-blue-500"
-                        textColor={"text-white"}
-                        hoverColor={"bg-red-400"}
-                    />
+                <div className="flex flex-row text-center">
+                    <div>
+                        <Button
+                            type="button"
+                            onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY])}
+                            children={t('points.for.entry')}
+                            background="bg-blue-500"
+                            textColor={"text-white"}
+                            hoverColor={"bg-red-400"}
+                        />
+                        <p class="font-semibold">{section.entry_points}</p>
+                    </div>
+                    <div>
+                        <Button
+                            type="button"
+                            onClick={() => sendUserPoints([PointsMountainSectionENUM.DESCENT])}
+                            children={t('points.for.descent')}
+                            background="bg-blue-500"
+                            textColor={"text-white"}
+                            hoverColor={"bg-red-400"}
+                        />
+                        <p class="font-semibold">{section.points_for_descent}</p>
+                    </div>
+                    <div>
+                        <Button
+                            type="button"
+                            onClick={() => sendUserPoints([PointsMountainSectionENUM.ENTRY, PointsMountainSectionENUM.DESCENT])}
+                            children={t('entry.and.exit')}
+                            background="bg-blue-500"
+                            textColor={"text-white"}
+                            hoverColor={"bg-red-400"}
+                        />
+                        <p class="font-semibold">{entryAndExitPoints}</p>
+                    </div>
                 </div>
             </Fieldset>
-
-
         </div>
     );
 }

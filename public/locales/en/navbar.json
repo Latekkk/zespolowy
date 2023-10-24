@@ -43,6 +43,8 @@
     "user.index": "List of users",
     "user.create": "Create a new user",
 
+    "userPointsToAccept": "User points to accept",
+
     "login": "Log in",
     "register": "Register",
     "settings": "Settings",
