@@ -12,5 +12,9 @@
     "user.password.repetition": "User password repetition",
     "enter.the.user.password.repetition": "Enter the user password repetition",
     "select.role": "Select role user",
-    "current.role": "current: "
+    "current.role": "current: ",
+    "admin": "Admin",
+    "user": "User",
+    "pathuser": "Pathuser",
+    "squaduser": "Squaduser"
 }

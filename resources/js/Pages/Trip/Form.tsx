@@ -100,7 +100,7 @@ export default function Form(props) {
                                 <Input
                                     labelText={t("trip.name")}
                                     name="name"
-                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                     value={data.name}
                                     error={errors.name}
                                     onChange={handleChange}
@@ -116,7 +116,7 @@ export default function Form(props) {
                                     onChange={handleChange}
                                     placeholder={t("trip.date.ph")}
                                     type="date"
-                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 />
                                 </div>
                                 <div className="mb-4"></div>

@@ -23,6 +23,9 @@ class TripSeeder extends Seeder
             [
                 'name' => 'Przez granice Orle - Harrachov (Czechy) ', 'date' => '23-06-25'
             ],
+            [
+                'name' => 'Wycieczka z Zamku Książ do Szczawno-Zdrój', 'date' => '24-10-24'
+            ],
             ];
         Trip::insert($trip);
     }

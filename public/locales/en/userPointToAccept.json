@@ -1,0 +1,14 @@
+{
+    "mountain_section.name": "Name of mountain section",
+    "approved_by.name": "Approved by",
+    "user.name": "Username",
+    "status": "Status",
+    "name": "List of points to accept",
+    "show.userPoint": "User mountain point",
+    "accept": "Accept",
+    "reject": "Reject",
+    "who.was.the.guide": "Who was the guide",
+    "participant": "Participant",
+    "when.it.was.held": "When it was held",
+    "points.for": "Points for"
+}

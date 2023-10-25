@@ -35,6 +35,21 @@ class MountainSectionSeeder extends Seeder
             [
                 'name' => 'Schronisko Orle - Harrachov, železniční stanice', 'entry_points' => '8', 'points_for_descent' => '10', 'start_point' => '13', 'end_point' => '14', 'mountain_main_part_id' => 1,
             ],
+            [
+                'name' => 'Książ, zamek - Cis Bolko', 'entry_points' => '1', 'points_for_descent' => '2', 'start_point' => '6', 'end_point' => '35', 'mountain_main_part_id' => 1,
+            ],
+            [
+                'name' => 'Cis Bolko - Pełcznica', 'entry_points' => '0', 'points_for_descent' => '0', 'start_point' => '35', 'end_point' => '36', 'mountain_main_part_id' => 1,
+            ],
+            [
+                'name' => 'Pełcznica - Zamek Cisy', 'entry_points' => '4', 'points_for_descent' => '4', 'start_point' => '36', 'end_point' => '37', 'mountain_main_part_id' => 1,
+            ],
+            [
+                'name' => 'Zamek Cisy - Czerwone Wzgórze', 'entry_points' => '7', 'points_for_descent' => '6', 'start_point' => '37', 'end_point' => '40', 'mountain_main_part_id' => 1,
+            ],
+            [
+                'name' => 'Czerwone Wzgórze - Szczawno-Zdrój', 'entry_points' => '4', 'points_for_descent' => '5', 'start_point' => '40', 'end_point' => '41', 'mountain_main_part_id' => 1,
+            ],
             ];
         MountainSection::insert($mountainsSection);
     }

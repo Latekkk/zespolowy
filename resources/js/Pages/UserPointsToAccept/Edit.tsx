@@ -28,36 +28,36 @@ export default function Edit({userPoint}) {
         <div>
             <div className={'flex flex-col gap-y-4'}>
                <div className={'flex flex-row gap-x-4'}>
-                   <Card title="Nazwa " className={'w-full'}>
+                   <Card title={t('name')} className={'w-full'}>
                        <p className="m-0">
                            {userPoint.mountain_section.name}
                        </p>
                    </Card>
-                   <Card title="Kto był przewodnikiem" className={'w-full'}>
+                   <Card title={t('who.was.the.guide')} className={'w-full'}>
                        <p className="m-0">
                            {userPoint.path_user.name}
                        </p>
                    </Card>
                </div>
                 <div className={'flex flex-row gap-x-4'}>
-                    <Card title="Uczestnik" className={'w-full'}>
+                    <Card title={t('participant')} className={'w-full'}>
                         <p className="m-0">
                             {userPoint.user.name}
                         </p>
                     </Card>
-                    <Card title="Kiedy było odbyte" className={'w-full'}>
+                    <Card title={t('when.it.was.held')} className={'w-full'}>
                         <p className="m-0">
                             <DataFormatter date={userPoint.updated_at} />
                         </p>
                     </Card>
                 </div>
                 <div className={'flex flex-row gap-x-4'}>
-                    <Card title="Status" className={'w-full'}>
+                    <Card title={t('status')} className={'w-full'}>
                         <p className="m-0">
                             {userPoint.status}
                         </p>
                     </Card>
-                    <Card title="Punkty za" className={'w-full'}>
+                    <Card title={t('points.for')} className={'w-full'}>
                         <p className="m-0">
                             {userPoint.points_mountain_section}
                         </p>
@@ -87,11 +87,11 @@ export default function Edit({userPoint}) {
                             {card}
                         </div>
                         <div className={'flex flex-row gap-x-2 p-2 pr-6 items-end justify-end '}>
-                            <PrimaryButton onClick={() => changeStatus('APPROVED')} disabled={false}>Zaakceptuj</PrimaryButton>
+                            <PrimaryButton onClick={() => changeStatus('APPROVED')} disabled={false}>{t("accept")}</PrimaryButton>
                             <PrimaryButton
                                 className="bg-red-700 hover:bg-red-500 focus:bg-red-500"
                                 onClick={() => changeStatus('REJECTED')}
-                            >Odrzuć</PrimaryButton>
+                            >{t("reject")}</PrimaryButton>
                         </div>
                     </div>
                 </div>

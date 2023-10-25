@@ -13,13 +13,41 @@ class MountainSectionTripSeeder extends Seeder
     public function run(): void
     {
         MountainSectionTrip::truncate();
-        $mountainsSectionTrip =[
+        $mountainsSectionTrip = [
             [
-                'mountain_section_id' => '3', 'trip_id' => '1',
-                'mountain_section_id' => '2', 'trip_id' => '2',
-                'mountain_section_id' => '7', 'trip_id' => '3'
-            ]
+                'mountain_section_id' => '3',
+                'trip_id' => '1',
+            ],
+            [
+                'mountain_section_id' => '2',
+                'trip_id' => '2',
+            ],
+            [
+                'mountain_section_id' => '7',
+                'trip_id' => '3',
+            ],
+            [
+                'mountain_section_id' => '8',
+                'trip_id' => '4',
+            ],
+            [
+                'mountain_section_id' => '9',
+                'trip_id' => '4',
+            ],
+            [
+                'mountain_section_id' => '10',
+                'trip_id' => '4',
+            ],
+            [
+                'mountain_section_id' => '11',
+                'trip_id' => '4',
+            ],
+            [
+                'mountain_section_id' => '12',
+                'trip_id' => '4',
+            ],
         ];
         MountainSectionTrip::insert($mountainsSectionTrip);
     }
 }
+

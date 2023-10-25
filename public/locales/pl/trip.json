@@ -7,6 +7,9 @@
     "trip.date.ph": "Wybierz datę kiedy odbędzie się wycieczka",
     "mountainSection": "Odcinki górskie",
     "select.a.mountain.section": "Wybierz odcinki górskie",
-    "selected.mountain.sections": "Wybrane odcinki górskie"
-
+    "selected.mountain.sections": "Wybrane odcinki górskie",
+    "select.a.leader": "Wybierz przodownika",
+    "points.for.entry": "Punkty za wejście",
+    "points.for.descent": "Punkty za zejście",
+    "entry.and.exit": "wejście i zejście"
 }

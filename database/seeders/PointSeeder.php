@@ -116,6 +116,30 @@ class PointSeeder extends Seeder
             [
                 'name' => 'Nad Podleskom', 'lat' => '48.956750', 'lng' => '20.389883', 'mountain_main_part_id'=> 6, 'user_id' => 0
             ],
+            [
+                'name' => 'Zamek Stary Książ', 'lat' => '50.837803', 'lng' => '16.294269', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Cis Bolko', 'lat' => '50.847188', 'lng' => '16.294269', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Pełcznica', 'lat' => '50.849975', 'lng' => '16.291686', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Zamek Cisy', 'lat' => '50.848511', 'lng' => '16.248347', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Struga, rozejście szlaków', 'lat' => '50.834053', 'lng' => '16.243642', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Struga, odejście szlaku czerwonego', 'lat' => '50.826815', 'lng' => '16.235950', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Czerwone Wzgórze', 'lat' => '50.817649', 'lng' => '16.242342', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
+            [
+                'name' => 'Szczawno-Zdrój', 'lat' => '50.800920', 'lng' => '16.251428', 'mountain_main_part_id'=> 5, 'user_id' => 0
+            ],
         ];
         Point::insert($points);
     }

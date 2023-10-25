@@ -10,5 +10,6 @@
     "delete": "Usuń",
     "deleted": "Usunięto",
     "delete.descr": "Czy chcesz usunąć: ",
-    "map": "Mapa "
+    "map": "Mapa ",
+    "preview": "Podgląd"
 }
