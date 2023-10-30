@@ -46,9 +46,11 @@ class TripController extends Controller
         $guides = $trip->mountainSections->flatMap(function ($mountainSection) {
             return $mountainSection->mountainMainPart->userMountainMainParts->pluck('user');
         });
+
+        $uniqueGuides = $guides->unique();
         return Inertia::render('Trip/Show', [
             'trip' => $trip,
-            'guides' => $guides
+            'guides' => $uniqueGuides
         ]);
     }
 
