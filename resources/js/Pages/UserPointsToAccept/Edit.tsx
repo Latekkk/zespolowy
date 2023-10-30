@@ -9,7 +9,7 @@ import {router} from "@inertiajs/react";
 import DataFormatter from "@/Components/DataFormatter";
 
 export default function Edit({userPoint}) {
-    const {t} = useTranslation(["UserPointsToAccept"]);
+    const {t} = useTranslation(["userPointToAccept"]);
     const globalTranslation = useTranslation(["global"]);
     const toast = useRef<Toast>(null);
 
