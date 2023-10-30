@@ -12,8 +12,7 @@ class MountainSectionSeeder extends Seeder
      */
     public function run(): void
     {
-        MountainSection::truncate();
-        $mountainsSection =[
+        $mountainsSections =[
             [
                 'name' => 'Rozdroże pod Łysociną - Schronisko PTTK Przełęcz Okraj', 'entry_points' => '3', 'points_for_descent' => '3', 'start_point' => '2', 'end_point' => '1', 'mountain_main_part_id' => 1
             ],
@@ -51,6 +50,10 @@ class MountainSectionSeeder extends Seeder
                 'name' => 'Czerwone Wzgórze - Szczawno-Zdrój', 'entry_points' => '4', 'points_for_descent' => '5', 'start_point' => '40', 'end_point' => '41', 'mountain_main_part_id' => 1,
             ],
             ];
-        MountainSection::insert($mountainsSection);
+        foreach ($mountainsSections as $mountainSection)
+        {
+            $mountainSection = new MountainSection($mountainSection);
+            $mountainSection->save();
+        }
     }
 }
