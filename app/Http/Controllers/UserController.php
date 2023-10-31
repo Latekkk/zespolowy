@@ -27,12 +27,14 @@ class UserController extends Controller
 
     public function index(): Response
     {
+        $this->authorize('index', User::class);
         return Inertia::render('User/Index', [
         ]);
     }
 
     public function create(): Response
     {
+        $this->authorize('create', User::class);
         return Inertia::render('User/Form', [
             'roles' => UserRolesEnum::toArray(),
         ]);
@@ -43,6 +45,7 @@ class UserController extends Controller
 
     public function edit(User $user): Response
     {
+        $this->authorize('update', [$user]);
         $user->load('userMountainMainParts');
 
         $excludedMountainRanges = $user->userMountainMainParts()->pluck('mountain_main_part_id')->all();
@@ -58,15 +61,15 @@ class UserController extends Controller
 
     public function update(User $user, UserRequest $userRequest): RedirectResponse
     {
+        $this->authorize('update', User::class);
         $this->repository->update($userRequest, $user);
-
         return redirect()->route('user.index')->with(ToastHelper::update('user'));
     }
 
     public function store(UserRequest $userRequest): RedirectResponse
     {
-        $this->repository->create($userRequest);
 
+        $this->repository->create($userRequest);
         return redirect()->route('user.index')->with(ToastHelper::create('user'));
     }
 

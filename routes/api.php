@@ -32,14 +32,13 @@ Route::post('/contacts/{contact}/response', [ContactController::class, 'setRespo
 Route::get('/points', [PointController::class, 'getAll'])->name('api.points.index');
 Route::delete('/points/{point}', [PointController::class, 'removeAPI'])->name('api.points.destroy');
 
-
 Route::get('/users', [UserController::class, 'getAll'])->name('api.users.index');
 Route::delete('/users/{user}', [UserController::class, 'removeAPI'])->name('api.users.destroy');
 
-Route::get('/mountainsSection', [MountainSectionController::class, 'getAll'])->name('api.mountainsSection.index');
-Route::delete('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'removeAPI'])->name('api.mountainSection.destroy');
-Route::put('/mountainsSection/{mountainsSection}/edit', [MountainSectionController::class, 'updateAPI'])->name('api.mountainSection.edit');
-Route::post('/mountainsSection/{mountainsSection}', [MountainSectionController::class, 'createAPI'])->name('api.mountainSection.create');
+Route::get('/mountainSection', [MountainSectionController::class, 'getAll'])->name('api.mountainSection.index');
+Route::delete('/mountainSection/{mountainSection}', [MountainSectionController::class, 'removeAPI'])->name('api.mountainSection.destroy');
+Route::put('/mountainSection/{mountainSection}/edit', [MountainSectionController::class, 'updateAPI'])->name('api.mountainSection.edit');
+Route::post('/mountainSection/{mountainSection}', [MountainSectionController::class, 'createAPI'])->name('api.mountainSection.create');
 
 Route::get('/trip', [TripController::class, 'getAll'])->name('api.trip.index');
 Route::delete('/trip/{trip}', [TripController::class, 'removeAPI'])->name('api.trip.destroy');

@@ -47,7 +47,7 @@ export default function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        mountainSection === null ?post(route('mountainSection.store',data)): put(route('mountainSection.update', mountainSection.id))
+        mountainSection === null ? post(route('mountainSection.store', data)): put(route('mountainSection.update', mountainSection.id))
 
     }
 

@@ -16,5 +16,7 @@
     "admin": "Administrator",
     "user": "Użytkownik",
     "pathuser": "Przodownik",
-    "squaduser": "Członek komisji"
+    "squaduser": "Członek komisji",
+    "authorizations.held": "Posiadane uprawnienia",
+    "available.entitlements": "Dostępne uprawnienia"
 }

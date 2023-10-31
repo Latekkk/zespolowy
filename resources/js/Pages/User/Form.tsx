@@ -132,7 +132,7 @@ export default function Form({user,
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">Posiadane uprawnienia</span>
+                                                    <span className="vertical-align-middle">{t('authorizations.held')}</span>
                                                 </div>
                                             }
                                         >
@@ -154,7 +154,7 @@ export default function Form({user,
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">Dostępne uprawnienia</span>
+                                                    <span className="vertical-align-middle">{t('available.entitlements')}</span>
                                                 </div>
                                             }
                                         >
@@ -172,7 +172,7 @@ export default function Form({user,
                                                             }}
                                                             key={mountain_main_part.name + '-add-button'}
                                                         >
-                                                            Dodaj {mountain_main_part.id} {user.id}
+                                                            {globalTranslation.t('add')} {mountain_main_part.id} {user.id}
                                                         </PrimaryButton>
                                                     </div>
                                                 )

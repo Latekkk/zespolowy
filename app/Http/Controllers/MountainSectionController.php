@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\MountainSectionRequest;
 use App\Http\Requests\TripRequest;
 use App\Models\MountainMainPart;
@@ -61,16 +62,16 @@ class MountainSectionController extends Controller
 
     public function update(MountainSection $mountainSection, MountainSectionRequest $mountainSectionRequest): RedirectResponse
     {
-        $this->authorize('update', MountainSection::class);
+        $this->authorize('update', $mountainSection);
         $this->repository->update($mountainSectionRequest, $mountainSection);
-        return redirect()->route('mountainSection.index')->with(['toast' => ['message' => __('mountainSection.create.toast'), 'type' => 'success']]);
+        return redirect()->route('mountainSection.index')->with(ToastHelper::update('mountainSection'));
     }
 
     public function store(MountainSectionRequest $request): RedirectResponse
     {
         $this->authorize('update', MountainSection::class);
         $this->repository->create($request);
-        return redirect()->route('mountainSection.index')->with(['toast' => ['message' => __('mountainSection.create.toast'), 'type' => 'success']]);
+        return redirect()->route('mountainSection.index')->with(ToastHelper::create('mountainSection'));
     }
     public function getAll(): JsonResponse
     {
