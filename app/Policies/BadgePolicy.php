@@ -21,7 +21,7 @@ class BadgePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Point $point): bool
+    public function view(User $user, Badge $badge): bool
     {
         return true;
     }
@@ -62,7 +62,7 @@ class BadgePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Point $point): bool
+    public function delete(User $user, Badge $badge): bool
     {
         switch (Auth::user()->role) {
             case UserRolesEnum::ADMIN->value:
@@ -78,7 +78,7 @@ class BadgePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Point $point): bool
+    public function restore(User $user, Badge $badge): bool
     {
         switch (Auth::user()->role) {
             case UserRolesEnum::ADMIN->value:
@@ -92,7 +92,7 @@ class BadgePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Point $point): bool
+    public function forceDelete(User $user, Badge $badge): bool
     {
         switch (Auth::user()->role) {
             case UserRolesEnum::ADMIN->value:
