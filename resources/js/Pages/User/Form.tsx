@@ -126,8 +126,8 @@ export default function Form({user,
 
                                 </div>
 
-                                <div className="card min-w-[300px] w-[800px]">
-                                    <Accordion activeIndex={0}>
+                                <div className={`card ${mountain_main_parts !== undefined && 'min-w-[300px] w-[800px]'}`}>
+                                    <Accordion activeIndex={0} className={mountain_main_parts === undefined && 'hidden'}>
                                         <AccordionTab
                                             header={
                                                 <div className="flex align-items-center">
@@ -158,7 +158,7 @@ export default function Form({user,
                                                 </div>
                                             }
                                         >
-                                            {mountain_main_parts.map((mountain_main_part, index) => {
+                                            {mountain_main_parts?.map((mountain_main_part, index) => {
                                                 return (
                                                     <div key={mountain_main_part.name + '-' + index} className="flex flex-row justify-between border border-1 p-2 my-2">
                                                         <p>{mountain_main_part.name}</p>
@@ -172,7 +172,7 @@ export default function Form({user,
                                                             }}
                                                             key={mountain_main_part.name + '-add-button'}
                                                         >
-                                                            Dodaj {mountain_main_part.id} {user.id}
+                                                            Dodaj
                                                         </PrimaryButton>
                                                     </div>
                                                 )
