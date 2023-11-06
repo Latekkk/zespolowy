@@ -16,5 +16,7 @@
     "admin": "Admin",
     "user": "User",
     "pathuser": "Pathuser",
-    "squaduser": "Squaduser"
+    "squaduser": "Squaduser",
+    "authorizations.held": "Authorizations held",
+    "available.entitlements": "Available entitlements"
 }

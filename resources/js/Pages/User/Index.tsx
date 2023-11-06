@@ -98,10 +98,10 @@ export default function Index(props: any) {
     };
 
     const removeElement = (data) => {
-        UserService.removePoint(data.id).then((e) => {
+        UserService.removeUser(data.id).then((e) => {
                 getUsers()
                 setVisible(false)
-                toastShow('Usunięto', 'error', data.name)
+                toastShow(globalTranslation.t('deleted'), 'error', data.name)
             }
         );
     }

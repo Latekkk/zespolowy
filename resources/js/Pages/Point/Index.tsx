@@ -117,7 +117,7 @@ export default function Index(props: any) {
         PointService.removePoint(data.id).then((e) => {
                 getPoints()
                 setVisible(false)
-                toastShow('Usunięto', 'error', data.name)
+                toastShow(globalTranslation.t('deleted'), 'error', data.name)
             }
         );
     }

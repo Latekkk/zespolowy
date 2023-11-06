@@ -2,9 +2,11 @@
 
 namespace App\Policies;
 
+use App\Enums\UserRolesEnum;
 use App\Models\Point;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
@@ -21,12 +23,24 @@ class UserPolicy
      */
     public function view(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 
     public function index(): Response|bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -42,16 +56,27 @@ class UserPolicy
      */
     public function update(User $user): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user,): bool
+    public function delete(User $user): bool
     {
-
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 
 
@@ -61,7 +86,13 @@ class UserPolicy
      */
     public function restore(User $user, Point $point): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 
     /**
@@ -69,6 +100,12 @@ class UserPolicy
      */
     public function forceDelete(User $user): bool
     {
-        return true;
+        switch (Auth::user()->role) {
+            case UserRolesEnum::ADMIN->value:
+            case UserRolesEnum::SQUADUSER->value:
+                return true;
+            default:
+                return false;
+        }
     }
 }

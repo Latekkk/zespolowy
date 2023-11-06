@@ -200,7 +200,10 @@ export default function Authenticated({props, header, children}) {
 
 
                             <div className="hidden sm:flex sm:items-center sm:ml-6">
-                                <NavBar navbar={navbar} user={auth.user}/>
+                                <NavBar
+                                    navbar={navbar.filter(item => item.can.includes(auth.user.role))}
+                                    user={auth.user}
+                                />
                             </div>
                         </div>
 

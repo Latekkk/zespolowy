@@ -84,7 +84,7 @@ export default function Index(  props: any) {
         TripService.removeTrip(data.id).then(() => {
                 getTrips()
                 setVisible(false)
-                toastShow('Usunięto', 'error', data.name)
+                toastShow(globalTranslation.t('deleted'), 'error', data.name)
             }
         );
     }

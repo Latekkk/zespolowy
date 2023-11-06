@@ -100,7 +100,7 @@ export default function Index(props: any) {
         MountainSectionService.removeMountainsSection(data.id).then(() => {
                 getMountainsSection()
                 setVisible(false)
-                toastShow('Usunięto', 'error', data.name)
+                toastShow(globalTranslation.t('deleted'), 'error', data.name)
             }
         );
     }
