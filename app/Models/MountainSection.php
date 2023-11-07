@@ -20,19 +20,19 @@ class MountainSection extends Model
         'name',
         'entry_points',
         'points_for_descent',
-        'start_point',
-        'end_point',
+        'start_point_id',
+        'end_point_id',
         'mountain_main_part_id'
     ];
 
-    public function start_point(): BelongsTo
+    public function startPoint()
     {
-        return $this->belongsTo(Point::class, 'start_point');
+        return $this->belongsTo(Point::class, 'start_point_id', 'id');
     }
 
-    public function end_point(): BelongsTo
+    public function endPoint()
     {
-        return $this->belongsTo(Point::class, 'end_point');
+        return $this->belongsTo(Point::class, 'end_point_id', 'id');
     }
 
     public function mountainRanges(): BelongsTo

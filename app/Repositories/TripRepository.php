@@ -56,6 +56,7 @@ class TripRepository
             $mountainSectionTrip = new MountainSectionTrip();
             $mountainSectionTrip->trip_id = $trip->id;
             $mountainSectionTrip->mountain_section_id = $mountainSectionId;
+            $mountainSectionTrip->selected = $mountainSectionData['selected'];
             $mountainSectionTrip->save();
         }
     }

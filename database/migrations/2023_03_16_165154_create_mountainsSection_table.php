@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('mountain_sections', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->foreignIdFor(\App\Models\Point::class,'start_point');
-            $table->foreignIdFor(\App\Models\Point::class,'end_point');
+            $table->foreignIdFor(\App\Models\Point::class,'start_point_id');
+            $table->foreignIdFor(\App\Models\Point::class,'end_point_id');
             $table->foreignIdFor(\App\Models\MountainMainPart::class);
             $table->integer('entry_points');
             $table->integer('points_for_descent');

@@ -11,5 +11,6 @@ class MountainSectionTrip extends Model
     protected $fillable = [
         'mountain_section_id',
         'trip_id',
+        'selected'
     ];
 }

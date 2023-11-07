@@ -28,7 +28,7 @@ class TripController extends Controller
     public function index()
     {
         return Inertia::render('Trip/Index', [
-            'trips' => Trip::with(['mountainSections.start_point','mountainSections.end_point' ]),
+            'trips' => Trip::with(['mountainSections.startPoint','mountainSections.endPoint' ]),
         ]);
 
     }
@@ -36,7 +36,7 @@ class TripController extends Controller
     public function create(): Response
     {
         return Inertia::render('Trip/Form', [
-            'mountainSection' => MountainSection::all(),
+            'mountainSection' => MountainSection::with(['startPoint', 'endPoint'])->get(),
         ]);
     }
 
@@ -77,7 +77,7 @@ class TripController extends Controller
     public function getAll(): JsonResponse
     {
         $params = request()->query();
-        $trip = Trip::with(['mountainSections.start_point','mountainSections.end_point' ])->orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
+        $trip = Trip::with(['mountainSections.startPoint','mountainSections.endPoint' ])->orderBy($params['sort']?? 'id', (int)$params['sortOrder'] >= 0? 'asc' : 'desc' )-> paginate((int)$params['paginate'] ?? 15)->appends(request()->query());
         return response()->json($trip);
     }
 

@@ -8,5 +8,6 @@ export interface MountainSection {
     start_point: Point;
     end_point: Point;
     mountainMainPart: MountainMainPart;
+    selected?: number;
 }
 

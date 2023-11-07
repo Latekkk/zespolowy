@@ -17,6 +17,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignIdFor(MountainSection::class);
             $table->foreignIdFor(Trip::class);
+            $table->integer('selected');
         });
     }
 
