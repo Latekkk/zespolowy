@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\StatuteRequest;
 use App\Models\Statute;
 use App\Repositories\StatuteRepository;
@@ -54,13 +55,13 @@ class StatuteController extends Controller
     {
         $this->authorize('update', Statute::class);
         $this->repository->update($statuteRequest, $statute);
-        return redirect()->route('statute.index')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
+        return redirect()->route('statute.index')->with(ToastHelper::update('statue'));
     }
 
     public function store(StatuteRequest $request): RedirectResponse
     {
         $this->authorize('update', Statute::class);
         $this->repository->create($request);
-        return redirect()->route('statute.index')->with(['toast' => ['message' => __('statute.create.toast'), 'type' => 'success']]);
+        return redirect()->route('statute.index')->with(ToastHelper::create('statue'));
     }
 }

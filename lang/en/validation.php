@@ -179,6 +179,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'name',
+        'markers' => 'geographical position',
+        'hiking_trail' => 'name designation of the tourist route',
+        'description' => 'description',
+        'img_url' => 'image',
+        'time_from' => 'since when has the',
+        'start_point' => 'starting point',
+        'end_point' => 'endpoint',
+        'entry_points' => 'points there',
+        'points_for_descent' => 'points for descent',
+        'mountain_main_part_id' => 'mountain group'
+    ],
 
 ];

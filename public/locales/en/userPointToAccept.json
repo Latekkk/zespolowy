@@ -1,10 +1,10 @@
 {
-    "mountain_section.name": "Name of mountain section",
+    "mountain_section.name": "Name of trip",
     "approved_by.name": "Approved by",
     "user.name": "Username",
     "status": "Status",
-    "name": "List of points to accept",
-    "show.userPoint": "User mountain point",
+    "name": "List of tours to accept",
+    "show.userTrip": "User trip",
     "accept": "Accept",
     "reject": "Reject",
     "who.was.the.guide": "Who was the guide",

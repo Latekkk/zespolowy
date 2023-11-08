@@ -49,13 +49,13 @@ class UserPointsController extends Controller
     {
         $this->repository->update($userPointsRequest, $userPoints);
 
-        return redirect()->route('home')->with(ToastHelper::update('trip'));
+        return redirect()->route('home')->with(ToastHelper::update('userPoint'));
     }
 
     public function store(UserPointsRequest $userPointsRequest): RedirectResponse
     {
         $userPoint = $this->repository->create($userPointsRequest);
-        return Redirect::back()->with(ToastHelper::create('UserPoint'));
+        return Redirect::back()->with(ToastHelper::create('userPoint'));
     }
 
     public function getAll(): JsonResponse

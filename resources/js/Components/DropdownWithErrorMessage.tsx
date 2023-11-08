@@ -15,7 +15,7 @@ export default function DropdownWithErrorMessage({name, value, onChange, error, 
                       options={options}
                       optionLabel={optionLabel}
                       placeholder={placeholder || (name) || ''}
-                      className={className}
+                      className={`${className} ${error ? ' border-red-500 ' : ' border-black '}`}
                       filter
             />
             <InputError message={error ? error:''}/>

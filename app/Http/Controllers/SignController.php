@@ -53,14 +53,14 @@ class SignController extends Controller
     {
         $this->repository->update($signRequest, $sign);
 
-        return redirect()->route('sign.index')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
+        return redirect()->route('sign.index')->with(ToastHelper::update('sign'));
     }
 
     public function store(SignRequest $request): RedirectResponse
     {
         $this->repository->create($request);
 
-        return redirect()->route('sign.index')->with(['toast' => ['message' => __('sign.create.toast'), 'type' => 'success']]);
+        return redirect()->route('sign.index')->with(ToastHelper::create('sign'));
     }
 
     public function destroy(Sign $sign): RedirectResponse
