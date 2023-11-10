@@ -66,7 +66,7 @@ class TripController extends Controller
     public function store(TripRequest $request): RedirectResponse
     {
         $this->repository->create($request);
-        return redirect()->route('trip.index')->with(ToastHelper::update('trip'));
+        return redirect()->route('trip.index')->with(ToastHelper::create('trip'));
     }
     public function update(TripRequest $request, Trip $trip): RedirectResponse
     {

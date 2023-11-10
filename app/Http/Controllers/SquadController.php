@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Helpers\ToastHelper;
 use App\Http\Requests\SquadRequest;
 use App\Models\Squad;
 use App\Repositories\SquadRepository;
@@ -55,13 +56,13 @@ class SquadController extends Controller
     {
         $this->authorize('update', Squad::class);
         $this->repository->update($squadRequest, $squad);
-        return redirect()->route('squad.index')->with(['toast' => ['message' => __('squad.create.toast'), 'type' => 'success']]);
+        return redirect()->route('squad.index')->with(ToastHelper::update('squad'));
     }
 
     public function store(SquadRequest $request): RedirectResponse
     {
         $this->authorize('update', Squad::class);
         $this->repository->create($request);
-        return redirect()->route('squad.index')->with(['toast' => ['message' => __('squad.create.toast'), 'type' => 'success']]);
+        return redirect()->route('squad.index')->with(ToastHelper::create('squad'));
     }
 }

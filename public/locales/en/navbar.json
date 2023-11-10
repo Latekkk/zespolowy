@@ -24,7 +24,7 @@
     "statute": "Statue",
     "statute.index": "Statue preview",
 
-    "mountainSection": "Mountain sections",
+    "mountainSection": "Mountain sections and points",
     "mountainSection.index": "List of mountain sections",
     "mountainSection.create": "Add new mountain section",
 
@@ -43,7 +43,7 @@
     "user.index": "List of users",
     "user.create": "Create a new user",
 
-    "userPointsToAccept": "User points to accept",
+    "userPointsToAccept": "User trips to accept",
 
     "login": "Log in",
     "register": "Register",

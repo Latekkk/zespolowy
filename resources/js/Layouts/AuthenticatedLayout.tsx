@@ -18,7 +18,7 @@ export default function Authenticated({props, header, children}) {
         {
             "name": "advertisement",
             "route": "home",
-            "can": ['guest','user', 'pathuser', 'squaduser', 'admin'],
+            "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "",
@@ -45,7 +45,7 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "mountainSection",
                     "route": "create",
-                    "can": ['pathuser','squaduser', 'squaduser', 'admin'],
+                    "can": ['pathuser', 'user', 'squaduser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "point",
@@ -55,7 +55,7 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "point",
                     "route": "create",
-                    "can": ['user','pathuser', 'squaduser', 'admin'],
+                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
                 }
             ]
         },
@@ -84,7 +84,7 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "badge",
                     "route": "index",
-                    "can": ['user','admin'],
+                    "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "badge",
@@ -101,7 +101,7 @@ export default function Authenticated({props, header, children}) {
                 {
                     "name": "sign",
                     "route": "index",
-                    "can": ['user', 'pathuser', 'squaduser', 'admin'],
+                    "can": ['guest', 'user', 'pathuser', 'squaduser', 'admin'],
                 },
                 {
                     "name": "sign",
@@ -130,12 +130,12 @@ export default function Authenticated({props, header, children}) {
         {
             "name": "user",
             "route": "user.index",
-            "can": [ 'admin'],
+            "can": ['admin'],
             "subLinks": [
                 {
                     "name": "user",
                     "route": "index",
-                    "can": [ 'admin'],
+                    "can": ['admin'],
                 },
                 {
                     "name": "user",
@@ -174,12 +174,12 @@ export default function Authenticated({props, header, children}) {
         ,{
             "name": "userPointsToAccept",
             "route": "userPointsToAccept.index",
-            "can": ['admin'],
+            "can": ['pathuser', 'squaduser', 'admin'],
             "subLinks": [
                 {
                     "name": "userPointsToAccept",
                     "route": "index",
-                    "can": ['admin'],
+                    "can": ['pathuser', 'squaduser', 'admin'],
                 },
             ]
         }

@@ -1,10 +1,10 @@
 {
-    "mountain_section.name": "Nazwa odcinka górskiego",
+    "mountain_section.name": "Nazwa wycieczki",
     "approved_by.name": "Zatwierdzony przez",
     "user.name": "Nazwa użytkownika",
     "status": "Status",
-    "name": "Lista punktów do zaakceptowania",
-    "show.userPoint": "Punkt górski użytkownika",
+    "name": "Lista wycieczek do zaakceptowania",
+    "show.userTrip": "Wycieczka użytkownika",
     "accept": "Zaakceptuj",
     "reject": "Odrzuć",
     "who.was.the.guide": "Kto był przewodnikiem",

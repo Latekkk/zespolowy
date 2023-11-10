@@ -61,7 +61,7 @@ export default function Form(props) {
                             <form onSubmit={handleSubmit}>
                                 <ReactQuill theme="snow" modules={modules} value={data.content} onChange={((e) => handleChange(e, 'content'))}/>
                                 {errors.content && <div>{errors.content}</div>}
-                                <Button type='submit' disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
+                                <Button type='submit' className={'mt-2'} disabled={processing} children={globalTranslation.t('submit')} background="bg-blue-500" textColor={"text-white"} hoverColor={"bg-blue-400"}/>
                             </form>
                         </div>
                     </div>
