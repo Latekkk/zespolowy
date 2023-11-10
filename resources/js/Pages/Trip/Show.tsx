@@ -18,6 +18,7 @@ export default function Form(props) {
     const globalTranslation = useTranslation(["global"]);
     const [selectedMountainSections, setSelectedMountainSections] = useState<MountainSection[]>([]);
     const [selectedTrip, setSelectedTrip] = useState(null);
+    const [allPoints, setAllPoints] = useState(0);
     const trip = props.trip ?? null;
     const [mountainSections, setMountainSections] = useState<MountainSection[]>([]);
     const user = usePage().props.auth.user
@@ -35,7 +36,9 @@ export default function Form(props) {
             ? post(route("trip.store", data))
             : put(route("trip.update", {data, trip: trip.id}));
     }
-
+    const updateTotalPoints = (points) => {
+        setAllPoints(allPoints + points);
+    };
     const setDefaultForm = () => {
         reset();
         clearErrors();
@@ -56,6 +59,9 @@ export default function Form(props) {
             }
         );
     };
+    useEffect(() => {
+        console.log(allPoints)
+    }, [allPoints]);
 
     const header = (
         <div className={'h-[0px]'}>
@@ -72,10 +78,13 @@ export default function Form(props) {
             <div className="card scrollpanel-demo">
                 <div className="flex flex-column md:flex-row gap-5">
                     <div className="flex-auto">
+                        <div className="mb-4">
+                            <p>{t("total.points")}: {allPoints}</p>
+                        </div>
                         <ScrollPanel style={{width: '100%', height: '400px'}}>
                             {selectedMountainSections.map((section, index) => (
                                 <TripChangeStatus trip={trip} section={section}
-                                                  user={user} guides={props.guides} collapsed={index !== 0}/>
+                                                  user={user} guides={props.guides} collapsed={index !== 0} updateTotalPoints={updateTotalPoints}/>
 
                             ))}
                         </ScrollPanel>
