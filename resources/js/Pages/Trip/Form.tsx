@@ -161,11 +161,11 @@ export default function Form(props) {
                                 />
                                 <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)} className={'h-12'}>{t("addMountainSection")}</PrimaryButton>
                             </div>
-                            <div className={'my-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/3'}>
+                            <div className={'my-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/5'}>
                                 <span>Łączna ilośc punktów:  {getPoints()}</span>
                             </div>
 
-                            <div className={'mb-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/3'}>
+                            <div className={'mb-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/5'}>
                                 <h3>{t("selected.mountain.sections")}</h3>
                             </div>
                             <div className="card scrollpanel-demo">

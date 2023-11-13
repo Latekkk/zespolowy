@@ -187,7 +187,7 @@ export default function Authenticated({props, header, children}) {
 
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-gray-100 overflow-x-hidden">
             <nav className="bg-white border-b border-gray-100">
                 <div className="w-max mx-auto px-4 sm:px-6 lg:px-6">
                     <div className="flex justify-between h-16">
