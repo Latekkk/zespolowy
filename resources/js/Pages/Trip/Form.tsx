@@ -23,11 +23,11 @@ export default function Form(props) {
     const [selectedTrip, setSelectedTrip] = useState(null);
     const trip = props.trip ?? null;
     const [mountainSections, setMountainSections] = useState<MountainSection[]>([]);
-
+    const [countPoints, setCountPoints] = useState(0)
     const {data, setData, post, put, processing, errors, reset, clearErrors} = useForm({
         name: trip?.name || "",
         date: trip?.date || "",
-        mountainSection: trip?.mountainSections || [],
+        mountainSection: props.trip.mountain_sections || [],
         remember: true,
     });
 
@@ -95,7 +95,37 @@ export default function Form(props) {
         }));
     };
 
-    return (<Layout
+    const getName = (section) => {
+        const endName = section?.end_point.name;
+        const startName = section?.start_point.name;
+        const selected = section?.selected;
+
+        if (section?.end_point_id === selected) {
+            return `${endName} - ${startName}: ${section.points_for_descent}`
+        } else {
+            return `${startName} - ${endName}: ${section?.entry_points}`
+
+        }
+
+    }
+
+    const getPoints = () => {
+        let count = 0;
+
+        data?.mountainSection.forEach((mountainSection) => {
+            const selected = mountainSection?.selected;
+            if (mountainSection?.end_point_id === selected) {
+                count += mountainSection.points_for_descent
+            } else {
+                count += mountainSection?.entry_points
+            }
+        })
+
+
+        return count
+    }
+
+        return (<Layout
             props={props}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -107,8 +137,9 @@ export default function Form(props) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <form onSubmit={handleSubmit}>
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="flex p-6 text-gray-900 flex-row gap-x-2 gap-y-2 items-center">
+                        <div className="flex flex-col gap-y-2 bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
+
+                            <div className="flex  text-gray-900 flex-row gap-x-2 gap-y-4 items-center">
                                 <Input
                                     labelText={t("trip.name")}
                                     name="name"
@@ -130,14 +161,19 @@ export default function Form(props) {
                                 />
                                 <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)} className={'h-12'}>{t("addMountainSection")}</PrimaryButton>
                             </div>
-                            <h3>{t("selected.mountain.sections")}</h3>
-                            <div className="mb-4"></div>
+                            <div className={'my-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/3'}>
+                                <span>Łączna ilośc punktów:  {getPoints()}</span>
+                            </div>
+
+                            <div className={'mb-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/3'}>
+                                <h3>{t("selected.mountain.sections")}</h3>
+                            </div>
                             <div className="card scrollpanel-demo">
                                 <div className="flex flex-column md:flex-row gap-5">
                                     <div className="flex-auto">
                                         <ScrollPanel style={{width: '100%', height: '400px'}}>
                                             {data?.mountainSection?.map((section) => (
-                                                <Trip section={section}
+                                                <Trip section={section} label={getName(section)} key={section.id}
                                                       handleRemoveMountainSection={handleRemoveMountainSection}/>
                                             ))}
                                         </ScrollPanel>

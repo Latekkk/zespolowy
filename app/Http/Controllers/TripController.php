@@ -56,7 +56,7 @@ class TripController extends Controller
 
     public function edit(Trip $trip): Response
     {
-        $trip->load('mountainSections');
+        $trip->load(['mountainSections.startPoint', 'mountainSections.endPoint']);
         return Inertia::render('Trip/Form', [
             'trip' => $trip,
             'mountainSection' => MountainSection::all(),

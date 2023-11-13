@@ -23,7 +23,6 @@ export default function Index({data, sort, sortOrder}) {
 
     const [visible, setVisible] = useState<boolean>(false);
     const [modalData, setModalData] = useState(null);
-    console.log(modalData)
 
     const columns: ColumnMeta[] = [
         {field: 'mountain_section.name', header: userPointToAcceptTranslation.t('mountain_section.name')},
