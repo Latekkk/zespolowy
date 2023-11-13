@@ -123,8 +123,9 @@ export default function Form(props) {
                                                           optionLabel="name"
                                                           placeholder={t('select.a.mountain.range')}
                                                           className="w-full md:w-14rem"
+                                                          error={errors.mountain_main_part_id}
                                 />
-                                <p> {t('mountain.section.name')}: {firstName?.name}  -  {secondName?.name}</p>
+                                <p> {t('mountain.section.name')}: {firstName?.name}  ,  {secondName?.name}</p>
                                 <DropdownWithErrorMessage label={t('starting.point')}
                                                           value={firstName?.name }
                                                           valueTemplate={firstName?.name }

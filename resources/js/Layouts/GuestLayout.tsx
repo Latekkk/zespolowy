@@ -89,6 +89,20 @@ export default function GuestLayout({props, header, children,}) {
             ]
         },
         {
+            "name": "sign",
+            "route": "sign.index",
+            "subLinks": [
+                {
+                    "name": "sign",
+                    "route": "index"
+                },
+                {
+                    "name": "sign",
+                    "route": "create"
+                }
+            ]
+        },
+        {
             "name": "settings",
             "route": "settings",
             "subLinks": [

@@ -147,9 +147,21 @@ return [
 
     'attributes' => [
         'name' => 'nazwa',
-        'markers' => 'Pozycja geograficzna',
+        'title' => 'tytuł',
+        'markers' => 'pozycja geograficzna',
         'hiking_trail' => 'nazwa oznaczenie szlaku turystycznego',
         'description' => 'opis',
-        'img_url' => 'zdjęcie'
+        'img_url' => 'zdjęcie',
+        'time_from' => 'od kiedy obowiązuje',
+        'start_point' => 'punkt początkowy',
+        'end_point' => 'punkt końcowy',
+        'entry_points' => 'punkty tam',
+        'points_for_descent' => 'punkty z powrotem',
+        'mountain_main_part_id' => 'grupa górska',
+        'date' => 'data',
+        'point' => 'punkty',
+        'phone_number' => 'numer telefonu',
+        'password' => 'hasło',
+        'current_password' => 'aktualne hasło'
     ],
 ];

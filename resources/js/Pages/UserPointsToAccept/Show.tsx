@@ -7,7 +7,7 @@ import {Toast} from "primereact/toast";
 import DataFormatter from "@/Components/DataFormatter";
 
 export default function Show({userPoint}) {
-    const {t} = useTranslation(["UserPointsToAccept"]);
+    const {t} = useTranslation(["UserPointToAccept"]);
     const globalTranslation = useTranslation(["global"]);
     const toast = useRef<Toast>(null);
 

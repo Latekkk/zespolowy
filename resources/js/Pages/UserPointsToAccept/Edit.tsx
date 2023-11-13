@@ -74,7 +74,7 @@ export default function Edit({userPoint}) {
     return (<Layout
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    {t("show.userPoint")}
+                    {t("show.userTrip")}
                 </h2>
             }
         >

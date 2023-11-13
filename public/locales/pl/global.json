@@ -12,5 +12,6 @@
     "delete.descr": "Czy chcesz usunąć: ",
     "map": "Mapa ",
     "preview": "Podgląd",
-    "add": "Dodaj"
+    "add": "Dodaj",
+    "cancel_button": "Anuluj"
 }

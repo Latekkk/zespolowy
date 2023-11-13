@@ -126,7 +126,7 @@ export default function Form(props) {
                                                               optionLabel="name"
                                                               placeholder={t('choose.mountain.range')}
                                                               className="w-full md:w-14rem"
-                                                              error={errors.mountainMainParts} name={'mountainRangesDropDown'}
+                                                              error={errors.mountain_main_part_id} name={'mountainRangesDropDown'}
                                     />
                                 </div>
 
