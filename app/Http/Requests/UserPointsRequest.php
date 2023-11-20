@@ -31,8 +31,9 @@ class UserPointsRequest extends FormRequest
         $mountainSectionId =  $this->mountain_section_id;
         return [
             'user_id' => 'required|exists:users,id',
-            'mountain_section_id' => 'required|exists:mountain_sections,id',
-            'points_mountain_section' => 'required|array|',
+            //'mountain_section_id' => 'required|exists:mountain_sections,id',
+            'points_mountain_section' => 'required',
+            'trip_id' => 'required',
             'points_mountain_section.*' => [
                 Rule::in(PointsMountainSectionEnum::toArray()),
                 function ($attribute, $value, $fail) use ($user_id, $mountainSectionId) {
@@ -54,7 +55,7 @@ class UserPointsRequest extends FormRequest
                 Rule::in(StatusEnum::toArray()),
             ],
             'approved_id' => 'nullable|exists:users,id',
-            'guide' => 'required|exists:users,id',
+            'guide' => 'nullable|exists:users,id',
             'date' => 'date|before_or_equal:today',
             'img_url' => 'required|image|min:1',
         ];

@@ -11,5 +11,11 @@
     "select.a.leader": "Wybierz przodownika",
     "points.for.entry": "Punkty za wejście",
     "points.for.descent": "Punkty za zejście",
-    "entry.and.exit": "wejście i zejście"
+    "entry.and.exit": "Punkty za wejście i zejście",
+    "points.forward": "Punkty tam",
+    "points.backward": "Punkty z powrotem",
+    "points.both.ways": "Punkty w dwie strony",
+    "total.pointsEntry" : "Punkty",
+    "trip.date" : "Data wycieczki",
+    "trip.accept.points": "Wyślij punkty"
 }

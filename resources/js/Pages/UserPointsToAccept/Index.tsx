@@ -16,6 +16,7 @@ interface ColumnMeta {
 
 export default function Index({data, sort, sortOrder}) {
     //Nie kopiować mam to w inż
+    //spoko mordini
     const userPointToAcceptTranslation = useTranslation(['userPointToAccept'])
     const pageProps = usePage().props;
     const [values, setValues] = useState(data?.data);
@@ -25,7 +26,7 @@ export default function Index({data, sort, sortOrder}) {
     const [modalData, setModalData] = useState(null);
 
     const columns: ColumnMeta[] = [
-        {field: 'mountain_section.name', header: userPointToAcceptTranslation.t('mountain_section.name')},
+        {field: 'trip_id.name', header: userPointToAcceptTranslation.t('mountain_section.name')},
         {field: 'approved_by.name', header: userPointToAcceptTranslation.t('approved_by.name')},
         {field: 'user.name', header: userPointToAcceptTranslation.t('user.name')},
         {field: 'status', header: userPointToAcceptTranslation.t('status')},
