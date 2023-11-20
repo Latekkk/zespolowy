@@ -27,7 +27,7 @@ export default function Form(props) {
     const {data, setData, post, put, processing, errors, reset, clearErrors} = useForm({
         name: trip?.name || "",
         date: trip?.date || "",
-        mountainSection: props.trip.mountain_sections || [],
+        mountainSection: props?.trip?.mountain_sections || [],
         remember: true,
     });
 
