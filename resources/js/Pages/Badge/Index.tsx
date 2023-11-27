@@ -58,7 +58,6 @@ export default function Index(props: any) {
                                 onClick={() =>router.delete(route('badge.destroy', modalData.id),{
                                     onSuccess:params => {
                                         toast.current?.show({severity: params.props.toast.value.severity, summary: params.props.toast.value.summary, detail: params.props.toast.value.content});
-                                        console.log(params.props.toast.value);
                                     }
                                 })}/>
                         <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
