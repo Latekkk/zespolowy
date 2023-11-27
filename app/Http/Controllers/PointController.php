@@ -89,7 +89,7 @@ class PointController extends Controller
 
     public function removeAPI(Point $point): JsonResponse
     {
-        $this->authorize('delete', Point::class);
+        $this->authorize('delete', $point);
         $this->repository->remove($point);
         return response()->json(['status' => 'ok']);
     }

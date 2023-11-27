@@ -219,10 +219,24 @@ export default function Form(props) {
                     />
 
                     <Heading3>Wybierz punkt początkowy</Heading3>
-                    <div className="flex flex-row gap-x-2 pt-2">
-                        <PrimaryButton type={'button'} className={' w-1/2 text-center p-2 line-clamp-1'} onClick={() => handleAddMountainSection(selectedMountainSections?.start_point_id)}>{selectedMountainSections?.start_point?.name ?? '-'}</PrimaryButton>
-                        <PrimaryButton type={'button'} className={' w-1/2 text-center p-2 line-clamp-1'} onClick={() => handleAddMountainSection(selectedMountainSections?.end_point_id)}>{selectedMountainSections?.end_point?.name ?? '-'}</PrimaryButton>
-                    </div>
+                <div className="flex flex-row gap-x-2 pt-2">
+                    <PrimaryButton
+                        type={'button'}
+                        className={'w-1/2 text-center p-2 line-clamp-1'}
+                        onClick={() => handleAddMountainSection(selectedMountainSections?.start_point_id)}
+                        disabled={!selectedMountainSections}
+                    >
+                        {selectedMountainSections?.start_point?.name ?? '-'}
+                    </PrimaryButton>
+                    <PrimaryButton
+                        type={'button'}
+                        className={'w-1/2 text-center p-2 line-clamp-1'}
+                        onClick={() => handleAddMountainSection(selectedMountainSections?.end_point_id)}
+                        disabled={!selectedMountainSections}
+                    >
+                        {selectedMountainSections?.end_point?.name ?? '-'}
+                    </PrimaryButton>
+                </div>
             </Dialog>
         </Layout>
     )
