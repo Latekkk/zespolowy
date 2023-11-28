@@ -32,16 +32,17 @@ class UserPointsController extends Controller
     public function create(): Response
     {
         return Inertia::render('Point/Form', [
+            'mountainMainPart' => MountainMainPart::all()
         ]);
 
     }
 
     public function edit(UserPoints $userPoints): Response
     {
-
         return Inertia::render('Point/Form', [
             'userPoints' => $userPoints,
-            'roles' => ['userPoints', 'admin']
+            'roles' => ['userPoints', 'admin'],
+            'mountainMainPart' => MountainMainPart::all()
         ]);
     }
 

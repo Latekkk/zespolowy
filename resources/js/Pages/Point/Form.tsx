@@ -17,8 +17,7 @@ export default function Form(props) {
     const {t} = useTranslation(['points'])
     const globalTranslation = useTranslation(['global'])
     const point = props.point ?? null;
-
-    const [mountainMainParts, setMountainMainParts] = useState( props?.point?.mountain_main_parts || [])
+    const [mountainMainParts, setMountainMainParts] = useState(  props.mountainMainPart)
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors} = useForm({
         markers: props?.point === undefined ? [] : [{
             'lat': Number(props?.point?.lat),
@@ -119,10 +118,10 @@ export default function Form(props) {
                                         </div>
                                     </div>
                                     <DropdownWithErrorMessage label={t('mountain.range')}
-                                                              value={getName()}
+                                                              value={mountainMainParts.find((element) => element?.id === data.mountain_main_part_id)}
                                                               valueTemplate={getName() }
                                                               onChange={(e) => handleChange(e.id, 'mountain_main_part_id', e.id)}
-                                                              options={props.mountainMainParts}
+                                                              options={mountainMainParts}
                                                               optionLabel="name"
                                                               placeholder={t('choose.mountain.range')}
                                                               className="w-full md:w-14rem"

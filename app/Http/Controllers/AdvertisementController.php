@@ -63,7 +63,7 @@ class AdvertisementController extends Controller
     }
     public function destroy(Advertisement $advertisement): RedirectResponse
     {
-        $this->repository->remove($advertisement);
-        return to_route('advertisment.index')->with(ToastHelper::remove('advertisement'));;
+        $advertisement->delete();
+        return to_route('home')->with(ToastHelper::remove('advertisement'));
     }
 }

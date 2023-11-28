@@ -8,8 +8,8 @@ export default function Trip({section, handleRemoveMountainSection, label}) {
     const globalTranslation = useTranslation(["global"]);
 
     return (
-        <div key={section.id} className='flex flex-row border-1 border border-gray-400 shadow-xl py-1 px-2 text-left items-center w-[600px] mb-6'>
-            <span className='w-[520px]'>{label}</span>
+        <div key={section.id} className='flex flex-row border-1 border border-gray-400 shadow-xl py-1 px-2 text-left items-center w-[800px] mb-6 justify-between'>
+            <span className='w-[700px]'>{label}</span>
             <Button
                 type="button"
                 onClick={() => handleRemoveMountainSection(section)}

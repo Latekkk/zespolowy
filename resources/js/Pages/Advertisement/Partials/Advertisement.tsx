@@ -3,8 +3,12 @@ import Dropdown from "@/Components/Dropdown";
 import { FiSettings } from "react-icons/fi";
 import {useTranslation} from "react-i18next";
 import { DateTime } from "luxon";
+import {Toast} from "primereact/toast";
+import React, { useRef } from "react";
+import PrimaryButton from "@/Components/PrimaryButton";
+import { router } from "@inertiajs/react";
 
-export default function Advertisement({advertisement,auth}: any) {
+export default function Advertisement({advertisement,auth, toast}: any) {
     const {t} = useTranslation(['advertisement'])
     const globalTranslation = useTranslation(['global'])
 
@@ -48,14 +52,22 @@ export default function Advertisement({advertisement,auth}: any) {
                                             </Dropdown.Trigger>
 
                                             <Dropdown.Content>
-                                                <Dropdown.Link href={route('advertisement.edit', advertisement.slug)}>
-                                                    {globalTranslation.t('edit')}
-                                                </Dropdown.Link>
+                                                <div className="flex flex-col">
+                                                    <PrimaryButton
+                                                        onClick={() => router.visit(route('advertisement.edit', advertisement.slug))}
+                                                        type={'button'}> {globalTranslation.t('edit')}
+                                                    </PrimaryButton>
+                                                    <PrimaryButton
+                                                        className={'bg-red-500 hover:bg-red-600'}
+                                                        onClick={() => router.delete(route('advertisement.destroy', advertisement.slug), {
+                                                            onSuccess: params =>{
 
-                                                <Dropdown.Link href={route('advertisement.destroy', advertisement.slug)}>
-                                                    {globalTranslation.t('remove')}
-                                                </Dropdown.Link>
-
+                                                                toast.current?.show({severity: params.props.toast.value.severity, summary: params.props.toast.value.summary, detail: params.props.toast.value.content});
+                                                            }
+                                                        })}
+                                                        type={'button'}> {globalTranslation.t('remove')}
+                                                    </PrimaryButton>
+                                                </div>
                                             </Dropdown.Content>
                                         </Dropdown>
                                     </div>

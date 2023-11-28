@@ -48,7 +48,7 @@ class PointController extends Controller
         $point->load('mountainMainParts');
         return Inertia::render('Point/Form', [
             'point' => $point,
-            'mountainMainParts' => MountainMainPart::all()
+            'mountainMainPart' => MountainMainPart::all()
         ]);
     }
 

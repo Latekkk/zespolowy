@@ -101,10 +101,9 @@ export default function Form(props) {
         const selected = section?.selected;
 
         if (section?.end_point_id === selected) {
-            return `${endName} - ${startName}: ${section.points_for_descent}`
+            return <div className={'flex flex-row justify-between pr-2'}><span>{endName} - {startName}</span> <span> {t('number.of.points.for.descent')}: {section.points_for_descent} </span></div>
         } else {
-            return `${startName} - ${endName}: ${section?.entry_points}`
-
+            return <div className={'flex flex-row justify-between pr-2'}><span>{startName} - {endName}</span> <span> {t('number.of.points.for.entry')}: {section.entry_points}</span></div>
         }
 
     }
@@ -159,7 +158,7 @@ export default function Form(props) {
                                     type="date"
                                     extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 />
-                                <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)} className={'h-12'}>{t("addMountainSection")}</PrimaryButton>
+                                <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)} className={'h-12'} className={'w-1/3 ml-6'} >{t("addMountainSection")}</PrimaryButton>
                             </div>
                             <div className={'my-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/5'}>
                                 <span>Łączna ilośc punktów:  {getPoints()}</span>
@@ -171,7 +170,7 @@ export default function Form(props) {
                             <div className="card scrollpanel-demo">
                                 <div className="flex flex-column md:flex-row gap-5">
                                     <div className="flex-auto">
-                                        <ScrollPanel style={{width: '100%', height: '400px'}}>
+                                        <ScrollPanel style={{width: '100%', height: '700px'}}>
                                             {data?.mountainSection?.map((section) => (
                                                 <Trip section={section} label={getName(section)} key={section.id}
                                                       handleRemoveMountainSection={handleRemoveMountainSection}/>
