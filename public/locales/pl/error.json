@@ -1,0 +1,10 @@
+{
+    "title.503": "503: Usługa niedostępna",
+    "title.500": "500: Błąd serwera",
+    "title.404": "404: Nie znaleziono strony",
+    "title.403": "403: Zakazane",
+    "description.503": "Przepraszamy, przeprowadzamy prace konserwacyjne. Prosimy o ponowne sprawdzenie wkrótce.",
+    "description.500": "Ups, coś poszło nie tak na naszych serwerach.",
+    "description.404": "Przepraszamy, nie można znaleźć strony, której szukasz.",
+    "description.403": "Przepraszamy, dostęp do tej strony jest zabroniony."
+}

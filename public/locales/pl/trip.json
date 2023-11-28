@@ -10,6 +10,8 @@
     "selected.mountain.sections": "Wybrane odcinki górskie",
     "select.a.leader": "Wybierz przodownika",
     "points.for.entry": "Punkty za wejście",
+    "number.of.points.for.descent": "Liczba punktów za zejscie",
+    "number.of.points.for.entry": "Liczba punktów za zejscie",
     "points.for.descent": "Punkty za zejście",
     "entry.and.exit": "Punkty za wejście i zejście",
     "points.forward": "Punkty tam",
@@ -18,4 +20,6 @@
     "total.pointsEntry" : "Punkty",
     "trip.date" : "Data wycieczki",
     "trip.accept.points": "Wyślij punkty"
+    "entry.and.exit": "wejście i zejście",
+    "addMountainSection" : "Dodaj sekcję górską"
 }

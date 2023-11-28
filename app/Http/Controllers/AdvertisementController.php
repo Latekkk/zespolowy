@@ -61,4 +61,9 @@ class AdvertisementController extends Controller
         $this->repository->create($request);
         return redirect()->route('home')->with(ToastHelper::create('advertisement'));
     }
+    public function destroy(Advertisement $advertisement): RedirectResponse
+    {
+        $advertisement->delete();
+        return to_route('home')->with(ToastHelper::remove('advertisement'));
+    }
 }

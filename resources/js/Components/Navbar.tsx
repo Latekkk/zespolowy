@@ -34,7 +34,7 @@ export default function NavBar({navbar, user = null}) {
         <>
             {navbar.map((link, index) => {
                 return (
-                    <div className="ml-3 relative" key={index}>
+                    <div className="relative min-w-[100px] text-center px-0.5" key={index}>
                         {
                             countOccurrencesInSubLinks(link, user?.role) <= 1 ?
                                 <>

@@ -1,0 +1,10 @@
+{
+    "title.503": "503: Service Unavailable",
+    "title.500": "500: Server Error",
+    "title.404": "404: Page not found",
+    "title.403": "403: Banned",
+    "description.503": "Sorry, we are performing maintenance work. Please check again soon.",
+    "description.500": "Oops, something went wrong on our servers.",
+    "description.404": "Sorry, the page you are looking for cannot be found.",
+    "description.403": "Sorry, access to this page is prohibited."
+}

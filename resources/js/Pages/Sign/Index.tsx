@@ -6,7 +6,7 @@ import {Dialog} from "primereact/dialog";
 import {Button} from "primereact/button";
 import {Toast} from "primereact/toast";
 import {Badge} from "@/Models/Badge";
-import {Head, Link} from '@inertiajs/react';
+import {Head, Link, router} from '@inertiajs/react';
 import PartialSign from "@/Pages/Sign/Partials/PartialSign";
 
 
@@ -53,8 +53,13 @@ export default function Index(props: any) {
                 <Dialog header={globalTranslation.t('delete.descr') + modalData.hiking_trail} visible={visible} maximizable
                         style={{width: '50vw'}} onHide={() => setVisible(false)}>
                     <div className="flex flex-row gap-x-2 justify-end">
-                        <Link href={route('sign.destroy', modalData.id)} method="delete" as="button" type="button"
-                              className="block bg-red-600 hover:bg-red-500 px-4 py-2 text-left text-sm leading-5 text-white hover:bg-gray-100 focus:outline-none focus:bg-red-500 transition duration-150 ease-in-out">{globalTranslation.t('delete')}</Link>
+                        <Button label={globalTranslation.t('delete')} className="block bg-red-600 hover:bg-red-500 px-4 py-2 text-left text-sm leading-5
+                                    text-white focus:outline-none focus:bg-red-500 transition duration-150 ease-in-out"
+                                onClick={() =>router.delete(route('sign.destroy', modalData.id),{
+                                    onSuccess:params => {
+                                        toast.current?.show({severity: params.props.toast.value.severity, summary: params.props.toast.value.summary, detail: params.props.toast.value.content});
+                                    }
+                                })}/>
                         <Button label={globalTranslation.t('cancel')} className={"bg-blue-600 hover:bg-red-500"}
                                 onClick={() => setVisible(false)}/>
                     </div>

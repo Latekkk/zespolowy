@@ -3,7 +3,10 @@ import { Head } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import Advertisement from './Partials/Advertisement';
 import Pagination from "@/Components/Pagination";
+import React, {useRef} from "react";
+import {Toast} from "primereact/toast";
 export default function Index(  props: any) {
+    const toast = useRef<Toast>(null);
 
     const { t } = useTranslation(['advertisement'])
     return (
@@ -19,6 +22,7 @@ export default function Index(  props: any) {
                         <div className="p-6 text-gray-900 flex flex-col gap-x-2 gap-y-2">
                             {props.advertisements.data.map((advertisement, index) => {
                                return <Advertisement
+                                   toast={toast}
                                     key={'advertisement' + index}
                                     auth={props.auth.user !== null}
                                     advertisement={advertisement}
@@ -29,6 +33,8 @@ export default function Index(  props: any) {
                     </div>
                 </div>
             </div>
+            <Toast ref={toast}/>
+
         </Layout>
     );
 }

@@ -25,8 +25,8 @@ class ContactRequest extends FormRequest
         return [
             'name'=> 'required|string|min:3|max:255',
             'title'=> 'required|string|min:5|max:255',
-            'email'=> 'required_without:phone_number|email:rfc,dns|min:5|max:255',
-            'phone_number'=> 'required_without:email|string|min:8|max:15',
+            'email'=> 'required_without:phone_number|nullable|email:rfc,dns|min:5|max:255',
+            'phone_number'=> 'required_without:email|nullable|string|min:8|max:15',
             'description'=> 'required|string|min:10|max:255',
             'response'=> 'nullable|boolean'
         ];

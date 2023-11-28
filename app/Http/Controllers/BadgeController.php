@@ -78,8 +78,8 @@ class BadgeController extends Controller
      */
     public function destroy(Badge $badge): RedirectResponse
     {
-        $this->authorize('delete', Badge::class);
+        $this->authorize('delete', $badge);
         $this->repository->remove($badge);
-        return redirect()->route('badge.index')->with(ToastHelper::remove('badge'));
+        return to_route('badge.index')->with(ToastHelper::remove('badge'));
     }
 }
