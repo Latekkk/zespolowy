@@ -95,7 +95,7 @@ export default function TripChangeStatus({ section, trip, user, guides, collapse
                     <div className={'flex flex-col gap-y-2'}>
                         <div onClick={openModal} style={{ cursor: 'pointer' }}>
                             {section.name}
-                            {duplicate && <p>Duplikat</p>}
+                            {duplicate && <p style={{ color: 'red', fontWeight: 'bold' }}>Duplikat</p>}
                         </div>
                     </div>
                 </div>

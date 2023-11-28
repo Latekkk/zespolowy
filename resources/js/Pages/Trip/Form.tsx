@@ -30,7 +30,6 @@ export default function Form(props) {
         mountainSection: props?.trip?.mountain_sections || [],
         remember: true,
     });
-
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
         let value = e?.target?.value || val || e || "";
@@ -124,7 +123,7 @@ export default function Form(props) {
         return count
     }
 
-        return (<Layout
+    return (<Layout
             props={props}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -211,7 +210,7 @@ export default function Form(props) {
                         value={selectedMountainSections}
                         valueTemplate={selectedMountainSections}
                         onChange={handleSelectedMountainSection}
-                        options={mountainSections}
+                        options={props.mountainSection}
                         optionLabel="name"
                         placeholder={t("select.a.mountain.section")}
                         className="w-full md:w-14rem"
