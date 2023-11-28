@@ -8,7 +8,7 @@ import {Toast} from "primereact/toast";
 export default function Layout({props = null, header, children}) {
     const pageProps = usePage().props;
     const {t} = useTranslation(['navbar'])
-    const auth = pageProps.auth.user
+    const auth = pageProps?.auth?.user
 
 
     const toast = useRef<Toast>(null);
