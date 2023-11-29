@@ -46,12 +46,12 @@ export default function Index(props: any) {
     const getMarkers = (obj) => {
         return [
             {
-                'lat': Number(points.find((p) => p.id === obj?.start_point).lat),
-                'lng': Number(points.find((p) => p.id === obj?.start_point).lng),
+                'lat': Number(points.find((p) => p.id === obj?.start_point_id).lat),
+                'lng': Number(points.find((p) => p.id === obj?.start_point_id).lng),
             },
             {
-                'lat': Number(points.find((p) => p.id === obj?.end_point).lat),
-                'lng': Number(points.find((p) => p.id === obj?.end_point).lng),
+                'lat': Number(points.find((p) => p.id === obj?.end_point_id).lat),
+                'lng': Number(points.find((p) => p.id === obj?.end_point_id).lng),
             }
         ];
     }
