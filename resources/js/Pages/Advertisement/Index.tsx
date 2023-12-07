@@ -24,7 +24,7 @@ export default function Index(  props: any) {
                                return <Advertisement
                                    toast={toast}
                                     key={'advertisement' + index}
-                                    auth={props.auth.user !== null}
+                                    auth={props?.auth?.user}
                                     advertisement={advertisement}
                                 />
                             })}
