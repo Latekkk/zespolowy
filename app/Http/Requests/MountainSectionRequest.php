@@ -32,8 +32,8 @@ class MountainSectionRequest extends FormRequest
 
         return [
             'name' => $nameRule,
-            'start_point' => 'required|different:end_point|exists:points,id',
-            'end_point' => 'required|different:start_point|exists:points,id',
+            'start_point_id' => 'required|different:end_point|exists:points,id',
+            'end_point_id' => 'required|different:start_point|exists:points,id',
             'entry_points' => 'required|integer|min:1',
             'points_for_descent' => 'required|integer|min:1',
             'start_end_points' => [
