@@ -24,8 +24,8 @@ export default function Form(props) {
         name: mountainSection?.name || "",
         entry_points: mountainSection?.entry_points || "",
         points_for_descent: mountainSection?.points_for_descent || "",
-        start_point : mountainSection?.start_point || "",
-        end_point : mountainSection?.end_point || "",
+        start_point_id : mountainSection?.start_point || "",
+        end_point_id : mountainSection?.end_point || "",
         mountain_main_part_id: mountainSection?.mountain_main_part_id || null,
         remember: true
     })
@@ -61,13 +61,13 @@ export default function Form(props) {
         if  (firstName !== null) {
             setData(data => ({
                 ...data,
-                ["start_point"]: firstName?.id,
+                ["start_point_id"]: firstName?.id,
             }))
         }
         if  (secondName !== null) {
             setData(data => ({
                 ...data,
-                ["end_point"]: secondName?.id,
+                ["end_point_id"]: secondName?.id,
             }))
         }
 
@@ -79,8 +79,8 @@ export default function Form(props) {
 
     useEffect(()=>{
         if(mountainSection != null){
-            setFirstName(findPoint(mountainSection.start_point));
-            setSecondName(findPoint(mountainSection.end_point));
+            setFirstName(findPoint(mountainSection.start_point_id));
+            setSecondName(findPoint(mountainSection.end_point_id));
         }
         getPoints()
     },[])

@@ -22,14 +22,13 @@ export default function Form({user,
 
     const createTemplateToDrop = (arr) => {
         return arr.map((item, index) => {
-            return {id: index+1, name: t(item)}
+            return {id: index+1, name: t(item), nameOrig: item}
         })
     }
 
     const arrRoles = createTemplateToDrop(roles);
     const props = usePage().props;
-
-    const [selectedRole, setSelectedRole] = useState( user?.role || '');
+    const [selectedRole, setSelectedRole] = useState(user?.role ? arrRoles.find(role => role.nameOrig === user.role) : '');
 
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors} = useForm({
         name: user?.name || '',
@@ -43,9 +42,10 @@ export default function Form({user,
     useEffect(() => {
         setData(data => ({
             ...data,
-            ['role']: selectedRole.name,
-        }))
-    }, [selectedRole])
+            role: selectedRole ? selectedRole.nameOrig : '', // Przekazujemy tylko ID roli
+        }));
+    }, [selectedRole]);
+
 
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
@@ -58,6 +58,7 @@ export default function Form({user,
 
     function handleSubmit(e) {
         e.preventDefault()
+        console.log(data)
         user === null ? post(route('user.store')) : put(route('user.update', user.id))
     }
 
@@ -65,7 +66,6 @@ export default function Form({user,
         reset();
         clearErrors()
     }
-
         return (
         <Layout
             props={props}

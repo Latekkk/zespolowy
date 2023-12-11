@@ -27,7 +27,6 @@ class UserPointsRepository
             $userPointsRequest->save();
             $this->photoService->savePhoto($this->getFile($request), $userPointsRequest);
         });
-
     }
 
     public function update(UserPointsRequest $request, UserPoints $user): void
@@ -44,41 +43,20 @@ class UserPointsRepository
     {
         $userPoints = [];
         $userId = $request->input('user_id');
+        $tripId = $request->input('trip_id');
         $pathId = $request->input('guide');
-        $mountainSectionId = $request->input('mountain_section_id');
         $status = $request->input('status');
         $approvedId = null;
 
         $pointsMountainSection = $request->input('points_mountain_section');
-        if (in_array(PointsMountainSectionEnum::ENTRY->value, $pointsMountainSection) && in_array(PointsMountainSectionEnum::DESCENT->value, $pointsMountainSection)) {
-            $userPoints = new UserPoints([
-                'user_id' => $userId,
-                'mountain_section_id' => $mountainSectionId,
-                'points_mountain_section' => PointsMountainSectionEnum::BOTH->value,
-                'status' => $status,
-                'approved_id' => $approvedId,
-                'path_user_id' => $pathId,
-            ]);
-        } else if (in_array(PointsMountainSectionEnum::ENTRY->value, $pointsMountainSection)) {
-            $userPoints = new UserPoints([
-                'user_id' => $userId,
-                'mountain_section_id' => $mountainSectionId,
-                'points_mountain_section' => PointsMountainSectionEnum::ENTRY->value,
-                'status' => $status,
-                'approved_id' => $approvedId,
-                'path_user_id' => $pathId,
-            ]);
-        } else if (in_array(PointsMountainSectionEnum::DESCENT->value, $pointsMountainSection)) {
-            $userPoints = new UserPoints([
-                'user_id' => $userId,
-                'mountain_section_id' => $mountainSectionId,
-                'points_mountain_section' => PointsMountainSectionEnum::DESCENT->value,
-                'status' => $status,
-                'approved_id' => $approvedId,
-                'path_user_id' => $pathId,
-            ]);
-        }
-
+        $userPoints = new UserPoints([
+            'user_id' => $userId,
+            'points_mountain_section' => $pointsMountainSection,
+            'trip_id' => $tripId,
+            'status' => $status,
+            'approved_id' => $approvedId,
+            'path_user_id' => $pathId,
+        ]);
         return $userPoints;
     }
 

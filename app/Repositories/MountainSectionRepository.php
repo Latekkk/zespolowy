@@ -18,6 +18,7 @@ class MountainSectionRepository
 
     public function create(MountainSectionRequest $request): void
     {
+        //dd($request);
         $this->model->create(array_merge($request->all(), ['slug' => SlugHelper::getSlug($request->name)]));
     }
 
