@@ -4,7 +4,7 @@ import {Head, useForm, usePage} from "@inertiajs/react";
 import {MountainSection} from "@/Models/MountainSection";
 import Layout from "@/Layouts/Layout";
 import Button from "@/Components/Button";
-import { Button as PrimeButton } from 'primereact/button';
+import {Button as PrimeButton} from 'primereact/button';
 import MountainSectionService from "@/Pages/MountainSection/service/MountainSectionService";
 import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,6 +18,7 @@ import useFileList from "@/Functions/fileList";
 import FileInput from "@/Components/FileInput";
 import undefinedImages from "@/Functions/undefinedImages";
 import StatusENUM from "@/Enums/StausEnum";
+import Heading3 from "@/Components/Heading3";
 
 export default function Form(props) {
     const {t} = useTranslation(["trip"]);
@@ -53,17 +54,19 @@ export default function Form(props) {
             setData("img_url", e.currentTarget.files[0]);
             console.log(e.currentTarget.files[0])
             mainPhoto.addFile(e.target.files)
-            errors.img_url=''
+            errors.img_url = ''
         }
     };
     const toast = useRef<Toast>(null);
     const [visible, setVisible] = useState<boolean>(false);
+
     function handleSubmit(e) {
         e.preventDefault();
         trip === null
             ? post(route("trip.store", data))
             : put(route("trip.update", {data, trip: trip.id}));
     }
+
     const setDefaultForm = () => {
         reset();
         clearErrors();
@@ -94,15 +97,6 @@ export default function Form(props) {
     };
 
 
-    const header = (
-        <div className={'h-[0px]'}>
-            <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png"/>
-        </div>
-    );
-    const footer = (
-        <></>
-    );
-
     function handleChange(e, keyName, val) {
         const key = e?.target?.id || keyName;
         let value = e?.target?.value || val || e || '';
@@ -111,16 +105,19 @@ export default function Form(props) {
             [key]: value,
         }))
     }
-    {selectedMountainSections.map((section, index) => {
-        const isRepetition = selectedMountainSections
-            .slice(0, index)
-            .some((prevSection) => prevSection.name === section.name);
-        if (!isRepetition){
-            allPointsEntry += parseFloat(section.entry_points);
-            allPointsDescent += parseFloat(section.points_for_descent);
-            allPointsEntryDescent += (parseFloat(section.entry_points) + parseFloat(section.points_for_descent));
-        }
-    })}
+
+    {
+        selectedMountainSections.map((section, index) => {
+            const isRepetition = selectedMountainSections
+                .slice(0, index)
+                .some((prevSection) => prevSection.name === section.name);
+            if (!isRepetition) {
+                allPointsEntry += parseFloat(section.entry_points);
+                allPointsDescent += parseFloat(section.points_for_descent);
+                allPointsEntryDescent += (parseFloat(section.entry_points) + parseFloat(section.points_for_descent));
+            }
+        })
+    }
 
     const sendUserPoints = async () => {
         setData(data => ({
@@ -142,84 +139,81 @@ export default function Form(props) {
             });
         }
     }
-    // useEffect(() => {
-    //     if (data.img_url !== undefined) {
-    //         post(route('userPoints.store'), {
-    //             onSuccess: (params) => {
-    //                 setData((data) => ({
-    //                     ...data
-    //                 }));
-    //             },
-    //         });
-    //     }
-    // }, [data.points_mountain_section]);
+
     useEffect(() => {
         errors.img_url = "Pole zdjęcie jest wymagane.";
     }, [])
 
 
     const card = (
-        <Card title={trip.name} subTitle={trip.date} footer={footer} header={header}
-              className="w-full h-full">
-            <div className="card scrollpanel-demo">
-                <div className="flex flex-column md:flex-row gap-5">
-                    <div className="flex-auto">
-                        <div className="mb-4">
+        <Card title={`${t('trip.name')}: ${trip.name}`} className="w-full h-full">
+            <div className="flex flex-row pt-2 justify-between">
+                <div className="flex flex-col w-1/2 gap-y-3 py-2">
+                    <Heading3 extraClass={'mt-0'}>{`${t('trip.date')}: ${trip.date}`}</Heading3>
 
-                            <p>{t("total.pointsEntry")}: {allPointsEntry}</p>
-                            <h1>{t("trip.date")}</h1>
-                            <Calendar value={data.date}
-                                      onChange={(e) => handleChange(e.target.value, 'date', e.target.value)}
-                                      maxDate={today} showIcon
-                                      className={'bg-blue-500'}/>
-                            <Dropdown value={props.guides.find((guide) => guide.id === data.guide)?.name}
-                                      name={'guide'}
-                                      onChange={(e) => handleChange(e.target.value.id, 'guide', e.target.value.id)}
-                                      options={props.guides}
-                                      optionLabel="name"
-                                      editable
-                                      placeholder={t('select.a.leader')}
-                                      className="md:w-14rem"/>
-                            <div className={'w-[350px] max-w-[350px] px-2'}>
-                                <FileInput labelText={'img.url'}
-                                           name='img_url'
-                                           value={data.img_url}
-                                           error={errors.img_url}
-                                           onChange={handleFile}
-                                />
-                                <div>
-                                    <h1>{globalTranslation.t("preview")}</h1>
-                                    <img className=" w-[150px] h-[150px] object-contain"
-                                         src={undefinedImages(mainPhoto?.files[0]?.url, '', undefinedUrl)}
-                                         width="150" height="150" alt={'xD'}/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-row text-center">
-                            <div>
-                                <Button
-                                    type="button"
-                                    onClick={() => sendUserPoints()}
-                                    children={t('trip.accept.points')}
-                                    background="bg-blue-500"
-                                    textColor={"text-white"}
-                                    hoverColor={"bg-red-400"}
-                                />
-                            </div>
-                        </div>
-                        <ScrollPanel style={{width: '100%', height: '400px'}}>
-                            {selectedMountainSections.map((section, index) => {
-                                const isRepetition = selectedMountainSections
-                                    .slice(0, index)
-                                    .some((prevSection) => prevSection.name === section.name);
-                                return (
-                                    <TripChangeStatus trip={trip} section={section}
-                                                      user={user} guides={props.guides} collapsed={index !== 0} duplicate={isRepetition}/>
-                                )
-                            })}
-                        </ScrollPanel>
+                    <Heading3 extraClass={'mt-0'}>{t("total.pointsEntry")}: {allPointsEntry}</Heading3>
+                    <Heading3 extraClass={'mt-0'}>{t("trip.date")}</Heading3>
+                    <div className="flex flex-row gap-x-2">
+                        <Calendar value={data.date}
+                                  onChange={(e) => handleChange(e.target.value, 'date', e.target.value)}
+                                  maxDate={today} showIcon
+                                  className={'bg-blue-500'}/>
+                        <Dropdown value={props.guides.find((guide) => guide.id === data.guide)?.name}
+                                  name={'guide'}
+                                  onChange={(e) => handleChange(e.target.value.id, 'guide', e.target.value.id)}
+                                  options={props.guides}
+                                  optionLabel="name"
+                                  editable
+                                  placeholder={t('select.a.leader')}
+                        />
                     </div>
                 </div>
+                <div className={'w-[350px] max-w-[350px] px-2'}>
+                    <FileInput labelText={t('img.url')}
+                               name='img_url'
+                               value={data.img_url}
+                               error={errors.img_url}
+                               onChange={handleFile}
+                    />
+                    <div>
+                        <h1>{globalTranslation.t("preview")}</h1>
+                        <img className=" w-[150px] h-[150px] object-contain"
+                             src={undefinedImages(mainPhoto?.files[0]?.url, '', undefinedUrl)}
+                             width="150" height="150" alt={'xD'}/>
+                    </div>
+                </div>
+            </div>
+
+            <div className={'flex flex-col gap-b-3'}>
+                <Heading3>{t('trips')}</Heading3>
+                <div
+                    className={'flex flex-row rounded rounded-xl border border-gray-500 py-4 justify-center items-center'}>
+
+                    <ScrollPanel style={{width: 'auto', height: '400px'}}
+                                 className={''}>
+                        {selectedMountainSections.map((section, index) => {
+                            const isRepetition = selectedMountainSections
+                                .slice(0, index)
+                                .some((prevSection) => prevSection.name === section.name);
+                            return (
+                                <TripChangeStatus trip={trip} section={section}
+                                                  user={user} guides={props.guides} collapsed={index !== 0}
+                                                  duplicate={isRepetition}/>
+                            )
+                        })}
+
+                    </ScrollPanel>
+                </div>
+            </div>
+            <div className="flex flex-row items-end justify-end py-2">
+                <Button
+                    type="button"
+                    onClick={() => sendUserPoints()}
+                    children={t('trip.accept.points')}
+                    background="bg-blue-500"
+                    textColor={"text-white"}
+                    hoverColor={"bg-red-400"}
+                />
             </div>
         </Card>
     )
@@ -236,12 +230,6 @@ export default function Form(props) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-                        <div className="card flex justify-items-end p-2">
-                            <Sidebar visible={visible} onHide={() => setVisible(false)} fullScreen>
-                                {card}
-                            </Sidebar>
-                            <PrimeButton icon="pi pi-th-large text-end" className={'p-2 text-end w-[150px]'} onClick={() => setVisible(true)} > Full screen </PrimeButton>
-                        </div>
                         <div className="flex p-6 text-gray-900 flex flex-col ">
                             {card}
                         </div>

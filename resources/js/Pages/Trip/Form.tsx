@@ -12,7 +12,6 @@ import {ScrollPanel} from "primereact/scrollpanel";
 import "react-datepicker/dist/react-datepicker.css";
 import {Dialog} from "primereact/dialog";
 import PrimaryButton from "@/Components/PrimaryButton";
-import Heading1 from "@/Components/Heading1";
 import Heading3 from "@/Components/Heading3";
 
 export default function Form(props) {

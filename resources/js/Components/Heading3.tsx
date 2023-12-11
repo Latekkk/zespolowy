@@ -5,7 +5,7 @@ type Heading3Props = {
     extraClass?: string;
 };
 
-const Heading1: React.FC<Heading3Props> = ({ children, extraClass = '' }) => {
+const Heading3: React.FC<Heading3Props> = ({ children, extraClass = '' }) => {
     return (
         <h3 className={`text-xl font-bold uppercase mt-8 ${extraClass}`}>
             {children}
@@ -13,7 +13,7 @@ const Heading1: React.FC<Heading3Props> = ({ children, extraClass = '' }) => {
     );
 };
 
-export default Heading1;
+export default Heading3;
 
 
 
