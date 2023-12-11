@@ -40,7 +40,7 @@ class UserController extends Controller
         ]);
 
 
-//        TODO:: Mikołaj napisz tu jakie role są xD
+//        TODO:: Mikołaj napisz tu jakie role są xD W sensie ale co tu napisac XD
     }
 
     public function edit(User $user): Response

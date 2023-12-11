@@ -14,8 +14,8 @@ class UserPoints extends Model
 
     protected $fillable = [
         'user_id',
-        'mountain_section_id',
         'points_mountain_section',
+        'trip_id',
         'status',
         'approved_id',
         'path_user_id'
@@ -26,9 +26,9 @@ class UserPoints extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function mountainSection(): BelongsTo
+    public function tripId(): BelongsTo
     {
-        return $this->belongsTo(MountainSection::class);
+        return $this->belongsTo(Trip::class, 'trip_id');
     }
 
     public function approvedBy(): BelongsTo

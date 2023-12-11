@@ -19,17 +19,17 @@ export default function Show({userPoint}) {
     const footer = (
         <></>
     );
-
+    console.log(userPoint);
     const card = (
         <div className={'flex  flex-col gap-y-2'}>
             <Card title={t('name')}>
                 <p className="m-0">
-                    {userPoint.mountain_section.name}
+                    {userPoint.trip_id.name}
                 </p>
             </Card>
             <Card title={t('who.was.the.guide')}>
                 <p className="m-0">
-                    {userPoint.path_user.name}
+                    {userPoint.path_user ? userPoint.path_user.name : ''}
                 </p>
             </Card>
             <Card title={t('participant')}>

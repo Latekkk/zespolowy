@@ -17,12 +17,11 @@ export default function Advertisement({advertisement,auth, toast}: any) {
 
         return full? date.toFormat("dd'.'LL'.'yyyy HH:MM:ss") : date.toFormat("dd'.'LL'.'yyyy")
     }
-
     return (
         <>
             <div className="rounded overflow-hidden shadow-lg w-full min-h-[150px]">
                     <div className="px-6 py-4 w-full">
-                        {auth === true &&
+                        {(auth && auth.role && (auth.role === 'squaduser' || auth.role === 'admin')) &&
                             <div className="relative w-full items-end ">
                                 <div className="w-full absolute flex justify-end hidden sm:flex sm:items-center sm:ml-6 pr-4">
                                     <div className="ml-3 w-max">
