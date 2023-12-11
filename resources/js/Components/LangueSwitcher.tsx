@@ -6,6 +6,7 @@ import {Button} from 'primereact/button';
 import Flag from 'react-world-flags'
 import axios from 'axios';
 import {Inertia} from "@inertiajs/inertia";
+import {router} from "@inertiajs/react";
 
 
 function LanguageSwitcher() {
@@ -45,7 +46,7 @@ function LanguageSwitcher() {
                                     detail: getCurrentLanguage() + ' ' + data.item.label,
                                     life: 3000
                                 });
-                                Inertia.visit(route('translationSwitcher', {'lang': 'pl'}))
+                                router.visit(route('translationSwitcher', {'lang': 'pl'}))
                             }
                         },
                         {
@@ -59,7 +60,7 @@ function LanguageSwitcher() {
                                     detail: getCurrentLanguage() + ' ' + data.item.label,
                                     life: 3000
                                 });
-                                Inertia.visit(route('translationSwitcher', {'lang': 'en'}))
+                                router.visit(route('translationSwitcher', {'lang': 'en'}))
                             }
                         }
                     ]
