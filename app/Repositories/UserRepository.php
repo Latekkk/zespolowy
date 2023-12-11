@@ -17,7 +17,6 @@ class UserRepository
     {
         $user = $this->getUserFromRequest($request);
         $user->save();
-
     }
 
     public function update(UserRequest $request, User $user): void
@@ -36,12 +35,11 @@ class UserRepository
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'role' => $request->input('role')
+            'role' => $request->input('role'),
         ];
-        if($request->input('password')) {
-            array_push($data,  ['password' => $request->input('password')]);
+        if($request->has('password')) {
+            $data = [...$data,  'password' => $request->input('password')];
         }
-
         if ($update) {
             return $data;
         }

@@ -1,5 +1,5 @@
 import Layout from '@/Layouts/Layout';
-import {useForm, usePage} from '@inertiajs/react';
+import {router, useForm, usePage} from '@inertiajs/react';
 import {useTranslation} from 'react-i18next';
 import Input from "@/Components/Input"
 import Button from "@/Components/Button";
@@ -11,10 +11,12 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import {Inertia} from "@inertiajs/inertia";
 import {ScrollPanel} from "primereact/scrollpanel";
 
-export default function Form({user,
+export default function Form({
+                                 user,
                                  user_mountain_main_parts,
                                  mountain_main_parts,
-                                 roles}) {
+                                 roles
+                             }) {
 
     const toast = useRef(null);
     const {t} = useTranslation(['users'])
@@ -22,14 +24,14 @@ export default function Form({user,
 
     const createTemplateToDrop = (arr) => {
         return arr.map((item, index) => {
-            return {id: index+1, name: t(item)}
+            return {id: index + 1, name: t(item), value: item}
         })
     }
 
     const arrRoles = createTemplateToDrop(roles);
     const props = usePage().props;
 
-    const [selectedRole, setSelectedRole] = useState( user?.role || '');
+    const [selectedRole, setSelectedRole] = useState(user?.role || '');
 
     const {data, setData, post, put, processing, errors, reset, cancel, clearErrors} = useForm({
         name: user?.name || '',
@@ -58,7 +60,7 @@ export default function Form({user,
 
     function handleSubmit(e) {
         e.preventDefault()
-        user === null ? post(route('user.store')) : put(route('user.update', user.id))
+        user === undefined ? post(route('user.store')) : put(route('user.update', user.id))
     }
 
     const setDefaultForm = () => {
@@ -66,11 +68,11 @@ export default function Form({user,
         clearErrors()
     }
 
-        return (
+    return (
         <Layout
             props={props}
             header={<h2
-            className="font-semibold text-xl text-gray-800 leading-tight">{t('creating.editing.a.user')}</h2>}
+                className="font-semibold text-xl text-gray-800 leading-tight">{t('creating.editing.a.user')}</h2>}
         >
 
             <div className="py-12">
@@ -111,8 +113,8 @@ export default function Form({user,
                                         />
                                     </div>
 
-                                    <DropdownWithErrorMessage value={selectedRole}
-                                                              onChange={(e) => setSelectedRole(e)}
+                                    <DropdownWithErrorMessage value={data.role}
+                                                              onChange={(e) => handleChange(e, 'role', e)}
                                                               options={arrRoles}
                                                               optionLabel="name"
                                                               placeholder={t('select.role')}
@@ -120,33 +122,37 @@ export default function Form({user,
                                                               error={errors.role}
                                                               name={'role'}
                                                               extraClass={undefined}
-                                                              label={user === null? (t('user.role') + t('current.role') + user?.role): t('user.role') }
+                                                              label={user === null ? (t('user.role') + t('current.role') + user?.role) : t('user.role')}
                                                               valueTemplate={undefined}
                                     />
 
                                 </div>
 
-                                <div className={`card ${mountain_main_parts !== undefined && 'min-w-[300px] w-[800px]'}`}>
-                                    <Accordion activeIndex={0} className={mountain_main_parts === undefined && 'hidden'}>
+                                <div
+                                    className={`card ${mountain_main_parts !== undefined && 'min-w-[300px] w-[800px]'}`}>
+                                    <Accordion activeIndex={0}
+                                               className={mountain_main_parts === undefined && 'hidden'}>
                                         <AccordionTab
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">{t('authorizations.held')}</span>
+                                                    <span
+                                                        className="vertical-align-middle">{t('authorizations.held')}</span>
                                                 </div>
                                             }
                                         >
 
-                                            <ScrollPanel style={{ width: '100%', height: '425px' }}>
-                                            {user_mountain_main_parts?.data && user_mountain_main_parts?.data.map((user_mountain_main_part, index) => {
-                                                return (
-                                                        <div className={'w-full border border-1 p-2 my-2 '} key={user_mountain_main_part.name + '-' + index}>
-                                                            <p >{user_mountain_main_part.name} </p>
+                                            <ScrollPanel style={{width: '100%', height: '425px'}}>
+                                                {user_mountain_main_parts?.data && user_mountain_main_parts?.data.map((user_mountain_main_part, index) => {
+                                                    return (
+                                                        <div className={'w-full border border-1 p-2 my-2 '}
+                                                             key={user_mountain_main_part.name + '-' + index}>
+                                                            <p>{user_mountain_main_part.name} </p>
                                                             <p>{user_mountain_main_part.created_at.split(' ')[0]}</p>
                                                             <p>{user_mountain_main_part.granted}</p>
                                                         </div>
-                                                );
-                                            })}
+                                                    );
+                                                })}
 
                                             </ScrollPanel>
                                         </AccordionTab>
@@ -154,18 +160,20 @@ export default function Form({user,
                                             header={
                                                 <div className="flex align-items-center">
                                                     <i className="pi pi-calendar mr-2"></i>
-                                                    <span className="vertical-align-middle">{t('available.entitlements')}</span>
+                                                    <span
+                                                        className="vertical-align-middle">{t('available.entitlements')}</span>
                                                 </div>
                                             }
                                         >
                                             {mountain_main_parts?.map((mountain_main_part, index) => {
                                                 return (
-                                                    <div key={mountain_main_part.name + '-' + index} className="flex flex-row justify-between border border-1 p-2 my-2">
+                                                    <div key={mountain_main_part.name + '-' + index}
+                                                         className="flex flex-row justify-between border border-1 p-2 my-2">
                                                         <p>{mountain_main_part.name}</p>
                                                         <PrimaryButton
                                                             type={'button'}
                                                             onClick={() => {
-                                                                Inertia.post(route('userMountainMainPartController.store', {
+                                                                router.post(route('userMountainMainPartController.store', {
                                                                     user_id: user.id,
                                                                     mountain_main_part_id: mountain_main_part.id
                                                                 }));
