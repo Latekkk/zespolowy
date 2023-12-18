@@ -50,7 +50,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

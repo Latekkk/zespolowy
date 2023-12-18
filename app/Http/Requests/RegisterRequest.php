@@ -11,8 +11,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $this->dd(auth()->guest());
-        return auth()->guest();
+        return !auth()->id();
     }
 
     /**
@@ -24,7 +23,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|max:200|min:3',
-            'email' => 'required|email|max:200|min:3',
+            'email' => 'required|email|max:200|min:3|unique:users,email',
             'password' => 'required|string|min:8|max:255',
             'password_repetition' => 'same:password',
         ];

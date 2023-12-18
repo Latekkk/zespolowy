@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRolesEnum;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,12 +18,10 @@ class RegisterController extends Controller
             "name" => $request->input('name'),
             "email" => $request->input('email'),
             "password" => $request->input('password'),
-            "role" => $request->input('role')
+            "role" => UserRolesEnum::USER->value
         ]);
 
-        Auth::login($user->id);
-        return redirect()->route('dashboard');
-
-
+        Auth::login($user);
+        return redirect()->route('home');
     }
 }
