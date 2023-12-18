@@ -68,7 +68,6 @@ class UserController extends Controller
 
     public function store(UserRequest $userRequest): RedirectResponse
     {
-
         $this->repository->create($userRequest);
         return redirect()->route('user.index')->with(ToastHelper::create('user'));
     }

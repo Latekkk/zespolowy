@@ -6,6 +6,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PointController;
 use App\Http\Controllers\ProfileController;
+use app\Http\Controllers\RegisterController;
 use App\Http\Controllers\SignController;
 use App\Http\Controllers\SquadController;
 use App\Http\Controllers\MountainSectionController;
@@ -48,6 +49,8 @@ Route::resource('point', PointController::class);
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::post('/register', [RegisterController::class, 'store'])->name('user.register.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -18,5 +18,7 @@
     "pathuser": "Przodownik",
     "squaduser": "Członek komisji",
     "authorizations.held": "Posiadane uprawnienia",
-    "available.entitlements": "Dostępne uprawnienia"
+    "available.entitlements": "Dostępne uprawnienia",
+    "already.registered": "Już zarejestrowany?",
+    "register": "zarejestruj"
 }

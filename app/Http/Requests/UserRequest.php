@@ -17,9 +17,6 @@ class UserRequest extends FormRequest
 
     public function rules(): array
     {
-
-
-//        TODO: Napisz ładny request, zrobic request do roli
         return [
             'name' => 'required|max:200|min:3',
             'email' => 'required|email|max:200|min:3',

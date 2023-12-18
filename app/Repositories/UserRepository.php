@@ -2,8 +2,10 @@
 
 namespace App\Repositories;
 
+use App\Enums\UserRolesEnum;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepository
 {
@@ -35,7 +37,7 @@ class UserRepository
         $data = [
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'role' => $request->input('role'),
+            'role' => $request?->input('role') ?? UserRolesEnum::USER ,
         ];
         if($request->has('password')) {
             $data = [...$data,  'password' => $request->input('password')];

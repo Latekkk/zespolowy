@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
@@ -6,106 +6,73 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
 import {useTranslation} from "react-i18next";
+import Input from "@/Components/Input";
 
 export default function Register() {
-    const {t} = useTranslation(['auth']);
+    const {t} = useTranslation(['users']);
     const {data, setData, post, processing, errors, reset} = useForm({
         name: '',
         email: '',
         password: '',
-        password_confirmation: '',
+        password_repetition: '',
     });
 
     useEffect(() => {
         return () => {
-            reset('password', 'password_confirmation');
+            reset('password', 'password_repetition');
         };
     }, []);
 
-    const handleOnChange = (event) => {
-        setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
-    };
+
+    function handleChange(e, keyName, val) {
+        const key = e?.target?.id || keyName;
+        let value = e?.target?.value || val || e || '';
+        setData(data => ({
+            ...data,
+            [key]: value,
+        }))
+    }
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('register'));
+        post(route('user.register.store'));
     };
 
     return (
         <GuestLayout>
             <Head title="Register"/>
-            <div className={"flex flex-col mx-36 my-12 items-center"}>
-
-                <div className={"flex w-max"}>
-                    <form onSubmit={submit}>
-                        <div>
-                            <InputLabel htmlFor="name" value={t('name')}/>
-
-                            <TextInput
-                                id="name"
-                                name="name"
-                                value={data.name}
-                                className="mt-1 block w-full"
-                                autoComplete="name"
-                                isFocused={true}
-                                onChange={handleOnChange}
-                                required
-                            />
-
-                            <InputError message={errors.name} className="mt-2"/>
-                        </div>
-
-                        <div className="mt-4">
-                            <InputLabel htmlFor="email" value={t('email')}/>
-
-                            <TextInput
-                                id="email"
-                                type="email"
-                                name="email"
-                                value={data.email}
-                                className="mt-1 block w-full"
-                                autoComplete="username"
-                                onChange={handleOnChange}
-                                required
-                            />
-
-                            <InputError message={errors.email} className="mt-2"/>
-                        </div>
-
-                        <div className="mt-4">
-                            <InputLabel htmlFor="password" value={t('password')}/>
-
-                            <TextInput
-                                id="password"
-                                type="password"
-                                name="password"
-                                value={data.password}
-                                className="mt-1 block w-full"
-                                autoComplete="new-password"
-                                onChange={handleOnChange}
-                                required
-                            />
-
-                            <InputError message={errors.password} className="mt-2"/>
-                        </div>
-
-                        <div className="mt-4">
-                            <InputLabel htmlFor="password_confirmation" value={t('confirm.password')}/>
-
-                            <TextInput
-                                id="password_confirmation"
-                                type="password"
-                                name="password_confirmation"
-                                value={data.password_confirmation}
-                                className="mt-1 block w-full"
-                                autoComplete="new-password"
-                                onChange={handleOnChange}
-                                required
-                            />
-
-                            <InputError message={errors.password_confirmation} className="mt-2"/>
-                        </div>
+            <div className={"flex flex-col p-12 my-12 items-center bg-white mx-12 gap-y-2"}>
+                <form onSubmit={submit} className={'w-1/3'}>
+                    <div className={"flex flex-col w-full gap-y-4"}>
+                        <Input labelText={t('user.name')}
+                               name='name'
+                               value={data.name}
+                               error={errors.name}
+                               onChange={handleChange}
+                               placeholder={t('enter.the.user.name')}
+                        />
+                        <Input labelText={t('user.email')}
+                               name='email'
+                               value={data.email}
+                               error={errors.email}
+                               onChange={handleChange}
+                               placeholder={t('enter.the.user.email')}
+                        />
+                        <Input labelText={t('user.password')}
+                               name='password'
+                               value={data.password}
+                               error={errors.password}
+                               onChange={handleChange}
+                               placeholder={t('enter.the.user.password')}
+                        />
+                        <Input labelText={t('user.password.repetition')}
+                               name='password_repetition'
+                               value={data.password_repetition}
+                               error={errors.password_repetition}
+                               onChange={handleChange}
+                               placeholder={t('enter.the.user.password.repetition')}
+                        />
 
                         <div className="flex items-center justify-end mt-4">
                             <Link
@@ -119,8 +86,9 @@ export default function Register() {
                                 {t('register')}
                             </PrimaryButton>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+
             </div>
         </GuestLayout>
     );

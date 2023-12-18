@@ -115,6 +115,16 @@ export default function GuestLayout({props, header, children,}) {
                     "route": "register"
                 },
             ]
+        },
+        {
+            "name": "register",
+            "route": "register",
+            "subLinks": [
+                {
+                    "name": "",
+                    "route": "register"
+                },
+            ]
         }
     ]
     return (
