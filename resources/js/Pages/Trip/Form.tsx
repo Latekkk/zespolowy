@@ -72,8 +72,9 @@ export default function Form(props) {
 
     const handleRemoveMountainSection = (mountainSection) => {
         const updatedMountainSections = data.mountainSection.filter(
-            (section) => section.id !== mountainSection.id
+            (section) => section.id !== mountainSection.id || section.selected !== mountainSection.selected
         );
+
         setData((data) => ({
             ...data,
             ["mountainSection"]: updatedMountainSections,
@@ -81,12 +82,10 @@ export default function Form(props) {
     };
 
     const handleAddMountainSection = (selected) => {
-
         let tmpMountainSection = selectedMountainSections;
         tmpMountainSection.selected = selected
-        getMountainSections()
-        const updatedMountainSections = [...data?.mountainSection, tmpMountainSection ]
-        setSelectedMountainSections(null);
+        console.log(tmpMountainSection)
+        const updatedMountainSections = [...data?.mountainSection, {...tmpMountainSection}]
         setData((data) => ({
             ...data,
             ["mountainSection"]: updatedMountainSections,
@@ -99,11 +98,12 @@ export default function Form(props) {
         const selected = section?.selected;
 
         if (section?.end_point_id === selected) {
-            return <div className={'flex flex-row justify-between pr-2'}><span>{endName} - {startName}</span> <span> {t('number.of.points.for.descent')}: {section.points_for_descent} </span></div>
+            return <div className={'flex flex-row justify-between pr-2'}><span>{endName} - {startName}</span>
+                <span> {t('number.of.points.for.descent')}: {section.points_for_descent} </span></div>
         } else {
-            return <div className={'flex flex-row justify-between pr-2'}><span>{startName} - {endName}</span> <span> {t('number.of.points.for.entry')}: {section.entry_points}</span></div>
+            return <div className={'flex flex-row justify-between pr-2'}><span>{startName} - {endName}</span>
+                <span> {t('number.of.points.for.entry')}: {section.entry_points}</span></div>
         }
-
     }
 
     const getPoints = () => {
@@ -111,7 +111,7 @@ export default function Form(props) {
 
         data?.mountainSection.forEach((mountainSection) => {
             const selected = mountainSection?.selected;
-            if (mountainSection?.end_point_id === selected) {
+            if (mountainSection.end_point_id === selected) {
                 count += mountainSection.points_for_descent
             } else {
                 count += mountainSection?.entry_points
@@ -156,10 +156,12 @@ export default function Form(props) {
                                     type="date"
                                     extraClass="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                 />
-                                <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)} className={'h-12'} className={'w-1/3 ml-6'} >{t("addMountainSection")}</PrimaryButton>
+                                <PrimaryButton type={'button'} onClick={() => setVisibleMountainSection(true)}
+                                               className={'h-12'}
+                                               className={'w-1/3 ml-6'}>{t("addMountainSection")}</PrimaryButton>
                             </div>
                             <div className={'my-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/5'}>
-                                <span>Łączna ilośc punktów:  {getPoints()}</span>
+                                <span>Łączna ilośc punktów: {getPoints()}</span>
                             </div>
 
                             <div className={'mb-3 bg-gray-200 border-gray-300 rounded-md p-2 shadow w-1/5'}>
@@ -204,18 +206,18 @@ export default function Form(props) {
 
             <Dialog header="Header" visible={visibleMountainSection} maximizable style={{width: '50vw'}}
                     onHide={() => setVisibleMountainSection(false)}>
-                    <DropdownWithErrorMessage
-                        label={t("mountainSection")}
-                        value={selectedMountainSections}
-                        valueTemplate={selectedMountainSections}
-                        onChange={handleSelectedMountainSection}
-                        options={props.mountainSection}
-                        optionLabel="name"
-                        placeholder={t("select.a.mountain.section")}
-                        className="w-full md:w-14rem"
-                    />
+                <DropdownWithErrorMessage
+                    label={t("mountainSection")}
+                    value={selectedMountainSections}
+                    valueTemplate={selectedMountainSections}
+                    onChange={handleSelectedMountainSection}
+                    options={props.mountainSection}
+                    optionLabel="name"
+                    placeholder={t("select.a.mountain.section")}
+                    className="w-full md:w-14rem"
+                />
 
-                    <Heading3>Wybierz punkt początkowy</Heading3>
+                <Heading3>Wybierz punkt początkowy</Heading3>
                 <div className="flex flex-row gap-x-2 pt-2">
                     <PrimaryButton
                         type={'button'}
