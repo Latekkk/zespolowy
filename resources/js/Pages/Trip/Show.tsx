@@ -108,14 +108,9 @@ export default function Form(props) {
 
     {
         selectedMountainSections.map((section, index) => {
-            const isRepetition = selectedMountainSections
-                .slice(0, index)
-                .some((prevSection) => prevSection.name === section.name);
-            if (!isRepetition) {
-                allPointsEntry += parseFloat(section.entry_points);
-                allPointsDescent += parseFloat(section.points_for_descent);
-                allPointsEntryDescent += (parseFloat(section.entry_points) + parseFloat(section.points_for_descent));
-            }
+            allPointsEntry += parseFloat(section.entry_points);
+            allPointsDescent += parseFloat(section.points_for_descent);
+            allPointsEntryDescent += (parseFloat(section.entry_points) + parseFloat(section.points_for_descent));
         })
     }
 

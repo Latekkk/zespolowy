@@ -8,24 +8,18 @@ import undefinedImages from "@/Functions/undefinedImages";
 import useFileList from "@/Functions/fileList";
 import { useForm, usePage } from "@inertiajs/react";
 
-export default function TripChangeStatus({ section, trip, user, guides, collapsed}) {
+export default function MountainSectionShowOne({ section, collapsed, duplicate}) {
     const { t } = useTranslation(['trip']);
     const globalTranslation = useTranslation(['global']);
     const pageProps = usePage().props;
     const [date, setDate] = useState<string | Date | Date[] | null>(null);
     let today = new Date();
 
-
-    const undefinedUrl = 'http://' + window.location.host + '/images/undefined/404.webp';
     const entryAndExitPoints = section.entry_points + section.points_for_descent;
 
     const { data, setData, post, put, processing, errors, reset, clearErrors } = useForm({
-        trip_id: '',
-        user_id: user.id,
         mountain_section_id: section.id,
         points_mountain_section: undefined,
-        date: '',
-        guide: undefined,
         status: StatusENUM.PENDING,
         remember: true,
     });
@@ -95,6 +89,7 @@ export default function TripChangeStatus({ section, trip, user, guides, collapse
                     <div className={'flex flex-col gap-y-2'}>
                         <div onClick={openModal} style={{ cursor: 'pointer' }}>
                             {section.name}
+                            {duplicate && <p style={{ color: 'red', fontWeight: 'bold' }}>Duplikat</p>}
                         </div>
                     </div>
                 </div>
